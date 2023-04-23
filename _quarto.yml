@@ -1,0 +1,26 @@
+project:
+  type: website
+
+website:
+  title: "Marcell Granat"
+  navbar:
+    right:
+      - about.qmd
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/granatmarcell
+      - icon: github
+        text: GitHub
+        href: https://github.com/MarcellGranat
+      - icon: file-earmark-person
+        text: CV
+        href: https://marcellgranat.github.io/cv/
+      - icon: envelope
+        href: "mailto:granat.marcell@uni-neumann.hu"
+format:
+  html:
+    theme: darkly
+    css: styles.css
+
+editor: visual
+

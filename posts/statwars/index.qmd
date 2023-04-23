@@ -1,0 +1,24 @@
+---
+title: "STAT WARS"
+date: '2022-01-27'
+slug: statwars
+image: featured.png
+---
+
+With my friend Bálint, we successfully won the 2021 "STAT WARS", due to which we were also featured in a morning TV show and in newspapers
+
+In 2021, the Central Statistical Office announced its data analysis competition for MSc students. Since my friend Balint Mazzag and I successfully won this, we had the opportunity to talk about our experiences and the importance of statistical knowledge in the Hungarian TV2 television channel's morning show. Also thanks to this, we gave an interview to [Figyelő](https://digitalstand.hu/olvaso/129772#1).
+
+{{< video https://www.youtube.com/embed/ETKlsxuFk7g >}}
+
+Source: [TV2](https://tv2play.hu/mokka/oriasi_verseny_es_kihivas_ok_a_statisztika_bajnokai)
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: "90%"
+
+knitr::include_graphics("1643274156567.jpeg")
+```
+
+Source: [LinkedIn](https://www.linkedin.com/posts/corvinus-university-of-budapest_ksh-corvinus-activity-6892391371714760704-d4hH?utm_source=share&utm_medium=member_desktop)

@@ -1,0 +1,49 @@
+---
+title: "Quantify the Economania Blog"
+date: '2022-09-27'
+slug: economania-textming
+categories: 
+  - Economania
+  - NLP
+image: featured.png
+---
+
+TF-IDF to analyse the Economania blog.
+
+---
+
+```{css, echo=FALSE}
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 64.28%; /* 16:9 Aspect Ratio */
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+```
+
+The MNB Institute organized the opening event of the Economania professional workshop, and I also had the opportunity to present the results of text analysis on the blog posts.
+
+::: container
+<iframe class="responsive-iframe" src="https://marcellgranat.github.io/economania-textmining"></iframe>
+:::
+
+
+
+My presentation was about the analysis of blog posts, based on TF-IDF indicators. TF-IDF is the frequency of the term (word) adjusted for how rarely it appears in the collection of documents (aggregated to years and authors in this case). This decreases the weight of the commonly used words and highlights the terms related only to that specific year or author.
+
+```{r echo=FALSE}
+knitr::include_graphics("IMG_0406.jpeg")
+```
+
+To carry out the analysis, I collected the individual blog posts myself using the web scraping method and cleaned the data, the code is available at the following link: <https://github.com/MarcellGranat/economania-textmining/blob/main/scrape.R>

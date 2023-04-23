@@ -1,0 +1,14 @@
+{
+  "hash": "2498dcef5b50a1982854fed1f09f4c38",
+  "result": {
+    "markdown": "---\ntitle: Web scraping with Shiny - automate your weekly food order\ndate: '2023-03-06'\nslug: interfood\ntags:\n  - shiny\n  - scraping\n---\n\n\nSimple, but useful application of static web scraping in a shiny web application to find your favorites in the menu.\n\n# Web scraping with Shiny - automate your weekly food order <img src=\"https://raw.githubusercontent.com/MarcellGranat/interfood/main/logo.png\" align=\"right\" width=\"120px\" />\n\nWeb scraping is a technology that can be used to automatically download data from online pages. It can be used in many areas: collecting data for research, monitoring prices, and automatically reporting any regularly updated online data source. In this fun project, I give an example of the latter.\n\nThe menu of Interfood is immense and I usually like to get the weekly order done quickly, so I built a small shiny application for it (Do not laugh, pancakes are really hard to find). Shiny is an application written in R (or Python) that can be stored on an online server, the biggest advantage of which is that it is incredibly easy to create.\n\nThe application works as follows: when you open it, it visits the Interfood's menu for the given week and downloads the entire offer.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(rvest)\n\nread_html(\"https://www.interfood.hu/etlap-es-rendeles/\") |> # download the entire website\n    html_nodes(paste0(\".cell:nth-child(1) .food-etlap-szoveg\")) |> # 1st day\n    html_text() |> # format to text\n    head() # first 6 item\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"Frankfurti leves\"            \"Frankfurti leves\"           \n[3] \"Zöldborsóleves V\"            \"Zöldborsóleves V\"           \n[5] \"Tejszínes cseresznyeleves V\" \"Tejszínes cseresznyeleves V\"\n```\n:::\n:::\n\n\nAfter a few cleaning steps, the entire menu is loaded, as if reading it on the web page. The next function of the application is that we can specify which dishes we have rated and which days we would like to order. The Shiny then simply collects the dishes with the highest ratings for the given days and visually displays the recommended order.\n\nThis is not a serious data analysis task, but an excellent example of how an application that can be written in seconds can help us in many areas of life and how rewarding coding can be. The full code is available in the follwing [GitHub repository](https://github.com/MarcellGranat/interfood) just as the link to the [app](https://marcellgranat.com/interfood).\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

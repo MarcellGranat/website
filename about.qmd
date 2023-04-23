@@ -1,0 +1,42 @@
+---
+title: "About me"
+image: profile.jpg
+about:
+  image-shape: rounded
+  template: solana
+  links:
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/granatmarcell
+      - icon: github
+        text: GitHub
+        href: https://github.com/MarcellGranat
+      - icon: file-earmark-person
+        text: CV
+        href: https://marcellgranat.github.io/cv/
+      - icon: envelope
+        text: Email
+        href: "mailto:granat.marcell@uni-neumann.hu"
+---
+
+I am an economic analyst, researcher and assistant lecturer at John von Neumann University. I love statistics, econometrics, ML and mostly R pogramming. This website is maintained to share lecture slides, materials related to my [subject](https://www.marcellgranat.com/big_data/) and blog posts about my actual research activities.
+
+## Education {{< fa graduation-cap >}}
+
+**Eötvös Loránd University**
+
+PhD in Economics \| Sept 2022 -present
+
+**Corvinus University of Budapest**
+
+MsC in Economics \| Sept 2017- June 2022
+
+## Experience {{< fa briefcase >}}
+
+**Central Bank of Hungary**
+
+Education and Research Expert \| February 2022 - present
+
+John von Neumann University
+
+Teaching Assistant \| August 2022 - present

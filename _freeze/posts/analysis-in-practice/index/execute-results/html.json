@@ -1,0 +1,14 @@
+{
+  "hash": "82f75562e38745239ba0e836f0028fc3",
+  "result": {
+    "markdown": "---\ntitle: \"Data Analysis in Practice\"\ndate: '2022-12-15'\nslug: analysis-in-practice\ncategories: \n  - used cars\n  - ML\n  - MCA\nimage: featured.png\n---\n\n\nI had the honor of being invited to present one our current research at the \"Data Analysis in Practice\" series.\n\nThis time, the focus was the used car market, but I was able to present our research to interested visitors with a detailed description of the methodology. We are extremely proud of this study because it combines the modern machine learning tools and survival analysis in a complex way to answer a research question that is important to everyone.\n\n\n::: {.cell}\n<style type=\"text/css\">\n.container {\n  position: relative;\n  width: 100%;\n  overflow: hidden;\n  padding-top: 64.28%; /* 16:9 Aspect Ratio */\n}\n\n.responsive-iframe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  border: none;\n}\n</style>\n:::\n\n::: {.cell}\n::: {.cell-output-display}\n![](IMG_3308.jpg){width=2016}\n:::\n:::\n\n\nThe enclosed slideshow helps you understand the intuition behind the models and why each methodological step is justified.\n\n<div class=\"container\"> \n  <iframe class=\"responsive-iframe\" src=\"https://marcellgranat.github.io/used-car-liquidity/analysis-in-practice.html\"></iframe>\n</div>\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

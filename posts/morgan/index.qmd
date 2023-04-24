@@ -7,7 +7,7 @@ categories:
   - ML
 ---
 
-Bálint and I participated in the QuantChallenge organized by Morgan Stanley, where we competed against 120 teams. Our hard work and determination paid off as we secured the 2nd place at the finals. This post presents our solution to first task.
+[Bálint Mazzag](https://balintmazzag.netlify.app) and I participated in the QuantChallenge organized by Morgan Stanley, where we competed against 120 teams. Our hard work and determination paid off as we secured the 2nd place at the finals. This post presents our solution to first task.
 
 Codes are available at the corresponding [GitHub repository](https://github.com/MarcellGranat/MorganStanley-QuantChallenge).
 

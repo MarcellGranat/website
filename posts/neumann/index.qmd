@@ -25,7 +25,9 @@ ChatGPT is based on a transformer architecture, the purpose of which is to **for
 The outcome is an interface that generates dialogues that **immediately pushed the popular digital frenzies of recent years into the background in the field of Internet searches** (see the attached figure). Many people may have tried it in order to admire the new achievement of technology, but many forums have already mentioned (mainly in an ominous tone) how ChatGPT can transform our lives. Is this the technology that will really take away the jobs of "white-collar" workers?
 
 ```{r}
+#| warning: false
 #| message: false
+
 library(tidyverse)
 
 gtrendsR::gtrends(
@@ -36,6 +38,7 @@ gtrendsR::gtrends(
     hits = as.numeric(hits),
     hits = ifelse(is.na(hits), 0, hits)
   ) |>
+  filter(date < "2023-03-09") |> 
   select(date, hits, keyword) |>
   ggplot() +
   aes(date, hits, color = keyword) +
@@ -51,7 +54,7 @@ gtrendsR::gtrends(
   theme(plot.caption.position = "plot")
 ```
 
-In response to these, memes were immediately born: "ChatGPT could only replace the programmers if the clients could tell us what they wanted. We are safe for now.” The truth lies somewhere in between.
+In response to these, memes were immediately born: "ChatGPT could only replace the programmers if the clients could tell us what they wanted. We are safe for now." The truth lies somewhere in between.
 
 **ChatGPT does unbeatable in what it's supposed to do: generate text.** But the creators also draw attention to the fact that the answer is always generated in such a way that it seems to be true, while it is often not even close to the truth (OpenAi, 2023). The reason for this is that during the training, it solves the task of selecting the most accepted text, but **there is no training database that labelled which information is correct and which is not**, so it cannot check the validity of the information. Accordingly, it cannot compete in areas where a real understanding of a given topic is required.
 
@@ -59,9 +62,4 @@ How can ChatGPT and its "relatives" transform our lives in the short run? The **
 
 ## References
 
-<p>
-<cite>OpenAi
-(2023).
-<em>Introducing ChatGPT</em>.
-URL: <a href="https://openai.com/blog/chatgpt">https://openai.com/blog/chatgpt</a> (visited on Mar. 6, 2023).</cite>
-</p>
+<p><cite>OpenAi (2023). <em>Introducing ChatGPT</em>. URL: <a href="https://openai.com/blog/chatgpt">https://openai.com/blog/chatgpt</a> (visited on Mar. 6, 2023).</cite></p>

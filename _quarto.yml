@@ -2,8 +2,13 @@ project:
   type: website
 
 website:
+  google-analytics:
+    tracking-id: "G-CEC6152V08"
+    anonymize-ip: true
+  favicon: logo.png
   title: "Marcell Granat"
   navbar:
+    
     right:
       - about.qmd
       - icon: linkedin
@@ -19,8 +24,7 @@ website:
         href: "mailto:granat.marcell@uni-neumann.hu"
 format:
   html:
-    theme: darkly
-    css: styles.css
+    theme: [darkly, styles.scss]
 
 editor: visual
 

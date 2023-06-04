@@ -1,5 +1,5 @@
 ---
-title: QuantChallenge
+title: QuantChallenge I
 date: '2023-04-22'
 slug: morgan
 image: logo.png

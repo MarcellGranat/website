@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="slide_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slide_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slide_files/libs/quarto-html/popper.min.js"></script>
+<script src="slide_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slide_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slide_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slide_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="slide_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+<meta name="author" content="Marcell Granat, Peter Vekas">
+<meta name="keywords" content="inflation, car, clustering">
+<title>Daily inflation for used vehicles in Hungary</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="slide_files/libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="slide_files/libs/revealjs/dist/reveal.css">
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+<link rel="stylesheet" href="slide_files/libs/revealjs/dist/theme/quarto.css">
+<link href="slide_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="slide_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="slide_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="slide_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+<style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-opacity="0.3" class="quarto-title-block center"><h1 class="title">Daily inflation for used vehicles in Hungary</h1>
+  <p class="subtitle">Mixed clustering methods to produce the representative consumer basket</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcell Granat, Peter Vekas 
+</div>
+</div>
+</div>
+
+  <p class="date">Invalid Date</p>
+</section><section><section id="introduction" class="title-slide slide level1 center"><h1>Introduction</h1>
+
+</section><section id="motivation" class="slide level2"><h2>Motivation</h2>
+<ul>
+<li class="fragment"><p>Modern technologies allow for better statistical analysis of economic indicators like inflation <span class="citation" data-cites="cavalloBillionPricesProject2016">(<a href="#/others-also-liked" role="doc-biblioref" onclick="">Cavallo and Rigobon 2016</a>)</span></p></li>
+<li class="fragment"><p>The car is a significant part of the consumption basket, accounting for <strong>5%</strong> in Hungary <span class="citation" data-cites="kshprice">(<a href="#/others-also-liked" role="doc-biblioref" onclick="">Hungarian Central Statistical Office 2022</a>)</span></p></li>
+<li class="fragment"><p>This research aims to provide a model framework for a daily inflation index for the car market</p></li>
+</ul>
+<aside class="notes"><ul>
+<li><p>based on COICOP classification</p></li>
+<li><p>relevant to everyone</p></li>
+<li><p>we can assume that market participant consider their transaction carefully and the prices and the quality of the cars are not independent</p></li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="where-are-we" class="slide level2" data-auto-animation=""><h2>Where are we?</h2>
+<ul>
+<li class="fragment"><p>This is the second research project focusing on used cars</p></li>
+<li class="fragment"><p>The first one is current under review at <em>Swiss Journal of Economics and Statistics</em> <span class="lb">(Q1)</span></p></li>
+</ul></section><section id="challenges-in-creating-a-daily-inflation-index-for-cars" class="slide level2"><h2>
+<span class="lightblue">Challenges</span> in Creating a Daily Inflation Index for Cars</h2>
+<ul>
+<li class="fragment">Cars are <strong>heterogeneous</strong>. They have countless properties that vary <span class="lb">(Similar to housing)</span>
+</li>
+</ul></section><section id="important-criteria-for-an-inflation-index" class="slide level2"><h2>Important Criteria for an Inflation Index</h2>
+<p>Based on <span class="citation" data-cites="markAlternativeHousingPrice1984">Mark and Goldberg (<a href="#/others-also-liked" role="doc-biblioref" onclick="">1984, 31</a>)</span>:</p>
+<ol class="example" type="1">
+<li class="fragment"><p>Conceptually sound</p></li>
+<li class="fragment"><p>Administratively simple</p></li>
+<li class="fragment"><p>Reasonably stable and not overly dependent on changes in transactions or samples</p></li>
+</ol>
+<div class="fragment">
+<p>We defined one extra for a <span class="lb">daily index</span></p>
+<ol start="4" class="example" type="1">
+<li class="fragment">Must be <strong>robust to new observations</strong>
+</li>
+</ol>
+<aside class="notes"><p>Since our goal is that we want to upload this data regularly to find</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section><section id="methodology-for-creating-the-index" class="slide level2"><h2>Methodology for Creating the Index</h2>
+<ol type="1">
+<li class="fragment"><p>Use clustering procedures to create a representative basket of cars</p></li>
+<li class="fragment"><p>Build multiple models (OLS, Random forest, …) to estimate prices of vehicles in the basket</p></li>
+<li class="fragment"><p>Apply adjustments for weekly and monthly seasonality <span class="lb">(WIP)</span></p></li>
+</ol></section></section><section><section id="data" class="title-slide slide level1 nonincremental center"><h1>Data</h1>
+<div class="fragment">
+<p>Downloaded data of cars available on the website <a href="https://www.hasznaltauto.hu">hasznaltauto.hu</a> daily for <strong>10 months starting in May of 2022</strong></p>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Assumption</strong></p>
+</div>
+<div class="callout-content">
+<p>Grouped vehicles by the day they were sold, assuming that if a car is <strong>no longer available on the website, then it has been sold for the last indicated price</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="advantages-of-online-based-inflation-calculation" class="slide level2 auto-animantion"><h2>Advantages of Online-based Inflation Calculation</h2>
+<ul>
+<li class="fragment"><p><strong>Cost reduction</strong> compared to traditional methods</p></li>
+<li class="fragment"><p>No censored price spells <span class="citation" data-cites="cavalloBillionPricesProject2016">(<a href="#/others-also-liked" role="doc-biblioref" onclick="">Cavallo and Rigobon 2016</a>)</span></p></li>
+</ul></section><section id="advantages-of-online-based-inflation-calculation-1" class="slide level2 auto-animantion"><h2>Advantages of Online-based Inflation Calculation</h2>
+<div>
+<ul>
+<li><p><strong>Cost reduction</strong> compared to traditional methods</p></li>
+<li><p>No censored price spells <span class="citation" data-cites="cavalloBillionPricesProject2016">(<a href="#/others-also-liked" role="doc-biblioref" onclick="">Cavallo and Rigobon 2016</a>)</span></p></li>
+</ul>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Bargaining</strong></p>
+</div>
+<div class="callout-content">
+<p>Bargaining may cause some inaccuracy in our index since we derive it from offer prices. But if this amount is time-invariant, then the comparison of the price level between periods (inflation) may remain accurate.</p>
+</div>
+</div>
+</div>
+</section><section id="cleaning-steps-and-variables" class="slide level2" data-auto-animation=""><h2>Cleaning Steps and Variables</h2>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; # A tibble: 470,298 × 121
+#&gt;   id     date        price brand allapot kivitel ajtok_szama
+#&gt;   &lt;chr&gt;  &lt;date&gt;      &lt;int&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;      
+#&gt; 1 10020… 2021-11-05 1.06e7 bmw   Normál  Városi… 5          
+#&gt; 2 10058… 2021-12-31 1.00e6 opel  Normál  Kombi   5          
+#&gt; 3 10126… 2021-07-13 1.30e6 opel  Kitűnő  Egyterű 5          
+#&gt; 4 10316… 2021-07-13 8.99e5 citr… Normál  Egyterű 5          
+#&gt; # ℹ 470,294 more rows
+#&gt; # ℹ 114 more variables: szin &lt;fct&gt;, karpit_szine_1 &lt;fct&gt;,
+#&gt; #   uzemanyag &lt;fct&gt;, henger_elrendezes &lt;fct&gt;, hajtas &lt;fct&gt;,
+#&gt; #   sebessegvalto_fajtaja &lt;fct&gt;, okmanyok_jellege &lt;fct&gt;,
+#&gt; #   muszaki_vizsga_ervenyes &lt;fct&gt;, klima_fajtaja &lt;fct&gt;,
+#&gt; #   karpit_szine_2 &lt;fct&gt;, teli_gumi_meret &lt;fct&gt;,
+#&gt; #   teto &lt;fct&gt;, hatso_nyari_gumi_meret &lt;fct&gt;, …</code></pre>
+</div>
+<ul>
+<li class="fragment">Variables with a high number of possible values but do not occur daily were classified into the “other” category (e.g.&nbsp;rare brands)</li>
+</ul></section><section id="cleaning-steps-and-variables-1" class="slide level2" data-auto-animation=""><h2>Cleaning Steps and Variables</h2>
+<div>
+<ul>
+<li><p>Variables with a high number of possible values but do not occur daily were classified into the “other” category (e.g.&nbsp;rare brands)</p></li>
+<li><p>Offer prices show positive skew, so predictive models were built in a <strong>log-lin form</strong></p></li>
+</ul>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-6-1.svg" width="4000" height="300"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes"><p>The reason is simple that we can not estimate the partial effect of a property if it does not included in the training set.</p>
+<p>I will talk about this a bit a later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section></section><section><section id="methodology" class="title-slide slide level1 center"><h1>Methodology</h1>
+<ul>
+<li class="fragment">Constructing a price index for <strong>heterogeneous</strong> goods is challenging</li>
+<li class="fragment">Numerous methodologies to control for quality changes, but no generally appropriate procedure</li>
+<li class="fragment">When creating a <strong>daily frequency index</strong>, the selection of a quality-adjustment methodology is crucial</li>
+</ul></section><section id="two-main-approaches-for-heterogeneous-goods1" class="slide level2"><h2>Two Main Approaches for Heterogeneous Goods<sup>1</sup>
+</h2>
+<dl>
+<dt class="fragment">Repeat sales</dt>
+<dd class="fragment">
+<p>Uses a fraction of data that are sold in both compared periods.</p>
+</dd>
+<dt class="fragment">Hedonic regression</dt>
+<dd class="fragment">
+<p>Model contains periodic dummy variables for quality-adjusted price change</p>
+</dd>
+</dl><aside><ol class="aside-footnotes"><li id="fn1"><p>Based on <span class="citation" data-cites="casePricesSingleFamily1987">Case and Shiller (<a href="#/others-also-liked" role="doc-biblioref" onclick="">1987</a>)</span></p></li></ol></aside></section><section class="slide level2"><div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issues with These Approaches</strong></p>
+</div>
+<div class="callout-content">
+<p>Repeat sales:</p>
+<ul>
+<li class="fragment">Fraction of repeat sales are close to zero.</li>
+</ul>
+<p>Hedonic regression:</p>
+<ul>
+<li class="fragment"><p>Model needs to be re-estimated if new observations are added (the <strong>model and former estimations change</strong>)</p></li>
+<li class="fragment"><p>Assumes utility of certain characteristics is constant over time, which is not true for the car market <span class="citation" data-cites="requena-silventeCalculatingHedonicPrice2006">(<a href="#/others-also-liked" role="doc-biblioref" onclick="">Requena-Silvente and Walker 2006</a>)</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="our-approach" class="slide level2" data-auto-animation=""><h2>Our Approach</h2>
+<ol type="1">
+<li class="fragment"><p>Forming submarkets that contain <strong>homogeneous observations</strong> <span class="lb">(clustering)</span></p></li>
+<li class="fragment"><p>Building predictive <strong>regression models</strong> using the sold cars for each day</p></li>
+<li class="fragment"><p>Derive the price level based on the <strong>predicted price</strong> of the cluster centres’</p></li>
+</ol></section><section id="our-approach-1" class="slide level2" data-auto-animation=""><h2>Our Approach</h2>
+<div>
+<ol type="1">
+<li><p>Forming submarkets that contain <strong>homogeneous observations</strong> <span class="lb">(clustering)</span></p></li>
+<li><p>Building predictive <strong>regression models</strong> using the sold cars for each day</p></li>
+<li><p>Derive the price level based on the <strong>predicted price</strong> of the cluster centres’</p></li>
+</ol>
+</div>
+</section><section id="criteria-for-model-selection" class="slide level2 callout-info"><h2>Criteria for Model Selection</h2>
+<ul>
+<li class="fragment">Good predictive ability (<strong>average <span class="math inline">\(R^2\)</span></strong> on the daily data)</li>
+<li class="fragment">Reasonably low resulted <strong>wiggliness</strong> (sum of squares of the second derivative of the price level)</li>
+</ul></section></section><section><section id="clustering" class="title-slide slide level1 center"><h1>Clustering</h1>
+
+</section><section id="number-of-clusters" class="slide level2" data-auto-animation=""><h2>Number of clusters</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issue #1</strong></p>
+</div>
+<div class="callout-content">
+<p>Determining the ideal quantity of clusters in a dataset is <strong>ambiguous</strong></p>
+</div>
+</div>
+</div>
+</section><section id="number-of-clusters-1" class="slide level2" data-auto-animation=""><h2>Number of clusters</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issue #1</strong></p>
+</div>
+<div class="callout-content">
+<p>Determining the ideal quantity of clusters in a dataset is <strong>ambiguous</strong></p>
+</div>
+</div>
+</div>
+<div>
+<ul>
+<li>
+<span class="lb">Traditional methodology:</span> estimating with all possible values and pick the best… <span class="lb">(At least we tried)</span>
+</li>
+</ul>
+</div>
+</section><section id="number-of-clusters-2" class="slide level2" data-auto-animation=""><h2>Number of clusters</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issue #1</strong></p>
+</div>
+<div class="callout-content">
+<p>Determining the ideal quantity of clusters in a dataset is <strong>ambiguous</strong></p>
+</div>
+</div>
+</div>
+<div>
+<ul>
+<li>
+<span class="lb">Traditional methodology:</span> estimating with all possible values and pick the best… <span class="lb">(At least we tried)</span>
+</li>
+</ul>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issue #2</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment"><p><strong>Time complexity</strong> increases proportionally with number of clusters <span class="lb">(K-proto)</span></p></li>
+<li class="fragment"><p>Estimation time increased by 3 hours for each additional cluster</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="number-of-clusters-3" class="slide level2" data-auto-animation=""><h2>Number of clusters</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issue #1</strong></p>
+</div>
+<div class="callout-content">
+<p>Determining the ideal quantity of clusters in a dataset is <strong>ambiguous</strong></p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><span class="citation" data-cites="charradPackageDeterminingRelevant2014">Charrad et al. (<a href="#/others-also-liked" role="doc-biblioref" onclick="">2014</a>)</span> provide a framework based on 30 different indicators</p></li>
+<li class="fragment"><p>We apply it with <strong>hierarchical clustering</strong></p></li>
+</ul></section><section id="hierarchical-clustering" class="slide level2" data-auto-animation=""><h2>Hierarchical clustering</h2>
+<ol type="1">
+<li class="fragment"><p>Each data point is initially considered as an individual cluster</p></li>
+<li class="fragment"><p>Iteratively merges the closest clusters based on a chosen distance metric (<strong>Gower-distance</strong>)</p></li>
+</ol></section><section id="hierarchical-clustering-1" class="slide level2" data-auto-animation=""><h2>Hierarchical clustering</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Advantage</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment"><p>Regardless of the number of clusters, it builds on the <strong>same distance matrix</strong></p></li>
+<li class="fragment"><p>Iterative merging of clusters is <strong>faster</strong> compared to other algorithms</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="hierarchical-clustering-2" class="slide level2" data-auto-animation=""><h2>Hierarchical clustering</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Advantage</strong></p>
+</div>
+<div class="callout-content">
+<div>
+<ol type="1">
+<li><p>Regardless of the number of clusters, it builds on the <strong>same distance matrix</strong></p></li>
+<li><p>Iterative merging of clusters is <strong>faster</strong> compared to other algorithms</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Limitations</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li class="fragment"><p>High memory demand due to the large computed distance matrix, thus we take a <strong>sample of 5,000</strong></p></li>
+<li class="fragment"><p>Only <strong>5 of the 30 indices</strong> suggested by <span class="citation" data-cites="charradPackageDeterminingRelevant2014">Charrad et al. (<a href="#/others-also-liked" role="doc-biblioref" onclick="">2014</a>)</span> can be used for mixed type data</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="hierarchical-clustering-3" class="slide level2" data-auto-animation=""><h2>Hierarchical clustering</h2>
+<p>Optimal number of clusters determined by:</p>
+<div>
+<ol type="1">
+<li><p><span class="lb">Minimal</span> C-index</p></li>
+<li><p><span class="lb">Maximal</span> Dunn-index</p></li>
+<li><p><span class="lb">Maximal</span> Frey-index, but below 1</p></li>
+<li><p><span class="lb">Minimal</span> McClain index</p></li>
+<li><p><span class="lb">Maximal</span> Silhouette</p></li>
+</ol>
+</div>
+</section><section id="hierarchical-clustering-4" class="slide level2" data-auto-animation=""><h2>Hierarchical clustering</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-7-1.svg" width="4000" height="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="cluster-centres" class="slide level2" data-auto-animation=""><h2>Cluster centres</h2>
+<p>After we defined the optimal number of clusters we apply the <strong>K-proto</strong> algorithm to the full dataset.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Advantage</strong></p>
+</div>
+<div class="callout-content">
+<p>The centres of clusters are <strong>existing points</strong> and thus they are easy to present what elements are in the produced representative basket.</p>
+</div>
+</div>
+</div>
+</section><section id="cluster-centres-1" class="slide level2" data-auto-animation=""><h2>Cluster centres</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-8-1.svg" width="2800" height="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section><section id="predicting-the-price-level" class="title-slide slide level1 center"><h1>Predicting the price level</h1>
+
+</section><section id="predicting-the-price-level-1" class="slide level2" data-auto-animation=""><h2>Predicting the price level</h2>
+<p>We apply multiple regression models to predict the price level.</p>
+<div class="fragment">
+<div>
+<ol type="1">
+<li>OLS</li>
+<li>LASSO</li>
+<li>Decision tree</li>
+<li>MARS</li>
+<li>Random Forest</li>
+</ol>
+</div>
+</div>
+</section><section id="predicting-the-price-level-2" class="slide level2" data-auto-animation=""><h2>Predicting the price level</h2>
+<p>We apply multiple regression models to predict the price level.</p>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Issue</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Traditional cross-validation is inappropriate</strong> in the presence of inflation.</p>
+</div>
+</div>
+</div>
+<aside class="notes"><p>Since the estimated price and the actual is not equal if there is inflation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside><div class="fragment">
+<p><em>Solution</em>: Observations of <strong>each day</strong> were split into an <strong>analysis (3/4)</strong> and an <strong>assessment set (1/4)</strong> using stratified sampling by the price and we tuned the models to reach lowest average RMSE.</p>
+</div>
+</section><section id="hyperparameter-tuning" class="slide level2" data-auto-animation=""><h2>Hyperparameter tuning</h2>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; # A tibble: 230 × 2
+#&gt;     splits              id        
+#&gt;     &lt;list&gt;              &lt;chr&gt;     
+#&gt;   1 &lt;split [2029/679]&gt;  2021-05-24
+#&gt;   2 &lt;split [1760/589]&gt;  2021-05-25
+#&gt;   3 &lt;split [2351/787]&gt;  2021-05-26
+#&gt;   4 &lt;split [1925/644]&gt;  2021-05-27
+#&gt;   5 &lt;split [1227/412]&gt;  2021-05-28
+#&gt;   6 &lt;split [524/176]&gt;   2021-05-29
+#&gt;   7 &lt;split [2181/728]&gt;  2021-05-30
+#&gt;   8 &lt;split [1419/476]&gt;  2021-05-31
+#&gt;   9 &lt;split [1712/572]&gt;  2021-06-01
+#&gt;  10 &lt;split [1495/501]&gt;  2021-06-02
+#&gt;  11 &lt;split [1574/527]&gt;  2021-06-03
+#&gt;  12 &lt;split [1120/376]&gt;  2021-06-04
+#&gt;  13 &lt;split [1158/388]&gt;  2021-06-05
+#&gt;  14 &lt;split [1845/618]&gt;  2021-06-06
+#&gt;  15 &lt;split [3945/1316]&gt; 2021-06-07
+#&gt;  16 &lt;split [3107/1037]&gt; 2021-06-10
+#&gt;  17 &lt;split [2661/890]&gt;  2021-06-12
+#&gt;  18 &lt;split [1628/544]&gt;  2021-06-14
+#&gt;  19 &lt;split [1616/540]&gt;  2021-06-15
+#&gt;  20 &lt;split [3420/1141]&gt; 2021-06-16
+#&gt;  21 &lt;split [7838/2615]&gt; 2021-06-18
+#&gt;  22 &lt;split [2319/774]&gt;  2021-06-24
+#&gt;  23 &lt;split [581/197]&gt;   2021-06-26
+#&gt;  24 &lt;split [1746/584]&gt;  2021-06-27
+#&gt;  25 &lt;split [3185/1064]&gt; 2021-06-28
+#&gt;  26 &lt;split [8396/2801]&gt; 2021-07-01
+#&gt;  27 &lt;split [4257/1420]&gt; 2021-07-06
+#&gt;  28 &lt;split [723/243]&gt;   2021-07-10
+#&gt;  29 &lt;split [2329/778]&gt;  2021-07-11
+#&gt;  30 &lt;split [5729/1912]&gt; 2021-07-13
+#&gt;  31 &lt;split [1209/406]&gt;  2021-07-15
+#&gt;  32 &lt;split [3185/1063]&gt; 2021-07-17
+#&gt;  33 &lt;split [5892/1966]&gt; 2021-07-20
+#&gt;  34 &lt;split [1500/502]&gt;  2021-07-27
+#&gt;  35 &lt;split [1151/386]&gt;  2021-07-29
+#&gt;  36 &lt;split [822/276]&gt;   2021-07-30
+#&gt;  37 &lt;split [523/176]&gt;   2021-08-01
+#&gt;  38 &lt;split [1428/479]&gt;  2021-08-02
+#&gt;  39 &lt;split [1852/620]&gt;  2021-08-03
+#&gt;  40 &lt;split [1065/358]&gt;  2021-08-05
+#&gt;  41 &lt;split [3163/1057]&gt; 2021-08-06
+#&gt;  42 &lt;split [1221/409]&gt;  2021-08-09
+#&gt;  43 &lt;split [2930/980]&gt;  2021-08-11
+#&gt;  44 &lt;split [3070/1025]&gt; 2021-08-13
+#&gt;  45 &lt;split [1986/665]&gt;  2021-08-16
+#&gt;  46 &lt;split [1038/347]&gt;  2021-08-18
+#&gt;  47 &lt;split [1866/623]&gt;  2021-08-19
+#&gt;  48 &lt;split [302/103]&gt;   2021-08-21
+#&gt;  49 &lt;split [600/204]&gt;   2021-08-22
+#&gt;  50 &lt;split [2322/775]&gt;  2021-08-23
+#&gt;  51 &lt;split [754/253]&gt;   2021-08-24
+#&gt;  52 &lt;split [1309/439]&gt;  2021-08-25
+#&gt;  53 &lt;split [1395/467]&gt;  2021-08-26
+#&gt;  54 &lt;split [1332/447]&gt;  2021-08-27
+#&gt;  55 &lt;split [954/320]&gt;   2021-08-28
+#&gt;  56 &lt;split [694/233]&gt;   2021-08-29
+#&gt;  57 &lt;split [1562/522]&gt;  2021-08-30
+#&gt;  58 &lt;split [1603/536]&gt;  2021-08-31
+#&gt;  59 &lt;split [1446/485]&gt;  2021-09-01
+#&gt;  60 &lt;split [1353/453]&gt;  2021-09-02
+#&gt;  61 &lt;split [1553/520]&gt;  2021-09-03
+#&gt;  62 &lt;split [1052/354]&gt;  2021-09-04
+#&gt;  63 &lt;split [724/243]&gt;   2021-09-05
+#&gt;  64 &lt;split [1535/513]&gt;  2021-09-06
+#&gt;  65 &lt;split [1726/578]&gt;  2021-09-07
+#&gt;  66 &lt;split [1392/464]&gt;  2021-09-08
+#&gt;  67 &lt;split [1554/520]&gt;  2021-09-09
+#&gt;  68 &lt;split [1475/494]&gt;  2021-09-10
+#&gt;  69 &lt;split [1095/368]&gt;  2021-09-11
+#&gt;  70 &lt;split [667/223]&gt;   2021-09-12
+#&gt;  71 &lt;split [1429/480]&gt;  2021-09-13
+#&gt;  72 &lt;split [1565/523]&gt;  2021-09-14
+#&gt;  73 &lt;split [3895/1300]&gt; 2021-09-15
+#&gt;  74 &lt;split [256/87]&gt;    2021-09-17
+#&gt;  75 &lt;split [989/332]&gt;   2021-09-18
+#&gt;  76 &lt;split [798/268]&gt;   2021-09-19
+#&gt;  77 &lt;split [1589/532]&gt;  2021-09-20
+#&gt;  78 &lt;split [1480/495]&gt;  2021-09-21
+#&gt;  79 &lt;split [1606/536]&gt;  2021-09-22
+#&gt;  80 &lt;split [1645/551]&gt;  2021-09-23
+#&gt;  81 &lt;split [1867/625]&gt;  2021-09-24
+#&gt;  82 &lt;split [1043/349]&gt;  2021-09-25
+#&gt;  83 &lt;split [702/236]&gt;   2021-09-26
+#&gt;  84 &lt;split [1614/540]&gt;  2021-09-27
+#&gt;  85 &lt;split [1623/542]&gt;  2021-09-28
+#&gt;  86 &lt;split [1416/473]&gt;  2021-09-29
+#&gt;  87 &lt;split [1732/579]&gt;  2021-09-30
+#&gt;  88 &lt;split [1444/484]&gt;  2021-10-01
+#&gt;  89 &lt;split [1374/460]&gt;  2021-10-02
+#&gt;  90 &lt;split [867/292]&gt;   2021-10-03
+#&gt;  91 &lt;split [1747/585]&gt;  2021-10-04
+#&gt;  92 &lt;split [1639/548]&gt;  2021-10-05
+#&gt;  93 &lt;split [1602/536]&gt;  2021-10-06
+#&gt;  94 &lt;split [1560/522]&gt;  2021-10-07
+#&gt;  95 &lt;split [1558/520]&gt;  2021-10-08
+#&gt;  96 &lt;split [1233/413]&gt;  2021-10-09
+#&gt;  97 &lt;split [772/259]&gt;   2021-10-10
+#&gt;  98 &lt;split [1576/526]&gt;  2021-10-11
+#&gt;  99 &lt;split [1613/539]&gt;  2021-10-12
+#&gt; 100 &lt;split [6883/2296]&gt; 2021-10-13
+#&gt; 101 &lt;split [1381/463]&gt;  2021-10-18
+#&gt; 102 &lt;split [1414/473]&gt;  2021-10-19
+#&gt; 103 &lt;split [1359/456]&gt;  2021-10-20
+#&gt; 104 &lt;split [1124/377]&gt;  2021-10-21
+#&gt; 105 &lt;split [1057/354]&gt;  2021-10-22
+#&gt; 106 &lt;split [648/219]&gt;   2021-10-23
+#&gt; 107 &lt;split [595/200]&gt;   2021-10-24
+#&gt; 108 &lt;split [1436/481]&gt;  2021-10-25
+#&gt; 109 &lt;split [1367/459]&gt;  2021-10-26
+#&gt; 110 &lt;split [1387/464]&gt;  2021-10-27
+#&gt; 111 &lt;split [1389/465]&gt;  2021-10-28
+#&gt; 112 &lt;split [1356/456]&gt;  2021-10-29
+#&gt; 113 &lt;split [1178/396]&gt;  2021-10-30
+#&gt; 114 &lt;split [512/172]&gt;   2021-10-31
+#&gt; 115 &lt;split [952/321]&gt;   2021-11-01
+#&gt; 116 &lt;split [2086/696]&gt;  2021-11-02
+#&gt; 117 &lt;split [1513/507]&gt;  2021-11-03
+#&gt; 118 &lt;split [1760/588]&gt;  2021-11-04
+#&gt; 119 &lt;split [1487/497]&gt;  2021-11-05
+#&gt; 120 &lt;split [1180/396]&gt;  2021-11-06
+#&gt; 121 &lt;split [862/291]&gt;   2021-11-07
+#&gt; 122 &lt;split [1688/565]&gt;  2021-11-08
+#&gt; 123 &lt;split [1479/494]&gt;  2021-11-09
+#&gt; 124 &lt;split [5451/1819]&gt; 2021-11-10
+#&gt; 125 &lt;split [611/205]&gt;   2021-11-14
+#&gt; 126 &lt;split [1295/433]&gt;  2021-11-15
+#&gt; 127 &lt;split [1315/439]&gt;  2021-11-16
+#&gt; 128 &lt;split [1215/407]&gt;  2021-11-17
+#&gt; 129 &lt;split [1690/567]&gt;  2021-11-18
+#&gt; 130 &lt;split [1430/478]&gt;  2021-11-19
+#&gt; 131 &lt;split [1222/409]&gt;  2021-11-20
+#&gt; 132 &lt;split [789/266]&gt;   2021-11-21
+#&gt; 133 &lt;split [1677/562]&gt;  2021-11-22
+#&gt; 134 &lt;split [1576/527]&gt;  2021-11-23
+#&gt; 135 &lt;split [1394/466]&gt;  2021-11-24
+#&gt; 136 &lt;split [1430/479]&gt;  2021-11-25
+#&gt; 137 &lt;split [1461/488]&gt;  2021-11-26
+#&gt; 138 &lt;split [1138/381]&gt;  2021-11-27
+#&gt; 139 &lt;split [860/289]&gt;   2021-11-28
+#&gt; 140 &lt;split [1599/534]&gt;  2021-11-29
+#&gt; 141 &lt;split [1278/428]&gt;  2021-11-30
+#&gt; 142 &lt;split [1561/523]&gt;  2021-12-01
+#&gt; 143 &lt;split [1793/599]&gt;  2021-12-02
+#&gt; 144 &lt;split [1864/624]&gt;  2021-12-03
+#&gt; 145 &lt;split [1211/405]&gt;  2021-12-04
+#&gt; 146 &lt;split [691/232]&gt;   2021-12-05
+#&gt; 147 &lt;split [1632/546]&gt;  2021-12-06
+#&gt; 148 &lt;split [1563/524]&gt;  2021-12-07
+#&gt; 149 &lt;split [1456/488]&gt;  2021-12-08
+#&gt; 150 &lt;split [1656/553]&gt;  2021-12-09
+#&gt; 151 &lt;split [1364/456]&gt;  2021-12-10
+#&gt; 152 &lt;split [1098/368]&gt;  2021-12-11
+#&gt; 153 &lt;split [755/254]&gt;   2021-12-12
+#&gt; 154 &lt;split [1496/500]&gt;  2021-12-13
+#&gt; 155 &lt;split [1494/500]&gt;  2021-12-14
+#&gt; 156 &lt;split [5710/1907]&gt; 2021-12-15
+#&gt; 157 &lt;split [1324/444]&gt;  2021-12-20
+#&gt; 158 &lt;split [1297/435]&gt;  2021-12-21
+#&gt; 159 &lt;split [1358/454]&gt;  2021-12-22
+#&gt; 160 &lt;split [1273/426]&gt;  2021-12-23
+#&gt; 161 &lt;split [428/144]&gt;   2021-12-24
+#&gt; 162 &lt;split [376/126]&gt;   2021-12-25
+#&gt; 163 &lt;split [430/145]&gt;   2021-12-26
+#&gt; 164 &lt;split [1374/461]&gt;  2021-12-27
+#&gt; 165 &lt;split [1503/502]&gt;  2021-12-28
+#&gt; 166 &lt;split [1232/413]&gt;  2021-12-29
+#&gt; 167 &lt;split [1370/459]&gt;  2021-12-30
+#&gt; 168 &lt;split [540/184]&gt;   2021-12-31
+#&gt; 169 &lt;split [444/150]&gt;   2022-01-01
+#&gt; 170 &lt;split [755/253]&gt;   2022-01-02
+#&gt; 171 &lt;split [2108/704]&gt;  2022-01-03
+#&gt; 172 &lt;split [1762/588]&gt;  2022-01-04
+#&gt; 173 &lt;split [1789/598]&gt;  2022-01-05
+#&gt; 174 &lt;split [1728/578]&gt;  2022-01-06
+#&gt; 175 &lt;split [1572/526]&gt;  2022-01-07
+#&gt; 176 &lt;split [1194/400]&gt;  2022-01-08
+#&gt; 177 &lt;split [774/259]&gt;   2022-01-09
+#&gt; 178 &lt;split [1607/538]&gt;  2022-01-10
+#&gt; 179 &lt;split [6213/2073]&gt; 2022-01-11
+#&gt; 180 &lt;split [1127/379]&gt;  2022-01-15
+#&gt; 181 &lt;split [676/228]&gt;   2022-01-16
+#&gt; 182 &lt;split [1331/445]&gt;  2022-01-17
+#&gt; 183 &lt;split [1186/396]&gt;  2022-01-18
+#&gt; 184 &lt;split [1072/358]&gt;  2022-01-19
+#&gt; 185 &lt;split [1220/408]&gt;  2022-01-20
+#&gt; 186 &lt;split [1125/377]&gt;  2022-01-21
+#&gt; 187 &lt;split [1033/346]&gt;  2022-01-22
+#&gt; 188 &lt;split [635/214]&gt;   2022-01-23
+#&gt; 189 &lt;split [1238/413]&gt;  2022-01-24
+#&gt; 190 &lt;split [1379/461]&gt;  2022-01-25
+#&gt; 191 &lt;split [1308/439]&gt;  2022-01-26
+#&gt; 192 &lt;split [1668/557]&gt;  2022-01-27
+#&gt; 193 &lt;split [1366/457]&gt;  2022-01-28
+#&gt; 194 &lt;split [1036/348]&gt;  2022-01-29
+#&gt; 195 &lt;split [695/233]&gt;   2022-01-30
+#&gt; 196 &lt;split [1388/464]&gt;  2022-01-31
+#&gt; 197 &lt;split [1649/551]&gt;  2022-02-01
+#&gt; 198 &lt;split [1503/504]&gt;  2022-02-02
+#&gt; 199 &lt;split [1440/481]&gt;  2022-02-03
+#&gt; 200 &lt;split [1404/470]&gt;  2022-02-04
+#&gt; 201 &lt;split [1061/357]&gt;  2022-02-05
+#&gt; 202 &lt;split [656/221]&gt;   2022-02-06
+#&gt; 203 &lt;split [1176/393]&gt;  2022-02-07
+#&gt; 204 &lt;split [2222/744]&gt;  2022-02-08
+#&gt; 205 &lt;split [2334/780]&gt;  2022-02-10
+#&gt; 206 &lt;split [392/132]&gt;   2022-02-13
+#&gt; 207 &lt;split [738/248]&gt;   2022-02-14
+#&gt; 208 &lt;split [755/253]&gt;   2022-02-15
+#&gt; 209 &lt;split [839/280]&gt;   2022-02-16
+#&gt; 210 &lt;split [4443/1483]&gt; 2022-02-17
+#&gt; 211 &lt;split [488/165]&gt;   2022-02-24
+#&gt; 212 &lt;split [508/172]&gt;   2022-02-25
+#&gt; 213 &lt;split [442/149]&gt;   2022-02-26
+#&gt; 214 &lt;split [303/104]&gt;   2022-02-27
+#&gt; 215 &lt;split [586/197]&gt;   2022-02-28
+#&gt; 216 &lt;split [444/150]&gt;   2022-03-01
+#&gt; 217 &lt;split [442/148]&gt;   2022-03-02
+#&gt; 218 &lt;split [391/132]&gt;   2022-03-03
+#&gt; 219 &lt;split [396/134]&gt;   2022-03-04
+#&gt; 220 &lt;split [325/110]&gt;   2022-03-05
+#&gt; 221 &lt;split [166/57]&gt;    2022-03-06
+#&gt; 222 &lt;split [388/131]&gt;   2022-03-07
+#&gt; 223 &lt;split [3656/1221]&gt; 2022-03-08
+#&gt; 224 &lt;split [243/83]&gt;    2022-03-23
+#&gt; 225 &lt;split [247/84]&gt;    2022-03-24
+#&gt; 226 &lt;split [417/140]&gt;   2022-03-25
+#&gt; 227 &lt;split [85/30]&gt;     2022-03-27
+#&gt; 228 &lt;split [445/152]&gt;   2022-03-28
+#&gt; 229 &lt;split [261/88]&gt;    2022-03-30
+#&gt; 230 &lt;split [400/135]&gt;   2022-03-31</code></pre>
+</div>
+</section><section id="hyperparameter-tuning-1" class="slide level2" data-auto-animation=""><h2>Hyperparameter tuning</h2>
+<p>An example workflow for the estimation (tuned)<sup>1</sup>:</p>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; ══ Workflow ════════════════════════════════════════════════
+#&gt; Preprocessor: Recipe
+#&gt; Model: decision_tree()
+#&gt; 
+#&gt; ── Preprocessor ────────────────────────────────────────────
+#&gt; 3 Recipe Steps
+#&gt; 
+#&gt; • step_rm()
+#&gt; • step_zv()
+#&gt; • step_normalize()
+#&gt; 
+#&gt; ── Model ───────────────────────────────────────────────────
+#&gt; Decision Tree Model Specification (regression)
+#&gt; 
+#&gt; Main Arguments:
+#&gt;   cost_complexity = 2.50100358331955e-08
+#&gt;   tree_depth = 11
+#&gt;   min_n = 31
+#&gt; 
+#&gt; Computational engine: rpart</code></pre>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Because of a <a href="https://github.com/tidymodels/workflows/issues/63">reported bug</a>, we had to transform the outcome manually, thus the performance metrics are calculated on the logarithm of the price.</p></li></ol></aside></section><section id="hyperparameter-tuning-2" class="slide level2" data-auto-animation=""><h2>Hyperparameter tuning</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-11-1.svg" width="4000" height="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Maximum entropy design-based hyperparameter tuning for decision tree</em></p>
+<aside class="notes"><p>MED: possible hyperparameter combinations are selected to cover the candidate space well and drastically increase the chances of finding good results</p>
+<p>cost-complexity is the cost-complexity parameter in classical CART models; Minimal node size is the minimum number of observation in a node; Tree depth is the maximum number of splits. The values of these hyperparameters are on the x-axis and the resulted average RMSE (we have 230 assessment sets) is on the y-axis.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="model-performance" class="slide level2"><h2>Model performance</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-13-1.svg" width="4000" height="800"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="at">wiggle =</span> price_level <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="fu">diff</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="fu">diff</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    .<span class="sc">^</span><span class="dv">2</span> <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="fu">sum</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section><section id="the-price-level" class="slide level2" data-auto-animation=""><h2>The price level</h2>
+<ol type="1">
+<li class="fragment"><p>We estimated the price of each item in the “representative basket” <span class="lb">(cluster centres)</span></p></li>
+<li class="fragment"><p>Calculate the <strong>weighted mean</strong> of them (w = # of cars in the cluster)</p></li>
+</ol></section><section id="the-price-level-1" class="slide level2" data-auto-animation=""><h2>The price level</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-1-1">Pooled</a></li>
+<li><a href="#tabset-1-2">Separated</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-15-1.svg" width="4000" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-16-1.svg" width="4000" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="the-price-level-2" class="slide level2" data-auto-animation=""><h2>The price level</h2>
+<ul>
+<li class="fragment"><p>The wiggliness of the estimated price level is still high.</p></li>
+<li class="fragment"><p>Possible reasons:</p></li>
+</ul>
+<ol type="1">
+<li class="fragment"><strong>Seasonality</strong></li>
+<li class="fragment">
+<strong># of observations</strong> are not sufficient to estimate the price level accurately</li>
+</ol></section><section id="seasonality" class="slide level2"><h2>Seasonality</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-17-1.svg" width="4000" height="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes"><p>Reasonable since the trading activity of professional retailers and private traders might differ</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="of-observations" class="slide level2"><h2># of observations</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-19-1.svg" width="4000" height="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="comparing-to-the-official-data" class="slide level2"><h2>Comparing to the official data</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-2-1">Raw</a></li>
+<li><a href="#tabset-2-2">3</a></li>
+<li><a href="#tabset-2-3">7</a></li>
+<li><a href="#tabset-2-4">30</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-20-1.svg" width="4000" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-21-1.svg" width="4000" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-22-1.svg" width="4000" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-4">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="slide_files/figure-revealjs/unnamed-chunk-23-1.svg" width="4000" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="methodology-of-the-statistical-office" class="slide level2" data-auto-animation=""><h2>Methodology of the Statistical Office</h2>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th style="text-align: center;">KSH</th>
+<th style="text-align: center;">Our approach</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Source</td>
+<td style="text-align: center;">Hasznaltauto.hu</td>
+<td style="text-align: center;">Hasznaltauto.hu</td>
+</tr>
+<tr class="even">
+<td>Measure</td>
+<td style="text-align: center;">Supply (middle of the month)</td>
+<td style="text-align: center;">Transaction proxy</td>
+</tr>
+<tr class="odd">
+<td>Rep.&nbsp;selection variables</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">120</td>
+</tr>
+</tbody>
+</table></section><section id="methodology-of-the-statistical-office-1" class="slide level2" data-auto-animation=""><h2>Methodology of the Statistical Office</h2>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th style="text-align: center;">KSH</th>
+<th style="text-align: center;">Our approach</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Rep.&nbsp;selection proc.</td>
+<td style="text-align: center;">Significantly different prices</td>
+<td style="text-align: center;">Clustering</td>
+</tr>
+<tr class="even">
+<td>Outliers</td>
+<td style="text-align: center;">Drop 10% lowest and highest based on price</td>
+<td style="text-align: center;">Unreliable prices</td>
+</tr>
+<tr class="odd">
+<td>Aggregation</td>
+<td style="text-align: center;">Value-weighted</td>
+<td style="text-align: center;">Weighted by # of observations</td>
+</tr>
+</tbody>
+</table></section><section id="others-also-liked" class="slide level2 smaller scrollable"><h2>Others also liked 👍</h2>
+
+<img src="mnb_intezet.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<ol start="35" type="I">
+<li class="fragment">Hungarian Operations Research Conference</li>
+</ol>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-casePricesSingleFamily1987" class="csl-entry" role="listitem">
+Case, Karl E., and Robert J. Shiller. 1987. <span>“Prices of <span>Single Family Homes Since</span> 1970: <span>New Indexes</span> for <span>Four Cities</span>.”</span> Working Paper 2393. <span>National Bureau of Economic Research</span>. <a href="https://www.nber.org/papers/w2393">https://www.nber.org/papers/w2393</a>.
+</div>
+<div id="ref-cavalloBillionPricesProject2016" class="csl-entry" role="listitem">
+Cavallo, Alberto, and Roberto Rigobon. 2016. <span>“The <span>Billion Prices Project</span>: <span>Using Online Prices</span> for <span>Measurement</span> and <span>Research</span>.”</span> <em>Journal of Economic Perspectives</em> 30 (2): 151–78. <a href="https://doi.org/10.1257/jep.30.2.151">https://doi.org/10.1257/jep.30.2.151</a>.
+</div>
+<div id="ref-charradPackageDeterminingRelevant2014" class="csl-entry" role="listitem">
+Charrad, Malika, Nadia Ghazzali, Véronique Boiteau, and Azam Niknafs. 2014. <span>“Package for <span>Determining</span> the <span>Relevant Number</span> of <span>Clusters</span> in a <span>Data Set</span>.”</span> <em>Journal of Statistical Software</em> 61 (6). <a href="https://doi.org/10.18637/jss.v061.i06">https://doi.org/10.18637/jss.v061.i06</a>.
+</div>
+<div id="ref-kshprice" class="csl-entry" role="listitem">
+Hungarian Central Statistical Office. 2022. <span>“Consumer Price Indices by <span>COICOP</span> Classification.”</span> <a href="https://www.ksh.hu/stadat_files/ara/en/ara0005.html">https://www.ksh.hu/stadat_files/ara/en/ara0005.html</a>.
+</div>
+<div id="ref-markAlternativeHousingPrice1984" class="csl-entry" role="listitem">
+Mark, Jonathan H., and Michael A. Goldberg. 1984. <span>“Alternative <span>Housing Price Indices</span>: <span>An Evaluation</span>.”</span> <em>Real Estate Economics</em> 12 (1): 30–49. <a href="https://doi.org/10.1111/1540-6229.00309">https://doi.org/10.1111/1540-6229.00309</a>.
+</div>
+<div id="ref-requena-silventeCalculatingHedonicPrice2006" class="csl-entry" role="listitem">
+Requena-Silvente, Francisco, and James Walker. 2006. <span>“Calculating <span>Hedonic Price Indices</span> with <span>Unobserved Product Attributes</span>: <span>An Application</span> to the <span>UK Car Market</span>.”</span> <em>Economica</em> 73 (291): 509–32. <a href="https://doi.org/10.1111/j.1468-0335.2006.00504.x">https://doi.org/10.1111/j.1468-0335.2006.00504.x</a>.
+</div>
+</div>
+</section></section>
+</div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="slide_files/libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="slide_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="slide_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="slide_files/libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="slide_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="slide_files/libs/revealjs/plugin/quarto-support/support.js"></script><script src="slide_files/libs/revealjs/plugin/notes/notes.js"></script><script src="slide_files/libs/revealjs/plugin/search/search.js"></script><script src="slide_files/libs/revealjs/plugin/zoom/zoom.js"></script><script src="slide_files/libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+
+
+</body></html>

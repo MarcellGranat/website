@@ -1,0 +1,474 @@
+---
+format: mnbinstitute-revealjs
+bibliography: references.bib
+cache: true
+logo: "https://marcellgranat.github.io/cb-textmining-intro/logo.png"
+nocite: |
+  @hvitfeldt2021supervised
+---
+
+```{r setup}
+library(tidyverse)
+list.files(recursive = TRUE, full.names = TRUE, pattern = "template_fns.R$") |>
+  source()
+```
+
+```{python}
+#| echo: false
+#| eval: false
+import qrcode
+
+# Creating an instance of QRCode class
+qr = qrcode.QRCode(version = 4,
+box_size = 10,
+border = 0)
+
+# Adding data to the instance 'qr'
+qr.add_data("https://marcellgranat.com/cb-textmining")
+
+qr.make(fit = True)
+img = qr.make_image(fill_color = 'blue',
+back_color = 'white')
+
+img.save('qrcode.png')
+```
+
+<h2>The Power of Words</h2>
+
+[Quantitative text mining tools]{style="color: #02294c; font-style: italic;"}
+
+<hr>
+
+<p>[Marcell Granát]{style="font-weight: bold;"} \| [Education & Research Expert at]{style="color: grey;"}</p>
+
+![](wide_mnb.png){width="300"}
+
+[2023]{style="color: grey;"}
+
+<br>
+
+<h3>
+
+`r fontawesome::fa("file-powerpoint", "#aa091d")`  <https://marcellgranat.com/cb-textmining>
+
+![](qrcode.png){.absolute bottom="10" right="10" width="200"}
+
+```{r}
+#| results: hide
+#| include: false
+
+source("00-utils.R")
+source("00-board.R")
+
+p_load(extrafont)
+
+theme_set(
+  theme_bw(base_family = "IBM Plex Sans", base_size = 18) + 
+    theme(
+      title = element_text(size = 20, face = "bold"),
+      strip.text = element_text(size = 20, 
+                                family = "IBM Plex Sans Medium",
+                                face = NULL),
+      strip.background = element_rect(fill = "#2e7b82")
+    )
+)
+
+update_geom_defaults("point", list(color = "#2e7b82", alpha = 0.8, size = 3))
+update_geom_defaults("rect", list(fill = "#2e7b82", alpha = 0.8, size = 2))
+update_geom_defaults("line", list(color = "#2e7b82", alpha = 0.9, 
+                                  linewidth = 1.2))
+update_geom_defaults("text", list(color = "#2e7b82", alpha = 0.8))
+geom_text(family = "IBM Plex Sans")
+```
+
+# Are the words important?
+
+## The Influence of Stories
+
+![](https://www.kaltoons.com/wp-content/uploads/Kal-Buy-Sell.print-1-15web-compressor.jpg){.r-stretch fig-alt="kaltoons" fig-align="center"}
+
+## The Influence of Stories
+
+George Akerlof and Robert Shiller [-@akerlof2010animal] highlighted in their classic book "*Animal Spirits*" that one of the most important factors driving markets are the **stories of the given "era"**. The value of the stock market and our assets are not only explained by our stories, but the **stories are shaping the markets**.
+
+## The Influence of Stories
+
+::: r-fit-text
+> "The **Internet** was indeed an important new technology. This new technology was especially salient because of its **presence in our daily lives**. All of us use the Internet. It is on our desktops, at our fingertips. The stories ofyoung people making fortunes were a **contemporary reenactment of the nineteenth-century Gold Rush**. The **steady progress of technology**, which has dominated economic growth for centuries-consisting of millions of incremental advances in **areas like materials science, chemistry, mechanical engineering, and agricultural science-has never attracted the public's interest**. These stories arc not popular. There are few statistics in People magazine. **But with the Internet, the economy literally got carried away with the story.**" --- @akerlof2010animal
+:::
+
+## Federal Reserve Announcements
+
+-   The **largest movements 🏃🏻** typically occur **around Federal Reserve announcements 🗣️** [@gurkaynak2004].
+
+. . .
+
+![](mermaid/mermaid-diagram-2023-07-15-203412.png){fig-align="center" width="518"}
+
+## Federal Reserve Announcements {auto-animate="true"}
+
+::: nonincremental
+-   **Large-scale asset purchases news 📰** has economically large🗽 and highly significant effects on asset prices [@rosa2012].
+
+-   Cumulative financial market impact of the Fed's LSAP program is equivalent to an unanticipated cut in the federal funds target rate 😯.
+:::
+
+## Federal Reserve Announcements {auto-animate="true"}
+
+::: columns
+::: {.column width="40%"}
+::: r-fit-text
+::: nonincremental
+-   **Large-scale asset purchases news** has economically large🗽 and highly significant effects on asset prices [@rosa2012].
+
+-   Cumulative financial market impact of the Fed's LSAP program is equivalent to an unanticipated cut in the federal funds target rate 😯.
+:::
+:::
+:::
+
+::: {.column width="60%"}
+::: callout-important
+## Control for the surprise component
+
+![](mermaid/mermaid-diagram-2023-07-15-205021.png){fig-align="center" heigth="400"}
+:::
+:::
+:::
+
+## The Influence of Stories ➡️ NLP {auto-animate="true" auto-animate-easing="ease-in-out"}
+
+::: r-fit-text
+Stories circulate among individuals in the economy in a manner similar to the spread of viruses. Just as public health experts utilize mathematical models to predict the trajectory of an epidemic, there is an opportunity to employ such models in this context as well.
+:::
+
+-   Our data analysis tools undergo continuous development.
+    -   Expansion of information technology.
+    -   Constant pushing of **computational capacities.**
+
+## The Influence of Stories ➡️ NLP {auto-animate="true"}
+
+::: r-fit-text
+::: nonincremental
+-   Our data analysis tools undergo continuous development.
+    -   Expansion of information technology.
+    -   Constant pushing of **computational capacities.**
+:::
+:::
+
+-   Important new elements in the analytical toolbox are text mining and **natural language processing** (*NLP*) techniques.
+    -   Processing and interpretation of **large quantities of data**
+    -   Making data **interpretable** (that was previously not possible)
+
+## The Influence of Stories ➡️ NLP {auto-animate="true"}
+
+> "I often say that when you can measure what you are speaking about, and express it in numbers, you know something about it; but when you cannot measure it, when you cannot express it in numbers, your knowledge is of a meagre and unsatisfactory kind; it may be the beginning of knowledge, but you have scarcely in your thoughts advanced to the stage of science, whatever the matter may be." -- Baron William Thomson Kelvin
+
+# Tools you need to know for text mining🧑‍💻
+
+## Sentiment Analysis 😏
+
+-   Sentiment analysis is the process of determining the sentiment (positive, negative, or neutral) in a given piece of text.
+-   It is widely used in text mining to understand the overall opinion or sentiment expressed by individuals or groups.
+-   The magnitude of the sentiment score can also indicate the intensity of the sentiment.
+
+## Sentiment Analysis 😏
+
+##### An example
+
+::: r-fit-text
+```{r}
+#| results: asis
+example_text <- '"Market sentiment shifted with concerns over rising inflation, causing uncertainty and apprehension among traders. This news triggered a sell-off in certain sectors, with investors adopting a cautious approach. Amid this backdrop, the market exhibited volatility, reflecting the emotional rollercoaster of market participants. Sentiment plays a crucial role in determining market direction, as investors feelings and emotions can sway their investment decisions. Stay tuned for updates on how sentiment continues to impact the stock market."'
+
+cat(example_text)
+```
+:::
+
+## Sentiment Analysis 😏
+
+##### The bing sentiment dictionary
+
+```{r}
+#| echo: true
+tidytext::get_sentiments("bing")
+```
+
+## Sentiment Analysis 😏
+
+##### Identified words with bing sentiment dictionary
+
+::: r-fit-text
+```{r}
+#| results: asis
+
+r_df <- tidytext::get_sentiments("bing") |> 
+  mutate(
+    word = str_remove_all(word, "[*]"),
+    replacement = case_when(
+      sentiment == "positive" ~ str_c("[", word, "]"),
+      sentiment == "negative" ~ str_c("[", word, ']{style="color: red;"}')
+    )) |> 
+  filter(
+    map_lgl(word, .progress = .p("filter"),  ~ str_detect(example_text, .))
+  ) |> 
+  filter(!word %in% c("sin", "taint", "mar", "pan", "ire", "deter", "dire"))
+
+example_text_annotated <- example_text |> 
+  str_replace_all(
+    set_names(r_df$replacement, r_df$word)
+  )
+
+cat(example_text_annotated)
+```
+:::
+
+## Sentiment Analysis 😏
+
+::: callout-caution
+## Choice of dictionary
+
+It's essential to choose the right dictionary for accurate sentiment analysis. Consider the coverage, context, and accuracy of the dictionary to ensure reliable results.
+:::
+
+::: r-fit-text
+Some popular dictionaries (All available in the [`{tidytext}`](https://github.com/juliasilge/tidytext) R package.):
+
+::: nonincremental
+-   `AFINN`: A popular English-language dictionary that assigns sentiment scores ranging from -5 to 5.
+-   `Bing`: Developed by Microsoft, it classifies words as positive or negative.
+-   `NRC`: An extensive emotion lexicon that assigns sentiments based on eight different emotions.
+:::
+:::
+
+## Sentiment Analysis 😏 {auto-animate="true"}
+
+::: callout-caution
+## Choice of dictionary
+
+It's essential to choose the right dictionary for accurate sentiment analysis. Consider the coverage, **context**, and accuracy of the dictionary to ensure reliable results.
+:::
+
+::: r-fit-text
+In certain contexts, the meaning of certain words can vary from the typical one. For instance, conventional dictionaries classify **"increase"** with a **positive** sentiment, but in news related to **COVID-19 infection**, it is probable not appropriate. This is why scholars frequently apply thematic dictionaries to their analytics.
+:::
+
+## Method Overview (basic)
+
+::: r-fit-text
+1.  Split the text into individual words.
+2.  Assign a sentiment score to each word.
+
+-   Each word is assigned a sentiment score based on a **pre-defined sentiment lexicon** or dictionary.
+-   The sentiment lexicon contains a **list of words along with their associated sentiment scores**.
+-   For example, **positive words 👍** may have a score of +1, **negative words 👎** may have a score of -1, and **neutral words 😐** may have a score of 0.
+
+3.  Calculate the overall sentiment score ($\sum$) for the text.
+:::
+
+## Topic modelling
+
+Topic modeling is a technique used in natural language processing and text mining to **automatically discover topics** or themes from a collection of documents. It helps in understanding the main ideas or concepts present in the text data.
+
+::: callout-warning
+This is an unsupervised machine learning tool, thus it does not have a target (outcome) ⛳ variable to assess its modeling effectiveness. It is not always clear how many topics we should aim to identify 🤷‍♂️. We want to avoid that our model is overly complicated and messy, but we also don't want important topics to be merged together ⚖️. As a result, there is always some subjective judgment 🧑‍⚖️ and need for fine-tuning (➡️ mostly time-consuming).
+:::
+
+## Latent Dirichlet Allocation (LDA)
+
+LDA assumes that (1) **each document is a mixture of a small number of topics**, and (2) **each topic is characterized by a distribution of words**. The goal of LDA is to infer the topic mixture distribution and the word distribution for each topic.
+
+::: callout-tip
+One example is that the newspaper articles cover various subjects such as *politics* and *economics*. By utilizing topic modeling, we can assess the **extent to which the articles focus on each topic** and observe how these **prevalences fluctuate over time.**
+:::
+
+## Structural Topic Model (STM)
+
+The motivation behind the STM is to provide a framework that **incorporates document-level covariate information**, which can improve the inference of topics. Unlike Latent Dirichlet Allocation, the STM allows researchers to incorporate additional information about the documents, such as *time, journal title, author* or contextual data.
+
+::: callout-tip
+This tool is relatively new, but it has gained popularity in the field of economics and finance research. You can find a recent publication from our institution is @csillag2022.
+:::
+
+## 👓 Supervised text analysis
+
+::: columns
+::: column
+Supervised machine learning algorithms can be used to build predictive models that **classify text** into different categories or **make predictions based on text inputs.**
+:::
+
+::: column
+[![](https://github.com/EmilHvitfeldt/smltar/blob/master/cover.jpg?raw=true){fig-alt="Supervised Machine Learning for Text Analysis in R" fig-align="center" width="253"}](https://smltar.com)
+:::
+:::
+
+# 📎 Papers based on TA
+
+##  {auto-animate="true"}
+
+#### @dybowski_european_2020
+
+::: nonincremental
+-   Demonstrated a shift in ECB's communication after the **2007-08 crisis.**
+
+    -   Instead of conventional monetary analyses, the stability of the **financial system** became the primary focus (`STM`).
+
+    -   The change was gradual but significant, with the prevalence of stability-related topics rising from approximately 20% before the crisis to 60-70% by 2017.
+:::
+
+##  {auto-animate="true"}
+
+#### @dybowski_european_2020
+
+::: nonincremental
+-   Despite the shift towards financial stability in ECB's communication, it is not evident that their statements necessarily reflect in their decisions.
+
+    -   Dybowski and Kempa (2020) analyzed not only the time series of topics' prevalence but also constructed a `sentiment index` indicating the positivity or negativity towards financial stability.
+
+    -   They integrated this sentiment index into an extended **Taylor rule**, but it did not affect the the interest decision significantly.
+:::
+
+## 
+
+#### @pongsakluangaram2017
+
+::: r-fit-text
+-   The authors analysed the communication of 22 central banks between 2000 and 2015
+
+-   readability, topics, tones
+
+-   Understanding MP communication generally required an advanced reader, but they improved a lot! (See also here: [economania.hu](https://economaniablog.hu/2022/08/26/ertheto-jegybanki-kommunikaciot-mindenkinek/))
+
+-   IT central banks had generally communicated more about inflation topic than economic growth topic
+:::
+
+## 
+
+#### @pongsakluangaram2017
+
+```{r}
+#| tbl-cap: Top words from the 15 topics (LDA)
+
+tibble::tribble(
+             ~Topic,       ~X1,        ~X2,       ~X3,       ~X4,         ~X5,        ~X6,       ~X7,       ~X8,            ~X9,        ~X10,
+             "Inflation",  "remain",   "ressur",     "low",  "recent",     "moder",     "data", "continu",   "rowth", "inflationari",   "confirm",
+          "Labor market", "increas",     "wage", "product",  "growth",    "labour",   "employ",    "cost",  "result",       "adjust",  "unemploy",
+       "Domestic demand",  "growth",   "demand",  "domest",  "sector", "household",  "continu",  "credit",  "invest",         "loan",     "rivat",
+    "Economic condition",  "econom", "committe",  "condit",  "inform",   "support",     "time",  "improv", "current",       "assess",    "radual",
+            "Oil prices",   "price",  "increas",     "Oil",  "consum",      "rise",     "food",  "commod",  "mainli",       "energi",    "declin",
+          "Risk outlook",    "risk",  "outlook",  "factor", "current",    "effect",   "deveio",  "balanc", "account",        "Chang",    "impact",
+      "Financial market",  "market",  "financi", "exchang",  "intern",        "us",   "includ",  "dollar",    "rand",      "volatil",    "domest",
+             "Euro area",    "euro",     "area",  "fiscal",   "overn",   "countri",    "ublic",  "financ",    "need",       "measur",    "reform",
+             "Inflation",  "inflat",   "expect",  "target",    "rang",    "remain",   "measur",     "cpi",    "core",       "within",       "end",
+         "Output growth",  "declin",    "indic",   "trend",  "output",    "growth",     "show",   "posit",    "real",     "although",    "improv",
+        "Global economy", "economi",   "econom",  "growth",  "global",     "activ", "recoveri",  "export",    "emer",        "world",     "state",
+       "Monetary policy",    "rate", "interest",  "annual",    "basi",     "point",    "decid", "unchang", "deposit",          "key",     "today",
+             "Inflation",    "term",   "medium",  "remain",  "stabil",   "develop",   "expect", "continu",   "close",      "council",      "time",
+       "Monetary policy",   "olici", "monetari",    "bank",   "board",  "maintain",     "meet", "central",    "oper",        "stanc", "overnight",
+     "Growth projection", "project",    "lower", "previou",    "last",  "forecast",   "period",  "higher",  "compar",          "gdp",    "averag"
+     ) |> 
+  rowwise() |> 
+  summarise(
+    Topic, `Top words` = str_flatten(c_across(-1), ", ")
+  ) |> 
+  gt() |> 
+  .gt_finalise() |> 
+  cols_align("left", 2) |> 
+  rm_footnotes() |> 
+  tab_source_note("Source: Luangaram & Wongwachara (2017)") |> 
+  tab_options(
+    table.font.size = px(15)
+  )
+
+```
+
+## 
+
+#### @pongsakluangaram2017
+
+::: r-fit-text
+::: nonincremental
+-   The authors analysed the communication of 22 central banks between 2000 and 2015
+
+-   readability, topics, tones
+
+-   Understanding MP communication generally required an advanced reader, but they improved a lot! (See also here: [economania.hu](https://economaniablog.hu/2022/08/26/ertheto-jegybanki-kommunikaciot-mindenkinek/))
+
+-   IT central banks had generally communicated more about inflation topic than economic growth topic
+
+-   Central bank communication complements well with the policy interest rate in enhancing the effectiveness of monetary transmission mechanism (`VAR`)
+:::
+:::
+
+## 
+
+#### @parle_financial_2022
+
+::: r-fit-text
+@parle_financial_2022 presents two methods of measuring the economic sentiment of the ECB press conferences, called **Hawk--Dove Indices**.
+:::
+
+. . .
+
+::: r-fit-text
+::: nonincremental
+-   **Hawkish**: Positive expectations regarding economic conditions or higher inflation pressure, and hence a tendency towards a monetary policy tightening.
+
+-   **Dovish**: Negative expectations regarding economic conditions or lower inflation pressure, and hence a tendency towards a monetary policy loosening
+:::
+:::
+
+. . .
+
+::: r-fit-text
+1.  `Dictionary based index`, with 4 categories (economic terms and sentiment)
+
+2.  `Dynamic Topic Model`
+:::
+
+## 
+
+#### @parle_financial_2022
+
+-   @parle_financial_2022 applies the Hawk--Dove Indices and intraday financial market indeces to identify the importance of the "information channel" and the the effect on the expectations about the future monetary policy.
+
+-   **Unintended consequences**: The paper highlights that the market reacts negatively to a dovish statement, which are set for stimulating the economy.
+
+## What should you expect?
+
+. . .
+
+::: r-fit-text
+Pros 🥰
+
+-   Text mining is a **relatively new 🆕** research method that has gained popularity in recent years. It has a **great potential 👊🏻** to make valuable contributions to various topics in finance 💰 and economics 📈.
+
+Cons 🤕
+
+-   At times, it can be challenging to **find** 🔍 a sufficient amount of textual data that aligns with your research question.
+
+-   **Cleaning** 🧹 and preprocessing tasks require **programming ⌨️ expertise** 🧐 due to the possibility of numerous emerging issues (often computationally intensive that requiring optimization) and that there is **no one-size-fits-all solution** 🤷‍♂️.
+:::
+
+------------------------------------------------------------------------
+
+[Thank you for your attention!]{style="color: grey;"} `r emo::ji("wave")`
+
+::: columns
+::: column
+Slides are available at:
+
+`r fontawesome::fa("file-powerpoint", "#aa091d")`  [marcellgranat.com/cb-textmining](https://marcellgranat.com/cb-textmining)
+
+`r emo::ji("email")` [granat.marcell\@nje.hu](mailto:granat.marcell@nje.hu)
+
+`r fontawesome::fa("linkedin", "#0b66c2")` Always keen to connect!
+:::
+
+::: column
+![](qrcode.png){fig-align="center" width="34%"}
+:::
+:::
+
+<hr>
+
+[And others also liked]{style="color: grey;"} `r emo::ji("book")`

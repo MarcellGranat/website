@@ -1,0 +1,51 @@
+title: Marcell's Favorite Templates
+author: Marcell Granat
+version: 0.1.0
+contributes:
+  formats:
+    common:
+      knitr:
+        opts_chunk:
+          echo: false
+    docx:
+      keep-md: false
+      fig-format: png
+      number-sections: true
+      bibliography: references.bib
+      reference-doc: custom-reference-doc.docx
+      knitr:
+        opts_chunk: 
+          echo: false
+          eval: true
+          collapse: true
+          comment: "#>"
+          fig-width: 6
+          fig.align: "center"
+    revealjs:
+      output-file: index.html
+      keep-md: false
+      center-title-slide: false
+      number-sections: false
+      incremental: true
+      code-overflow: wrap
+      logo: "logo.png"
+      code-copy: true
+      keywords: inflation, car, clustering
+      footer: "\\@Marcell Granat"
+      theme: [simple, custom.scss]
+      title-slide-attributes: 
+        data-background-opacity: "0.3"
+      highlight-style: a11y
+      code-link: true
+      bibliography: references.bib
+      knitr:
+        opts_chunk: 
+          echo: false
+          eval: true
+          collapse: true
+          dev: "svg"
+          comment: "#>"
+          fig.height: 6
+          out.height: "600px"
+          fig.align: "center"
+      

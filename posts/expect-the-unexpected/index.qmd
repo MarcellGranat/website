@@ -16,7 +16,7 @@ nocite: |
   @granát2023
 ---
 
-Our recent article was published at Journal of Finance Research Letters.
+Our recent article was published at Finance Research Letters.
 
 ------------------------------------------------------------------------
 

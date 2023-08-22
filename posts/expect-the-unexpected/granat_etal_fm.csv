@@ -1,4 +1,4 @@
-Please cite the article! This time-series is the datapoints from Table 3 in Granát et al. - Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war? (Finance Research Letters, 2023)
+If you use this data, please cite the original paper. This time-series is the datapoints from Table 3 in Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. Finance Research Letters, 104301.
 "","time","t","t_group","term","estimate","std.error","statistic","p.value","conf.low","conf.high"
 "1",2021-10-07,-100,"-10","relative_price",0.00957598809870092,0.00229333245367911,4.17557780745593,3.44997695188307e-05,0.00507133320804344,0.0140806429893584
 "2",2021-10-08,-99,"-10","relative_price",0.00957598809870092,0.00229333245367911,4.17557780745593,3.44997695188307e-05,0.00507133320804344,0.0140806429893584

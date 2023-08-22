@@ -68,7 +68,7 @@ four_factor_adj_price_df |>
   write.csv(file = "waad.csv")
 
 c(
-  "Please cite the article! This time-series is the datapoints from Figure 3 in Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. Finance Research Letters, 104301.", 
+  "If you use this data, please cite the original paper. This time-series is the datapoints from Figure 3 in Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. Finance Research Letters, 104301.", 
   read_lines("waad.csv")
 ) |> 
   str_flatten("\n") |> 
@@ -128,21 +128,11 @@ famamacbeth_fitted_df |>
   write.csv(file = "fm.csv")
 
 c(
-  "Please cite the article! This time-series is the datapoints from Table 3 in Granát et al. - Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war? (Finance Research Letters, 2023)", 
+  "If you use this data, please cite the original paper. This time-series is the datapoints from Table 3 in Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. Finance Research Letters, 104301.", 
   read_lines("fm.csv")
 ) |> 
   str_flatten("\n") |> 
   writeLines(con = "granat_etal_fm.csv")  
-```
-
-
-```{r}
-c(
-  "Please cite the article! This time-series is the datapoints from Figure 3 in Granát et al. - Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war? (Finance Research Letters, 2023)", 
-  read_lines("waad.csv")
-) |> 
-  str_flatten("\n") |> 
-  writeLines(con = "granat_etal_waad.csv")
 ```
 
 <a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_fm.csv" download class="btn btn-primary">Download in CSV</a>

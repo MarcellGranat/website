@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Learn how to understand, speak, and do economics in the public sector">
+
+<title>Microeconomics for Public Policy - Problem set 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Microeconomics for Public Policy - Problem set 2">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://econs23.classes.andrewheiss.com/files/social-image-s23.png">
+<meta property="og:site-name" content="Microeconomics for Public Policy">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:height" content="640">
+<meta property="og:image:width" content="1280">
+<meta name="twitter:title" content="Microeconomics for Public Policy - Problem set 2">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://econs23.classes.andrewheiss.com/files/social-image-s23.png">
+<meta name="twitter:creator" content="@andrewheiss">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="640">
+<meta name="twitter:image-width" content="1280">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Microeconomics for Public Policy</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Classes and readings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../assignment/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../news/index.html" rel="" target="">
+ <span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://gsuecons2023.slack.com" rel="" target=""><i class="bi bi-slack" role="img" aria-label="Slack">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-problem-set.html">Problem sets</a></li><li class="breadcrumb-item"><a href="../assignment/02-problem-set.html">Problem set 2</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment overview</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Problem sets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-problem-set.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Problem set 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/04-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/05-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/06-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/07-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 7</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Weekly check-ins</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/04-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/05-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/06-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/07-weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in 7</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">1</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">3</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">4</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">5</a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">6</a></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">7</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7">Problem set 2</h1>
+
+<div class="date-block bg-assignment text-white p-2">
+  <p class="date">Due by 11:59 PM on Tuesday, June 20, 2023</p>
+</div>
+</header>
+
+<div class="cell">
+
+<style type="text/css">
+table {
+  display: table;
+}
+
+.table td {
+  vertical-align: middle;
+  line-height: 1.1;
+}
+</style>
+</div>
+<p><strong>Submit this as a PDF on iCollege.</strong> You can use whatever you want to make your drawings, including <a href="https://gravit.io/">Gravit Designer</a>, Adobe Illustrator, Excel, PowerPoint, Microsoft Paint, or photographed/scanned pen and paper.</p>
+<p><strong>Cite your sources and show your work.</strong></p>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">1</h2>
+<p>The following game represents the interaction between two software engineers, Astrid and Bettina, who are working together to write code as a part of a project. Astrid is better at writing Java code, while Bettina prefers C++. The numbers represent the pay in dollars for completion of the project.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+<span style="color: #5e81ac;">Bettina</span>
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Java</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">C++</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Astrid</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">Java</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">$4,000</span> , <span style="color: #5e81ac;">$3,000</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">$2,000</span> , <span style="color: #5e81ac;">$2,000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Astrid</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">C++</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">$0</span> , <span style="color: #5e81ac;">$0</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">$3,000</span> , <span style="color: #5e81ac;">$6,000</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Based on this information, which of the following are true? Why or why not? <strong>Explain why or why not in a sentence for each.</strong></p>
+<ol type="1">
+<li><p>There are two Nash equilibria: (Java, Java) and (C++, C++).</p></li>
+<li><p>If Astrid can choose the language first and commit to it, then (Java, Java) will be chosen.</p></li>
+<li><p>If the two can make an agreement beforehand, including a transfer of $500 from Bettina to Astrid, then (C++, C++) will be chosen.</p></li>
+<li><p>If the two can make an agreement beforehand, including a transfer of $2,000 from Bettina to Astrid, then (C++, C++) will be chosen.</p></li>
+<li><p>If the two cannot make an agreement beforehand, then they may end up with the (Java, C++) outcome.</p></li>
+</ol>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">2</h2>
+<p>Consider a repeated prisoners’ dilemma game with a finite number of rounds.</p>
+<ol type="1">
+<li><p>If we assume that all parties are narrowly rational, and that they know which is the last period, why would we predict no cooperation during the whole game? <strong>Answer in a sentence.</strong></p></li>
+<li><p>Why, in practice, might parties not behave this way? <strong>Answer in ≈30 words.</strong></p></li>
+</ol>
+<p>In the prisoners’ dilemma computer tournament described in the Radiolab episode, the <em>Tit for Tat</em> strategy won. This was also the case in the <a href="http://ncase.me/trust/">“Evolution of Trust”</a> game that you played.</p>
+<ol start="3" type="1">
+<li><p>In what sense, exactly, did it win? <strong>Answer in a sentence.</strong></p></li>
+<li><p>How robust was this finding? Are there situations where <em>Tit for Tat</em> is too nice? Too provocable? Too forgiving? <strong>Answer in ≈30 words.</strong></p></li>
+</ol>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">3</h2>
+<p>The inherent negativeness in political campaigns is often described as a classic prisoner’s dilemma.</p>
+<ol type="1">
+<li><p>Write down a payoff matrix that shows the choice between positive and negative campaigning as a prisoner’s dilemma.</p></li>
+<li><p>Give a recent real-life example of a negative campaign prisoner’s dilemma. <strong>Answer in ≈30 words.</strong></p></li>
+</ol>
+<p>In class, I argued that negative political campaigning might be better modeled as a stag hunt.</p>
+<ol start="3" type="1">
+<li><p>Why did I say this? What is the difference between a stag hunt and a prisoner’s dilemma? <strong>Answer in ≈50 words.</strong></p></li>
+<li><p>Write down a payoff matrix that shows the choice between positive and negative campaigning as a stag hunt.</p></li>
+</ol>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">4</h2>
+<p>After Hurricane Maria, hundreds of nonprofit organizations streamed to Puerto Rico and other Caribbean islands to provide disaster relief. <a href="https://theconversation.com/response-to-natural-disasters-like-harvey-could-be-helped-with-game-theory-83125">Research has found</a> that coordination between nonprofits during disasters is difficult to maintain—it’s easy for individual nonprofits to fundraise and pursue programming on their own while ignoring other organizations working on the same issues. Additionally, there are incentives to do projects that are cheap and have fast turnaround, since <a href="https://www.sciencedirect.com/science/article/pii/S092552730900365X">donors respond to the visibility of organizations providing disaster relief</a>.</p>
+<p>Consider two nonprofit organizations working in Puerto Rico. Together, they could spend time coordinating their efforts and run a shelter for hurricane victims, providing each organization with 100 utils. Alternatively, they could individually distribute paper towels—a simple, low-cost, fast, and <a href="https://www.cnn.com/videos/politics/2017/10/03/donald-trump-puerto-rico-supplies-von.cnn/video/playlists/trumps-response-to-puerto-rico-crisis/">visible</a> project—and receive 5 utils.</p>
+<p>This situation can be modeled with the following payoff matrix:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+<span style="color: #5e81ac;">Nonprofit 2</span>
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Run shelter</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Distribute paper towels</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Nonprofit 1</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">Run<br>
+shelter</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">100</span> , <span style="color: #5e81ac;">100</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">0</span> , <span style="color: #5e81ac;">5</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Nonprofit 1</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">Distribute<br>
+paper<br>
+towels</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">5</span> , <span style="color: #5e81ac;">0</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">5</span> , <span style="color: #5e81ac;">5</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<ol type="1">
+<li><p>What are the consequences of this kind of interaction? What will the two organizations naturally tend to do? Why? (i.e.&nbsp;what are the equilibria?) <strong>Answer in ≈30 words.</strong></p></li>
+<li><p>What kind of game is this? Why? Can cooperation be ensured? How? <strong>Answer in ≈20 words.</strong></p></li>
+<li><p><strong>Extra credit:</strong> In the absence of communication, what are the two nonprofits’ mixed strategies? (See <a href="../resource/game-theory.html">the guide in the resources section</a> for how to calculate mixed strategies.) How will they guess what the other organization will do? Under what conditions will nonprofit 1 choose to run the shelter? (i.e.&nbsp;what are the probability cutoffs for each nonprofit choosing to run the shelter or distribute paper towels?) <strong>Answer in ≈40 words. Show your work.</strong></p></li>
+<li><p><strong>Extra credit:</strong> What is the expected payoff of engaging in a mixed strategy? (i.e.&nbsp;choosing to gamble based on probability cutoffs rather than communicate and coordinate in person?) <strong>Show your work.</strong></p></li>
+</ol>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">5</h2>
+<p><a href="https://www.edelman.com/trust-barometer">A recent poll by the Edelman Trust Barometer</a> shows a staggering drop in trust in private and public institutions in the United States. Only 33% of Americans surveyed have trust in government, and “no country saw steeper declines than the United States, with a 37-point aggregate drop in trust across all institutions”</p>
+<ol type="1">
+<li><p>Why does a community with a high level of trust have an advantage over one with lower levels of trust? (<em>Hint</em>: recall your reading from Mayer, 2014 on stag hunts) <strong>Answer in ≈40 words.</strong></p></li>
+<li><p>To what extent can the institution of trust be thought of as a cooperative equilibrium in a stag hunt game? <strong>Answer in ≈30 words.</strong></p></li>
+<li><p>How might a cooperative equilibrium degenerate into a non-cooperative equilibrium? <strong>Answer in ≈30 words.</strong></p></li>
+</ol>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5">6</h2>
+<p>Consider <strong>the society you live in,</strong> or <strong>another society</strong> with which you are familiar.</p>
+<ol type="1">
+<li>To make society fairer (according to the substantive judgment of fairness), would you want greater equality of income, happiness, or freedom? Why? Would there be a trade-off between these aspects? (<strong>≈30 words</strong>)</li>
+<li>Are there other things that should be more equal to achieve greater substantive fairness in this society? (<strong>≈30 words</strong>)</li>
+<li>How fair is this society, according to the procedural judgment of fairness? (<strong>≈30 words</strong>)</li>
+<li>Suppose that, behind a Rawlsian veil of ignorance, you could choose to live in a society in which one (but only one) of the three procedural standards for fairness (voluntary exchange of property, equality of opportunity, and deservingness) would be the guiding principle for how institutions are organized. Which procedural standard would you choose, and why? (<strong>≈50 words</strong>)</li>
+</ol>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6">7</h2>
+<ol type="1">
+<li><p>Two farmers have unlimited access to a common plot of land and can let their cows graze on it. The matrix below shows the benefits they get from grazing either 1 or 2+ cows on the land.</p>
+<ol type="1">
+<li>What category of game is this?</li>
+<li>What is/are the Nash equilibrium/equilibria?</li>
+<li>What is/are the Pareto efficient outcome(s) in this game?</li>
+</ol></li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+<span style="color: #5e81ac;">Farmer 2</span>
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">1 cow</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">2+ cows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Farmer 1</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">1<br>
+cow</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">8</span> , <span style="color: #5e81ac;">8</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">2</span> , <span style="color: #5e81ac;">10</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Farmer 1</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">2+<br>
+cows</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">10</span> , <span style="color: #5e81ac;">2</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">4</span> , <span style="color: #5e81ac;">4</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>The government offers a reward or subsidy for communities where farmers only allow 1 cow to graze on the common field, resulting in a new payoff matrix.</p>
+<ol type="1">
+<li>What category of game is this?</li>
+<li>What is/are the Nash equilibrium/equilibria?</li>
+<li>What is/are the Pareto efficient outcome(s) in this game?</li>
+</ol></li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+<span style="color: #5e81ac;">Farmer 2</span>
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">1 cow</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">2+ cows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Farmer 1</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">1<br>
+cow</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">15</span> , <span style="color: #5e81ac;">15</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">2</span> , <span style="color: #5e81ac;">10</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="-webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); display: inline-block; "><span style=" font-weight: bold;    color: #bf616a !important;">Farmer 1</span></span></td>
+<td style="text-align: center;"><span style=" font-weight: bold;    ">2+<br>
+cows</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">10</span> , <span style="color: #5e81ac;">2</span></td>
+<td style="text-align: center;"><span style="color: #bf616a;">4</span> , <span style="color: #5e81ac;">4</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<ol start="3" type="1">
+<li>How is Pareto efficiency different from fairness? (<strong>≈30 words</strong>)</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.andrewheiss.com">Andrew Heiss</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/andrewheiss/econs23.classes.andrewheiss.com">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

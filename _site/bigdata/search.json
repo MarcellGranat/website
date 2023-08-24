@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "\n            Big Data & Data Visualisation\n        ",
     "section": "",
-    "text": "Big Data & Data Visualisation\n        \n        \n            Learn how to analyse, understand, and communicate about your data!\n        \n        \n            Fall 2023 MNB Insitute John von Neumann University\n        \n    \n    \n        \n            \n            \n            \n        \n    \n\n\n\n\n\nInstructor\n\n   Marcell Granát\n   Infopark I Building\n   granat.marcell@nje.hu\n   Schedule an appointment\n\n\n\nCourse details\n\n   on Tuesdays\n   Sept 11–December 30, 2023\n   15:00-18.30\n   Neumann Room (computer lab)\n\n\n\nContacting me\nE-mails or Teams are the best ways to get in contact with me. I will try to respond to all course-related e-mails and messages within 24 hours. Feel free to schedule an appointment for an online meeting (especially if I am your supervisor)."
+    "text": "Big Data & Data Visualisation\n        \n        \n            Learn how to analyse, understand, and communicate about your data!\n        \n        \n            Fall 2023 MNB Insitute John von Neumann University\n        \n    \n    \n        \n            \n            \n            \n        \n    \n\n\n\n\n\nInstructor\n\n   Marcell Granát\n   Infopark I Building\n   granat.marcell@nje.hu\n   Schedule an appointment\n\n\n\nCourse details\n\n   on Tuesdays\n   Sept 11–December 02, 2023\n   15:00-18.30\n   Neumann Room (computer lab)\n\n\n\nContacting me\nE-mails or Teams are the best ways to get in contact with me. I will try to respond to all course-related e-mails and messages within 24 hours. Feel free to schedule an appointment for an online meeting (especially if I am your supervisor)."
   },
   {
     "objectID": "schedule.html",
@@ -18,14 +18,14 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Marcell Granát\n   Infopark I Building\n   granat.marcell@nje.hu\n   Schedule an appointment\n\n\n\n\n\n   on Tuesdays\n   Sept 11–December 30, 2023\n   15:00-18.30\n   Neumann Room (computer lab)"
+    "text": "Marcell Granát\n   Infopark I Building\n   granat.marcell@nje.hu\n   Schedule an appointment\n\n\n\n\n\n   on Tuesdays\n   Sept 11–December 02, 2023\n   15:00-18.30\n   Neumann Room (computer lab)"
   },
   {
     "objectID": "syllabus.html#course-objectives",
     "href": "syllabus.html#course-objectives",
     "title": "Syllabus",
     "section": "Course objectives",
-    "text": "Course objectives\nThe public sector is complex. Public administrators, managers, and policy makers need to be fluent in the language of economics and need to be able to engage in and understand quantitative analysis of social policies."
+    "text": "Course objectives\n\nIn the digital era, an abundant amount of data is created every day, which contains valuable information about the economy, but their proper handling is not trivial. Data analysis and visualization have now become one of the most important skills in business, but in the world of research, it is clearly the most important.\n\nThis course introduces several statistical and visualization methods that helps to work with data, such as advanced inferential statistics and dimension reduction techniques. In addition, we will put a lot of effort into helping you to use  programming language (properly) to be able to apply these tools in practice."
   },
   {
     "objectID": "syllabus.html#course-materials",
@@ -144,14 +144,14 @@
     "href": "content/01-content.html",
     "title": "Capitalism and measurement",
     "section": "",
-    "text": "Chapters 1 and 9 in Naked Economics Wheelan:2019?\n Introduction and 1.1–1.10 in Economy, Society, and Public Policy core-espp?\n “Dismal ignorance of the “dismal science”—a response to Larry Elliot”\n Planet Money, “The Invention Of ‘The Economy’,” episode 522\n On the Media, “Money, Then and Now,” July 5, 2019"
+    "text": "Chapters 1 and 9 in Naked Economics (Wheelan:2019?)\n Introduction and 1.1–1.10 in Economy, Society, and Public Policy (core-espp?)\n “Dismal ignorance of the “dismal science”—a response to Larry Elliot”\n Planet Money, “The Invention Of ‘The Economy’,” episode 522\n On the Media, “Money, Then and Now,” July 5, 2019"
   },
   {
     "objectID": "content/01-content.html#readings",
     "href": "content/01-content.html#readings",
     "title": "Capitalism and measurement",
     "section": "",
-    "text": "Chapters 1 and 9 in Naked Economics Wheelan:2019?\n Introduction and 1.1–1.10 in Economy, Society, and Public Policy core-espp?\n “Dismal ignorance of the “dismal science”—a response to Larry Elliot”\n Planet Money, “The Invention Of ‘The Economy’,” episode 522\n On the Media, “Money, Then and Now,” July 5, 2019"
+    "text": "Chapters 1 and 9 in Naked Economics (Wheelan:2019?)\n Introduction and 1.1–1.10 in Economy, Society, and Public Policy (core-espp?)\n “Dismal ignorance of the “dismal science”—a response to Larry Elliot”\n Planet Money, “The Invention Of ‘The Economy’,” episode 522\n On the Media, “Money, Then and Now,” July 5, 2019"
   },
   {
     "objectID": "content/01-content.html#other-useful-resources",

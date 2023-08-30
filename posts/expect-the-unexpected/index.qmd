@@ -1,6 +1,6 @@
 ---
-title: Expect the Unexpected
-date: '2023-08-21'
+title: "The Russo-Ukrainian Crisis: Did Financial Markets See it Coming?"
+date: '2023-08-30'
 slug: expect
 author: Marcell Granát, Kristóf Lehmann, Olivér Nagy, Gábor Neszveda
 image: logo.jpg
@@ -20,7 +20,9 @@ nocite: |
 
 ------------------------------------------------------------------------
 
-The economy of the second decade of the 21st century is characterised by sudden economic shocks. In our recent research, we focused on the Russian-Ukrainian crisis and examined how much of a surprise it was for the financial markets. It is not entirely trivial to determine if this could have been foreseen or not.
+
+
+The economy of the second decade of the 21st century is characterised by sudden economic shocks. The Russian military operation in Ukraine on the 24th of February had a significant impact on the global financial markets and the economy. There are conflicting views on whether the event surprised the world or if it was already expected.
 
 On one hand, the escalation of the conflict had been building up for many years, giving the markets time to factor in this danger in advance. On the other hand, significant movements were observed in the financial markets after the outbreak of the war, indicating that the news came as a surprise to investors. The solution likely lies somewhere in between, with a gradually increasing number of investors anticipating the escalation of the conflict.
 
@@ -29,7 +31,6 @@ We applied @kyle1985 model, which is based on informed and uninformed investors,
 The assumption of the empirical model is that after the outbreak, no one can doubt the fact of the war, so the observed prices at that time already reflect the value attributed to a financial security in a war scenario. This is referred to as liquidity value. Once this price is known, we examine historically how close the prices were to their liqudation values during specific periods. The simplest way to illustrate this is presented by @fig-motivation, the average absolute differences from the liquidation value over time.
 
 <a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_waad.csv" download class="btn btn-primary">Download in CSV</a>
-
 
 ```{r}
 #| include: false
@@ -74,7 +75,6 @@ c(
   str_flatten("\n") |> 
   writeLines(con = "granat_etal_waad.csv")
 ```
-
 
 ```{r}
 #| label: fig-motivation
@@ -136,7 +136,6 @@ c(
 ```
 
 <a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_fm.csv" download class="btn btn-primary">Download in CSV</a>
-
 
 ```{r}
 #| label: fig-fm-coef

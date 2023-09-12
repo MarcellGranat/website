@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "The base R",
+    "section": "",
+    "text": "📈 Handling large datasets: Economic data often consists of thousands or even millions of observations. Programming enables us to organize and process this data effectively. By writing code, we can automate repetitive tasks, explore the data, and perform calculations on a scale that would be impractical or time-consuming with manual methods.\n🧹 Data cleaning and preprocessing: Real-world data is often messy and inconsistent. Programming allows us to clean and preprocess the data, removing any errors, inconsistencies, or missing values. By writing code to handle such data cleaning tasks, we can ensure the accuracy and integrity of our analysis.\n🔁 Reproducibility: Programming promotes reproducibility in statistical analysis. By documenting and sharing our code, others can replicate our analyses, verify our findings, and build upon our work. This promotes transparency and strengthens the validity of our results.\n🛃 Flexibility and customization: Programming languages like  and Python provide a wide range of statistical libraries and packages specifically designed for data analysis. These libraries offer various functions and algorithms to perform statistical tests, regression models, or other techniques. The ability to customize and tailor these tools to specific research questions allows for more precise and detailed analysis.\n\n\n\n\n\nProgramming, like any other skill, requires practice and persistence ⚒️. As Hadley Wickham, a prominent figure in the  community, once said, “The only way to write good code is to write tons of subpar code first. Feeling shame about bad code stops you from getting to good code.” 🚀 This sentiment underscores the importance of perseverance and learning from mistakes in the journey of mastering ."
+  },
+  {
+    "objectID": "content/01-content.html#example---fertility-rates-by-country-by-year-1",
+    "href": "content/01-content.html#example---fertility-rates-by-country-by-year-1",
+    "title": "The base R",
+    "section": "Example - Fertility rates by country / by year",
+    "text": "Example - Fertility rates by country / by year\n\nData from OECD\n\nDataCode to reproduce\n\n\n\nfertility_df\n\n      AUS  AUT  BEL  CAN  CZE  DNK  FIN  FRA  DEU  GRC  HUN  ISL  IRL  ITA  JPN\n1960 3.45 2.69 2.54 3.90 2.11 2.54 2.71 2.74 2.37 2.23 2.02 4.26 3.76 2.41 2.00\n1961 3.55 2.78 2.63 3.84 2.13 2.55 2.65 2.82 2.44 2.13 1.94 3.88 3.79 2.41 1.96\n1962 3.43 2.80 2.59 3.76 2.14 2.54 2.66 2.80 2.44 2.16 1.79 3.98 3.92 2.46 1.98\n1963 3.34 2.82 2.68 3.67 2.33 2.64 2.66 2.90 2.51 2.14 1.82 3.98 4.01 2.56 2.00\n1964 3.15 2.79 2.71 3.50 2.36 2.60 2.58 2.91 2.53 2.24 1.80 3.86 4.06 2.70 2.05\n1965 2.97 2.70 2.61 3.15 2.18 2.61 2.46 2.85 2.50 2.25 1.81 3.71 4.03 2.67 2.14\n1966 2.89 2.66 2.52 2.81 2.01 2.62 2.40 2.80 2.51 2.32 1.88 3.58 3.95 2.63 1.58\n1967 2.85 2.62 2.41 2.60 1.90 2.35 2.32 2.67 2.45 2.45 2.01 3.28 3.84 2.54 2.23\n1968 2.89 2.58 2.31 2.45 1.83 2.12 2.15 2.59 2.36 2.42 2.06 3.07 3.78 2.49 2.13\n1969 2.89 2.49 2.27 2.40 1.86 2.00 1.94 2.53 2.21 2.36 2.04 2.99 3.85 2.51 2.13\n1970 2.86 2.29 2.25 2.33 1.91 1.95 1.83 2.48 2.03 2.40 1.97 2.81 3.87 2.42 2.13\n1971 2.95 2.20 2.21 2.19 1.98 2.04 1.70 2.50 1.97 2.32 1.92 2.92 3.98 2.41 2.16\n1972 2.74 2.08 2.09 2.02 2.07 2.03 1.59 2.42 1.74 2.32 1.93 3.09 3.88 2.36 2.14\n1973 2.49 1.94 1.95 1.93 2.29 1.92 1.50 2.31 1.56 2.27 1.95 2.95 3.74 2.34 2.14\n1974 2.32 1.91 1.83 1.82 2.43 1.90 1.62 2.11 1.53 2.38 2.30 2.66 3.62 2.33 2.05\n1975 2.15 1.83 1.74 1.80 2.40 1.92 1.69 1.93 1.48 2.33 2.38 2.65 3.40 2.21 1.91\n1976 2.06 1.69 1.73 1.76 2.36 1.75 1.72 1.83 1.51 2.35 2.26 2.52 3.31 2.11 1.85\n1977 2.01 1.63 1.71 1.75 2.32 1.66 1.69 1.86 1.51 2.27 2.17 2.31 3.27 1.97 1.80\n1978 1.95 1.60 1.69 1.70 2.32 1.67 1.65 1.82 1.50 2.28 2.08 2.35 3.24 1.87 1.79\n1979 1.91 1.60 1.69 1.70 2.29 1.60 1.64 1.86 1.50 2.26 2.02 2.49 3.23 1.76 1.77\n1980 1.89 1.65 1.68 1.68 2.10 1.55 1.63 1.95 1.56 2.23 1.92 2.48 3.23 1.68 1.75\n1981 1.94 1.67 1.66 1.65 2.02 1.44 1.65 1.95 1.53 2.10 1.88 2.33 3.07 1.60 1.74\n1982 1.93 1.66 1.61 1.64 2.01 1.43 1.72 1.91 1.51 2.03 1.78 2.26 2.96 1.60 1.77\n1983 1.92 1.56 1.57 1.63 1.96 1.38 1.74 1.78 1.43 1.94 1.73 2.24 2.76 1.54 1.80\n1984 1.84 1.52 1.54 1.63 1.97 1.40 1.70 1.80 1.39 1.82 1.73 2.08 2.59 1.48 1.81\n1985 1.92 1.47 1.51 1.61 1.96 1.45 1.64 1.81 1.37 1.68 1.83 1.93 2.50 1.45 1.76\n1986 1.87 1.45 1.54 1.59 1.94 1.48 1.60 1.83 1.41 1.60 1.83 1.93 2.44 1.37 1.72\n1987 1.85 1.43 1.54 1.58 1.91 1.50 1.59 1.80 1.43 1.50 1.81 2.07 2.31 1.35 1.69\n1988 1.83 1.45 1.57 1.60 1.94 1.56 1.70 1.81 1.46 1.50 1.79 2.27 2.17 1.38 1.66\n1989 1.84 1.45 1.58 1.66 1.87 1.62 1.71 1.79 1.42 1.40 1.78 2.20 2.08 1.35 1.57\n1990 1.90 1.46 1.62 1.71 1.89 1.67 1.79 1.78 1.45 1.39 1.84 2.31 2.12 1.36 1.54\n1991 1.85 1.51 1.66 1.72 1.86 1.68 1.80 1.77 1.33 1.37 1.86 2.19 2.09 1.33 1.53\n1992 1.89 1.51 1.65 1.71 1.72 1.76 1.85 1.73 1.29 1.36 1.77 2.21 1.99 1.32 1.50\n1993 1.86 1.50 1.61 1.69 1.67 1.75 1.81 1.66 1.28 1.32 1.69 2.22 1.91 1.26 1.46\n1994 1.84 1.47 1.56 1.69 1.44 1.81 1.85 1.66 1.24 1.33 1.64 2.14 1.85 1.22 1.50\n1995 1.82 1.42 1.56 1.67 1.28 1.81 1.81 1.71 1.25 1.28 1.57 2.08 1.85 1.19 1.42\n1996 1.80 1.45 1.59 1.63 1.19 1.75 1.76 1.73 1.32 1.26 1.46 2.12 1.89 1.22 1.43\n1997 1.78 1.39 1.60 1.57 1.17 1.76 1.75 1.73 1.37 1.27 1.38 2.04 1.94 1.23 1.39\n1998 1.76 1.37 1.60 1.56 1.16 1.73 1.71 1.76 1.36 1.24 1.33 2.05 1.95 1.21 1.38\n1999 1.76 1.34 1.62 1.55 1.13 1.74 1.73 1.79 1.36 1.23 1.29 1.99 1.91 1.23 1.34\n2000 1.76 1.36 1.67 1.51 1.14 1.77 1.73 1.87 1.38 1.25 1.33 2.08 1.90 1.26 1.36\n2001 1.73 1.33 1.67 1.54 1.15 1.75 1.73 1.88 1.35 1.25 1.31 1.95 1.96 1.25 1.33\n2002 1.77 1.39 1.65 1.52 1.17 1.72 1.72 1.86 1.34 1.28 1.31 1.93 1.98 1.27 1.32\n2003 1.77 1.38 1.67 1.55 1.18 1.76 1.76 1.87 1.34 1.29 1.28 1.99 1.98 1.29 1.29\n2004 1.78 1.42 1.72 1.56 1.23 1.79 1.80 1.90 1.36 1.31 1.28 2.03 1.95 1.34 1.29\n2005 1.85 1.41 1.76 1.58 1.28 1.80 1.80 1.92 1.34 1.34 1.32 2.05 1.88 1.33 1.26\n2006 1.88 1.41 1.80 1.63 1.33 1.85 1.84 1.98 1.33 1.40 1.35 2.07 1.94 1.37 1.32\n2007 1.99 1.39 1.82 1.67 1.44 1.84 1.83 1.95 1.37 1.41 1.32 2.09 2.01 1.39 1.34\n2008 2.02 1.42 1.85 1.70 1.50 1.89 1.85 1.99 1.38 1.50 1.35 2.14 2.06 1.44 1.37\n2009 1.97 1.40 1.84 1.69 1.49 1.84 1.86 1.99 1.36 1.50 1.33 2.22 2.06 1.44 1.37\n2010 1.95 1.44 1.86 1.65 1.49 1.87 1.87 2.02 1.39 1.48 1.26 2.20 2.05 1.44 1.39\n2011 1.92 1.43 1.81 1.63 1.43 1.75 1.83 2.00 1.39 1.40 1.24 2.02 2.03 1.42 1.39\n2012 1.93 1.44 1.80 1.63 1.45 1.73 1.80 1.99 1.41 1.34 1.34 2.04 1.98 1.42 1.41\n2013 1.88 1.44 1.76 1.61 1.46 1.67 1.75 1.97 1.42 1.29 1.34 1.93 1.93 1.39 1.43\n2014 1.79 1.46 1.74 1.61 1.53 1.69 1.71 1.97 1.47 1.30 1.41 1.93 1.89 1.38 1.42\n2015 1.79 1.49 1.70 1.60 1.57 1.71 1.65 1.93 1.50 1.33 1.44 1.81 1.85 1.36 1.45\n2016 1.79 1.53 1.68 1.59 1.63 1.79 1.57 1.89 1.59 1.38 1.49 1.75 1.82 1.36 1.44\n2017 1.74 1.52 1.65 1.55 1.69 1.75 1.49 1.86 1.57 1.35 1.49 1.71 1.78 1.34 1.43\n2018 1.74 1.48 1.62 1.51 1.71 1.73 1.41 1.84 1.57 1.35 1.49 1.71 1.75 1.31 1.42\n2019 1.67 1.46 1.60 1.47 1.71 1.70 1.35 1.83 1.54 1.34 1.49 1.75 1.70 1.27 1.36\n2020 1.59 1.44 1.55 1.41 1.71 1.67 1.37 1.79 1.53 1.39 1.56 1.72 1.63 1.24 1.33\n2021 1.70 1.48 1.60 1.43 1.83 1.72 1.46 1.80 1.58 1.43 1.59 1.82 1.72 1.25 1.30\n2022   NA   NA   NA   NA   NA 1.55   NA   NA   NA   NA 1.52   NA   NA   NA   NA\n      KOR  LUX  MEX  NLD  NZL  NOR  POL  PRT  SVK  ESP  SWE  CHE  TUR  GBR  USA\n1960 6.00 2.28 6.77 3.12 4.24 2.91 2.98 3.10 3.07 2.86 2.20 2.44 6.40 2.72 3.65\n1961 5.80 2.33 6.76 3.22 4.31 2.94 2.83 3.16 2.96 2.76 2.23 2.53 6.33 2.80 3.62\n1962 5.60 2.35 6.76 3.18 4.19 2.91 2.72 3.21 2.83 2.80 2.26 2.60 6.26 2.88 3.46\n1963 5.40 2.33 6.75 3.19 4.05 2.93 2.70 3.11 2.93 2.88 2.34 2.67 6.19 2.92 3.32\n1964 5.20 2.38 6.75 3.17 3.80 2.98 2.57 3.21 2.91 3.01 2.48 2.68 6.01 2.97 3.19\n1965 5.00 2.42 6.76 3.04 3.54 2.94 2.52 3.14 2.80 2.94 2.42 2.61 5.84 2.89 2.91\n1966 4.80 2.37 6.77 2.90 3.41 2.90 2.34 3.12 2.67 2.99 2.36 2.52 5.66 2.79 2.72\n1967 4.66 2.25 6.79 2.81 3.35 2.81 2.33 3.08 2.49 3.03 2.27 2.41 5.49 2.69 2.56\n1968 4.52 2.13 6.81 2.72 3.34 2.75 2.24 3.00 2.40 2.96 2.07 2.30 5.31 2.60 2.46\n1969 4.53 2.02 6.83 2.75 3.28 2.69 2.20 2.95 2.43 2.93 1.93 2.19 5.18 2.51 2.46\n1970 4.53 1.98 6.83 2.57 3.17 2.50 2.20 2.83 2.40 2.90 1.94 2.10 5.00 2.43 2.48\n1971 4.54 1.96 6.79 2.36 3.18 2.49 2.25 2.78 2.43 2.88 1.96 2.04 5.00 2.40 2.27\n1972 4.12 1.75 6.70 2.15 3.00 2.38 2.24 2.69 2.49 2.86 1.91 1.91 5.00 2.20 2.01\n1973 4.07 1.58 6.56 1.90 2.76 2.23 2.26 2.65 2.56 2.84 1.86 1.81 5.59 2.04 1.88\n1974 3.77 1.58 6.37 1.77 2.58 2.13 2.26 2.60 2.60 2.89 1.87 1.73 5.46 1.92 1.84\n1975 3.43 1.55 6.13 1.66 2.37 1.98 2.27 2.58 2.53 2.80 1.77 1.61 5.32 1.81 1.77\n1976 3.00 1.48 5.86 1.63 2.27 1.86 2.30 2.58 2.52 2.80 1.68 1.55 5.19 1.74 1.74\n1977 2.99 1.49 5.59 1.58 2.21 1.75 2.23 2.48 2.47 2.67 1.64 1.53 4.90 1.69 1.79\n1978 2.64 1.47 5.32 1.58 2.07 1.77 2.21 2.28 2.45 2.55 1.60 1.51 5.05 1.75 1.76\n1979 2.90 1.47 5.06 1.56 2.12 1.75 2.28 2.17 2.44 2.37 1.66 1.52 4.84 1.86 1.81\n1980 2.82 1.50 4.84 1.60 2.03 1.72 2.28 2.18 2.31 2.22 1.68 1.55 4.63 1.90 1.84\n1981 2.57 1.55 4.64 1.56 2.01 1.70 2.24 2.13 2.28 2.04 1.63 1.55 4.41 1.82 1.81\n1982 2.39 1.49 4.46 1.50 1.95 1.71 2.34 2.07 2.27 1.94 1.62 1.56 4.20 1.78 1.83\n1983 2.06 1.44 4.30 1.47 1.92 1.66 2.42 1.95 2.27 1.80 1.61 1.52 4.11 1.77 1.80\n1984 1.74 1.42 4.15 1.49 1.93 1.66 2.37 1.90 2.25 1.73 1.65 1.53 3.93 1.77 1.81\n1985 1.66 1.38 4.02 1.51 1.93 1.68 2.33 1.72 2.25 1.64 1.73 1.52 3.76 1.79 1.84\n1986 1.58 1.44 3.90 1.55 1.96 1.71 2.22 1.66 2.20 1.56 1.79 1.53 3.58 1.78 1.84\n1987 1.53 1.39 3.79 1.56 2.03 1.75 2.15 1.62 2.14 1.50 1.84 1.52 3.40 1.81 1.87\n1988 1.55 1.51 3.68 1.55 2.10 1.84 2.13 1.62 2.15 1.45 1.96 1.57 3.29 1.82 1.93\n1989 1.56 1.52 3.57 1.55 2.12 1.89 2.07 1.58 2.08 1.40 2.02 1.56 3.39 1.79 2.01\n1990 1.57 1.62 3.47 1.62 2.18 1.93 1.99 1.56 2.09 1.36 2.14 1.59 3.07 1.83 2.08\n1991 1.71 1.60 3.37 1.61 2.09 1.92 1.98 1.56 2.05 1.33 2.12 1.58 3.00 1.82 2.06\n1992 1.76 1.67 3.27 1.59 2.06 1.89 1.85 1.53 1.99 1.32 2.09 1.58 2.93 1.79 2.05\n1993 1.65 1.69 3.18 1.57 2.04 1.86 1.77 1.51 1.93 1.27 2.00 1.51 2.87 1.76 2.02\n1994 1.66 1.72 3.10 1.57 1.98 1.87 1.72 1.44 1.67 1.20 1.89 1.49 2.81 1.74 2.00\n1995 1.63 1.67 3.02 1.53 1.98 1.87 1.55 1.41 1.52 1.17 1.74 1.48 2.75 1.71 1.98\n1996 1.57 1.76 2.95 1.53 1.96 1.89 1.53 1.44 1.47 1.16 1.61 1.50 2.69 1.73 1.98\n1997 1.54 1.71 2.88 1.56 1.96 1.86 1.47 1.47 1.43 1.18 1.53 1.48 2.63 1.72 1.97\n1998 1.46 1.67 2.82 1.63 1.89 1.81 1.41 1.48 1.37 1.16 1.51 1.47 2.56 1.71 2.00\n1999 1.43 1.71 2.77 1.65 1.97 1.85 1.37 1.51 1.33 1.19 1.50 1.48 2.48 1.68 2.01\n2000 1.48 1.78 2.72 1.72 1.98 1.85 1.37 1.56 1.29 1.23 1.55 1.50 2.27 1.64 2.06\n2001 1.31 1.66 2.67 1.71 1.97 1.78 1.32 1.46 1.20 1.24 1.57 1.38 2.37 1.63 2.03\n2002 1.18 1.63 2.62 1.73 1.89 1.75 1.25 1.47 1.19 1.25 1.65 1.39 2.17 1.63 2.01\n2003 1.19 1.62 2.58 1.75 1.93 1.80 1.22 1.44 1.20 1.30 1.72 1.39 2.09 1.70 2.04\n2004 1.16 1.66 2.54 1.73 1.98 1.83 1.23 1.41 1.24 1.31 1.75 1.42 2.11 1.75 2.05\n2005 1.09 1.62 2.50 1.71 1.97 1.84 1.24 1.42 1.25 1.33 1.77 1.42 2.12 1.76 2.06\n2006 1.13 1.64 2.46 1.72 2.01 1.90 1.27 1.38 1.24 1.36 1.85 1.44 2.12 1.82 2.11\n2007 1.26 1.61 2.42 1.72 2.18 1.90 1.31 1.35 1.25 1.38 1.88 1.46 2.16 1.86 2.12\n2008 1.19 1.60 2.39 1.77 2.19 1.96 1.39 1.40 1.32 1.45 1.91 1.48 2.15 1.91 2.07\n2009 1.15 1.59 2.36 1.79 2.13 1.98 1.40 1.35 1.41 1.38 1.94 1.50 2.10 1.89 2.00\n2010 1.23 1.63 2.34 1.80 2.17 1.95 1.38 1.39 1.40 1.37 1.98 1.54 2.08 1.92 1.93\n2011 1.24 1.51 2.32 1.76 2.09 1.88 1.30 1.35 1.45 1.34 1.90 1.52 2.05 1.91 1.89\n2012 1.30 1.57 2.29 1.72 2.10 1.85 1.30 1.29 1.34 1.32 1.91 1.53 2.11 1.92 1.88\n2013 1.19 1.55 2.27 1.68 2.01 1.78 1.26 1.21 1.34 1.27 1.89 1.52 2.11 1.83 1.86\n2014 1.21 1.50 2.21 1.71 1.92 1.76 1.29 1.23 1.37 1.32 1.88 1.54 2.18 1.81 1.86\n2015 1.24 1.47 2.14 1.66 1.99 1.73 1.29 1.31 1.40 1.33 1.85 1.54 2.15 1.80 1.84\n2016 1.17 1.41 2.09 1.66 1.87 1.71 1.36 1.36 1.48 1.34 1.85 1.54 2.11 1.79 1.82\n2017 1.05 1.39 2.04 1.62 1.81 1.62 1.45 1.38 1.52 1.31 1.78 1.52 2.07 1.74 1.77\n2018 0.98 1.38 2.00 1.59 1.71 1.56 1.44 1.42 1.54 1.26 1.75 1.52 1.99 1.68 1.73\n2019 0.92 1.34 1.92 1.57 1.72 1.53 1.42 1.43 1.57 1.23 1.70 1.48 1.88 1.63 1.71\n2020 0.84 1.36 1.91 1.54 1.61 1.48 1.39 1.41 1.59 1.19 1.66 1.46 1.76 1.56 1.64\n2021 0.81 1.38 1.82 1.62 1.64 1.55 1.33 1.35 1.63 1.19 1.67 1.51 1.70 1.53 1.66\n2022   NA   NA   NA   NA   NA 1.41   NA   NA   NA   NA   NA   NA   NA   NA   NA\n      BRA  CHL  CHN  EST  IND  IDN  ISR  RUS  SVN  ZAF  COL  LVA  LTU  ARG  BGR\n1960 6.06 4.70 4.45 1.98 5.91 5.55 3.95 2.52 2.18 6.16 6.74 1.94 2.40 3.11 2.31\n1961 6.03 4.66 3.86 1.98 5.90 5.57 3.80 2.45 2.26 6.14 6.71 1.94 2.40 3.10 2.29\n1962 5.98 4.60 6.09 1.95 5.89 5.59 3.77 2.36 2.27 6.11 6.66 1.91 2.40 3.09 2.24\n1963 5.91 4.54 7.51 1.89 5.88 5.60 3.81 2.27 2.28 6.08 6.58 1.85 2.40 3.08 2.21\n1964 5.82 4.46 6.67 1.94 5.86 5.61 3.93 2.18 2.32 6.03 6.48 1.79 2.40 3.07 2.19\n1965 5.70 4.36 6.61 1.88 5.83 5.62 3.99 2.13 2.45 5.97 6.33 1.74 2.40 3.06 2.09\n1966 5.57 4.26 6.31 1.87 5.79 5.60 3.89 2.10 2.48 5.91 6.16 1.76 2.40 3.05 2.03\n1967 5.42 4.14 5.81 1.90 5.75 5.58 3.64 2.04 2.38 5.85 5.96 1.80 2.40 3.05 2.02\n1968 5.27 4.03 6.51 2.03 5.70 5.54 3.82 1.99 2.28 5.78 5.74 1.83 2.40 3.05 2.27\n1969 5.12 3.90 6.18 2.13 5.65 5.51 3.83 1.97 2.17 5.72 5.51 1.88 2.40 3.06 2.27\n1970 4.97 3.78 6.09 2.17 5.59 5.45 3.97 1.99 2.21 5.63 5.28 2.02 2.40 3.08 2.17\n1971 4.84 3.65 5.52 2.19 5.52 5.36 3.94 2.03 2.16 5.57 5.06 2.04 2.41 3.11 2.10\n1972 4.71 3.53 5.11 2.13 5.44 5.29 3.71 2.04 2.14 5.49 4.86 2.03 2.34 3.15 2.03\n1973 4.60 3.41 4.73 2.06 5.36 5.22 3.68 2.01 2.18 5.41 4.68 1.96 2.22 3.20 2.15\n1974 4.50 3.29 4.17 2.07 5.28 5.09 3.71 2.00 2.10 5.30 4.53 2.00 2.21 3.25 2.29\n1975 4.42 3.18 3.57 2.04 5.19 5.04 3.68 1.98 2.16 5.19 4.40 1.97 2.18 3.30 2.23\n1976 4.34 3.08 3.24 2.07 5.11 4.92 3.70 1.97 2.17 5.07 4.29 1.93 2.18 3.34 2.24\n1977 4.27 2.98 2.84 2.06 5.03 4.81 3.47 1.95 2.16 4.94 4.18 1.89 2.14 3.36 2.21\n1978 4.20 2.89 2.72 2.02 4.96 4.72 3.28 1.92 2.19 4.85 4.07 1.87 2.08 3.36 2.15\n1979 4.12 2.81 2.75 2.00 4.89 4.61 3.21 1.90 2.22 4.82 3.97 1.87 2.05 3.34 2.16\n1980 4.04 2.74 2.74 2.02 4.83 4.49 3.14 1.89 2.11 4.78 3.86 1.90 1.99 3.30 2.05\n1981 3.94 2.69 2.79 2.07 4.77 4.36 3.06 1.91 1.96 4.71 3.74 1.90 1.98 3.25 2.00\n1982 3.84 2.65 2.97 2.08 4.70 4.25 3.12 2.04 1.93 4.70 3.63 1.98 1.97 3.20 2.01\n1983 3.72 2.62 2.56 2.16 4.64 4.10 3.21 2.11 1.82 4.63 3.53 2.13 2.10 3.16 2.01\n1984 3.60 2.60 2.61 2.17 4.56 3.94 3.13 2.06 1.75 4.57 3.43 2.15 2.07 3.12 2.01\n1985 3.47 2.59 2.63 2.12 4.48 3.71 3.12 2.05 1.72 4.50 3.34 2.09 2.08 3.10 1.97\n1986 3.34 2.59 2.72 2.17 4.40 3.53 3.09 2.15 1.65 4.41 3.27 2.21 2.12 3.08 2.02\n1987 3.23 2.59 2.76 2.26 4.31 3.42 3.05 2.22 1.64 4.35 3.21 2.21 2.11 3.06 1.96\n1988 3.11 2.59 2.54 2.26 4.22 3.33 3.06 2.12 1.63 4.18 3.16 2.16 2.02 3.04 1.97\n1989 3.01 2.59 2.52 2.22 4.13 3.22 3.03 2.01 1.52 3.98 3.12 2.05 1.98 3.02 1.90\n1990 2.91 2.58 2.51 2.05 4.05 3.10 3.02 1.89 1.46 3.72 3.08 2.01 2.03 3.00 1.82\n1991 2.82 2.56 1.93 1.80 3.96 3.06 2.91 1.73 1.42 3.62 3.05 1.86 2.01 2.97 1.66\n1992 2.72 2.53 1.78 1.71 3.88 2.94 2.93 1.55 1.34 3.48 3.01 1.73 1.97 2.93 1.55\n1993 2.67 2.48 1.69 1.49 3.80 2.88 2.92 1.39 1.33 3.37 2.97 1.51 1.74 2.88 1.46\n1994 2.62 2.43 1.63 1.42 3.72 2.84 2.90 1.40 1.32 3.26 2.92 1.39 1.57 2.83 1.37\n1995 2.58 2.37 1.59 1.38 3.65 2.80 2.88 1.34 1.29 3.17 2.86 1.26 1.55 2.77 1.23\n1996 2.52 2.31 1.55 1.37 3.58 2.77 2.94 1.27 1.28 2.99 2.80 1.16 1.49 2.72 1.23\n1997 2.47 2.24 1.53 1.32 3.51 2.74 2.93 1.22 1.25 2.73 2.74 1.11 1.47 2.67 1.09\n1998 2.41 2.17 1.52 1.28 3.45 2.66 2.98 1.23 1.23 2.63 2.68 1.10 1.46 2.62 1.11\n1999 2.33 2.11 1.53 1.30 3.38 2.58 2.94 1.16 1.21 2.56 2.63 1.18 1.46 2.58 1.23\n2000 2.26 2.06 1.63 1.36 3.35 2.54 2.95 1.20 1.26 2.41 2.57 1.25 1.39 2.54 1.26\n2001 2.18 2.01 1.56 1.32 3.30 2.50 2.89 1.22 1.21 2.37 2.52 1.22 1.29 2.51 1.21\n2002 2.10 1.97 1.57 1.36 3.22 2.46 2.89 1.29 1.21 2.32 2.46 1.26 1.23 2.49 1.21\n2003 2.02 1.94 1.57 1.36 3.12 2.43 2.95 1.32 1.20 2.36 2.40 1.32 1.26 2.46 1.23\n2004 2.00 1.92 1.61 1.47 3.05 2.42 2.90 1.34 1.25 2.44 2.33 1.29 1.27 2.44 1.29\n2005 1.97 1.91 1.62 1.52 2.96 2.43 2.84 1.29 1.26 2.51 2.26 1.39 1.29 2.42 1.32\n2006 1.93 1.90 1.64 1.58 2.86 2.45 2.88 1.31 1.31 2.55 2.20 1.46 1.33 2.40 1.38\n2007 1.88 1.90 1.67 1.69 2.78 2.49 2.90 1.42 1.38 2.55 2.14 1.54 1.36 2.38 1.49\n2008 1.84 1.90 1.70 1.72 2.72 2.48 2.96 1.50 1.53 2.68 2.08 1.58 1.45 2.37 1.56\n2009 1.83 1.89 1.71 1.70 2.67 2.46 2.96 1.54 1.53 2.50 2.03 1.46 1.50 2.36 1.66\n2010 1.81 1.88 1.69 1.72 2.60 2.45 3.03 1.57 1.57 2.44 1.99 1.36 1.50 2.35 1.57\n2011 1.80 1.82 1.67 1.61 2.54 2.50 3.00 1.58 1.56 2.44 1.96 1.33 1.55 2.34 1.51\n2012 1.77 1.80 1.80 1.56 2.47 2.49 3.05 1.69 1.58 2.45 1.93 1.44 1.60 2.33 1.50\n2013 1.75 1.79 1.71 1.52 2.41 2.43 3.03 1.71 1.55 2.43 1.91 1.52 1.59 2.32 1.48\n2014 1.77 1.77 1.77 1.54 2.31 2.39 3.08 1.75 1.58 2.42 1.88 1.65 1.63 2.31 1.53\n2015 1.78 1.74 1.67 1.58 2.29 2.35 3.09 1.78 1.57 2.36 1.86 1.70 1.70 2.30 1.53\n2016 1.71 1.68 1.77 1.60 2.27 2.31 3.11 1.76 1.58 2.26 1.84 1.74 1.69 2.24 1.54\n2017 1.74 1.60 1.81 1.59 2.20 2.26 3.11 1.62 1.62 2.33 1.82 1.69 1.63 2.17 1.56\n2018 1.75 1.56 1.55 1.67 2.18 2.23 3.09 1.58 1.60 2.42 1.79 1.60 1.63 2.04 1.56\n2019 1.70 1.55 1.50 1.66 2.11 2.22 3.01 1.50 1.61 2.48 1.77 1.61 1.61 1.99 1.58\n2020 1.65 1.54 1.28 1.58 2.05 2.19 2.90 1.51 1.59 2.40 1.74 1.55 1.48 1.91 1.56\n2021 1.64 1.54 1.16 1.61 2.03 2.17 3.00 1.49 1.64 2.37 1.72 1.57 1.36 1.89 1.58\n2022   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA\n      HRV  CYP  MLT  ROU  SAU  PER  CRI   EU\n1960 2.20   NA   NA   NA 7.63 6.94 6.71 2.62\n1961 2.19   NA   NA   NA 7.63 6.92 6.65 2.62\n1962 2.17   NA   NA   NA 7.64 6.90 6.54 2.61\n1963 2.12   NA   NA   NA 7.65 6.86 6.39 2.65\n1964 2.12   NA   NA   NA 7.67 6.81 6.19 2.67\n1965 2.21   NA   NA   NA 7.66 6.75 5.96 2.62\n1966 2.21   NA   NA   NA 7.66 6.68 5.70 2.58\n1967 2.07   NA   NA   NA 7.66 6.60 5.42 2.53\n1968 1.99   NA   NA   NA 7.63 6.51 5.03 2.45\n1969 1.91   NA   NA   NA 7.60 6.42 4.84 2.41\n1970 1.83   NA   NA   NA 7.58 6.32 4.59 2.37\n1971 1.95   NA   NA   NA 7.56 6.21 4.36 2.36\n1972 1.97   NA   NA   NA 7.54 6.09 4.16 2.29\n1973 1.98   NA   NA   NA 7.48 5.97 3.99 2.23\n1974 1.95   NA   NA   NA 7.43 5.84 3.89 2.23\n1975 1.92   NA   NA 2.59 7.37 5.71 3.80 2.18\n1976 1.90   NA   NA 2.54 7.33 5.58 3.75 2.14\n1977 1.91   NA   NA 2.57 7.30 5.44 3.70 2.09\n1978 1.92   NA   NA 2.52 7.26 5.31 3.66 2.05\n1979 1.94   NA   NA 2.49 7.23 5.17 3.65 2.03\n1980 1.92   NA 1.99 2.43 7.19 5.04 3.59 2.00\n1981 1.91   NA 1.87 2.36 7.13 4.92 3.56 1.95\n1982 1.90 2.48 2.04 2.17 7.05 4.80 3.54 1.93\n1983 1.88 2.50 1.97 2.06 6.95 4.68 3.53 1.89\n1984 1.87 2.52 1.97 2.26 6.84 4.57 3.52 1.87\n1985 1.81 2.43 1.99 2.31 6.70 4.46 3.51 1.84\n1986 1.76 2.46 1.94 2.39 6.55 4.35 3.46 1.84\n1987 1.74 2.38 1.97 2.38 6.36 4.25 3.40 1.82\n1988 1.74 2.49 2.10 2.30 6.17 4.14 3.34 1.83\n1989 1.67 2.36 2.11 2.22 6.00 4.03 3.27 1.79\n1990 1.67 2.41 2.05 1.83 5.83 3.91 3.21 1.78\n1991 1.55 2.32 2.10 1.59 5.66 3.79 3.12 1.73\n1992 1.39 2.48 2.12 1.51 5.49 3.67 3.04 1.70\n1993 1.43 2.24 2.01 1.43 5.32 3.55 2.96 1.62\n1994 1.43 2.17 1.89 1.40 5.14 3.43 2.89 1.56\n1995 1.50 2.03 1.82 1.33 4.95 3.32 2.80 1.51\n1996 1.64 1.95 2.01 1.30 4.77 3.20 2.71 1.50\n1997 1.69 1.86 1.95 1.32 4.59 3.10 2.64 1.48\n1998 1.45 1.76 1.81 1.32 4.42 3.00 2.53 1.45\n1999 1.38 1.67 1.72 1.30 4.25 2.92 2.48 1.45\n2000 1.39 1.64 1.69 1.31 4.12 2.85 2.41 1.47\n2001 1.46 1.57 1.50 1.27 3.91 2.74 2.33 1.44\n2002 1.42 1.49 1.45 1.27 3.71 2.69 2.20 1.43\n2003 1.41 1.51 1.48 1.30 3.50 2.66 2.14 1.45\n2004 1.43 1.52 1.40 1.33 3.34 2.67 2.08 1.47\n2005 1.50 1.48 1.38 1.40 3.24 2.69 2.04 1.48\n2006 1.47 1.52 1.36 1.42 3.21 2.69 2.01 1.51\n2007 1.48 1.44 1.35 1.45 3.18 2.67 2.01 1.53\n2008 1.55 1.48 1.43 1.60 3.06 2.63 2.02 1.59\n2009 1.58 1.47 1.42 1.66 2.95 2.61 1.98 1.59\n2010 1.55 1.44 1.36 1.59 2.85 2.57 1.93 1.58\n2011 1.48 1.35 1.45 1.47 2.81 2.54 1.90 1.54\n2012 1.51 1.39 1.42 1.52 2.78 2.49 1.88 1.54\n2013 1.46 1.30 1.36 1.41 2.74 2.43 1.84 1.51\n2014 1.46 1.31 1.38 1.52 2.69 2.38 1.82 1.54\n2015 1.40 1.32 1.37 1.58 2.64 2.34 1.79 1.54\n2016 1.42 1.37 1.37 1.64 2.59 2.31 1.75 1.56\n2017 1.42 1.32 1.26 1.71 2.58 2.28 1.74 1.55\n2018 1.47 1.32 1.23 1.76 2.55 2.26 1.71 1.54\n2019 1.47 1.33 1.14 1.77 2.50 2.24 1.63 1.52\n2020 1.48 1.36 1.13 1.80 2.47 2.22 1.56 1.50\n2021 1.58 1.39 1.13 1.81 2.43 2.19 1.53 1.53\n2022   NA   NA   NA   NA   NA   NA   NA   NA\n\n\n\n\nLater, we will discuss the meanings of each step and the fact that there are much simpler solutions available.\n\nfertility_df &lt;- read_csv(\"https://stats.oecd.org/sdmx-json/data/DP_LIVE/.FERTILITY.../OECD?contentType=csv&detail=code&separator=comma&csv-lang=en\")\nfertility_df &lt;- fertility_df[, c(\"LOCATION\", \"TIME\", \"Value\")]  \n\nfertility_df &lt;- tidyr::pivot_wider(fertility_df, names_from = \"LOCATION\", \n                   values_from = \"Value\")\n\nfertility_df &lt;- tibble::column_to_rownames(fertility_df, \"TIME\")\nfertility_df &lt;- fertility_df[, - 51] # OECD average\n\nfertility_df &lt;- data.frame(fertility_df)\n\n\n\n\nAt the end of these steps, we have a table, each column of which shows the time series of the fertility rate of a country.\n\n\n\nApply - MARGIN = 1\n\napply(fertility_df, MARGIN = 1, above_replacement_prop)\n\n      1960       1961       1962       1963       1964       1965       1966 \n0.92000000 0.92000000 0.92000000 0.92000000 0.92000000 0.92000000 0.88000000 \n      1967       1968       1969       1970       1971       1972       1973 \n0.86000000 0.86000000 0.82000000 0.80000000 0.78000000 0.68000000 0.66000000 \n      1974       1975       1976       1977       1978       1979       1980 \n0.66000000 0.62745098 0.60784314 0.56862745 0.50980392 0.52941176 0.48076923 \n      1981       1982       1983       1984       1985       1986       1987 \n0.42307692 0.39622642 0.43396226 0.39622642 0.37735849 0.43396226 0.43396226 \n      1988       1989       1990       1991       1992       1993       1994 \n0.47169811 0.37735849 0.35849057 0.32075472 0.30188679 0.28301887 0.28301887 \n      1995       1996       1997       1998       1999       2000       2001 \n0.24528302 0.26415094 0.24528302 0.24528302 0.24528302 0.22641509 0.22641509 \n      2002       2003       2004       2005       2006       2007       2008 \n0.22641509 0.18867925 0.18867925 0.18867925 0.20754717 0.22641509 0.20754717 \n      2009       2010       2011       2012       2013       2014       2015 \n0.20754717 0.18867925 0.15094340 0.18867925 0.16981132 0.16981132 0.16981132 \n      2016       2017       2018       2019       2020       2021       2022 \n0.15094340 0.13207547 0.11320755 0.11320755 0.09433962 0.09433962 0.00000000 \n\n\nIf MARGIN == 1, the apply calculates the proportion of observation above 2.1 in each row. The returned value is a named vector, which means that you can refer to its values by index, or by name.\n\n\n\nApply - MARGIN = 1\n\napply(fertility_df, MARGIN = 1, above_replacement_prop)[1]\n\n1960 \n0.92 \n\napply(fertility_df, MARGIN = 1, above_replacement_prop)[\"2020\"]\n\n      2020 \n0.09433962 \n\n\n\n\n\nApply - MARGIN = 2\n\napply(fertility_df, MARGIN = 2, above_replacement_prop)\n\n       AUS        AUT        BEL        CAN        CZE        DNK        FIN \n0.25806452 0.19354839 0.19354839 0.19354839 0.22580645 0.14285714 0.14516129 \n       FRA        DEU        GRC        HUN        ISL        IRL        ITA \n0.24193548 0.16129032 0.35483871 0.06349206 0.56451613 0.48387097 0.27419355 \n       JPN        KOR        LUX        MEX        NLD        NZL        NOR \n0.12903226 0.37096774 0.14516129 0.90322581 0.20967742 0.43548387 0.23809524 \n       POL        PRT        SVK        ESP        SWE        CHE        TUR \n0.46774194 0.35483871 0.46774194 0.33870968 0.16129032 0.17741935 0.87096774 \n       GBR        USA        BRA        CHL        CHN        EST        IND \n0.20967742 0.22580645 0.69354839 0.64516129 0.50000000 0.17741935 0.96774194 \n       IDN        ISR        RUS        SVN        ZAF        COL        LVA \n1.00000000 1.00000000 0.17741935 0.33870968 1.00000000 0.77419355 0.08064516 \n       LTU        ARG        BGR        HRV        CYP        MLT        ROU \n0.33870968 0.93548387 0.25806452 0.11290323 0.32500000 0.09523810 0.29787234 \n       SAU        PER        CRI         EU \n1.00000000 1.00000000 0.70967742 0.27419355 \n\n\nIf MARGIN == 2, the apply calculates the proportion of observation above 2.1 in each column."
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Statistics in R",
+    "section": "",
+    "text": "Statistical analysis serves as an information-compressing mechanism. The primary objectives can be broadly categorized into:\n\n\nThese tasks aim to forecast future outcomes based on historical data and current conditions.\n\n\n\nThese tasks focus on summarizing the main aspects of the data to provide an informative overview.\n\n\nThis involves identifying patterns, relationships, or anomalies in the data without a prior hypothesis.\n\n\n\nThis involves testing predefined hypotheses to confirm or refute them."
+  },
+  {
+    "objectID": "content/02-content.html#objectives-of-statistical-analysis-in-economics",
+    "href": "content/02-content.html#objectives-of-statistical-analysis-in-economics",
+    "title": "Statistics in R",
+    "section": "",
+    "text": "Statistical analysis serves as an information-compressing mechanism. The primary objectives can be broadly categorized into:\n\n\nThese tasks aim to forecast future outcomes based on historical data and current conditions.\n\n\n\nThese tasks focus on summarizing the main aspects of the data to provide an informative overview.\n\n\nThis involves identifying patterns, relationships, or anomalies in the data without a prior hypothesis.\n\n\n\nThis involves testing predefined hypotheses to confirm or refute them."
+  },
+  {
+    "objectID": "content/02-content.html#types-of-data",
+    "href": "content/02-content.html#types-of-data",
+    "title": "Statistics in R",
+    "section": "Types of Data",
+    "text": "Types of Data\n\nClassification Based on Structure\n\nUnstructured Data\nData that does not have a predefined format or organization.\n\n\nStructured Data\nData that is organized in a specific manner, often in tabular form.\n\nTypes of Structured Data\n\nCross-sectional\nTime-series\nLongitudinal\nSpatial\nNetwork\n\nThe type of data dictates the statistical tools and techniques that can be employed for analysis.\n\n\n\n\n\nAttribute Types\nDifferent types of attributes require different statistical techniques for effective analysis.\n\n\n\n\n\n\n  \n    \n    \n      Attribute type\n      Description\n      Examples\n      Operations\n    \n  \n  \n    Nominal\nNominal values provide only enough information to distinguish one object from another. (=, ≠)\nZip codes, employee ID numbers, eye color, gender\nMode, entropy, contingency correlation, chi2 test\n    Ordinal\nThe values of an ordinal attribute provide enough information to order objects. (&lt;, &gt;)\nHardness of minerals, {good, better, best}, grades, street numbers\nQuantiles, rank correlation\n    Interval\nDifferences between values are meaningful, i.e., a unit of measurement exists. (+, -)\nCalendar dates, temperature in Celsius or Fahrenheit\nmean, standard deviation, Pearson's correlation\n    Ratio\nFor ratio variables, both differences and ratios are meaningful. (*, /)\nTemperature in Kelvin, monetary quantities, counts, age, mass, length, electrical current\nGeometric mean, harmonic mean, percent variation"
+  },
+  {
+    "objectID": "content/02-content.html#quality-of-data",
+    "href": "content/02-content.html#quality-of-data",
+    "title": "Statistics in R",
+    "section": "Quality of Data",
+    "text": "Quality of Data\n\n\n\n\n\nCommon Issues\n\nMissing data\nOutliers\nDuplication\nInconsistent data\n\n\n\n\n\nSome examples\n\n\nLet us examine a sample data from the modeldata R package.\n\n# load the data\ndata(attrition, package = \"modeldata\") \n\n\n\n\n\n\n\n\n\n\ntibble(attrition)\n\n# A tibble: 1,470 × 31\n     Age Attrition BusinessTravel    DailyRate Department       DistanceFromHome\n   &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;                 &lt;int&gt; &lt;fct&gt;                       &lt;int&gt;\n 1    41 Yes       Travel_Rarely          1102 Sales                           1\n 2    49 No        Travel_Frequently       279 Research_Develo…                8\n 3    37 Yes       Travel_Rarely          1373 Research_Develo…                2\n 4    33 No        Travel_Frequently      1392 Research_Develo…                3\n 5    27 No        Travel_Rarely           591 Research_Develo…                2\n 6    32 No        Travel_Frequently      1005 Research_Develo…                2\n 7    59 No        Travel_Rarely          1324 Research_Develo…                3\n 8    30 No        Travel_Rarely          1358 Research_Develo…               24\n 9    38 No        Travel_Frequently       216 Research_Develo…               23\n10    36 No        Travel_Rarely          1299 Research_Develo…               27\n# ℹ 1,460 more rows\n# ℹ 25 more variables: Education &lt;ord&gt;, EducationField &lt;fct&gt;,\n#   EnvironmentSatisfaction &lt;ord&gt;, Gender &lt;fct&gt;, HourlyRate &lt;int&gt;,\n#   JobInvolvement &lt;ord&gt;, JobLevel &lt;int&gt;, JobRole &lt;fct&gt;, JobSatisfaction &lt;ord&gt;,\n#   MaritalStatus &lt;fct&gt;, MonthlyIncome &lt;int&gt;, MonthlyRate &lt;int&gt;,\n#   NumCompaniesWorked &lt;int&gt;, OverTime &lt;fct&gt;, PercentSalaryHike &lt;int&gt;,\n#   PerformanceRating &lt;ord&gt;, RelationshipSatisfaction &lt;ord&gt;, …\n\n\nAfter loading data that we would like to work with, it is worthwhile to examine and create descriptive statistics. The summary function exists in almost every language, but in R, I suggest using a dedicated package for this purpose: skmir (although there are countless others available).\n\nattrition |&gt; \n  skimr::skim()\n\n\nData summary\n\n\nName\nattrition\n\n\nNumber of rows\n1470\n\n\nNumber of columns\n31\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nfactor\n15\n\n\nnumeric\n16\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: factor\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nordered\nn_unique\ntop_counts\n\n\n\n\nAttrition\n0\n1\nFALSE\n2\nNo: 1233, Yes: 237\n\n\nBusinessTravel\n0\n1\nFALSE\n3\nTra: 1043, Tra: 277, Non: 150\n\n\nDepartment\n0\n1\nFALSE\n3\nRes: 961, Sal: 446, Hum: 63\n\n\nEducation\n0\n1\nTRUE\n5\nBac: 572, Mas: 398, Col: 282, Bel: 170\n\n\nEducationField\n0\n1\nFALSE\n6\nLif: 606, Med: 464, Mar: 159, Tec: 132\n\n\nEnvironmentSatisfaction\n0\n1\nTRUE\n4\nHig: 453, Ver: 446, Med: 287, Low: 284\n\n\nGender\n0\n1\nFALSE\n2\nMal: 882, Fem: 588\n\n\nJobInvolvement\n0\n1\nTRUE\n4\nHig: 868, Med: 375, Ver: 144, Low: 83\n\n\nJobRole\n0\n1\nFALSE\n9\nSal: 326, Res: 292, Lab: 259, Man: 145\n\n\nJobSatisfaction\n0\n1\nTRUE\n4\nVer: 459, Hig: 442, Low: 289, Med: 280\n\n\nMaritalStatus\n0\n1\nFALSE\n3\nMar: 673, Sin: 470, Div: 327\n\n\nOverTime\n0\n1\nFALSE\n2\nNo: 1054, Yes: 416\n\n\nPerformanceRating\n0\n1\nTRUE\n2\nExc: 1244, Out: 226, Low: 0, Goo: 0\n\n\nRelationshipSatisfaction\n0\n1\nTRUE\n4\nHig: 459, Ver: 432, Med: 303, Low: 276\n\n\nWorkLifeBalance\n0\n1\nTRUE\n4\nBet: 893, Goo: 344, Bes: 153, Bad: 80\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nAge\n0\n1\n36.92\n9.14\n18\n30\n36.0\n43.00\n60\n▂▇▇▃▂\n\n\nDailyRate\n0\n1\n802.49\n403.51\n102\n465\n802.0\n1157.00\n1499\n▇▇▇▇▇\n\n\nDistanceFromHome\n0\n1\n9.19\n8.11\n1\n2\n7.0\n14.00\n29\n▇▅▂▂▂\n\n\nHourlyRate\n0\n1\n65.89\n20.33\n30\n48\n66.0\n83.75\n100\n▇▇▇▇▇\n\n\nJobLevel\n0\n1\n2.06\n1.11\n1\n1\n2.0\n3.00\n5\n▇▇▃▂▁\n\n\nMonthlyIncome\n0\n1\n6502.93\n4707.96\n1009\n2911\n4919.0\n8379.00\n19999\n▇▅▂▁▂\n\n\nMonthlyRate\n0\n1\n14313.10\n7117.79\n2094\n8047\n14235.5\n20461.50\n26999\n▇▇▇▇▇\n\n\nNumCompaniesWorked\n0\n1\n2.69\n2.50\n0\n1\n2.0\n4.00\n9\n▇▃▂▂▁\n\n\nPercentSalaryHike\n0\n1\n15.21\n3.66\n11\n12\n14.0\n18.00\n25\n▇▅▃▂▁\n\n\nStockOptionLevel\n0\n1\n0.79\n0.85\n0\n0\n1.0\n1.00\n3\n▇▇▁▂▁\n\n\nTotalWorkingYears\n0\n1\n11.28\n7.78\n0\n6\n10.0\n15.00\n40\n▇▇▂▁▁\n\n\nTrainingTimesLastYear\n0\n1\n2.80\n1.29\n0\n2\n3.0\n3.00\n6\n▂▇▇▂▃\n\n\nYearsAtCompany\n0\n1\n7.01\n6.13\n0\n3\n5.0\n9.00\n40\n▇▂▁▁▁\n\n\nYearsInCurrentRole\n0\n1\n4.23\n3.62\n0\n2\n3.0\n7.00\n18\n▇▃▂▁▁\n\n\nYearsSinceLastPromotion\n0\n1\n2.19\n3.22\n0\n0\n1.0\n3.00\n15\n▇▁▁▁▁\n\n\nYearsWithCurrManager\n0\n1\n4.12\n3.57\n0\n2\n3.0\n7.00\n17\n▇▂▅▁▁"
+  },
+  {
+    "objectID": "content/02-content.html#measures-of-central-tendency",
+    "href": "content/02-content.html#measures-of-central-tendency",
+    "title": "Statistics in R",
+    "section": "Measures of Central Tendency 🦔",
+    "text": "Measures of Central Tendency 🦔\n\nArithmetic Mean\nThe arithmetic mean is calculated as:\n\\[\\bar{Y}=\\frac{Y_1+Y_2+\\ldots+Y_N}{N}=\\frac{\\sum_{i=1}^N Y_i}{N}\\]\n\n\nGeometric Mean\nThe geometric mean is calculated as:\n\\[\\bar{Y}_g=\\sqrt[N]{\\prod_{i=1}^N Y_i}\\]\n\nExample\nThe average can also be interpreted as meaning that if all elements were replaced by this value, the sum of the elements would remain the same.\nLet us see the case of indexes:\nThe GDP growth in one year was 5 percent and 5 percent in the following and 10 percent in the 3rd.\nWhat was the annual growth in the 3 years?\n\\[1.05 \\times 1.05 \\times 1.10 = \\sqrt[3]{1.21}=1.0656\\]\nHowever, the arithmetic mean equals 20/3 = 6.66.\n\n\n\nHarmonic Mean\nThe harmonic mean is calculated as:\n\\[\\bar{Y}_h=\\frac{N}{\\sum_{i=1}^N \\frac{1}{Y_i}}\\]\n\nExample\nConsider two car owners who seek to reduce their costs:\n\nAdam switches from a gas-guzzler of 12 mpg to a slightly less voracious guzzler that runs at 14 mpg.\nThe environmentally virtuous Beth switches from a Bon ss es from 30 mpg car to one that runs at 40 mpg.\n\nSuppose both drivers travel equal distances over a year. Who will save more gas by switching?\n\n\n\nSquared Mean\nThe squared mean is calculated as:\n\\[\\bar{Y_q}=\\sqrt{\\frac{\\sum_{i=1}^N Y_i^2}{N}}\\]"
+  },
+  {
+    "objectID": "content/02-content.html#quantiles",
+    "href": "content/02-content.html#quantiles",
+    "title": "Statistics in R",
+    "section": "Quantiles",
+    "text": "Quantiles\nQuantiles are values that divide a dataset into equal groups. The types of quantiles include:\n\n\n\n\n\n\n  \n    \n    \n      # Groups\n      NAME\n    \n  \n  \n    2\nMedian\n    3\nTertiles\n    4\nQuartiles\n    5\nQuintiles\n    10\nDeciles\n    20\nVentiles\n    100\nPercentiles\n  \n  \n  \n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nThere will often be occasions when you need to reproduce a complete study or methodology for research or any other purpose. Generally, it’s not possible, and even the calculation of quantiles prevents precise reproduction, as everyone considers it completely obvious how to calculate the median or a quartile (and the choosen method is never documented). However, depending on the chosen methodology, we will obtain a very minimal but still different result.\n\nx &lt;- c(231, 45342, 2313, 213, 564, 874543, 92713, 3941, 31297, 2654, 4324, 6542) # random numbers\n\n\nquantile(x, probs = c(.25, .5, .75))\n\n     25%      50%      75% \n 1875.75  4132.50 34808.25 \n\n\n\nquantile(x, probs = c(.25, .5, .75), type = 2)\n\n    25%     50%     75% \n 1438.5  4132.5 38319.5"
+  },
+  {
+    "objectID": "content/02-content.html#measures-of-variability",
+    "href": "content/02-content.html#measures-of-variability",
+    "title": "Statistics in R",
+    "section": "Measures of Variability",
+    "text": "Measures of Variability\n\nStandard Deviation\nStandard deviation is the average difference between the observations and the mean??\nIt was already mentioned that the sum of the deviations from the average is zero. If we divide zero by the number of observations it is still zero…\nHere comes the squared mean!\n\\[\\sigma=\\sqrt{\\frac{\\sum_{i=1}^N\\left(Y_i-\\bar{Y}\\right)^2}{N}}\\]\n\n\nVariance\nVariance is simply the square of standard deviation.\n\\[\\sigma^2=\\frac{\\sum_{i=1}^N\\left(Y_i-\\bar{Y}\\right)^2}{N}\\]\n\n\n\n\n\n\nNote\n\n\n\nIn many cases, we often use variance instead of standard deviation and not just for fun. If we recall what we learned about the ANOVA, variances are additive, while standard deviations are not."
+  },
+  {
+    "objectID": "content/02-content.html#range",
+    "href": "content/02-content.html#range",
+    "title": "Statistics in R",
+    "section": "Range",
+    "text": "Range\nThe spread of your data from the lowest to the highest value.\n\nInterquartile range (IQR)\n\\[\\text{IQR}=Q_3-Q1\\]\n\n\nInterdecile range (IDR)\n\\[\\text{IDR}=D_9-D1\\]\n\n\nBoxplot\n\nboxplot(attrition$MonthlyIncome)\n\n\n\n\n\n\nThe boxplot is highly popular for describing a variable, as it displays numerous variables and effectively illustrates the differences based on a categorical feature (but we will discuss this further when we get there)."
+  },
+  {
+    "objectID": "content/index.html",
+    "href": "content/index.html",
+    "title": "Readings, lectures, and videos",
+    "section": "",
+    "text": "This website contains readings related to the lecture. I don’t expect you to read the chapters before the class, as we’ll cover everything during the lessons. If you have any questions or find any mistakes, please don’t hesitate to reach out to me."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "\n            Big Data & Data Visualisation\n        ",
@@ -28,332 +105,31 @@
     "text": "Course objectives\n\nIn the digital era, an abundant amount of data is created every day, which contains valuable information about the economy, but their proper handling is not trivial. Data analysis and visualization have now become one of the most important skills in business, but in the world of research, it is clearly the most important.\n\nThis course introduces several statistical and visualization methods that helps to work with data, such as advanced inferential statistics and dimension reduction techniques. In addition, we will put a lot of effort into helping you to use  programming language (properly) to be able to apply these tools in practice."
   },
   {
+    "objectID": "syllabus.html#topics",
+    "href": "syllabus.html#topics",
+    "title": "Syllabus",
+    "section": "Topics",
+    "text": "Topics\n\n\n\n\n\n\nCaution\n\n\n\nThis is just a plan! We are still in the early stages of this program. We don’t have much experience with how much preliminary knowledge you have, so the final agenda may change a bit as we progress.\n\n\n\n\n\n\n\n\n  \n    \n    \n      Week\n      Topic\n    \n  \n  \n    1\nIntroduction to R, Descriptive Statistics\n    2\nData Manipulation I\n    3\nData Manipulation II, Functional Programming\n    4\nRegression, Classification\n    5\nData Visualization I\n    6\nData Visualization II, Tools for Publishing\n    7\nCasuality\n    8\nTidy Modelling\n    9\nClustering\n    10\nWeb scraping, Dimension Reduction\n    11\nText Mining"
+  },
+  {
     "objectID": "syllabus.html#course-materials",
     "href": "syllabus.html#course-materials",
     "title": "Syllabus",
     "section": "Course materials",
-    "text": "Course materials\nReadings that I highly recommend for this course are free, as this course focuses primarily on the technical aspects of data analysis, which are rapidly evolving. The majority of pertinent sources are available online.\n\nBooks\n\nHighly recommended (and also free)\n\nWickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). R for data science. ” O’Reilly Media, Inc.”\nWitten, D., & James, G. (2013). An introduction to statistical learning with applications in R. springer publication.\nKuhn, M., & Silge, J. (2022). Tidy modeling with R. ” O’Reilly Media, Inc.”\nVillanueva, R. A. M., & Chen, Z. J. (2019). ggplot2: elegant graphics for data analysis.\n\n\n\nRecommended\n\nGábor Békés, Gábor Kézdi. 2021. Data Analysis for Business, Economics, and Policy. Cambridge University Press\nCole Nussbaumer Knaflic. 2015. Storytelling with Data: A Data Visualization Guide for Business Professionals. 1st Edition. Wiley\n\n\n\n\nOther sources"
-  },
-  {
-    "objectID": "syllabus.html#course-schedule",
-    "href": "syllabus.html#course-schedule",
-    "title": "Syllabus",
-    "section": "Course schedule",
-    "text": "Course schedule\nWe have no regularly scheduled meeting times. There may be an occasional live Webex-streamed (and recorded for later) lab or two during the semester, if we can coordinate a time.\nInstead, 100% of the class content is asynchronous. You can do the readings and watch the videos on your own schedule at whatever time works best for you. Many of you work full time and you have childcare and parental care responsibilities, leaving you with only evenings for coursework. I’ve designed this asynchronous system with you specifically in mind. I also can only really do teaching work at night when my kids are in bed—I recorded all these videos between like 10 PM and 2 AM. We’re all in similar pandemic boats.\nEach session has a set of readings and an accompanying lecture. I would strongly recommend working through the readings before watching the lecture, but you can do it in whatever order you want."
-  },
-  {
-    "objectID": "syllabus.html#course-policies",
-    "href": "syllabus.html#course-policies",
-    "title": "Syllabus",
-    "section": "Course policies",
-    "text": "Course policies\nBe nice. Be honest. Don’t cheat. (and please try to be present 😇)\nThis syllabus reflects a plan for the semester. Deviations may become necessary as the course progresses (sorry this is only the second cohort).\n\nSchedule an appointment\nSeriously. Feel free to schedule an appointment for an online meeting (especially if I am your supervisor). I strive to keep this calendar up-to-date, so that the vacant slots are accessible to you. Oh, and it would be greatly appreciated if you could provide a brief overview of the topic we will be discussing, so I can do any necessary preparation beforehand."
-  },
-  {
-    "objectID": "syllabus.html#assignments-and-grades",
-    "href": "syllabus.html#assignments-and-grades",
-    "title": "Syllabus",
-    "section": "Assignments and grades",
-    "text": "Assignments and grades\nYou can find the assignments on the assignments page.\n\n\n\n\n\nAssignment\nPoints\nPercent\n\n\n\n\nProblem sets\n48\n20%\n\n\nExam\n192\n80%\n\n\nTotal\n240\n\n\n\n\n\n\n\n\n\n\n\n\n\nGrade\nRange\n\n\n\n\n5\n90–100%\n\n\n4\n80–89%\n\n\n3\n66–79%\n\n\n2\n50–65%\n\n\n1\n0–49%"
-  },
-  {
-    "objectID": "syllabus.html#movies",
-    "href": "syllabus.html#movies",
-    "title": "Syllabus",
-    "section": "Movies",
-    "text": "Movies\nOnce you have read this entire syllabus and the assignment overview page, please click here and e-mail me the poster for one of your favorite movies."
-  },
-  {
-    "objectID": "syllabus.html#footnotes",
-    "href": "syllabus.html#footnotes",
-    "title": "Syllabus",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nThere’s fairly widespread misunderstanding about what office hours actually are! Many students often think that they are the times I shouldn’t be disturbed, which is the exact opposite of what they’re for!↩︎\nSo seriously, just don’t cheat or plagiarize!↩︎"
-  },
-  {
-    "objectID": "content/index.html",
-    "href": "content/index.html",
-    "title": "Readings, lectures, and videos",
-    "section": "",
-    "text": "Each class session has a set of required readings that you should complete before watching the lecture. Lecture videos are included in a YouTube playlist on each session page. PDFs of the slides are also included on each session page."
-  },
-  {
-    "objectID": "assignment/index.html",
-    "href": "assignment/index.html",
-    "title": "Assignment overview",
-    "section": "",
-    "text": "The main goals of this class are to help you understand, speak, and do economics. Each type of assignment in this class is designed to help you achieve one or more of these goals."
-  },
-  {
-    "objectID": "assignment/index.html#participation",
-    "href": "assignment/index.html#participation",
-    "title": "Assignment overview",
-    "section": "Participation",
-    "text": "Participation\nWhen I teach this course in face-to-face settings, I make it as interactive, personable, and fun as possible, using all sorts of simulations and in-class games and activities. In an asynchronous online setting, this is sadly not possible. These activities are fantastic not only for understanding core economic principles, but because they allow for increased social interaction, which helps with learning.\nResearch about online courses consistently finds that learning requires social interaction to be successful. In fact, one of the greatest predictors of success is whether students build relationships with their classmates and their professor. This is true for both online classes and face-to-face classes! It’s entirely possible to take a face-to-face class and have almost no social interaction. The worst, most useless class I ever took as an undergraduate was a required Intro to US History class that met twice a week for two hours in a massive auditorium with 900 (!!!) other students. It was awful and I learned nothing.\nFacilitating, measuring, and quantifying social interaction in an online course, however, is fraught with difficulty. I do not want to create an inorganic forum where you must do things like leave two comments of at least 15 words every week, or other things that begin to approach busywork. The temptation to just phone in participation is too great (I would absolutely phone it in if I were taking a class with similar requirements: “great post i agree entirely with the premise of your reflection and synthesis thank you”—15 words, boom.).\nThere are two elements of this course that are designed to make social interaction more organic and real and also allow you to work through economic principles together: (1) Slack and (2) weekly check-ins\n\nSlack\nTo help facilitate online interaction, we will use Slack for communication. The iCollege forums are stodgy, overly formal, and clunky. Slack is not.\nAccess the class workspace here, or click on the  icon in the header of this page. If you’re unfamiliar with Slack, scroll through Slack’s official demo here.\nThere are two public channels in our class workspace:\n\n#general: Post and talk about general things related to the class and economics in general. Find a neat news story related to principal-agent problems? See an example of a stag hunt game in real life? Wonder why a problem set isn’t posted yet? Share and ask those things here.\n#help: Ask specific questions about problem sets and other assignments here.\n\nFeel free to create your own channels as well. For instance, if you want to use Slack to review problem set answer keys with classmates, create a channel.\nYou can also direct message me to contact me directly.\nIn general, interact with me and your classmates through Slack! Don’t lurk in silence in the shadows. (Don’t overshare either and spam the #general channel in Slack, but in my experience there’s little risk of that). Do reach out and talk to your classmates (and me!).\nIn other online classes I have taught, I have found that a key predictor of success is how often students communicate with me and between themselves. Ask questions on Slack. If you see someone’s question there and you know how to help, answer!\nYou’re not going to be graded on Slack usage. I will not watch to see who is active or count likes or responses or anything like that. If you want to opt out entirely and never use it, feel free to do so. You’ll just miss out on a lot of public class-related conversation, possible avenues for help, and a pretty quick way to get in contact with me.\n\n\nWeekly check-ins\nTo (1) demonstrate to me what you’re learning in the class, and (2) help me answer your questions, you will turn in a short weekly check-in by 11:59 PM every Monday.\nYou will complete this check-in individually. This is not a group assignment. (It has been in the past, but not this summer.)\nYou will answer these two questions for each session:\n\nWhat were the three (3) most interesting or exciting things you learned from the session? Why?\nWhat were the three (3) muddiest or unclear things from the session this week? What are you still wondering about?\n\nYou can include more than three interesting or muddiest things, but you must include at least three. There should be six easily identifiable things in each check-in: three exciting things and three questions.\nIMPORTANT: I highly recommend writing your responses in a separate document and copying/pasting the text into iCollege. It will be far easier for you if you write the responses right after completing the readings and watching the videos instead of waiting until you get around to putting them in iCollege—you will forget your questions and insights if you don’t.\nI will grade these check-ins using a check system:\n\n✔+: (11.5 points (115%) in gradebook) Response shows phenomenal thought and engagement with the course content. I will not assign these often.\n✔: (10 points (100%) in gradebook) Response is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance.\n✔−: (5 points (50%) in gradebook) Response is hastily composed, too short, and/or only cursorily engages with the course content. This grade signals that you need to improve next time. I will hopefully not assign these often.\n\nNotice that is essentially a pass/fail or completion-based system. I’m not grading your writing ability, I’m not counting the exact number of words you’re writing, and I’m not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I’m looking for thoughtful engagement, three interesting things, and three questions. That’s all. Do good work and you’ll get a ✓.\nYou will submit these check-ins via iCollege (they’re listed in the “Quiz” section)."
-  },
-  {
-    "objectID": "assignment/index.html#problem-sets",
-    "href": "assignment/index.html#problem-sets",
-    "title": "Assignment overview",
-    "section": "Problem sets",
-    "text": "Problem sets\nTo practice solving microeconomic problems you will complete a series of 7 problem sets. Many of the questions on these assignments will come from Economy, Society, and Public Policy, some will come from previous courses, and others will come from my head.\nYou need to show that you made a good faith effort to work each question. I will not grade these in detail—if you get stuck on a particularly tricky question, don’t panic or worry! I provide you with all the answer keys and you will go over the answers as part of your weekly report.\nThe problem sets will be graded using a check system:\n\n✔+: (23 points (115%) in gradebook) Problem set is 100% completed. Every question was attempted and answered, and all answers are correct. Work is exceptional. I will not assign these often.\n✔: (20 points (100%) in gradebook) Problem set is 70–99% complete and most answers are correct. This is the expected level of performance.\n✔−: (10 points (50%) in gradebook) Problem set is less than 70% complete and/or most answers are incorrect. This indicates that you need to improve next time. I will hopefully not asisgn these often.\n\nYou may (and should!) work together on the problem sets, but you must turn in your own answers.\nYou will turn these problem sets in via iCollege.\n\nProblem set answer key review\nAfter submitting each problem set, its corresponding answer key will become available in the “Content” section at iCollege. You should download this and compare your answers with what’s in the answer key. Check your work, see what you got right and wrong, and redo your work to make sure you understand the questions (though you don’t need to resubmit any of your work!)\nYou can do this on your own, or you can meet up with classmates to review the answers as a group (I highly recommend this!!!).\nYou’ll report about your problem set review as part of the weekly check-in. Like the weekly check-in, I highly recommend writing your responses in a separate document and copying/pasting the text into iCollege when you submit the check-in. You will forget your questions if you don’t.\nYou’ll answer these questions:\n\nDid you review the problem set answer key and compare the answers with your work? (1 point)\n\nYes, by myself\nYes, with others from the class\nNo\n\nWhich problem set question was the most difficult? (2 points)\nWhat questions do you still have? (2 points)\n\nThe review is worth 5 points."
-  },
-  {
-    "objectID": "assignment/index.html#exams",
-    "href": "assignment/index.html#exams",
-    "title": "Assignment overview",
-    "section": "Exams",
-    "text": "Exams\nThere will be two exams covering (1) capitalism, markets, power, and institutions and core economic models, and (2) market failures and government intervention in the economy.\nYou will take these exams online through iCollege. The exams will be timed, but you can use notes and readings and the Google. You must take the exams on your own though, and not talk to anyone about them.\nStudy guides for each exam will be posted in the resources section."
-  },
-  {
-    "objectID": "assignment/01-weekly-check-in.html",
-    "href": "assignment/01-weekly-check-in.html",
-    "title": "Weekly check-in 1",
-    "section": "",
-    "text": "Answer these questions and submit your responses on iCollege.\nI highly recommend writing your responses in a separate document and copying/pasting the text into iCollege. It will be far easier for you if you write the responses right after completing the readings and watching the videos instead of waiting until you get around to putting them in iCollege—you will forget your questions and insights if you don’t.\n\nSession 1: Capitalism and measurement\n\nWhat were the three (3) most interesting or exciting things you learned from the session? Why?\nWhat were the three (3) muddiest or unclear things from the session this week? What are you still wondering about?\n\n\n\nSession 2: Governments and institutions\n\nWhat were the three (3) most interesting or exciting things you learned from the session? Why?\nWhat were the three (3) muddiest or unclear things from the session this week? What are you still wondering about?"
-  },
-  {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
-    "title": "Social interactions and economic outcomes",
-    "section": "",
-    "text": "Important: The PDFs of the individual chapters are posted on iCollege.\n\n Introduction and 2.1-2.12 in Economy, Society, and Public Policy The CORE Team, Economy, Society, and Public Policy, 2019, https://www.core-econ.org/espp/.\n Play through “The Evolution of Trust” by Nicky Case\n Radiolab, “One Good Deed Deserves Another,” part 3 in “The Good Show,” season 9, episode 1\n Radiolab, “The Golden Rule,” part 1 in “What’s Left When You’re Right?,” season 12, episode 6\n Golden Balls Split or Steal video clip (watch after listening to “The Golden Rule”)\n Chapter 2 in Frederick W. Mayer, Narrative Politics: Stories and Collective Action Frederick W. Mayer, Narrative Politics: Stories and Collective Action (Oxford: Oxford University Press, 2014)."
-  },
-  {
-    "objectID": "content/03-content.html#readings",
-    "href": "content/03-content.html#readings",
-    "title": "Social interactions and economic outcomes",
-    "section": "",
-    "text": "Important: The PDFs of the individual chapters are posted on iCollege.\n\n Introduction and 2.1-2.12 in Economy, Society, and Public Policy The CORE Team, Economy, Society, and Public Policy, 2019, https://www.core-econ.org/espp/.\n Play through “The Evolution of Trust” by Nicky Case\n Radiolab, “One Good Deed Deserves Another,” part 3 in “The Good Show,” season 9, episode 1\n Radiolab, “The Golden Rule,” part 1 in “What’s Left When You’re Right?,” season 12, episode 6\n Golden Balls Split or Steal video clip (watch after listening to “The Golden Rule”)\n Chapter 2 in Frederick W. Mayer, Narrative Politics: Stories and Collective Action Frederick W. Mayer, Narrative Politics: Stories and Collective Action (Oxford: Oxford University Press, 2014)."
-  },
-  {
-    "objectID": "content/03-content.html#slides",
-    "href": "content/03-content.html#slides",
-    "title": "Social interactions and economic outcomes",
-    "section": "Slides",
-    "text": "Slides\n\n Download PDF of all slides"
-  },
-  {
-    "objectID": "content/03-content.html#videos",
-    "href": "content/03-content.html#videos",
-    "title": "Social interactions and economic outcomes",
-    "section": "Videos",
-    "text": "Videos\nVideos for each section of the lecture are available at this YouTube playlist.\n\nIntroduction\nIndividuals and society\nGame theory\nStags, hares, and prisoners\nFixing collective action problems\n\nYou can also watch the playlist (and skip around to different sections) here:"
-  },
-  {
-    "objectID": "content/01-content.html",
-    "href": "content/01-content.html",
-    "title": "Capitalism and measurement",
-    "section": "",
-    "text": "Chapters 1 and 9 in Naked Economics (Wheelan:2019?)\n Introduction and 1.1–1.10 in Economy, Society, and Public Policy (core-espp?)\n “Dismal ignorance of the “dismal science”—a response to Larry Elliot”\n Planet Money, “The Invention Of ‘The Economy’,” episode 522\n On the Media, “Money, Then and Now,” July 5, 2019"
-  },
-  {
-    "objectID": "content/01-content.html#readings",
-    "href": "content/01-content.html#readings",
-    "title": "Capitalism and measurement",
-    "section": "",
-    "text": "Chapters 1 and 9 in Naked Economics (Wheelan:2019?)\n Introduction and 1.1–1.10 in Economy, Society, and Public Policy (core-espp?)\n “Dismal ignorance of the “dismal science”—a response to Larry Elliot”\n Planet Money, “The Invention Of ‘The Economy’,” episode 522\n On the Media, “Money, Then and Now,” July 5, 2019"
-  },
-  {
-    "objectID": "content/01-content.html#other-useful-resources",
-    "href": "content/01-content.html#other-useful-resources",
-    "title": "Capitalism and measurement",
-    "section": "Other useful resources",
-    "text": "Other useful resources\n\n Primer, “Simulating Supply and Demand”"
-  },
-  {
-    "objectID": "content/01-content.html#slides",
-    "href": "content/01-content.html#slides",
-    "title": "Capitalism and measurement",
-    "section": "Slides",
-    "text": "Slides\n\n Download PDF of all slides"
-  },
-  {
-    "objectID": "content/01-content.html#videos",
-    "href": "content/01-content.html#videos",
-    "title": "Capitalism and measurement",
-    "section": "Videos",
-    "text": "Videos\nVideos for each section of the lecture are available at this YouTube playlist.\n\nIntroduction\nTechnology, growth, and capitalism\nInstitutions and coordination\nWhy do we make you take this class?\nClass details\nImportance of institutions\nDownsides of capitalism\nMeasuring stuff correctly\n\nYou can also watch the playlist (and skip around to different sections) here:"
-  },
-  {
-    "objectID": "content/02-content.html",
-    "href": "content/02-content.html",
-    "title": "Markets and democracy",
-    "section": "",
-    "text": "11.1-11.6 in Economy, Society, and Public Policy The CORE Team, Economy, Society, and Public Policy, 2019, https://www.core-econ.org/espp/.\n 12.1-12.6 in Economy, Society, and Public Policy The CORE Team.\n James Madison, The Federalist Papers, #10\n Chapters 3, 4, and 8 in Naked Economics Charles Wheelan, Naked Economics: Undressing the Dismal Science, 3rd ed. (New York: W. W. Norton & Company, 2019).\n The Uncertain Hour, “The Peanut Butter Grandma goes to Washington,” season 2, episode 1\n The Uncertain Hour, “The Peanut Butter Wars,” season 2, episode 2\n The Uncertain Hour, “The Peanut Butter Verdict,” season 2, episode 3"
-  },
-  {
-    "objectID": "content/02-content.html#readings",
-    "href": "content/02-content.html#readings",
-    "title": "Markets and democracy",
-    "section": "",
-    "text": "11.1-11.6 in Economy, Society, and Public Policy The CORE Team, Economy, Society, and Public Policy, 2019, https://www.core-econ.org/espp/.\n 12.1-12.6 in Economy, Society, and Public Policy The CORE Team.\n James Madison, The Federalist Papers, #10\n Chapters 3, 4, and 8 in Naked Economics Charles Wheelan, Naked Economics: Undressing the Dismal Science, 3rd ed. (New York: W. W. Norton & Company, 2019).\n The Uncertain Hour, “The Peanut Butter Grandma goes to Washington,” season 2, episode 1\n The Uncertain Hour, “The Peanut Butter Wars,” season 2, episode 2\n The Uncertain Hour, “The Peanut Butter Verdict,” season 2, episode 3"
-  },
-  {
-    "objectID": "content/02-content.html#other-useful-resources",
-    "href": "content/02-content.html#other-useful-resources",
-    "title": "Markets and democracy",
-    "section": "Other useful resources",
-    "text": "Other useful resources\n\n Khan Academy: Absolute and comparative advantage\n Planet Money, “A Former Lobbyist Tells All,” Episode 341, January 27, 2012\n LSE Research: Washington’s Revolving Door\n John Sides, “A new experiment shows how money buys access to Congress,” The Washington Post’s Monkey Cage, March 11, 2014"
-  },
-  {
-    "objectID": "content/02-content.html#slides",
-    "href": "content/02-content.html#slides",
-    "title": "Markets and democracy",
-    "section": "Slides",
-    "text": "Slides\n\n Download PDF of all slides"
-  },
-  {
-    "objectID": "content/02-content.html#videos",
-    "href": "content/02-content.html#videos",
-    "title": "Markets and democracy",
-    "section": "Videos",
-    "text": "Videos\nVideos for each section of the lecture are available at this YouTube playlist.\n\nIntroduction\nMarkets and institutions\nMarkets, trading, and prices\nGovernments in the economy\nDemocracy and factions\nSmall factions and public goods\nGovernment failure\n\nYou can also watch the playlist (and skip around to different sections) here:"
-  },
-  {
-    "objectID": "content/05-content.html",
-    "href": "content/05-content.html",
-    "title": "Work, wellbeing, and scarcity",
-    "section": "",
-    "text": "Introduction and 4.1-4.12 in Economy, Society, and Public Policy The CORE Team, Economy, Society, and Public Policy, 2019, https://www.core-econ.org/espp/.\n Chapters 2 and 6 in Naked Economics Charles Wheelan, Naked Economics: Undressing the Dismal Science, 3rd ed. (New York: W. W. Norton & Company, 2019).\n Anuschka de Rohan, “Why dolphins are deep thinkers”, The Guardian, July 2, 2003 (first 3 paragraphs only)\n Charles Duhigg, “Warning: Habits May Be Good for You,” New York Times, July 13, 2008 (a PDF version of this is on iCollege under “Content” if you can’t access it with the URL)\n Randall Munroe, “Cost of Pennies”\n Randall Munroe, “Working”"
-  },
-  {
-    "objectID": "content/05-content.html#readings",
-    "href": "content/05-content.html#readings",
-    "title": "Work, wellbeing, and scarcity",
-    "section": "",
-    "text": "Introduction and 4.1-4.12 in Economy, Society, and Public Policy The CORE Team, Economy, Society, and Public Policy, 2019, https://www.core-econ.org/espp/.\n Chapters 2 and 6 in Naked Economics Charles Wheelan, Naked Economics: Undressing the Dismal Science, 3rd ed. (New York: W. W. Norton & Company, 2019).\n Anuschka de Rohan, “Why dolphins are deep thinkers”, The Guardian, July 2, 2003 (first 3 paragraphs only)\n Charles Duhigg, “Warning: Habits May Be Good for You,” New York Times, July 13, 2008 (a PDF version of this is on iCollege under “Content” if you can’t access it with the URL)\n Randall Munroe, “Cost of Pennies”\n Randall Munroe, “Working”"
-  },
-  {
-    "objectID": "content/05-content.html#other-useful-resources",
-    "href": "content/05-content.html#other-useful-resources",
-    "title": "Work, wellbeing, and scarcity",
-    "section": "Other useful resources",
-    "text": "Other useful resources\nI pause a couple times during the lecture sections on indifference curves and utility maximization and I mention that you should watch these videos. Here are those videos:\n\n Marginal Revolution University, “Indifference curves” (watch during the “Utility and indifference” section)\n Marginal Revolution University, “Constraint optimization” (watch during the “Maximizing utility” section)\n\nAlso, a complete walkthrough of how to maximize utility with algebra and graphs is at the “Utility maximization” guide in the resources section."
-  },
-  {
-    "objectID": "content/05-content.html#slides",
-    "href": "content/05-content.html#slides",
-    "title": "Work, wellbeing, and scarcity",
-    "section": "Slides",
-    "text": "Slides\n\n Download PDF of all slides"
-  },
-  {
-    "objectID": "content/05-content.html#videos",
-    "href": "content/05-content.html#videos",
-    "title": "Work, wellbeing, and scarcity",
-    "section": "Videos",
-    "text": "Videos\nVideos for each section of the lecture are available at this YouTube playlist.\n\nIntroduction\nIncentives\nElasticity\nPreferences, constraints, and tradeoffs\nUtility and indifference\nCalculus party!!!\nMaximizing utility\n\nYou can also watch the playlist (and skip around to different sections) here:"
-  },
-  {
-    "objectID": "assignment/01-problem-set.html",
-    "href": "assignment/01-problem-set.html",
-    "title": "Problem set 1",
-    "section": "",
-    "text": "Submit this as a PDF on iCollege. Show your work when possible."
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section",
-    "href": "assignment/01-problem-set.html#section",
-    "title": "Problem set 1",
-    "section": "1",
-    "text": "1\nDownload this dataset (Source: Global Consumption and Income Project. All incomes expressed in 2005 USD PPP.)\n\n[ gcip_raw.xlsx\n\n\nChoose five countries you are interested in.\nFor each of these countries, calculate the 90/10 ratio for 1980, 1990, 2000, and 2014. Look at the step-by-step instructions in ESPP.\nInclude a table of these ratios in your problem set. Try plotting all four ratios for all five countries at the same time too and include that graph.\nSpeculate about country- and time-based differences between these countries. Answer in ≈50 words."
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section-1",
-    "href": "assignment/01-problem-set.html#section-1",
-    "title": "Problem set 1",
-    "section": "2",
-    "text": "2\nDownload this dataset (Source: ESPP. All numbers expressed in 1990 international USD (i.e. they’re all real values; you don’t need to adjust for inflation or anything)):\n\n[ global_income_raw.xlsx\n\n\nCalculate the compound annual growth rate for China, Britain, Italy, and India for the years 1750–1850, 1851–1950, and 1951–2014.\nInclude a table of these growth rates and try to plot them somehow.\nExplain why you need to calculate the compound annual growth rate. Answer in a sentence.\nDiscuss the results. Which countries grew the most in which 100-year periods? Speculate about why. Answer in ≈75 words."
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section-2",
-    "href": "assignment/01-problem-set.html#section-2",
-    "title": "Problem set 1",
-    "section": "3",
-    "text": "3\nThe following table shows the nominal GDP (in 2015 US dollars) and the population of Japan in 2013 and 2014 (Source: The World Bank):\n\n\n\nMeasure\n2013\n2014\n\n\n\n\nGDP\n$4,919,563,108,372.50\n$4,601,461,206,885.10\n\n\nPopulation\n127,338,621\n127,131,800\n\n\n\nBased on this information, which of the following statements regarding GDP per capita is correct? Explain why or why not in a sentence for each:\n\nThe GDP per capita in 2013 was $36,194.41.\nThe GDP per capita fell by 6.74% between 2013 and 2014.\nThe fall in the population was enough to offset the fall in the GDP for an overall growth in GDP per capita between 2013 and 2014.\nThe GDP per capita fell by 6.31% between 2013 and 2014."
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section-3",
-    "href": "assignment/01-problem-set.html#section-3",
-    "title": "Problem set 1",
-    "section": "4",
-    "text": "4\n\n\n\n\n\n\nHelpful guide\n\n\n\nYou’ll want to refer to the guide on inflation and change for this question.\n\n\n\nThe consumer price index (1982–84 = 100) in December 1980 was 86.4, and it was 247.963 in December 2017 (Source: CPIAUCSL from FRED). How much inflation has there been between 1980 and 2017?\nIn December 1980 the average price of unleaded regular gasoline was $1.34; in December 2017, it was $2.48. (Source: Weekly U. S. Regular All Formulations Retail Gasoline Prices from the US EIA.) Did the price of gasoline increase or decrease in real terms over this period? By what percentage has the price of gasoline changed (in real terms) over this period? What is the implied average annual rate of growth or decline in the real price over this period?\nIn 1980 the federal minimum wage was $3.10 per hour; today it is $7.25. Has its real value increased or decreased over this period? What policy and managerial implications does this have?"
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section-4",
-    "href": "assignment/01-problem-set.html#section-4",
-    "title": "Problem set 1",
-    "section": "5",
-    "text": "5\n\n\n\n\n\n\nHelpful guide\n\n\n\nYou’ll want to refer to the guide on inflation and change for this question.\n\n\nDownload this dataset:\n\n[ fred_gdp.xlsx\n\nFollowing the examples on this page here, do the following with this data:\n\nCreate a column that shows the nominal GDP per capita for the United States.\nCreate a column that shows the real GDP per capita for the United States in 2012 dollars. You shouldn’t use the CPI here. The Fed and other national agencies have a special kind of CPI-like measure for GDP called the “GDP deflator”, which is included in the dataset you downloaded. The reference year for this deflator is 2012.\nCreate a column that shows the real GDP per capita for the United States in 2018 dollars.\nCreate a plot showing three lines over time: nominal GDP per capita, real GDP per capita (2012 dollars), and real GDP per capita (2018 dollars).\nCreate a column that shows the percent change between each year for one of the real GDP columns. Which year saw the biggest growth rate? Which year saw the smallest growth rate? Plot the annual percent change if you’re feeling adventurous."
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section-5",
-    "href": "assignment/01-problem-set.html#section-5",
-    "title": "Problem set 1",
-    "section": "6",
-    "text": "6\nJames Madison, a leading figure in the debates about the US Constitution after the formerly British colonies in the United States of America won the war of independence, wrote in 1788:\n\nIn framing a government which is to be administered by men over men, the great difficulty lies in this: you must first enable the government to control the governed; and in the next place oblige it to control itself.\n\nHow does democracy (including the rule of law) address Madison’s concerns to oblige the government to “control itself”? (≈100 words)"
-  },
-  {
-    "objectID": "assignment/01-problem-set.html#section-6",
-    "href": "assignment/01-problem-set.html#section-6",
-    "title": "Problem set 1",
-    "section": "7",
-    "text": "7\n\n\n\n\n\n\nHelpful guide\n\n\n\nYou’ll want to refer to the guide on absolute and comparative advantage for this question.\n\n\nThailand and Cambodia produce rice and trucks at constant rates of product transformation (their possibility frontiers are straight lines—they don’t make more or less of the product depending on how much they’re currently making). In one year, Thailand could produce 1,500 tons of rice and no trucks, 500 boatloads of trucks and no rice, or any combination in between. Cambodia can produce 1,000 tons of rice or 200 boatloads of trucks, or somewhere in between. Answer the following:\n\nDraw the production possibility frontier for each country, labeling each curve and known points.\nThailand can produce more of both projects than Cambodia. Can Thailand gain anything by trading with Cambodia? Explain in ≈30 words.\nIf the answer to #2 is yes, which ratios of trucks to rice create advantages from trade? Which ratios of trucks to rice create disadvantages from trade?"
-  },
-  {
-    "objectID": "syllabus.html#grades",
-    "href": "syllabus.html#grades",
-    "title": "Syllabus",
-    "section": "Grades",
-    "text": "Grades\nYou will earn a significant portion of the points with the end-of-semester written exam, but passing the course also requires completing (minimum 24 points from the 48) the ongoing problem set assignments throughout the year.\n\n\n\n\n\nAssignment\nPoints\nPercent\n\n\n\n\nProblem sets\n48\n20%\n\n\nExam\n192\n80%\n\n\nTotal\n240\n\n\n\n\n\n\n\n\n\n\n\n\n\nGrade\nRange\n\n\n\n\n5\n90–100%\n\n\n4\n80–89%\n\n\n3\n66–79%\n\n\n2\n50–65%\n\n\n1\n0–49%"
+    "text": "Course materials\nReadings that I highly recommend for this course are free, as this course focuses primarily on the technical aspects of data analysis, which are rapidly evolving. The majority of pertinent sources are available online.\n\nBooks\n\nHighly recommended (and also free)\n\nWickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). R for data science. ” O’Reilly Media, Inc.”\nWitten, D., & James, G. (2013). An introduction to statistical learning with applications in R. springer publication.\nKuhn, M., & Silge, J. (2022). Tidy modeling with R. ” O’Reilly Media, Inc.”\nVillanueva, R. A. M., & Chen, Z. J. (2019). ggplot2: elegant graphics for data analysis.\n\n\n\nRecommended\n\nGábor Békés, Gábor Kézdi. 2021. Data Analysis for Business, Economics, and Policy. Cambridge University Press\nCole Nussbaumer Knaflic. 2015. Storytelling with Data: A Data Visualization Guide for Business Professionals. 1st Edition. Wiley\n\n\n\n\nSchedule an appointment\nSeriously. Feel free to schedule an appointment for an online meeting (especially if I am your supervisor). I strive to keep this calendar up-to-date, so that the vacant slots are accessible to you. Oh, and it would be greatly appreciated if you could provide a brief overview of the topic we will be discussing, so I can do any necessary preparation beforehand."
   },
   {
     "objectID": "syllabus.html#assignments",
     "href": "syllabus.html#assignments",
     "title": "Syllabus",
     "section": "Assignments",
-    "text": "Assignments\nYou can find the assignments on the assignments page.\nYou have the opportunity to fill out the task multiple times, but for personal reasons, I ask you not to try it for too long (I pay for the server usage fee, not the university), so solve it when you feel ready. The system will automatically evaluate based on your last solution.\n\nLate work\nYou will lose 0.5 point per day for each day a problem set is late (yes, even if it’s only 5 minutes after the deadline). The table with current points are automatically generated from the server."
+    "text": "Assignments\nYou can find the assignments on the assignments page.\nYou have the opportunity to fill out the task multiple times, but for personal reasons, I ask you not to try it for too long (I pay for the server usage fee, not the university), or run it manually. Simply copy and paste the following code into your R console, and you will be all set (You must install both of those packages first):\n\ngit2r::clone(url = \"https://github.com/MarcellGranat/bigdata2023_learnr.git\", local_path = \"repo\")\nrmarkdown::run(\"repo/learnr.Rmd\")\n\nOnce you have completed all the tasks, simply click on the generate button to obtain a hash code. If you got a message that your results are saved, then its saved, and you do not have any additional task. But if you do not get it, then send this hash code to me via email (the server is on local computers and anything may happen 🤷‍♂️).\nThis hash code contains your answers as well as other relevant information about your submission. You must complete each problem set by Monday, 23:59 of the following week.\n\nLate work\nYou will lose 0.5 point per day for each day a problem set is late (yes, even if it’s only 5 minutes after the deadline). The table with current points are automatically generated from the server."
   },
   {
-    "objectID": "content/09-content.html",
-    "href": "content/09-content.html",
-    "title": "Firms and markets",
-    "section": "",
-    "text": "Chapters 7 and 12 in Naked Economics Wheelan:2019?\n Introduction and 7.1-7.12 in Economy, Society, and Public Policy core-espp?\n Play at least 15 minutes of “Universal Paperclips”1\n Michael Eisen, “Amazon’s $23,698,655.93 book about flies,” April 22, 2011\n Freakonomics Radio, “Why Uber Is an Economist’s Dream,” September 7, 2016\n Steve Sexton, “The Inefficiency of Local Food”, Freakonomics Blog, November 14, 2011"
-  },
-  {
-    "objectID": "content/09-content.html#readings",
-    "href": "content/09-content.html#readings",
-    "title": "Firms and markets",
-    "section": "",
-    "text": "Chapters 7 and 12 in Naked Economics Wheelan:2019?\n Introduction and 7.1-7.12 in Economy, Society, and Public Policy core-espp?\n Play at least 15 minutes of “Universal Paperclips”1\n Michael Eisen, “Amazon’s $23,698,655.93 book about flies,” April 22, 2011\n Freakonomics Radio, “Why Uber Is an Economist’s Dream,” September 7, 2016\n Steve Sexton, “The Inefficiency of Local Food”, Freakonomics Blog, November 14, 2011"
-  },
-  {
-    "objectID": "content/09-content.html#other-useful-resources",
-    "href": "content/09-content.html#other-useful-resources",
-    "title": "Firms and markets",
-    "section": "Other useful resources",
-    "text": "Other useful resources\nThese two sessions have a bunch of helpful guides in the resources section:\n\nFirm costs + profit maximization\nSupply, demand, surplus, DWL, and elasticity\nMonopolies\n\nYou should definitely check those guides out and follow along with the examples there.\nThese topics are covered in pretty much every introductory economics class in the world, which means the internet is full of examples of how to do the math involved. I’ve included lists of helpful videos at the top of each of these guides."
-  },
-  {
-    "objectID": "content/09-content.html#slides",
-    "href": "content/09-content.html#slides",
-    "title": "Firms and markets",
-    "section": "Slides",
-    "text": "Slides\n\n Download PDF of all slides"
-  },
-  {
-    "objectID": "content/09-content.html#videos",
-    "href": "content/09-content.html#videos",
-    "title": "Firms and markets",
-    "section": "Videos",
-    "text": "Videos\nVideos for each section of the lecture are available at this YouTube playlist.\n\nIntroduction\nSupply and demand\nDemand and WTP\nSupply and WTA\nElasticities of demand\nScale, location, networks, and time\nSurplus, taxes, incidence, and DWL\nChanges in supply and demand\nEscaping the price taking world\n\nYou can also watch the playlist (and skip around to different sections) here:"
-  },
-  {
-    "objectID": "content/09-content.html#footnotes",
-    "href": "content/09-content.html#footnotes",
-    "title": "Firms and markets",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nWARNING: This game can take over your life for the next day or so, which can be really fun and rewarding, but also it can seriously for real consume every waking moment for a few hours. This is your official warning.↩︎"
+    "objectID": "syllabus.html#grades",
+    "href": "syllabus.html#grades",
+    "title": "Syllabus",
+    "section": "Grades",
+    "text": "Grades\nYou will earn a significant portion of the points with the end-of-semester written exam, but passing the course also requires completing (minimum 24 points from the 48) the ongoing problem set assignments throughout the year.\n\n\n\n\n\n\n  \n    \n    \n      Assignment\n      Points\n      Percent\n    \n  \n  \n    Problem sets\n50\n20%\n    Exam\n200\n80%\n    Total\n250\n\n  \n  \n  \n\n\n\n\n\n\n\n\n\n\n  \n    \n    \n      Grade\n      Range\n    \n  \n  \n    5\n90–100%\n    4\n80–89%\n    3\n66–79%\n    2\n50–65%\n    1\n0–49%"
   }
 ]

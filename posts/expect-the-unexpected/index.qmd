@@ -16,19 +16,17 @@ nocite: |
   @granát2023
 ---
 
-[Our recent article](https://www.sciencedirect.com/science/article/pii/S1544612323006736) was published at Finance Research Letters.
+[Our recent article](https://www.sciencedirect.com/science/article/pii/S1544612323006736) was published in Finance Research Letters.
 
 ------------------------------------------------------------------------
-
-
 
 The economy of the second decade of the 21st century is characterised by sudden economic shocks. The Russian military operation in Ukraine on the 24th of February had a significant impact on the global financial markets and the economy. There are conflicting views on whether the event surprised the world or if it was already expected.
 
 On one hand, the escalation of the conflict had been building up for many years, giving the markets time to factor in this danger in advance. On the other hand, significant movements were observed in the financial markets after the outbreak of the war, indicating that the news came as a surprise to investors. The solution likely lies somewhere in between, with a gradually increasing number of investors anticipating the escalation of the conflict.
 
-We applied @kyle1985 model, which is based on informed and uninformed investors, to investigate when and how the conviction of a war appeared among financial market participants.
+We applied Kyle's \@-kyle1985 model, which is based on informed and uninformed investors, to investigate when and how the conviction of a war appeared among financial market participants.
 
-The assumption of the empirical model is that after the outbreak, no one can doubt the fact of the war, so the observed prices at that time already reflect the value attributed to a financial security in a war scenario. This is referred to as liquidity value. Once this price is known, we examine historically how close the prices were to their liqudation values during specific periods. The simplest way to illustrate this is presented by @fig-motivation, the average absolute differences from the liquidation value over time.
+The empirical model assumes that after the outbreak, no one can doubt the fact of the war, so the observed prices at that time already reflect the value attributed to a financial security in a war scenario. This is referred to as liquidity value. Once this price is known, we examine historically how close the prices were to their liqudation values during specific periods. The simplest way to illustrate this is presented in @fig-motivation, the average absolute differences from the liquidation value over time.
 
 <a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_waad.csv" download class="btn btn-primary">Download in CSV</a>
 
@@ -78,7 +76,7 @@ c(
 
 ```{r}
 #| label: fig-motivation
-#| fig-cap: Average of the absolute differences between the current price indeces and their value at the outbreak of the war.
+#| fig-cap: Average of the absolute differences between the current price indices and their value at the outbreak of the war.
 #| fig-height: 2
 
 four_factor_adj_price_df |> 
@@ -117,7 +115,7 @@ four_factor_adj_price_df |>
   custom_theme_dark
 ```
 
-We applied two formal models. The first model examines, within 10 trading days divided into windows, to what extent the relative price to liquidity value explains the volatility of prices. In other words, it investigates how much can be said that traders started considering countries who would fall sharply in the event of a war outbreak as less valuable.
+We applied two formal models. The first model examines, within 10 trading days divided into windows, to what extent the relative price to liquidity value explains the volatility of prices. In other words, it investigates how much can be said that traders started considering countries that would fall sharply in the event of a war outbreak as less valuable.
 
 ```{r}
 #| eval: false
@@ -139,7 +137,7 @@ c(
 
 ```{r}
 #| label: fig-fm-coef
-#| fig-cap: Estimated coefficients for the Fama–MacBeth type regression models. The time-series shows the effect of the difference from the liquadation value on the price change (higher value mean faster convergence).
+#| fig-cap: Estimated coefficients for the Fama–MacBeth type regression models. The time series shows the effect of the difference from the liquidation value on the price change (a higher value means faster convergence).
 
 famamacbeth_fitted_df <- pin_read(.board, "famamacbeth")
 
@@ -190,12 +188,12 @@ famamacbeth_fitted_df |>
   custom_theme_dark
 ```
 
-Our second formal model identifies the exact date of the pricing initiation. It is a non-linear regression with a behavioral equation that includes two states. In the first state, the difference from the liquidity value does not affect price movements, while in the second state, there is a monotonically increasing effect as the event approaches (as seen in @fig-fm-coef).
+Our second formal model identifies the exact date of the pricing initiation. It is a non-linear regression with a behavioural equation that includes two states. In the first state, the difference from the liquidity value does not affect price movements, while in the second state, there is a monotonically increasing effect as the event approaches (as seen in @fig-fm-coef).
 
-The identification of the exact date was necessary because although the described behavior can be captured well in the model presented by @fig-fm-coef, we only see time windows there. Based on the non-linear model, we can conclude that the pricing initiation is 50 days before the outbreak, so it can be set on January 6th.
+The identification of the exact date was necessary because although the described behaviour can be captured well in the model presented by @fig-fm-coef, we only see time windows there. Based on the non-linear model, we can conclude that the pricing initiation is 50 days before the outbreak, so it can be set on January 6th.
 
-The predictability of war plays a role in numerous topics on economic and political fields, but the fact that the stock market priced this risk in just 50 days before its outbreak highlights that we are living in a decade of uncertainty.
+The predictability of war plays a role in numerous topics in economic and political fields, but the fact that the stock market priced this risk in just 50 days before its outbreak highlights that we are living in a decade of uncertainty.
 
-For citation, please use the version published in Finance Research Letters (currently ranked as the 4th top financial journal by Google Scholar):
+For citation, please use the version published in Finance Research Letters:
 
-> Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. *Finance Research Letters*, 104301.
+> Marcell P. Granát, Krsitóf Lehmann, Olivér Nagy, & Gábor Neszveda (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. *Finance Research Letters*, 104301. <https://doi.org/10.1016/j.frl.2023.104301>.

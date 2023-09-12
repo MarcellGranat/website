@@ -10,7 +10,10 @@ website:
   navbar:
     
     right:
-      - about.qmd
+      # - about.qmd
+      - icon: bar-chart-line
+        text: Big Data & Visualisation
+        href: https://marcellgranat.com/bigdata
       - icon: linkedin
         text: LinkedIn
         href: https://www.linkedin.com/in/granatmarcell

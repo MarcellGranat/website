@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Learn how to understand, speak, and do economics in the public sector">
+<meta name="description" content="Learn how to analyse, understand, and communicate about your data!">
 
-<title>Microeconomics for Public Policy - Markets and democracy</title>
+<title>Big Data &amp; Data Visualisation - Statistics in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -63,21 +97,14 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Microeconomics for Public Policy - Markets and democracy">
+<meta property="og:title" content="Big Data &amp; Data Visualisation - Statistics in R">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://econs23.classes.andrewheiss.com/files/social-image-s23.png">
-<meta property="og:site-name" content="Microeconomics for Public Policy">
+<meta property="og:image" content="https://marcellgranat.com/bigdata/files/social-image-s23.png">
+<meta property="og:site-name" content="Big Data &amp; Data Visualisation">
 <meta property="og:locale" content="en_US">
-<meta property="og:image:height" content="640">
-<meta property="og:image:width" content="1280">
-<meta name="twitter:title" content="Microeconomics for Public Policy - Markets and democracy">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://econs23.classes.andrewheiss.com/files/social-image-s23.png">
-<meta name="twitter:creator" content="@andrewheiss">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image-height" content="640">
-<meta name="twitter:image-width" content="1280">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -88,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Microeconomics for Public Policy</span>
+    <span class="navbar-title">Big Data &amp; Data Visualisation</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -102,25 +129,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule.html" rel="" target="">
- <span class="menu-text">Schedule</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../content/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Classes and readings</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../assignment/index.html" rel="" target="">
+    <a class="nav-link" href="../assignment.html" rel="" target="">
  <span class="menu-text">Assignments</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../news/index.html" rel="" target="">
- <span class="menu-text">News</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://gsuecons2023.slack.com" rel="" target=""><i class="bi bi-slack" role="img" aria-label="Slack">
-</i> 
- <span class="menu-text"></span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -133,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Capitalism, markets, and public policy</a></li><li class="breadcrumb-item"><a href="../content/02-content.html">2: Governments and institutions</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="../content/02-content.html">Statistics in R</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -165,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Capitalism, markets, and public policy</span></a>
+ <span class="menu-text">Introduction to R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -174,106 +188,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1: Capitalism and measurement</span></a>
+ <span class="menu-text">The base R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/02-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">2: Governments and institutions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: Social interactions and economic outcomes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Fairness and efficiency</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Economic models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5–6: Work, wellbeing, and scarcity</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7–8: The firm</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">9–10: Firms and markets</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Market failures and institutions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">11: Institutions, power, and inequality</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">12: Market failures</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13: When governments go wrong</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">14: Institutional alternatives</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Conclusions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">15: Markets, public policy, and public administration</span></a>
+ <span class="menu-text">Statistics in R</span></a>
   </div>
 </li>
       </ul>
@@ -288,10 +209,43 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#readings" id="toc-readings" class="nav-link active" data-scroll-target="#readings">Readings</a></li>
-  <li><a href="#other-useful-resources" id="toc-other-useful-resources" class="nav-link" data-scroll-target="#other-useful-resources">Other useful resources</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#videos" id="toc-videos" class="nav-link" data-scroll-target="#videos">Videos</a></li>
+  <li><a href="#objectives-of-statistical-analysis-in-economics" id="toc-objectives-of-statistical-analysis-in-economics" class="nav-link active" data-scroll-target="#objectives-of-statistical-analysis-in-economics">Objectives of Statistical Analysis in Economics</a>
+  <ul class="collapse">
+  <li><a href="#predictive-tasks" id="toc-predictive-tasks" class="nav-link" data-scroll-target="#predictive-tasks">Predictive Tasks</a></li>
+  <li><a href="#descriptive-tasks" id="toc-descriptive-tasks" class="nav-link" data-scroll-target="#descriptive-tasks">Descriptive Tasks</a></li>
+  </ul></li>
+  <li><a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data">Types of Data</a>
+  <ul class="collapse">
+  <li><a href="#classification-based-on-structure" id="toc-classification-based-on-structure" class="nav-link" data-scroll-target="#classification-based-on-structure">Classification Based on Structure</a></li>
+  <li><a href="#attribute-types" id="toc-attribute-types" class="nav-link" data-scroll-target="#attribute-types">Attribute Types</a></li>
+  </ul></li>
+  <li><a href="#quality-of-data" id="toc-quality-of-data" class="nav-link" data-scroll-target="#quality-of-data">Quality of Data</a>
+  <ul class="collapse">
+  <li><a href="#some-examples" id="toc-some-examples" class="nav-link" data-scroll-target="#some-examples">Some examples</a></li>
+  </ul></li>
+  <li><a href="#american-trends-panel-wave-110" id="toc-american-trends-panel-wave-110" class="nav-link" data-scroll-target="#american-trends-panel-wave-110"><strong>American Trends Panel Wave 110</strong></a>
+  <ul class="collapse">
+  <li><a href="#case-studies-on-data-related-issues" id="toc-case-studies-on-data-related-issues" class="nav-link" data-scroll-target="#case-studies-on-data-related-issues">Case Studies on Data-Related Issues</a></li>
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency">Measures of Central Tendency 🦔</a>
+  <ul class="collapse">
+  <li><a href="#arithmetic-mean" id="toc-arithmetic-mean" class="nav-link" data-scroll-target="#arithmetic-mean">Arithmetic Mean</a></li>
+  <li><a href="#geometric-mean" id="toc-geometric-mean" class="nav-link" data-scroll-target="#geometric-mean">Geometric Mean</a></li>
+  <li><a href="#harmonic-mean" id="toc-harmonic-mean" class="nav-link" data-scroll-target="#harmonic-mean">Harmonic Mean</a></li>
+  <li><a href="#squared-mean" id="toc-squared-mean" class="nav-link" data-scroll-target="#squared-mean">Squared Mean</a></li>
+  </ul></li>
+  <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles">Quantiles</a></li>
+  <li><a href="#measures-of-variability" id="toc-measures-of-variability" class="nav-link" data-scroll-target="#measures-of-variability">Measures of Variability</a>
+  <ul class="collapse">
+  <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard Deviation</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance">Variance</a></li>
+  </ul></li>
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">Range</a>
+  <ul class="collapse">
+  <li><a href="#interquartile-range-iqr" id="toc-interquartile-range-iqr" class="nav-link" data-scroll-target="#interquartile-range-iqr">Interquartile range (IQR)</a></li>
+  <li><a href="#interdecile-range-idr" id="toc-interdecile-range-idr" class="nav-link" data-scroll-target="#interdecile-range-idr">Interdecile range (IDR)</a></li>
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -299,62 +253,4039 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Markets and democracy</h1>
+<h1 class="title display-7">Statistics in R</h1>
 
 <div class="date-block bg-class text-white p-2">
-    <p class="date">Readings and class materials for Monday, June 5, 2023–Friday, June 9, 2023</p>
+  <p class="date">Readings and class materials for Tuesday, September 12, 2023</p>
 </div>
 </header>
 
-<section id="readings" class="level2">
-<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<section id="objectives-of-statistical-analysis-in-economics" class="level2">
+<h2 class="anchored" data-anchor-id="objectives-of-statistical-analysis-in-economics">Objectives of Statistical Analysis in Economics</h2>
+<p>Statistical analysis serves as an information-compressing mechanism. The primary objectives can be broadly categorized into:</p>
+<section id="predictive-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="predictive-tasks">Predictive Tasks</h3>
+<p>These tasks aim to forecast future outcomes based on historical data and current conditions.</p>
+</section>
+<section id="descriptive-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-tasks">Descriptive Tasks</h3>
+<p>These tasks focus on summarizing the main aspects of the data to provide an informative overview.</p>
+<section id="exploratory-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h4>
+<p>This involves identifying patterns, relationships, or anomalies in the data without a prior hypothesis.</p>
+</section>
+<section id="confirmatory-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="confirmatory-analysis">Confirmatory Analysis</h4>
+<p>This involves testing predefined hypotheses to confirm or refute them.</p>
+</section>
+</section>
+</section>
+<section id="types-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-data">Types of Data</h2>
+<section id="classification-based-on-structure" class="level3">
+<h3 class="anchored" data-anchor-id="classification-based-on-structure">Classification Based on Structure</h3>
+<section id="unstructured-data" class="level4">
+<h4 class="anchored" data-anchor-id="unstructured-data">Unstructured Data</h4>
+<p>Data that does not have a predefined format or organization.</p>
+</section>
+<section id="structured-data" class="level4">
+<h4 class="anchored" data-anchor-id="structured-data">Structured Data</h4>
+<p>Data that is organized in a specific manner, often in tabular form.</p>
+<section id="types-of-structured-data" class="level5">
+<h5 class="anchored" data-anchor-id="types-of-structured-data">Types of Structured Data</h5>
 <ul>
-<li><i class="fa-solid fa-book" aria-label="book"></i> 11.1-11.<strong>6</strong> in <em>Economy, Society, and Public Policy</em> <span class="citation" data-cites="core-espp">The CORE Team, <em>Economy, Society, and Public Policy</em>, 2019, <a href="https://www.core-econ.org/espp/" role="doc-biblioref">https://www.core-econ.org/espp/</a>.</span></li>
-<li><i class="fa-solid fa-book" aria-label="book"></i> 12.1-12.<strong>6</strong> in <em>Economy, Society, and Public Policy</em> <span class="citation" data-cites="core-espp">The CORE Team.</span></li>
-<li><i class="fa-solid fa-arrow-up-right-from-square" aria-label="arrow-up-right-from-square"></i> James Madison, <a href="http://avalon.law.yale.edu/18th_century/fed10.asp">The Federalist Papers, #10</a></li>
-<li><i class="fa-solid fa-book" aria-label="book"></i> Chapters 3, 4, and 8 in <em>Naked Economics</em> <span class="citation" data-cites="Wheelan:2019">Charles Wheelan, <em>Naked Economics: Undressing the Dismal Science</em>, 3rd ed. (New York: W. W. Norton &amp; Company, 2019).</span></li>
-<li><i class="fa-solid fa-podcast" aria-label="podcast"></i> The Uncertain Hour, <a href="https://www.marketplace.org/2017/10/25/business/uncertain-hour/s02-1-peanut-butter-grandma-goes-washington">“The Peanut Butter Grandma goes to Washington,”</a> season 2, episode 1</li>
-<li><i class="fa-solid fa-podcast" aria-label="podcast"></i> The Uncertain Hour, <a href="https://www.marketplace.org/2017/11/10/business/uncertain-hour/s02-2-peanut-butter-wars">“The Peanut Butter Wars,”</a> season 2, episode 2</li>
-<li><i class="fa-solid fa-podcast" aria-label="podcast"></i> The Uncertain Hour, <a href="https://www.marketplace.org/2017/11/22/business/uncertain-hour/s02-3-peanut-butter-verdict">“The Peanut Butter Verdict,”</a> season 2, episode 3</li>
+<li><p>Cross-sectional</p></li>
+<li><p>Time-series</p></li>
+<li><p>Longitudinal</p></li>
+<li><p>Spatial</p></li>
+<li><p>Network</p></li>
+</ul>
+<p>The type of data dictates the statistical tools and techniques that can be employed for analysis.</p>
+<p><img src="images/attributes_observations.png" class="img-fluid"></p>
+</section>
+</section>
+</section>
+<section id="attribute-types" class="level3">
+<h3 class="anchored" data-anchor-id="attribute-types">Attribute Types</h3>
+<p>Different types of attributes require different statistical techniques for effective analysis.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="txwlexzykk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#txwlexzykk table {
+  font-family: 'IBM Plex Sans Condensed', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#txwlexzykk thead, #txwlexzykk tbody, #txwlexzykk tfoot, #txwlexzykk tr, #txwlexzykk td, #txwlexzykk th {
+  border-style: none;
+}
+
+#txwlexzykk p {
+  margin: 0;
+  padding: 0;
+}
+
+#txwlexzykk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 21px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#txwlexzykk .gt_title {
+  color: #333333;
+  font-size: 26px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#txwlexzykk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#txwlexzykk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(255, 255, 255, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #114853;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#txwlexzykk .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #114853;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#txwlexzykk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#txwlexzykk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#txwlexzykk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#txwlexzykk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#txwlexzykk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#txwlexzykk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#txwlexzykk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#txwlexzykk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#txwlexzykk .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #CCCCCC;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#txwlexzykk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txwlexzykk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#txwlexzykk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#txwlexzykk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#txwlexzykk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txwlexzykk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#txwlexzykk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txwlexzykk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_striped {
+  background-color: #F9F9FB;
+}
+
+#txwlexzykk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_footnote {
+  margin: 0px;
+  font-size: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txwlexzykk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txwlexzykk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txwlexzykk .gt_left {
+  text-align: left;
+}
+
+#txwlexzykk .gt_center {
+  text-align: center;
+}
+
+#txwlexzykk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#txwlexzykk .gt_font_normal {
+  font-weight: normal;
+}
+
+#txwlexzykk .gt_font_bold {
+  font-weight: bold;
+}
+
+#txwlexzykk .gt_font_italic {
+  font-style: italic;
+}
+
+#txwlexzykk .gt_super {
+  font-size: 65%;
+}
+
+#txwlexzykk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#txwlexzykk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#txwlexzykk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#txwlexzykk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#txwlexzykk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#txwlexzykk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#txwlexzykk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Attribute type">Attribute type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Examples">Examples</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Operations">Operations</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Attribute type" class="gt_row gt_center">Nominal</td>
+<td headers="Description" class="gt_row gt_center">Nominal values provide only enough information to distinguish one object from another. (=, ≠)</td>
+<td headers="Examples" class="gt_row gt_center">Zip codes, employee ID numbers, eye color, gender</td>
+<td headers="Operations" class="gt_row gt_center">Mode, entropy, contingency correlation, chi2 test</td></tr>
+    <tr><td headers="Attribute type" class="gt_row gt_center">Ordinal</td>
+<td headers="Description" class="gt_row gt_center">The values of an ordinal attribute provide enough information to order objects. (&lt;, &gt;)</td>
+<td headers="Examples" class="gt_row gt_center">Hardness of minerals, {good, better, best}, grades, street numbers</td>
+<td headers="Operations" class="gt_row gt_center">Quantiles, rank correlation</td></tr>
+    <tr><td headers="Attribute type" class="gt_row gt_center">Interval</td>
+<td headers="Description" class="gt_row gt_center">Differences between values are meaningful, i.e., a unit of measurement exists. (+, -)</td>
+<td headers="Examples" class="gt_row gt_center">Calendar dates, temperature in Celsius or Fahrenheit</td>
+<td headers="Operations" class="gt_row gt_center">mean, standard deviation, Pearson's correlation</td></tr>
+    <tr><td headers="Attribute type" class="gt_row gt_center">Ratio</td>
+<td headers="Description" class="gt_row gt_center">For ratio variables, both differences and ratios are meaningful. (*, /)</td>
+<td headers="Examples" class="gt_row gt_center">Temperature in Kelvin, monetary quantities, counts, age, mass, length, electrical current</td>
+<td headers="Operations" class="gt_row gt_center">Geometric mean, harmonic mean, percent variation</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="quality-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="quality-of-data">Quality of Data</h2>
+<div class="columns">
+<div class="column">
+<p><img src="images/meme_clean_data.jpg" class="img-fluid" style="width:90.0%"></p>
+</div><div class="column">
+<section id="common-issues" class="level3">
+<h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
+<ul>
+<li><p>Missing data</p></li>
+<li><p>Outliers</p></li>
+<li><p>Duplication</p></li>
+<li><p>Inconsistent data</p></li>
 </ul>
 </section>
-<section id="other-useful-resources" class="level2">
-<h2 class="anchored" data-anchor-id="other-useful-resources">Other useful resources</h2>
-<ul>
-<li><i class="fa-brands fa-youtube" aria-label="youtube"></i> <a href="https://www.khanacademy.org/economics-finance-domain/ap-macroeconomics/basic-economics-concepts-macro/scarcity-and-growth/v/comparative-advantage-specialization-and-gains-from-trade">Khan Academy: Absolute and comparative advantage</a></li>
-<li><i class="fa-solid fa-podcast" aria-label="podcast"></i> Planet Money, <a href="https://www.npr.org/sections/money/2012/01/27/145923803/the-friday-podcast-a-former-lobbyist-tells-all">“A Former Lobbyist Tells All,”</a> Episode 341, January 27, 2012</li>
-<li><i class="fa-brands fa-youtube" aria-label="youtube"></i> <a href="https://www.youtube.com/watch?v=2XLuaebpdAA">LSE Research: Washington’s Revolving Door</a></li>
-<li><i class="fa-solid fa-arrow-up-right-from-square" aria-label="arrow-up-right-from-square"></i> John Sides, <a href="https://www.washingtonpost.com/news/monkey-cage/wp/2014/03/11/a-new-experiment-shows-how-money-buys-access-to-congress/?utm_term=.52fe30402280">“A new experiment shows how money buys access to Congress,”</a> The Washington Post’s Monkey Cage, March 11, 2014</li>
-</ul>
-</section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="slides/pmap8141_s23_02-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
-<figure class="slide-thumb figure">
-<a href="slides/pmap8141_s23_02-slides.pdf"><img class="img-fluid figure-img" src="slides/pmap8141_s23_02-slides.png" alt="First slide"></a>
+</div>
+</div>
+<section id="some-examples" class="level3">
+<h3 class="anchored" data-anchor-id="some-examples">Some examples</h3>
+<div class="columns">
+<div class="column" style="width: 70%">
+<p>Let us examine a sample data from the modeldata R package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(attrition, <span class="at">package =</span> <span class="st">"modeldata"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width: 70%">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/278798301_481570430317127_8457195516254737151_n.jpg" class="img-fluid figure-img" style="width:89.0%"></p>
 </figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(attrition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,470 × 31
+     Age Attrition BusinessTravel    DailyRate Department       DistanceFromHome
+   &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;                 &lt;int&gt; &lt;fct&gt;                       &lt;int&gt;
+ 1    41 Yes       Travel_Rarely          1102 Sales                           1
+ 2    49 No        Travel_Frequently       279 Research_Develo…                8
+ 3    37 Yes       Travel_Rarely          1373 Research_Develo…                2
+ 4    33 No        Travel_Frequently      1392 Research_Develo…                3
+ 5    27 No        Travel_Rarely           591 Research_Develo…                2
+ 6    32 No        Travel_Frequently      1005 Research_Develo…                2
+ 7    59 No        Travel_Rarely          1324 Research_Develo…                3
+ 8    30 No        Travel_Rarely          1358 Research_Develo…               24
+ 9    38 No        Travel_Frequently       216 Research_Develo…               23
+10    36 No        Travel_Rarely          1299 Research_Develo…               27
+# ℹ 1,460 more rows
+# ℹ 25 more variables: Education &lt;ord&gt;, EducationField &lt;fct&gt;,
+#   EnvironmentSatisfaction &lt;ord&gt;, Gender &lt;fct&gt;, HourlyRate &lt;int&gt;,
+#   JobInvolvement &lt;ord&gt;, JobLevel &lt;int&gt;, JobRole &lt;fct&gt;, JobSatisfaction &lt;ord&gt;,
+#   MaritalStatus &lt;fct&gt;, MonthlyIncome &lt;int&gt;, MonthlyRate &lt;int&gt;,
+#   NumCompaniesWorked &lt;int&gt;, OverTime &lt;fct&gt;, PercentSalaryHike &lt;int&gt;,
+#   PerformanceRating &lt;ord&gt;, RelationshipSatisfaction &lt;ord&gt;, …</code></pre>
+</div>
+</div>
+<p>After loading data that we would like to work with, it is worthwhile to examine and create descriptive statistics. The <code>summary</code> function exists in almost every language, but in R, I suggest using a dedicated package for this purpose: <code>skmir</code> (although there are countless others available).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>attrition <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">attrition</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">1470</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Attrition</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No: 1233, Yes: 237</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BusinessTravel</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Tra: 1043, Tra: 277, Non: 150</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Department</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Res: 961, Sal: 446, Hum: 63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Education</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Bac: 572, Mas: 398, Col: 282, Bel: 170</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EducationField</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Lif: 606, Med: 464, Mar: 159, Tec: 132</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EnvironmentSatisfaction</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Hig: 453, Ver: 446, Med: 287, Low: 284</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gender</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Mal: 882, Fem: 588</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JobInvolvement</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Hig: 868, Med: 375, Ver: 144, Low: 83</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JobRole</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Sal: 326, Res: 292, Lab: 259, Man: 145</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JobSatisfaction</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Ver: 459, Hig: 442, Low: 289, Med: 280</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MaritalStatus</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Mar: 673, Sin: 470, Div: 327</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">OverTime</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No: 1054, Yes: 416</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PerformanceRating</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Exc: 1244, Out: 226, Low: 0, Goo: 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RelationshipSatisfaction</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Hig: 459, Ver: 432, Med: 303, Low: 276</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WorkLifeBalance</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Bet: 893, Goo: 344, Bes: 153, Bad: 80</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36.92</td>
+<td style="text-align: right;">9.14</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">36.0</td>
+<td style="text-align: right;">43.00</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;">▂▇▇▃▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DailyRate</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">802.49</td>
+<td style="text-align: right;">403.51</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">465</td>
+<td style="text-align: right;">802.0</td>
+<td style="text-align: right;">1157.00</td>
+<td style="text-align: right;">1499</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DistanceFromHome</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9.19</td>
+<td style="text-align: right;">8.11</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">14.00</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">▇▅▂▂▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HourlyRate</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">65.89</td>
+<td style="text-align: right;">20.33</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">66.0</td>
+<td style="text-align: right;">83.75</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JobLevel</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.06</td>
+<td style="text-align: right;">1.11</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">▇▇▃▂▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MonthlyIncome</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6502.93</td>
+<td style="text-align: right;">4707.96</td>
+<td style="text-align: right;">1009</td>
+<td style="text-align: right;">2911</td>
+<td style="text-align: right;">4919.0</td>
+<td style="text-align: right;">8379.00</td>
+<td style="text-align: right;">19999</td>
+<td style="text-align: left;">▇▅▂▁▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MonthlyRate</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">14313.10</td>
+<td style="text-align: right;">7117.79</td>
+<td style="text-align: right;">2094</td>
+<td style="text-align: right;">8047</td>
+<td style="text-align: right;">14235.5</td>
+<td style="text-align: right;">20461.50</td>
+<td style="text-align: right;">26999</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NumCompaniesWorked</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">2.50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">▇▃▂▂▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PercentSalaryHike</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15.21</td>
+<td style="text-align: right;">3.66</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">18.00</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">▇▅▃▂▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">StockOptionLevel</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">▇▇▁▂▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TotalWorkingYears</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11.28</td>
+<td style="text-align: right;">7.78</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">10.0</td>
+<td style="text-align: right;">15.00</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">▇▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TrainingTimesLastYear</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.80</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">▂▇▇▂▃</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">YearsAtCompany</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.01</td>
+<td style="text-align: right;">6.13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">9.00</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">YearsInCurrentRole</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.23</td>
+<td style="text-align: right;">3.62</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">▇▃▂▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">YearsSinceLastPromotion</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.19</td>
+<td style="text-align: right;">3.22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">YearsWithCurrManager</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.12</td>
+<td style="text-align: right;">3.57</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">▇▂▅▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
-<section id="videos" class="level2">
-<h2 class="anchored" data-anchor-id="videos">Videos</h2>
-<p>Videos for each section of the lecture are <a href="https://www.youtube.com/playlist?list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">available at this YouTube playlist</a>.</p>
+</section>
+<section id="american-trends-panel-wave-110" class="level1">
+<h1><strong>American Trends Panel Wave 110</strong></h1>
+<p>Source: <a href="https://www.pewresearch.org/politics/dataset/american-trends-panel-wave-110/">Pew Research Center</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"../data/ATP W110.sav"</span>) <span class="sc">|&gt;</span> <span class="co"># .. = root folder</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">haven::read_sav(“../data/…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">6174</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">175</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">173</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">POSIXct</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">QKEY</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.774274e+11</td>
+<td style="text-align: right;">6.583185e+10</td>
+<td style="text-align: right;">100314</td>
+<td style="text-align: right;">2.01801e+11</td>
+<td style="text-align: right;">2.018011e+11</td>
+<td style="text-align: right;">2.019011e+11</td>
+<td style="text-align: right;">2.02101e+11</td>
+<td style="text-align: left;">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEVICE_TYPE_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.730000e+00</td>
+<td style="text-align: right;">5.200000e-01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: left;">▃▁▇▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LANG_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.070000e+00</td>
+<td style="text-align: right;">2.600000e-01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FORM_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.500000e+00</td>
+<td style="text-align: right;">5.000000e-01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: left;">▇▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">XCITIZEN_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.330000e+00</td>
+<td style="text-align: right;">5.140000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">POL1JB_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.930000e+00</td>
+<td style="text-align: right;">1.129000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">POL1JBSTR_W110</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">2.870000e+00</td>
+<td style="text-align: right;">1.205000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INSTFAV_a_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.210000e+00</td>
+<td style="text-align: right;">1.124000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INSTFAV_b_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.980000e+00</td>
+<td style="text-align: right;">1.079000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBCONF_ECON_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.270000e+00</td>
+<td style="text-align: right;">6.310000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBCONF_CRIS_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.250000e+00</td>
+<td style="text-align: right;">6.780000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBCONF_IMMI_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.280000e+00</td>
+<td style="text-align: right;">6.550000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBCONF_CLSR_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.500000e+00</td>
+<td style="text-align: right;">6.510000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBCONF_CN_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.560000e+00</td>
+<td style="text-align: right;">8.340000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBCONF_CONG_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.330000e+00</td>
+<td style="text-align: right;">6.970000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBCONF_CRIM_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.370000e+00</td>
+<td style="text-align: right;">7.190000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBCONF_PUBH_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.090000e+00</td>
+<td style="text-align: right;">7.220000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBECON_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.270000e+00</td>
+<td style="text-align: right;">1.012000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBADMIN2_NRCH_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.890000e+00</td>
+<td style="text-align: right;">1.067000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBADMIN2_OPEN_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.380000e+00</td>
+<td style="text-align: right;">8.350000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBADMIN2_EFFI_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.720000e+00</td>
+<td style="text-align: right;">8.490000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JBADMIN2_STND_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.360000e+00</td>
+<td style="text-align: right;">7.810000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JBADMIN2_MORL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.380000e+00</td>
+<td style="text-align: right;">8.630000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DIFFPARTY_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">7.140000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PTYISSUE_ECON_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.990000e+00</td>
+<td style="text-align: right;">1.013000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTYISSUE_ABPOL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.140000e+00</td>
+<td style="text-align: right;">9.100000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PTYISSUE_IMM_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.600000e+00</td>
+<td style="text-align: right;">8.030000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTYISSUE_COV_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.660000e+00</td>
+<td style="text-align: right;">1.117000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PTYISSUE_CLIM_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.620000e+00</td>
+<td style="text-align: right;">1.090000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTYISSUE_LGT_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.720000e+00</td>
+<td style="text-align: right;">1.089000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PTYISSUE_GUNS_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.730000e+00</td>
+<td style="text-align: right;">7.820000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTYISSUE_HC_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.470000e+00</td>
+<td style="text-align: right;">1.049000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PTYISSUE_RACE_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.760000e+00</td>
+<td style="text-align: right;">1.141000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTYISSUE_CRIME_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.330000e+00</td>
+<td style="text-align: right;">1.108000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REPPTYTRAIT_EXTR_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.820000e+00</td>
+<td style="text-align: right;">1.263000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REPPTYTRAIT_EXCHT_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.220000e+00</td>
+<td style="text-align: right;">1.405000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REPPTYTRAIT_HON_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.080000e+00</td>
+<td style="text-align: right;">1.064000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REPPTYTRAIT_TOL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.210000e+00</td>
+<td style="text-align: right;">1.138000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REPPTYTRAIT_TRADS_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.980000e+00</td>
+<td style="text-align: right;">1.121000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REPPTYTRAIT_INTF_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.260000e+00</td>
+<td style="text-align: right;">1.327000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEMPTYTRAIT_EXTR_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.550000e+00</td>
+<td style="text-align: right;">1.085000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEMPTYTRAIT_EXCHT_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.460000e+00</td>
+<td style="text-align: right;">1.390000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEMPTYTRAIT_HON_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.760000e+00</td>
+<td style="text-align: right;">1.010000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEMPTYTRAIT_TOL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.590000e+00</td>
+<td style="text-align: right;">1.099000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEMPTYTRAIT_TRADS_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.760000e+00</td>
+<td style="text-align: right;">1.110000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEMPTYTRAIT_INTF_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.930000e+00</td>
+<td style="text-align: right;">1.224000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRAITREPa_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.810000e+00</td>
+<td style="text-align: right;">1.256000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRAITREPb_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.220000e+00</td>
+<td style="text-align: right;">1.176000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRAITREPc_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">1.169000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRAITREPe_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.730000e+00</td>
+<td style="text-align: right;">1.232000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRAITREPf_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.640000e+00</td>
+<td style="text-align: right;">1.140000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRAITDEMa_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.700000e+00</td>
+<td style="text-align: right;">1.209000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRAITDEMb_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.690000e+00</td>
+<td style="text-align: right;">1.202000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRAITDEMc_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.210000e+00</td>
+<td style="text-align: right;">1.135000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRAITDEMe_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.670000e+00</td>
+<td style="text-align: right;">1.257000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRAITDEMf_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.740000e+00</td>
+<td style="text-align: right;">1.221000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SENGUN22A_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.050000e+00</td>
+<td style="text-align: right;">4.150000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SENGUN22B_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.510000e+00</td>
+<td style="text-align: right;">4.470000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SENGUN22C_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.020000e+00</td>
+<td style="text-align: right;">6.980000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SENGUN22D_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.870000e+00</td>
+<td style="text-align: right;">1.215000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ABRTLGL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.700000e+00</td>
+<td style="text-align: right;">1.220000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ECON1_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.620000e+00</td>
+<td style="text-align: right;">5.210000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ECON1B_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.680000e+00</td>
+<td style="text-align: right;">7.710000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PERSFNC_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.070000e+00</td>
+<td style="text-align: right;">6.530000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PERSFNCB_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.640000e+00</td>
+<td style="text-align: right;">7.010000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ECONCONC_INFL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.520000e+00</td>
+<td style="text-align: right;">4.840000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ECONCONC_UNEM_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.590000e+00</td>
+<td style="text-align: right;">6.100000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ECONCONC_LAB_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.320000e+00</td>
+<td style="text-align: right;">5.980000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ECONCONC_ENG_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.540000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ECONCONC_SHTG_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.100000e+00</td>
+<td style="text-align: right;">6.100000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ECONCONC_REAL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.780000e+00</td>
+<td style="text-align: right;">5.020000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ECONCONC_STCK_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.730000e+00</td>
+<td style="text-align: right;">8.210000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFROLE_GOVSP_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.770000e+00</td>
+<td style="text-align: right;">8.570000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFROLE_COVID_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.150000e+00</td>
+<td style="text-align: right;">6.810000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFROLE_PROF_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.460000e+00</td>
+<td style="text-align: right;">8.410000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFROLE_UKR_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.520000e+00</td>
+<td style="text-align: right;">7.940000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFROLE_INTRT_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.350000e+00</td>
+<td style="text-align: right;">1.106000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PARTY_GOOD_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.820000e+00</td>
+<td style="text-align: right;">1.161000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">VIEWSCHAR_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.110000e+00</td>
+<td style="text-align: right;">1.316000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FAVPOL_BIDEN_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.640000e+00</td>
+<td style="text-align: right;">9.190000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FAVPOL_TRUMP_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.760000e+00</td>
+<td style="text-align: right;">8.590000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FAVPOL_HARRIS_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.070000e+00</td>
+<td style="text-align: right;">1.094000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FAVPOL_SCHUMER_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">5.620000e+00</td>
+<td style="text-align: right;">1.469000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FAVPOL_MCCONNELL_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">5.850000e+00</td>
+<td style="text-align: right;">1.504000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FAVPOL_PELOSI_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.450000e+00</td>
+<td style="text-align: right;">1.180000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FAVPOL_MCCARTHY_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">6.230000e+00</td>
+<td style="text-align: right;">1.537000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FAVPOL_PENCE_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.480000e+00</td>
+<td style="text-align: right;">1.265000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RGHTCNTRL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.680000e+00</td>
+<td style="text-align: right;">1.040000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MOREGUNIMPACT_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.090000e+00</td>
+<td style="text-align: right;">1.075000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MASSSTRICT_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">2.610000e+00</td>
+<td style="text-align: right;">8.410000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ELCTCOLLB_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.310000e+00</td>
+<td style="text-align: right;">1.365000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CANMTCHPOL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.950000e+00</td>
+<td style="text-align: right;">1.221000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LEADERCHAR_WIN_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.360000e+00</td>
+<td style="text-align: right;">1.070000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LEADERCHAR_DSA_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.360000e+00</td>
+<td style="text-align: right;">1.350000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LEADERCHAR_MIL_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.850000e+00</td>
+<td style="text-align: right;">1.076000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LEADERCHAR_GVEXP_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.950000e+00</td>
+<td style="text-align: right;">1.095000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PRTY_CHSE_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.890000e+00</td>
+<td style="text-align: right;">1.019000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REPLEAD_EVIL_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">2.970000e+00</td>
+<td style="text-align: right;">9.590000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REPLEAD_COOP_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">2.680000e+00</td>
+<td style="text-align: right;">9.120000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REPLEAD_DMGD_W110</td>
+<td style="text-align: right;">3089</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">4.580000e+00</td>
+<td style="text-align: right;">9.730000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEMLEAD_EVIL_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.490000e+00</td>
+<td style="text-align: right;">1.167000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEMLEAD_COOP_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">1.076000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEMLEAD_RPGD_W110</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">1.135000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HRD_ABRTN_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.760000e+00</td>
+<td style="text-align: right;">5.980000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ABRTN_SCOTUS_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.090000e+00</td>
+<td style="text-align: right;">1.128000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PARTY_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.480000e+00</td>
+<td style="text-align: right;">1.064000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PARTYLN_W110</td>
+<td style="text-align: right;">3437</td>
+<td style="text-align: right;">0.44</td>
+<td style="text-align: right;">9.480000e+00</td>
+<td style="text-align: right;">2.667000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PARTYSTR_W110</td>
+<td style="text-align: right;">2737</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">1.790000e+00</td>
+<td style="text-align: right;">6.670000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYREP_a_W110</td>
+<td style="text-align: right;">4623</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">1.610000e+00</td>
+<td style="text-align: right;">6.090000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYREP_b_W110</td>
+<td style="text-align: right;">4623</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">1.730000e+00</td>
+<td style="text-align: right;">6.580000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYREP_c_W110</td>
+<td style="text-align: right;">4623</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">1.960000e+00</td>
+<td style="text-align: right;">4.340000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYREP_f_W110</td>
+<td style="text-align: right;">4623</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">2.700000e+00</td>
+<td style="text-align: right;">4.300000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYREP_g_W110</td>
+<td style="text-align: right;">4623</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">2.010000e+00</td>
+<td style="text-align: right;">6.570000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYDEM_a_W110</td>
+<td style="text-align: right;">4288</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">2.040000e+00</td>
+<td style="text-align: right;">8.100000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYDEM_b_W110</td>
+<td style="text-align: right;">4288</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">2.120000e+00</td>
+<td style="text-align: right;">8.100000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYDEM_c_W110</td>
+<td style="text-align: right;">4288</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">2.300000e+00</td>
+<td style="text-align: right;">7.450000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYDEM_f_W110</td>
+<td style="text-align: right;">4288</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">2.800000e+00</td>
+<td style="text-align: right;">5.920000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYDEM_g_W110</td>
+<td style="text-align: right;">4288</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">2.080000e+00</td>
+<td style="text-align: right;">7.110000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN1R_a_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.280000e+00</td>
+<td style="text-align: right;">7.590000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN1R_b_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.060000e+00</td>
+<td style="text-align: right;">7.050000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN1R_c_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.950000e+00</td>
+<td style="text-align: right;">9.020000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN1R_g_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">3.070000e+00</td>
+<td style="text-align: right;">9.870000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN2R_a_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.890000e+00</td>
+<td style="text-align: right;">9.460000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN2R_b_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.610000e+00</td>
+<td style="text-align: right;">8.590000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN2R_c_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">3.020000e+00</td>
+<td style="text-align: right;">8.060000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN2R_e_W110</td>
+<td style="text-align: right;">5020</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.540000e+00</td>
+<td style="text-align: right;">8.590000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN1D_a_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.240000e+00</td>
+<td style="text-align: right;">5.920000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN1D_b_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">1.930000e+00</td>
+<td style="text-align: right;">5.950000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN1D_c_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.530000e+00</td>
+<td style="text-align: right;">6.470000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN1D_g_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.590000e+00</td>
+<td style="text-align: right;">7.460000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN2D_a_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.550000e+00</td>
+<td style="text-align: right;">7.910000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN2D_b_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.500000e+00</td>
+<td style="text-align: right;">7.920000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IDENTITYLN2D_c_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.970000e+00</td>
+<td style="text-align: right;">7.430000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDENTITYLN2D_e_W110</td>
+<td style="text-align: right;">4814</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">2.740000e+00</td>
+<td style="text-align: right;">9.500000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DVOTER_W110</td>
+<td style="text-align: right;">3161</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">3.780000e+00</td>
+<td style="text-align: right;">6.100000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RVOTER_W110</td>
+<td style="text-align: right;">3577</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">3.900000e+00</td>
+<td style="text-align: right;">6.270000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">E3MOD_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.510000e+00</td>
+<td style="text-align: right;">7.700000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">YRSJOB_W110</td>
+<td style="text-align: right;">2908</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">2.710000e+00</td>
+<td style="text-align: right;">3.540000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">YRSJOBSLF_W110</td>
+<td style="text-align: right;">5656</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">3.240000e+00</td>
+<td style="text-align: right;">6.060000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOOKLKLY_W110</td>
+<td style="text-align: right;">2390</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">4.090000e+00</td>
+<td style="text-align: right;">5.540000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JOBSEC_W110</td>
+<td style="text-align: right;">2390</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">2.730000e+00</td>
+<td style="text-align: right;">7.450000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FINDJOB_W110</td>
+<td style="text-align: right;">2390</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">3.270000e+00</td>
+<td style="text-align: right;">5.080000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ABRTN_STATE_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.650000e+00</td>
+<td style="text-align: right;">1.220000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">4.00000e+00</td>
+<td style="text-align: left;">▆▅▁▃▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_METRO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.110000e+00</td>
+<td style="text-align: right;">3.200000e-01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_CREGION</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.720000e+00</td>
+<td style="text-align: right;">9.800000e-01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.00000e+00</td>
+<td style="text-align: left;">▃▃▁▇▅</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_CDIVISION</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">5.290000e+00</td>
+<td style="text-align: right;">2.410000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.00000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">7.000000e+00</td>
+<td style="text-align: right;">9.00000e+00</td>
+<td style="text-align: left;">▅▆▇▆▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_AGECAT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.970000e+00</td>
+<td style="text-align: right;">5.560000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_GENDER</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.790000e+00</td>
+<td style="text-align: right;">4.490000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_EDUCCAT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.090000e+00</td>
+<td style="text-align: right;">5.300000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_EDUCCAT2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.170000e+00</td>
+<td style="text-align: right;">5.370000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_HISP</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.140000e+00</td>
+<td style="text-align: right;">5.940000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_HISP_ORIGIN</td>
+<td style="text-align: right;">4779</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">1.484000e+01</td>
+<td style="text-align: right;">3.081000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">8.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_YEARSINUS</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.990000e+00</td>
+<td style="text-align: right;">7.180000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_RACECMB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.570000e+00</td>
+<td style="text-align: right;">1.376000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_RACETHNMOD</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.130000e+00</td>
+<td style="text-align: right;">1.084000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_CITIZEN</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.330000e+00</td>
+<td style="text-align: right;">5.140000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_BIRTHPLACE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.030000e+00</td>
+<td style="text-align: right;">6.760000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_MARITAL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.960000e+00</td>
+<td style="text-align: right;">6.660000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_RELIG</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">5.120000e+00</td>
+<td style="text-align: right;">8.800000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">1.000000e+01</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_BORN</td>
+<td style="text-align: right;">2072</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">3.490000e+00</td>
+<td style="text-align: right;">1.357000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_RELIGCAT1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.660000e+00</td>
+<td style="text-align: right;">7.850000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_ATTEND</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.470000e+00</td>
+<td style="text-align: right;">6.250000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">6.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_PARTY_FINAL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.480000e+00</td>
+<td style="text-align: right;">1.064000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_PARTYLN_FINAL</td>
+<td style="text-align: right;">3437</td>
+<td style="text-align: right;">0.44</td>
+<td style="text-align: right;">9.480000e+00</td>
+<td style="text-align: right;">2.667000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_PARTYSUM_FINAL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.810000e+00</td>
+<td style="text-align: right;">1.470000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.00000e+00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_PARTYSUMIDEO_FINAL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.800000e+00</td>
+<td style="text-align: right;">1.790000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.00000e+00</td>
+<td style="text-align: left;">▇▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_INC_SDT1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">8.680000e+00</td>
+<td style="text-align: right;">1.884000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">5.000000e+00</td>
+<td style="text-align: right;">9.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_REG</td>
+<td style="text-align: right;">372</td>
+<td style="text-align: right;">0.94</td>
+<td style="text-align: right;">1.670000e+00</td>
+<td style="text-align: right;">6.180000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_IDEO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4.940000e+00</td>
+<td style="text-align: right;">1.389000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00000e+00</td>
+<td style="text-align: right;">3.000000e+00</td>
+<td style="text-align: right;">4.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_INTFREQ</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">1.820000e+00</td>
+<td style="text-align: right;">3.860000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F_VOLSUM</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.850000e+00</td>
+<td style="text-align: right;">3.940000e+00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F_INC_TIER2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">6.740000e+00</td>
+<td style="text-align: right;">2.112000e+01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">2.000000e+00</td>
+<td style="text-align: right;">9.90000e+01</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WEIGHT_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.000000e+00</td>
+<td style="text-align: right;">1.030000e+00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3.80000e-01</td>
+<td style="text-align: right;">7.100000e-01</td>
+<td style="text-align: right;">1.240000e+00</td>
+<td style="text-align: right;">6.13000e+00</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: POSIXct</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">min</th>
+<th style="text-align: left;">max</th>
+<th style="text-align: left;">median</th>
+<th style="text-align: right;">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">INTERVIEW_START_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2022-06-27 17:00:53</td>
+<td style="text-align: left;">2022-07-04 22:56:53</td>
+<td style="text-align: left;">2022-06-29 08:34:32</td>
+<td style="text-align: right;">5867</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INTERVIEW_END_W110</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2022-06-27 17:15:36</td>
+<td style="text-align: left;">2022-07-04 23:14:28</td>
+<td style="text-align: left;">2022-06-29 10:29:48</td>
+<td style="text-align: right;">5924</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="case-studies-on-data-related-issues" class="level3">
+<h3 class="anchored" data-anchor-id="case-studies-on-data-related-issues">Case Studies on Data-Related Issues</h3>
+<p>Statistician: So, you got the data for all the patients?</p>
+<p>Data Miner: Yes. I haven’t had much time for analysis, but I do have a few interesting results.</p>
+<p>Statistician: Amazing. There were so many data issues with this set of patients that I couldn’t do much.</p>
+<p>Data Miner: Oh? I didn’t hear about any possible problems.</p>
+<p>Statistician: Well, first there is field 5, the variable we want to predict. It’s common knowledge among people who analyze this type of data that results are better if you work with the log of the values, but I didn’t discover this until later. Was it mentioned to you?</p>
+<p>Data Miner: No.</p>
+<p>Statistician: But surely you heard about what happened to field 4? It’s supposed to be measured on a scale from 1 to 10, with 0 indicating a missing value, but because of a data entry error, all 10’s were changed into 0’s. Unfortunately, since some of the patients have missing values for this field, it’s impossible to say whether a 0 in this field is a real 0 or a 10. Quite a few of the records have that problem.</p>
+<p>Data Miner: Interesting. Were there any other problems?</p>
+<p>Statistician: Yes, fields 2 and 3 are basically the same, but I assume that you probably noticed that.</p>
+<p>Data Miner: Yes, but these fields were only weak predictors of field 5.</p>
+<p>Statistician: Anyway, given all those problems, I’m surprised you were able to accomplish anything.</p>
+<p>Data Miner: True, but my results are really quite good. Field 1 is a very strong predictor of field 5. I’m surprised that this wasn’t noticed before.</p>
+<p>Statistician: What? Field 1 is just an identification number.</p>
+<p>Data Miner: Nonetheless, my results speak for themselves.</p>
+<p>Statistician: Oh, no! I just remembered. We assigned ID numbers after we sorted the records based on field 5. There is a strong connection, but it’s meaningless. Sorry.</p>
+</section>
+<section id="measures-of-central-tendency" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-central-tendency">Measures of Central Tendency 🦔</h2>
+<section id="arithmetic-mean" class="level3">
+<h3 class="anchored" data-anchor-id="arithmetic-mean">Arithmetic Mean</h3>
+<p>The arithmetic mean is calculated as:</p>
+<p><span class="math display">\[\bar{Y}=\frac{Y_1+Y_2+\ldots+Y_N}{N}=\frac{\sum_{i=1}^N Y_i}{N}\]</span></p>
+</section>
+<section id="geometric-mean" class="level3">
+<h3 class="anchored" data-anchor-id="geometric-mean">Geometric Mean</h3>
+<p>The geometric mean is calculated as:</p>
+<p><span class="math display">\[\bar{Y}_g=\sqrt[N]{\prod_{i=1}^N Y_i}\]</span></p>
+<section id="example" class="level5">
+<h5 class="anchored" data-anchor-id="example">Example</h5>
+<p>The average can also be interpreted as meaning that if all elements were replaced by this value, the sum of the elements would remain the same.</p>
+<p>Let us see the case of indexes:</p>
+<p>The GDP growth in one year was 5 percent and 5 percent in the following and 10 percent in the 3rd.</p>
+<p>What was the annual growth in the 3 years?</p>
+<p><span class="math display">\[1.05 \times 1.05 \times 1.10 = \sqrt[3]{1.21}=1.0656\]</span></p>
+<p>However, the arithmetic mean equals 20/3 = 6.66.</p>
+</section>
+</section>
+<section id="harmonic-mean" class="level3">
+<h3 class="anchored" data-anchor-id="harmonic-mean">Harmonic Mean</h3>
+<p>The harmonic mean is calculated as:</p>
+<p><span class="math display">\[\bar{Y}_h=\frac{N}{\sum_{i=1}^N \frac{1}{Y_i}}\]</span></p>
+<section id="example-1" class="level5">
+<h5 class="anchored" data-anchor-id="example-1">Example</h5>
+<p>Consider two car owners who seek to reduce their costs:</p>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=Lb0hTA34eus&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Introduction</a></li>
-<li><a href="https://www.youtube.com/watch?v=xhNA53SXL9I&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Markets and institutions</a></li>
-<li><a href="https://www.youtube.com/watch?v=Ed529kY5-Mg&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Markets, trading, and prices</a></li>
-<li><a href="https://www.youtube.com/watch?v=8Jufbwo1D_w&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Governments in the economy</a></li>
-<li><a href="https://www.youtube.com/watch?v=6yj02BbbRg8&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Democracy and factions</a></li>
-<li><a href="https://www.youtube.com/watch?v=KQy492BkCLQ&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Small factions and public goods</a></li>
-<li><a href="https://www.youtube.com/watch?v=ne1rcs7nwxU&amp;list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b">Government failure</a></li>
+<li><p>Adam switches from a gas-guzzler of <strong>12 mpg to</strong> a slightly less voracious guzzler that runs at <strong>14 mpg</strong>.</p></li>
+<li><p>The environmentally virtuous Beth switches from a Bon ss es <strong>from 30 mpg car to</strong> one that runs at <strong>40 mpg</strong>.</p></li>
 </ul>
-<p>You can also watch the playlist (and skip around to different sections) here:</p>
-<div class="ratio ratio-16x9">
-<iframe src="https://www.youtube.com/embed/playlist?list=PLS6tnpTr39sHyJ4m5VJXbLVqvE9ea0o_b" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-</iframe>
+<p>Suppose both drivers travel <strong>equal distances</strong> over a year. <em>Who will save more gas by switching?</em></p>
+</section>
+</section>
+<section id="squared-mean" class="level3">
+<h3 class="anchored" data-anchor-id="squared-mean">Squared Mean</h3>
+<p>The squared mean is calculated as:</p>
+<p><span class="math display">\[\bar{Y_q}=\sqrt{\frac{\sum_{i=1}^N Y_i^2}{N}}\]</span></p>
+</section>
+</section>
+<section id="quantiles" class="level2">
+<h2 class="anchored" data-anchor-id="quantiles">Quantiles</h2>
+<p>Quantiles are values that divide a dataset into equal groups. The types of quantiles include:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="rytxyfkcch" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#rytxyfkcch table {
+  font-family: 'IBM Plex Sans Condensed', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rytxyfkcch thead, #rytxyfkcch tbody, #rytxyfkcch tfoot, #rytxyfkcch tr, #rytxyfkcch td, #rytxyfkcch th {
+  border-style: none;
+}
+
+#rytxyfkcch p {
+  margin: 0;
+  padding: 0;
+}
+
+#rytxyfkcch .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 21px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rytxyfkcch .gt_title {
+  color: #333333;
+  font-size: 26px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rytxyfkcch .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rytxyfkcch .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(255, 255, 255, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #114853;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rytxyfkcch .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #114853;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rytxyfkcch .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rytxyfkcch .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rytxyfkcch .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rytxyfkcch .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rytxyfkcch .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rytxyfkcch .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rytxyfkcch .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rytxyfkcch .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rytxyfkcch .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #CCCCCC;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rytxyfkcch .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytxyfkcch .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rytxyfkcch .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rytxyfkcch .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rytxyfkcch .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytxyfkcch .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rytxyfkcch .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytxyfkcch .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_striped {
+  background-color: #F9F9FB;
+}
+
+#rytxyfkcch .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_footnote {
+  margin: 0px;
+  font-size: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytxyfkcch .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rytxyfkcch .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rytxyfkcch .gt_left {
+  text-align: left;
+}
+
+#rytxyfkcch .gt_center {
+  text-align: center;
+}
+
+#rytxyfkcch .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rytxyfkcch .gt_font_normal {
+  font-weight: normal;
+}
+
+#rytxyfkcch .gt_font_bold {
+  font-weight: bold;
+}
+
+#rytxyfkcch .gt_font_italic {
+  font-style: italic;
+}
+
+#rytxyfkcch .gt_super {
+  font-size: 65%;
+}
+
+#rytxyfkcch .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rytxyfkcch .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rytxyfkcch .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rytxyfkcch .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rytxyfkcch .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rytxyfkcch .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rytxyfkcch .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="# Groups"># Groups</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NAME">NAME</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="# groups" class="gt_row gt_center">2</td>
+<td headers="Name" class="gt_row gt_center">Median</td></tr>
+    <tr><td headers="# groups" class="gt_row gt_center">3</td>
+<td headers="Name" class="gt_row gt_center">Tertiles</td></tr>
+    <tr><td headers="# groups" class="gt_row gt_center">4</td>
+<td headers="Name" class="gt_row gt_center">Quartiles</td></tr>
+    <tr><td headers="# groups" class="gt_row gt_center">5</td>
+<td headers="Name" class="gt_row gt_center">Quintiles</td></tr>
+    <tr><td headers="# groups" class="gt_row gt_center">10</td>
+<td headers="Name" class="gt_row gt_center">Deciles</td></tr>
+    <tr><td headers="# groups" class="gt_row gt_center">20</td>
+<td headers="Name" class="gt_row gt_center">Ventiles</td></tr>
+    <tr><td headers="# groups" class="gt_row gt_center">100</td>
+<td headers="Name" class="gt_row gt_center">Percentiles</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There will often be occasions when you need to reproduce a complete study or methodology for research or any other purpose. Generally, it’s not possible, and even the calculation of quantiles prevents precise reproduction, as everyone considers it completely obvious how to calculate the median or a quartile (and the choosen method is never documented). However, depending on the chosen methodology, we will obtain a very minimal but still different result.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">231</span>, <span class="dv">45342</span>, <span class="dv">2313</span>, <span class="dv">213</span>, <span class="dv">564</span>, <span class="dv">874543</span>, <span class="dv">92713</span>, <span class="dv">3941</span>, <span class="dv">31297</span>, <span class="dv">2654</span>, <span class="dv">4324</span>, <span class="dv">6542</span>) <span class="co"># random numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(x, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     25%      50%      75% 
+ 1875.75  4132.50 34808.25 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(x, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>), <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    25%     50%     75% 
+ 1438.5  4132.5 38319.5 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="measures-of-variability" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-variability">Measures of Variability</h2>
+<section id="standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="standard-deviation">Standard Deviation</h3>
+<p>Standard deviation is the average difference between the observations and the mean??</p>
+<p>It was already mentioned that the sum of the deviations from the average is zero. If we divide zero by the number of observations it is still zero…</p>
+<p>Here comes the squared mean!</p>
+<p><span class="math display">\[\sigma=\sqrt{\frac{\sum_{i=1}^N\left(Y_i-\bar{Y}\right)^2}{N}}\]</span></p>
+</section>
+<section id="variance" class="level3">
+<h3 class="anchored" data-anchor-id="variance">Variance</h3>
+<p>Variance is simply the square of standard deviation.</p>
+<p><span class="math display">\[\sigma^2=\frac{\sum_{i=1}^N\left(Y_i-\bar{Y}\right)^2}{N}\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In many cases, we often use variance instead of standard deviation and not just for fun. If we recall what we learned about the ANOVA, variances are additive, while standard deviations are not.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="range" class="level2">
+<h2 class="anchored" data-anchor-id="range">Range</h2>
+<p>The spread of your data from the lowest to the highest value.</p>
+<section id="interquartile-range-iqr" class="level3">
+<h3 class="anchored" data-anchor-id="interquartile-range-iqr">Interquartile range (IQR)</h3>
+<p><span class="math display">\[\text{IQR}=Q_3-Q1\]</span></p>
+</section>
+<section id="interdecile-range-idr" class="level3">
+<h3 class="anchored" data-anchor-id="interdecile-range-idr">Interdecile range (IDR)</h3>
+<p><span class="math display">\[\text{IDR}=D_9-D1\]</span></p>
+</section>
+<section id="boxplot" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(attrition<span class="sc">$</span>MonthlyIncome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-content_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<p>The boxplot is highly popular for describing a variable, as it displays numerous variables and effectively illustrates the differences based on a categorical feature (but we will discuss this further when we get there).</p>
+</div><div class="column">
+<p><img src="images/cropped-box-plot.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="02-content_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -557,11 +4488,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.andrewheiss.com">Andrew Heiss</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.marcellgranat.com">Marcell Granát</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/andrewheiss/econs23.classes.andrewheiss.com">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

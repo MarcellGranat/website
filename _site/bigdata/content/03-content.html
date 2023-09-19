@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Learn how to analyse, understand, and communicate about your data!">
+<title>Big Data &amp; Data Visualisation - Dplyr &amp; Tidyr basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta property="og:title" content="Big Data &amp; Data Visualisation - Dplyr &amp; Tidyr basics">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://marcellgranat.com/bigdata/files/social-image-s23.png">
+<meta property="og:site-name" content="Big Data &amp; Data Visualisation">
+<meta property="og:locale" content="en_US">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Big Data &amp; Data Visualisation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../content/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Classes and readings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignment.html" rel="" target="">
+ <span class="menu-text">Assignments</span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/03-content.html">Data manipulation I</a></li><li class="breadcrumb-item"><a href="../content/03-content.html">Introduction to manipulation</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings, lectures, and videos</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics in R</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data manipulation I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Introduction to manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link active" data-scroll-target="#the-tidyverse">The tidyverse</a></li>
+  <li>
+<a href="#the-pipe" id="toc-the-pipe" class="nav-link" data-scroll-target="#the-pipe">The pipe</a>
+  <ul class="collapse">
+<li>
+<a href="#dplyr-functions" id="toc-dplyr-functions" class="nav-link" data-scroll-target="#dplyr-functions">Dplyr functions</a>
+  <ul class="collapse">
+<li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">Mutate</a></li>
+  <li><a href="#grouping" id="toc-grouping" class="nav-link" data-scroll-target="#grouping">Grouping</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#if-at-all-deprecated" id="toc-if-at-all-deprecated" class="nav-link" data-scroll-target="#if-at-all-deprecated">…if, …at, …all (deprecated)</a></li>
+  <li><a href="#acrosswhere" id="toc-acrosswhere" class="nav-link" data-scroll-target="#acrosswhere">Across/where</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tidyr-functions" id="toc-tidyr-functions" class="nav-link" data-scroll-target="#tidyr-functions">Tidyr functions</a>
+  <ul class="collapse">
+<li><a href="#widelong" id="toc-widelong" class="nav-link" data-scroll-target="#widelong">Wide/long</a></li>
+  </ul>
+</li>
+  <li><a href="#mutating-joins" id="toc-mutating-joins" class="nav-link" data-scroll-target="#mutating-joins">Mutating joins</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">Dplyr &amp; Tidyr basics</h1>
+
+<div class="date-block bg-class text-white p-2">
+  <p class="date">Readings and class materials for Tuesday, September 19, 2023</p>
+</div>
+</header><section id="the-tidyverse" class="level2"><h2 class="anchored" data-anchor-id="the-tidyverse">The tidyverse</h2>
+<p><code>Tidyverse</code> contains the most important packages that you’re likely to use in everyday data analyses:</p>
+<div class="columns">
+<div class="column">
+<ul>
+<li><p><a href="https://ggplot2.tidyverse.org/">ggplot2</a>, for data visualisation. (Later on, as we direct our attention towards the process of visualization)</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/">dplyr</a>, for data manipulation. (now)</p></li>
+<li><p><a href="https://tidyr.tidyverse.org/">tidyr</a>, for <strong>tidy</strong> data. (today)</p></li>
+<li><p><a href="https://readr.tidyverse.org/">readr</a>, for data import.</p></li>
+<li><p><a href="https://purrr.tidyverse.org/">purrr</a>, for functional programming.</p></li>
+<li><p><a href="https://tibble.tidyverse.org/">tibble</a>, for tibbles (modernized data frames).</p></li>
+<li><p><a href="https://github.com/tidyverse/stringr">stringr</a>, for strings.</p></li>
+<li><p><a href="https://github.com/tidyverse/forcats">forcats</a>, for factors.</p></li>
+</ul>
+</div><div class="column">
+<p><img src="images/FikqdZmVEAECf2X.jpg" class="img-fluid"></p>
+</div>
+</div>
+<p>Tidyverse works similarly to any other package, but when activated, <strong>8 packages</strong> are activated at the same time. The following message should appear then on the console:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.4.3     ✔ purrr   1.0.2
+✔ tibble  3.2.1     ✔ dplyr   1.1.2
+✔ tidyr   1.3.0     ✔ stringr 1.5.0
+✔ readr   2.1.4     ✔ forcats 1.0.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+</div>
+</section><section id="the-pipe" class="level1"><h1>The pipe</h1>
+<blockquote class="blockquote">
+<p>“The magrittr (to be pronounced with a sophisticated french accent) package has two aims: decrease development time and <strong>improve readability</strong> and maintainability of code. Or even shortr: make your code smokin’ (puff puff)!</p>
+<p>To achieve its humble aims, magrittr (remember the accent) provides a new “pipe”-like operator, <strong>%&gt;%</strong>, with which you may <strong>pipe</strong> a <strong>value forward into an expression or function call</strong>; something along the lines of <strong>x %&gt;% f</strong>, rather than <strong>f(x)</strong>. This is not an unknown feature elsewhere; a prime example is the <code>|&gt;</code> operator used extensively in F# (to say the least) and indeed this – along with Unix pipes – served as a motivation for developing the magrittr package.”</p>
+</blockquote>
+<p>Source: <a href="https://magrittr.tidyverse.org/articles/magrittr.html">Package description</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since last year, the `|&gt;` pipe operator has been integrated into R 4.2 as a native feature. It offers nearly identical functionality to its predecessor, but there are certain cases where the syntax differs.</p>
+</div>
+</div>
+<p><img src="images/meme_pipe.gif" class="img-fluid"></p>
+<ul>
+<li><p>You can an insert a pipe operatior by <code>ctrl + shift + M</code> / <code>command + shift + M</code></p></li>
+<li><p>To understand its relevance, you should think about it like telling <strong>… then</strong> to the program</p></li>
+</ul>
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8SGif63VW6E?start=2249" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</p>
+<p>Lets return to the <code>fertility_df</code> data frame.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://stats.oecd.org/sdmx-json/data/DP_LIVE/.FERTILITY.../OECD?contentType=csv&amp;detail=code&amp;separator=comma&amp;csv-lang=en"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 8
+   LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+ 1 AUS      FERTILITY TOT     CHD_WOMAN A          1960  3.45 NA          
+ 2 AUS      FERTILITY TOT     CHD_WOMAN A          1961  3.55 NA          
+ 3 AUS      FERTILITY TOT     CHD_WOMAN A          1962  3.43 NA          
+ 4 AUS      FERTILITY TOT     CHD_WOMAN A          1963  3.34 NA          
+ 5 AUS      FERTILITY TOT     CHD_WOMAN A          1964  3.15 NA          
+ 6 AUS      FERTILITY TOT     CHD_WOMAN A          1965  2.97 NA          
+ 7 AUS      FERTILITY TOT     CHD_WOMAN A          1966  2.89 NA          
+ 8 AUS      FERTILITY TOT     CHD_WOMAN A          1967  2.85 NA          
+ 9 AUS      FERTILITY TOT     CHD_WOMAN A          1968  2.89 NA          
+10 AUS      FERTILITY TOT     CHD_WOMAN A          1969  2.89 NA          
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p>Lets take an example with the following two functions from the {dplyr} package:</p>
+<ul>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> subset a data frame, retaining all rows that satisfy your conditions</p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> count the unique values of one or more variables</p></li>
+</ul>
+<p><strong><em>How many observations are there by years that are above 2.1?</em></strong></p>
+<p>Step 1. Filter to rows where <code>Value &gt;= 2.1</code></p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">fertility_df</span>, <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,369 × 8
+   LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+ 1 AUS      FERTILITY TOT     CHD_WOMAN A          1960  3.45 NA          
+ 2 AUS      FERTILITY TOT     CHD_WOMAN A          1961  3.55 NA          
+ 3 AUS      FERTILITY TOT     CHD_WOMAN A          1962  3.43 NA          
+ 4 AUS      FERTILITY TOT     CHD_WOMAN A          1963  3.34 NA          
+ 5 AUS      FERTILITY TOT     CHD_WOMAN A          1964  3.15 NA          
+ 6 AUS      FERTILITY TOT     CHD_WOMAN A          1965  2.97 NA          
+ 7 AUS      FERTILITY TOT     CHD_WOMAN A          1966  2.89 NA          
+ 8 AUS      FERTILITY TOT     CHD_WOMAN A          1967  2.85 NA          
+ 9 AUS      FERTILITY TOT     CHD_WOMAN A          1968  2.89 NA          
+10 AUS      FERTILITY TOT     CHD_WOMAN A          1969  2.89 NA          
+# ℹ 1,359 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unlike python or base R, in the case of dplyr functions, you can simply refer to the names of the variables without using “” or specifying the data frame.</p>
+</div>
+</div>
+<p>The following is identical with pipe. (The outcome before the <code>%&gt;%</code> is the first unspecified input of the next expression)</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,369 × 8
+   LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+ 1 AUS      FERTILITY TOT     CHD_WOMAN A          1960  3.45 NA          
+ 2 AUS      FERTILITY TOT     CHD_WOMAN A          1961  3.55 NA          
+ 3 AUS      FERTILITY TOT     CHD_WOMAN A          1962  3.43 NA          
+ 4 AUS      FERTILITY TOT     CHD_WOMAN A          1963  3.34 NA          
+ 5 AUS      FERTILITY TOT     CHD_WOMAN A          1964  3.15 NA          
+ 6 AUS      FERTILITY TOT     CHD_WOMAN A          1965  2.97 NA          
+ 7 AUS      FERTILITY TOT     CHD_WOMAN A          1966  2.89 NA          
+ 8 AUS      FERTILITY TOT     CHD_WOMAN A          1967  2.85 NA          
+ 9 AUS      FERTILITY TOT     CHD_WOMAN A          1968  2.89 NA          
+10 AUS      FERTILITY TOT     CHD_WOMAN A          1969  2.89 NA          
+# ℹ 1,359 more rows</code></pre>
+</div>
+</div>
+<p>Without the <code>%&gt;%</code> 2 possibilities exist to use the result of the <code>filter</code> in the <code>count</code> function</p>
+<section id="assigning-a-new-data-frame" class="level4"><h4 class="anchored" data-anchor-id="assigning-a-new-data-frame">1 Assigning a new data frame</h4>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">fertility_df</span>, <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">fertility_df2</span>, <span class="va">TIME</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="unreadable-nesting" class="level4"><h4 class="anchored" data-anchor-id="unreadable-nesting">2 Unreadable nesting</h4>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">fertility_df</span>, <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span><span class="op">)</span>, <span class="va">TIME</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 2
+    TIME     n
+   &lt;dbl&gt; &lt;int&gt;
+ 1  1960    47
+ 2  1961    47
+ 3  1962    47
+ 4  1963    47
+ 5  1964    47
+ 6  1965    47
+ 7  1966    45
+ 8  1967    44
+ 9  1968    44
+10  1969    42
+# ℹ 52 more rows</code></pre>
+</div>
+</div>
+<p>With the <code>%&gt;%</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># "... and after the filtering ..."</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">TIME</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 2
+    TIME     n
+   &lt;dbl&gt; &lt;int&gt;
+ 1  1960    47
+ 2  1961    47
+ 3  1962    47
+ 4  1963    47
+ 5  1964    47
+ 6  1965    47
+ 7  1966    45
+ 8  1967    44
+ 9  1968    44
+10  1969    42
+# ℹ 52 more rows</code></pre>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<p><strong>No additional unnecessary object in the env, and the code readable.</strong></p>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/meme_absolute_win.png" class="img-fluid figure-img" style="width:78.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<a href="https://github.com/rstudio/cheatsheets">CHEATSHEETS</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/data-transformation - 01.jpg" class="img-fluid"></p>
+<p><img src="images/data-transformation - 02.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section><section id="dplyr-functions" class="level2"><h2 class="anchored" data-anchor-id="dplyr-functions">Dplyr functions</h2>
+<p><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> Extract the specified columns as a table.</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">fertility_df</span>, <span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AUS       1960  3.45
+ 2 AUS       1961  3.55
+ 3 AUS       1962  3.43
+ 4 AUS       1963  3.34
+ 5 AUS       1964  3.15
+ 6 AUS       1965  2.97
+ 7 AUS       1966  2.89
+ 8 AUS       1967  2.85
+ 9 AUS       1968  2.89
+10 AUS       1969  2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="co"># using col names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AUS       1960  3.45
+ 2 AUS       1961  3.55
+ 3 AUS       1962  3.43
+ 4 AUS       1963  3.34
+ 5 AUS       1964  3.15
+ 6 AUS       1965  2.97
+ 7 AUS       1966  2.89
+ 8 AUS       1967  2.85
+ 9 AUS       1968  2.89
+10 AUS       1969  2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<section id="identical-outcome" class="level4"><h4 class="anchored" data-anchor-id="identical-outcome">Identical outcome</h4>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span> <span class="co"># by column numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AUS       1960  3.45
+ 2 AUS       1961  3.55
+ 3 AUS       1962  3.43
+ 4 AUS       1963  3.34
+ 5 AUS       1964  3.15
+ 6 AUS       1965  2.97
+ 7 AUS       1966  2.89
+ 8 AUS       1967  2.85
+ 9 AUS       1968  2.89
+10 AUS       1969  2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span> <span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="op">-</span><span class="va">`Flag Codes`</span><span class="op">)</span> <span class="co"># drop these</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AUS       1960  3.45
+ 2 AUS       1961  3.55
+ 3 AUS       1962  3.43
+ 4 AUS       1963  3.34
+ 5 AUS       1964  3.15
+ 6 AUS       1965  2.97
+ 7 AUS       1966  2.89
+ 8 AUS       1967  2.85
+ 9 AUS       1968  2.89
+10 AUS       1969  2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this case, “<code>" had to be used when referencing the variable named</code>flag code<code>. The reason for this is that in dplyr expressions, variables containing spaces or special characters always need to be enclosed in "</code>” To overcome the difficulties arising from special characters in the headers, the <code>clean_names</code> function in the <code>janitor</code> package provides a helpful solution, allowing all variables of a table to be renamed at once.</p>
+</div>
+</div>
+<hr>
+<p><code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> renames columns.</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>geo <span class="op">=</span> <span class="va">LOCATION</span>, fertility <span class="op">=</span> <span class="va">Value</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   geo    TIME fertility
+   &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;
+ 1 AUS    1960      3.45
+ 2 AUS    1961      3.55
+ 3 AUS    1962      3.43
+ 4 AUS    1963      3.34
+ 5 AUS    1964      3.15
+ 6 AUS    1965      2.97
+ 7 AUS    1966      2.89
+ 8 AUS    1967      2.85
+ 9 AUS    1968      2.89
+10 AUS    1969      2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p>.content-box-green[ HINT: ]</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can do it in 1 single step.</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>    geo <span class="op">=</span> <span class="va">LOCATION</span>, <span class="co"># select and rename</span></span>
+<span>    <span class="va">TIME</span>,</span>
+<span>    fertility <span class="op">=</span> <span class="va">Value</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   geo    TIME fertility
+   &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;
+ 1 AUS    1960      3.45
+ 2 AUS    1961      3.55
+ 3 AUS    1962      3.43
+ 4 AUS    1963      3.34
+ 5 AUS    1964      3.15
+ 6 AUS    1965      2.97
+ 7 AUS    1966      2.89
+ 8 AUS    1967      2.85
+ 9 AUS    1968      2.89
+10 AUS    1969      2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section><section id="mutate" class="level3"><h3 class="anchored" data-anchor-id="mutate">Mutate</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> computes new column(s).</p>
+<p><code><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode::countrycode()</a></code> Translates from one country naming scheme to another.</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    country_name <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span>,</span>
+<span>    continent <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"continent"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 5
+   LOCATION  TIME Value country_name continent
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;    
+ 1 AUS       1960  3.45 Australia    Oceania  
+ 2 AUS       1961  3.55 Australia    Oceania  
+ 3 AUS       1962  3.43 Australia    Oceania  
+ 4 AUS       1963  3.34 Australia    Oceania  
+ 5 AUS       1964  3.15 Australia    Oceania  
+ 6 AUS       1965  2.97 Australia    Oceania  
+ 7 AUS       1966  2.89 Australia    Oceania  
+ 8 AUS       1967  2.85 Australia    Oceania  
+ 9 AUS       1968  2.89 Australia    Oceania  
+10 AUS       1969  2.89 Australia    Oceania  
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    country_name <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span>,</span>
+<span>    continent <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"continent"</span><span class="op">)</span>,</span>
+<span>    LOCATION <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"iso2c"</span><span class="op">)</span> <span class="co"># modify the original column</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 5
+   LOCATION  TIME Value country_name continent
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;    
+ 1 AU        1960  3.45 Australia    Oceania  
+ 2 AU        1961  3.55 Australia    Oceania  
+ 3 AU        1962  3.43 Australia    Oceania  
+ 4 AU        1963  3.34 Australia    Oceania  
+ 5 AU        1964  3.15 Australia    Oceania  
+ 6 AU        1965  2.97 Australia    Oceania  
+ 7 AU        1966  2.89 Australia    Oceania  
+ 8 AU        1967  2.85 Australia    Oceania  
+ 9 AU        1968  2.89 Australia    Oceania  
+10 AU        1969  2.89 Australia    Oceania  
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you specify a single value instead of a vector, then the values will be repeated by the number of rows.</p>
+<div class="cell">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg_fertility <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 4
+   LOCATION  TIME Value avg_fertility
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+ 1 AUS       1960  3.45          2.34
+ 2 AUS       1961  3.55          2.34
+ 3 AUS       1962  3.43          2.34
+ 4 AUS       1963  3.34          2.34
+ 5 AUS       1964  3.15          2.34
+ 6 AUS       1965  2.97          2.34
+ 7 AUS       1966  2.89          2.34
+ 8 AUS       1967  2.85          2.34
+ 9 AUS       1968  2.89          2.34
+10 AUS       1969  2.89          2.34
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+<section id="tips-for-mutate" class="level4"><h4 class="anchored" data-anchor-id="tips-for-mutate">Tips for mutate</h4>
+</section><section id="ifelse" class="level4"><h4 class="anchored" data-anchor-id="ifelse">ifelse</h4>
+<p><code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> returns a vector filled with elements selected from either yes or no depending on the condition.</p>
+<div class="cell">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    avg_fertility <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span>,</span>
+<span>    above_avg <span class="op">=</span> <span class="va">Value</span> <span class="op">&gt;</span> <span class="va">avg_fertility</span>,</span>
+<span>    high <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">above_avg</span>, <span class="st">"yes, above the avg"</span>, <span class="st">"no"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 6
+   LOCATION  TIME Value avg_fertility above_avg high              
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt; &lt;lgl&gt;     &lt;chr&gt;             
+ 1 AUS       1960  3.45          2.34 TRUE      yes, above the avg
+ 2 AUS       1961  3.55          2.34 TRUE      yes, above the avg
+ 3 AUS       1962  3.43          2.34 TRUE      yes, above the avg
+ 4 AUS       1963  3.34          2.34 TRUE      yes, above the avg
+ 5 AUS       1964  3.15          2.34 TRUE      yes, above the avg
+ 6 AUS       1965  2.97          2.34 TRUE      yes, above the avg
+ 7 AUS       1966  2.89          2.34 TRUE      yes, above the avg
+ 8 AUS       1967  2.85          2.34 TRUE      yes, above the avg
+ 9 AUS       1968  2.89          2.34 TRUE      yes, above the avg
+10 AUS       1969  2.89          2.34 TRUE      yes, above the avg
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p><code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> returns a vector filled with elements selected from either yes or no depending on the condition.</p>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    avg_fertility <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span>,</span>
+<span>    above_avg <span class="op">=</span> <span class="va">Value</span> <span class="op">&gt;</span> <span class="va">avg_fertility</span>,</span>
+<span>    high <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">above_avg</span>, <span class="st">"yes, above the avg"</span>, <span class="st">"no"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 6
+   LOCATION  TIME Value avg_fertility above_avg high              
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt; &lt;lgl&gt;     &lt;chr&gt;             
+ 1 AUS       1960  3.45          2.34 TRUE      yes, above the avg
+ 2 AUS       1961  3.55          2.34 TRUE      yes, above the avg
+ 3 AUS       1962  3.43          2.34 TRUE      yes, above the avg
+ 4 AUS       1963  3.34          2.34 TRUE      yes, above the avg
+ 5 AUS       1964  3.15          2.34 TRUE      yes, above the avg
+ 6 AUS       1965  2.97          2.34 TRUE      yes, above the avg
+ 7 AUS       1966  2.89          2.34 TRUE      yes, above the avg
+ 8 AUS       1967  2.85          2.34 TRUE      yes, above the avg
+ 9 AUS       1968  2.89          2.34 TRUE      yes, above the avg
+10 AUS       1969  2.89          2.34 TRUE      yes, above the avg
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p>With a single step:</p>
+<div class="cell">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    high <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Value</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span>, <span class="st">"yes, above the avg"</span>, <span class="st">"no"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 4
+   LOCATION  TIME Value high              
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             
+ 1 AUS       1960  3.45 yes, above the avg
+ 2 AUS       1961  3.55 yes, above the avg
+ 3 AUS       1962  3.43 yes, above the avg
+ 4 AUS       1963  3.34 yes, above the avg
+ 5 AUS       1964  3.15 yes, above the avg
+ 6 AUS       1965  2.97 yes, above the avg
+ 7 AUS       1966  2.89 yes, above the avg
+ 8 AUS       1967  2.85 yes, above the avg
+ 9 AUS       1968  2.89 yes, above the avg
+10 AUS       1969  2.89 yes, above the avg
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</section><section id="case_when" class="level4"><h4 class="anchored" data-anchor-id="case_when">case_when</h4>
+<p><code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> Vectorise multiple if_else() statements (return the first value associated with TRUE condition)</p>
+<div class="cell">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>     fertility_level <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"very high"</span>,</span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">"high"</span>, </span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span> <span class="op">~</span> <span class="st">"above replacement r"</span>,</span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">1.3</span> <span class="op">~</span> <span class="st">"below replacemnt r"</span>,</span>
+<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"very low"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 4
+   LOCATION  TIME Value fertility_level    
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              
+ 1 AUS       1960  3.45 high               
+ 2 AUS       1961  3.55 high               
+ 3 AUS       1962  3.43 high               
+ 4 AUS       1963  3.34 high               
+ 5 AUS       1964  3.15 high               
+ 6 AUS       1965  2.97 above replacement r
+ 7 AUS       1966  2.89 above replacement r
+ 8 AUS       1967  2.85 above replacement r
+ 9 AUS       1968  2.89 above replacement r
+10 AUS       1969  2.89 above replacement r
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p>From the latest release:</p>
+<div class="cell">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>     fertility_level <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"very high"</span>,</span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">"high"</span>, </span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span> <span class="op">~</span> <span class="st">"above replacement r"</span>,</span>
+<span>      <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">1.3</span> <span class="op">~</span> <span class="st">"below replacemnt r"</span>,</span>
+<span>      .default <span class="op">=</span>  <span class="st">"very low"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 4
+   LOCATION  TIME Value fertility_level    
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              
+ 1 AUS       1960  3.45 high               
+ 2 AUS       1961  3.55 high               
+ 3 AUS       1962  3.43 high               
+ 4 AUS       1963  3.34 high               
+ 5 AUS       1964  3.15 high               
+ 6 AUS       1965  2.97 above replacement r
+ 7 AUS       1966  2.89 above replacement r
+ 8 AUS       1967  2.85 above replacement r
+ 9 AUS       1968  2.89 above replacement r
+10 AUS       1969  2.89 above replacement r
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute()</a></code> Compute new column(s), drop others. (= select + mutate)</p>
+<div class="cell">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, </span>
+<span>              fertility_level <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
+<span>                <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"very high"</span>,</span>
+<span>                <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">"high"</span>, </span>
+<span>                <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">2.1</span> <span class="op">~</span> <span class="st">"above replacement r"</span>,</span>
+<span>                <span class="va">Value</span> <span class="op">&gt;=</span> <span class="fl">1.3</span> <span class="op">~</span> <span class="st">"below replacemnt r"</span>,</span>
+<span>                <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"very low"</span> </span>
+<span>              <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> Extract rows that meet logical criteria.</p>
+<div class="cell">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">LOCATION</span> <span class="op">!=</span> <span class="st">"EU"</span> <span class="op">&amp;</span> <span class="va">LOCATION</span> <span class="op">!=</span> <span class="st">"OAVG"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,170 × 8
+   LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+ 1 AUS      FERTILITY TOT     CHD_WOMAN A          1960  3.45 NA          
+ 2 AUS      FERTILITY TOT     CHD_WOMAN A          1961  3.55 NA          
+ 3 AUS      FERTILITY TOT     CHD_WOMAN A          1962  3.43 NA          
+ 4 AUS      FERTILITY TOT     CHD_WOMAN A          1963  3.34 NA          
+ 5 AUS      FERTILITY TOT     CHD_WOMAN A          1964  3.15 NA          
+ 6 AUS      FERTILITY TOT     CHD_WOMAN A          1965  2.97 NA          
+ 7 AUS      FERTILITY TOT     CHD_WOMAN A          1966  2.89 NA          
+ 8 AUS      FERTILITY TOT     CHD_WOMAN A          1967  2.85 NA          
+ 9 AUS      FERTILITY TOT     CHD_WOMAN A          1968  2.89 NA          
+10 AUS      FERTILITY TOT     CHD_WOMAN A          1969  2.89 NA          
+# ℹ 3,160 more rows</code></pre>
+</div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> Select rows by position</p>
+<div class="cell">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 8
+  LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+1 AUS      FERTILITY TOT     CHD_WOMAN A          1961  3.55 NA          
+2 AUS      FERTILITY TOT     CHD_WOMAN A          1962  3.43 NA          
+3 AUS      FERTILITY TOT     CHD_WOMAN A          1963  3.34 NA          
+4 AUS      FERTILITY TOT     CHD_WOMAN A          1964  3.15 NA          </code></pre>
+</div>
+</div>
+<p><code>sample_n</code> Select n random rows.</p>
+<div class="cell">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+1 AUS      FERTILITY TOT     CHD_WOMAN A          2000  1.76 NA          
+2 SVN      FERTILITY TOT     CHD_WOMAN A          1988  1.63 NA          
+3 KOR      FERTILITY TOT     CHD_WOMAN A          1979  2.9  NA          
+4 COL      FERTILITY TOT     CHD_WOMAN A          2021  1.72 NA          
+5 AUS      FERTILITY TOT     CHD_WOMAN A          1997  1.78 NA          
+6 IDN      FERTILITY TOT     CHD_WOMAN A          2002  2.46 NA          </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In order to ensure that R consistently generates the same “random” sample, you can utilize the <code>set.seed</code> function. This function has the ability to influence all sources of randomness within your ongoing session. Use it for your research project, if reproducibility is important.</p>
+</div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> Order rows by values of a column or columns (low to high), use with <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code> to order from high to low.</p>
+<div class="cell">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, </span>
+<span>         <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 KOR       2021  0.81
+ 2 KOR       2020  0.84
+ 3 KOR       2019  0.92
+ 4 KOR       2018  0.98
+ 5 KOR       2017  1.05
+ 6 KOR       2005  1.09
+ 7 BGR       1997  1.09
+ 8 LVA       1998  1.1 
+ 9 LVA       1997  1.11
+10 BGR       1998  1.11
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, </span>
+<span>         <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 SAU       1964  7.67
+ 2 SAU       1965  7.66
+ 3 SAU       1966  7.66
+ 4 SAU       1967  7.66
+ 5 SAU       1963  7.65
+ 6 SAU       1962  7.64
+ 7 SAU       1960  7.63
+ 8 SAU       1961  7.63
+ 9 SAU       1968  7.63
+10 SAU       1969  7.6 
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</section></section><section id="grouping" class="level3"><h3 class="anchored" data-anchor-id="grouping">Grouping</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> Create a “grouped” copy of a table.</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> Compute table of summaries.</p>
+<div class="cell">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">LOCATION</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 8
+# Groups:   LOCATION [54]
+   LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+ 1 AUS      FERTILITY TOT     CHD_WOMAN A          1960  3.45 NA          
+ 2 AUS      FERTILITY TOT     CHD_WOMAN A          1961  3.55 NA          
+ 3 AUS      FERTILITY TOT     CHD_WOMAN A          1962  3.43 NA          
+ 4 AUS      FERTILITY TOT     CHD_WOMAN A          1963  3.34 NA          
+ 5 AUS      FERTILITY TOT     CHD_WOMAN A          1964  3.15 NA          
+ 6 AUS      FERTILITY TOT     CHD_WOMAN A          1965  2.97 NA          
+ 7 AUS      FERTILITY TOT     CHD_WOMAN A          1966  2.89 NA          
+ 8 AUS      FERTILITY TOT     CHD_WOMAN A          1967  2.85 NA          
+ 9 AUS      FERTILITY TOT     CHD_WOMAN A          1968  2.89 NA          
+10 AUS      FERTILITY TOT     CHD_WOMAN A          1969  2.89 NA          
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">LOCATION</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>avg_fertility <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 2
+   LOCATION avg_fertility
+   &lt;chr&gt;            &lt;dbl&gt;
+ 1 ARG               2.79
+ 2 AUS               2.13
+ 3 AUT               1.72
+ 4 BEL               1.84
+ 5 BGR               1.76
+ 6 BRA               3.29
+ 7 CAN               1.91
+ 8 CHE               1.70
+ 9 CHL               2.68
+10 CHN               2.91
+# ℹ 44 more rows</code></pre>
+</div>
+</div>
+<section id="example-number-of-observations" class="level4"><h4 class="anchored" data-anchor-id="example-number-of-observations">Example: number of observations</h4>
+<div class="cell">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">LOCATION</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n_obs <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 2
+   LOCATION n_obs
+   &lt;chr&gt;    &lt;int&gt;
+ 1 ARG         62
+ 2 AUS         62
+ 3 AUT         62
+ 4 BEL         62
+ 5 BGR         62
+ 6 BRA         62
+ 7 CAN         62
+ 8 CHE         62
+ 9 CHL         62
+10 CHN         62
+# ℹ 44 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every other manipulation will behave differently if the data frame is grouped (We frequently utilise this).</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">LOCATION</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg_fertility <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 4
+# Groups:   LOCATION [54]
+   LOCATION  TIME Value avg_fertility
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+ 1 AUS       1960  3.45          2.13
+ 2 AUS       1961  3.55          2.13
+ 3 AUS       1962  3.43          2.13
+ 4 AUS       1963  3.34          2.13
+ 5 AUS       1964  3.15          2.13
+ 6 AUS       1965  2.97          2.13
+ 7 AUS       1966  2.89          2.13
+ 8 AUS       1967  2.85          2.13
+ 9 AUS       1968  2.89          2.13
+10 AUS       1969  2.89          2.13
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</section></section><section id="exercise" class="level3"><h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
+<p>In which decade did the average fertility rate of European countries decrease the most? (in absolute magnitude)</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the <code><a href="https://dplyr.tidyverse.org/reference/nth.html">first()</a></code> and the <code><a href="https://dplyr.tidyverse.org/reference/nth.html">last()</a></code> function to calculate difference in a period.</p>
+</div>
+</div>
+</section><section id="if-at-all-deprecated" class="level3"><h3 class="anchored" data-anchor-id="if-at-all-deprecated">…if, …at, …all (deprecated)</h3>
+<p>Some of the previously listed functions have extended versions.</p>
+<p><em>Select all columns where the condition is TRUE</em></p>
+<div class="cell">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 2
+    TIME Value
+   &lt;dbl&gt; &lt;dbl&gt;
+ 1  1960  3.45
+ 2  1961  3.55
+ 3  1962  3.43
+ 4  1963  3.34
+ 5  1964  3.15
+ 6  1965  2.97
+ 7  1966  2.89
+ 8  1967  2.85
+ 9  1968  2.89
+10  1969  2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<p><em>Modify all columns where the condition is true</em></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will utilize lambda-style functions in this context. This implies that after the tilde (~), you may reference the current element using the dot operator (.).</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 8
+   LOCATION INDICATOR SUBJECT MEASURE   FREQUENCY  TIME Value `Flag Codes`
+   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;       
+ 1 AUS      FERTILITY TOT     CHD_WOMAN A         19600  34.5 NA          
+ 2 AUS      FERTILITY TOT     CHD_WOMAN A         19610  35.5 NA          
+ 3 AUS      FERTILITY TOT     CHD_WOMAN A         19620  34.3 NA          
+ 4 AUS      FERTILITY TOT     CHD_WOMAN A         19630  33.4 NA          
+ 5 AUS      FERTILITY TOT     CHD_WOMAN A         19640  31.5 NA          
+ 6 AUS      FERTILITY TOT     CHD_WOMAN A         19650  29.7 NA          
+ 7 AUS      FERTILITY TOT     CHD_WOMAN A         19660  28.9 NA          
+ 8 AUS      FERTILITY TOT     CHD_WOMAN A         19670  28.5 NA          
+ 9 AUS      FERTILITY TOT     CHD_WOMAN A         19680  28.9 NA          
+10 AUS      FERTILITY TOT     CHD_WOMAN A         19690  28.9 NA          
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</section><section id="acrosswhere" class="level3"><h3 class="anchored" data-anchor-id="acrosswhere">Across/where</h3>
+<p>The concepts of “across” and “where” represent relatively new functions that offer an alternative to the previously used if/at/all notations. These functions provide us with a more efficient and reliable approach, eliminating the need for dependence on the aforementioned notations.</p>
+<div class="cell">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AUS       1960  3.45
+ 2 AUS       1961  3.55
+ 3 AUS       1962  3.43
+ 4 AUS       1963  3.34
+ 5 AUS       1964  3.15
+ 6 AUS       1965  2.97
+ 7 AUS       1966  2.89
+ 8 AUS       1967  2.85
+ 9 AUS       1968  2.89
+10 AUS       1969  2.89
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 3
+   LOCATION  TIME Value
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AUS      1991.  2.34
+ 2 AUS      1991.  2.34
+ 3 AUS      1991.  2.34
+ 4 AUS      1991.  2.34
+ 5 AUS      1991.  2.34
+ 6 AUS      1991.  2.34
+ 7 AUS      1991.  2.34
+ 8 AUS      1991.  2.34
+ 9 AUS      1991.  2.34
+10 AUS      1991.  2.34
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>, .names <span class="op">=</span> <span class="st">"{.col}_{.fn}"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,294 × 5
+   LOCATION  TIME Value TIME_avg Value_avg
+   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 AUS       1960  3.45    1991.      2.34
+ 2 AUS       1961  3.55    1991.      2.34
+ 3 AUS       1962  3.43    1991.      2.34
+ 4 AUS       1963  3.34    1991.      2.34
+ 5 AUS       1964  3.15    1991.      2.34
+ 6 AUS       1965  2.97    1991.      2.34
+ 7 AUS       1966  2.89    1991.      2.34
+ 8 AUS       1967  2.85    1991.      2.34
+ 9 AUS       1968  2.89    1991.      2.34
+10 AUS       1969  2.89    1991.      2.34
+# ℹ 3,284 more rows</code></pre>
+</div>
+</div>
+</section></section><section id="tidyr-functions" class="level2"><h2 class="anchored" data-anchor-id="tidyr-functions">Tidyr functions</h2>
+<p>The goal of <code>tidyr</code> is to help you create tidy data. Tidy data is data where:</p>
+<ol type="1">
+<li><p>Every column is variable.</p></li>
+<li><p>Every row is an observation.</p></li>
+<li><p>Every cell is a single value.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+CHEATSHEETS
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/CleanShot 2023-09-19 at 10.55.00@2x.png" class="img-fluid"></p>
+<p><img src="images/CleanShot 2023-09-19 at 10.55.53@2x.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="widelong" class="level3"><h3 class="anchored" data-anchor-id="widelong">Wide/long</h3>
+<p>Datasets are in long on wide format (but never in the currently desired one) 😆</p>
+<p>The following example is the one we saw last week to present the apply functions. In excel you probably operated with tables in wide format, but in R we always prefer the long format.</p>
+<div class="cell">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_wide</span> <span class="op">&lt;-</span> <span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">LOCATION</span>, values_from <span class="op">=</span> <span class="va">Value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fertility_wide</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 63 × 55
+    TIME   AUS   AUT   BEL   CAN   CZE   DNK   FIN   FRA   DEU   GRC   HUN   ISL
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  1960  3.45  2.69  2.54  3.9   2.11  2.54  2.71  2.74  2.37  2.23  2.02  4.26
+ 2  1961  3.55  2.78  2.63  3.84  2.13  2.55  2.65  2.82  2.44  2.13  1.94  3.88
+ 3  1962  3.43  2.8   2.59  3.76  2.14  2.54  2.66  2.8   2.44  2.16  1.79  3.98
+ 4  1963  3.34  2.82  2.68  3.67  2.33  2.64  2.66  2.9   2.51  2.14  1.82  3.98
+ 5  1964  3.15  2.79  2.71  3.5   2.36  2.6   2.58  2.91  2.53  2.24  1.8   3.86
+ 6  1965  2.97  2.7   2.61  3.15  2.18  2.61  2.46  2.85  2.5   2.25  1.81  3.71
+ 7  1966  2.89  2.66  2.52  2.81  2.01  2.62  2.4   2.8   2.51  2.32  1.88  3.58
+ 8  1967  2.85  2.62  2.41  2.6   1.9   2.35  2.32  2.67  2.45  2.45  2.01  3.28
+ 9  1968  2.89  2.58  2.31  2.45  1.83  2.12  2.15  2.59  2.36  2.42  2.06  3.07
+10  1969  2.89  2.49  2.27  2.4   1.86  2     1.94  2.53  2.21  2.36  2.04  2.99
+# ℹ 53 more rows
+# ℹ 42 more variables: IRL &lt;dbl&gt;, ITA &lt;dbl&gt;, JPN &lt;dbl&gt;, KOR &lt;dbl&gt;, LUX &lt;dbl&gt;,
+#   MEX &lt;dbl&gt;, NLD &lt;dbl&gt;, NZL &lt;dbl&gt;, NOR &lt;dbl&gt;, POL &lt;dbl&gt;, PRT &lt;dbl&gt;,
+#   SVK &lt;dbl&gt;, ESP &lt;dbl&gt;, SWE &lt;dbl&gt;, CHE &lt;dbl&gt;, TUR &lt;dbl&gt;, GBR &lt;dbl&gt;,
+#   USA &lt;dbl&gt;, BRA &lt;dbl&gt;, CHL &lt;dbl&gt;, CHN &lt;dbl&gt;, EST &lt;dbl&gt;, IND &lt;dbl&gt;,
+#   IDN &lt;dbl&gt;, ISR &lt;dbl&gt;, RUS &lt;dbl&gt;, SVN &lt;dbl&gt;, ZAF &lt;dbl&gt;, COL &lt;dbl&gt;,
+#   LVA &lt;dbl&gt;, LTU &lt;dbl&gt;, ARG &lt;dbl&gt;, BGR &lt;dbl&gt;, HRV &lt;dbl&gt;, CYP &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Yes, <code>pivot_longer</code> is to convert back the table into long format.</p>
+<div class="cell">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="op">-</span> <span class="fl">1</span>, <span class="co"># all except the 1st</span></span>
+<span>    <span class="co"># 2:last_col()</span></span>
+<span>    <span class="co"># AUS, AUT, ... also work</span></span>
+<span>    names_to <span class="op">=</span> <span class="st">"LOCATION"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"fertility"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,402 × 3
+    TIME LOCATION fertility
+   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+ 1  1960 AUS           3.45
+ 2  1960 AUT           2.69
+ 3  1960 BEL           2.54
+ 4  1960 CAN           3.9 
+ 5  1960 CZE           2.11
+ 6  1960 DNK           2.54
+ 7  1960 FIN           2.71
+ 8  1960 FRA           2.74
+ 9  1960 DEU           2.37
+10  1960 GRC           2.23
+# ℹ 3,392 more rows</code></pre>
+</div>
+</div>
+</section></section><section id="mutating-joins" class="level2"><h2 class="anchored" data-anchor-id="mutating-joins">Mutating joins</h2>
+<p>Joins are fundamental operations that merge rows from two or more tables based on the common columns (keys). These operations play a crucial role in data manipulation and analysis, especially when dealing with multiple data sources (which is almost always the case).</p>
+<p>The difference among the functions is how they handle values from the shared columns that appear in only one of the two tables.</p>
+<div class="cell">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create two example data frames</span></span>
+<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, Score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">85</span>, <span class="fl">88</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name Score
+1  2     Bob    90
+2  3 Charlie    85</code></pre>
+</div>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name Score
+1  1   Alice    NA
+2  2     Bob    90
+3  3 Charlie    85</code></pre>
+</div>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name Score
+1  2     Bob    90
+2  3 Charlie    85
+3  4    &lt;NA&gt;    88</code></pre>
+</div>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name Score
+1  1   Alice    NA
+2  2     Bob    90
+3  3 Charlie    85
+4  4    &lt;NA&gt;    88</code></pre>
+</div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name
+1  2     Bob
+2  3 Charlie</code></pre>
+</div>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID  Name
+1  1 Alice</code></pre>
+</div>
+</div>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.marcellgranat.com">Marcell Granát</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

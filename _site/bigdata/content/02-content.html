@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="description" content="Learn how to analyse, understand, and communicate about your data!">
-
 <title>Big Data &amp; Data Visualisation - Statistics in R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -75,8 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -95,24 +90,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 <meta property="og:title" content="Big Data &amp; Data Visualisation - Statistics in R">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://marcellgranat.com/bigdata/files/social-image-s23.png">
 <meta property="og:site-name" content="Big Data &amp; Data Visualisation">
 <meta property="og:locale" content="en_US">
 </head>
-
 <body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Big Data &amp; Data Visualisation</span>
@@ -124,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../syllabus.html" rel="" target="">
  <span class="menu-text">Syllabus</span></a>
   </li>  
@@ -137,13 +125,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -151,15 +137,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Overview</span></a>
@@ -167,15 +149,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Readings, lectures, and videos</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -184,8 +166,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The base R</span></a>
@@ -198,101 +180,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data manipulation I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objectives-of-statistical-analysis-in-economics" id="toc-objectives-of-statistical-analysis-in-economics" class="nav-link active" data-scroll-target="#objectives-of-statistical-analysis-in-economics">Objectives of Statistical Analysis in Economics</a>
+<li>
+<a href="#objectives-of-statistical-analysis-in-economics" id="toc-objectives-of-statistical-analysis-in-economics" class="nav-link active" data-scroll-target="#objectives-of-statistical-analysis-in-economics">Objectives of Statistical Analysis in Economics</a>
   <ul class="collapse">
-  <li><a href="#predictive-tasks" id="toc-predictive-tasks" class="nav-link" data-scroll-target="#predictive-tasks">Predictive Tasks</a></li>
+<li><a href="#predictive-tasks" id="toc-predictive-tasks" class="nav-link" data-scroll-target="#predictive-tasks">Predictive Tasks</a></li>
   <li><a href="#descriptive-tasks" id="toc-descriptive-tasks" class="nav-link" data-scroll-target="#descriptive-tasks">Descriptive Tasks</a></li>
-  </ul></li>
-  <li><a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data">Types of Data</a>
+  </ul>
+</li>
+  <li>
+<a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data">Types of Data</a>
   <ul class="collapse">
-  <li><a href="#classification-based-on-structure" id="toc-classification-based-on-structure" class="nav-link" data-scroll-target="#classification-based-on-structure">Classification Based on Structure</a></li>
+<li><a href="#classification-based-on-structure" id="toc-classification-based-on-structure" class="nav-link" data-scroll-target="#classification-based-on-structure">Classification Based on Structure</a></li>
   <li><a href="#attribute-types" id="toc-attribute-types" class="nav-link" data-scroll-target="#attribute-types">Attribute Types</a></li>
-  </ul></li>
-  <li><a href="#quality-of-data" id="toc-quality-of-data" class="nav-link" data-scroll-target="#quality-of-data">Quality of Data</a>
+  </ul>
+</li>
+  <li>
+<a href="#quality-of-data" id="toc-quality-of-data" class="nav-link" data-scroll-target="#quality-of-data">Quality of Data</a>
   <ul class="collapse">
-  <li><a href="#some-examples" id="toc-some-examples" class="nav-link" data-scroll-target="#some-examples">Some examples</a></li>
-  </ul></li>
-  <li><a href="#american-trends-panel-wave-110" id="toc-american-trends-panel-wave-110" class="nav-link" data-scroll-target="#american-trends-panel-wave-110"><strong>American Trends Panel Wave 110</strong></a>
+<li><a href="#some-examples" id="toc-some-examples" class="nav-link" data-scroll-target="#some-examples">Some examples</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#american-trends-panel-wave-110" id="toc-american-trends-panel-wave-110" class="nav-link" data-scroll-target="#american-trends-panel-wave-110"><strong>American Trends Panel Wave 110</strong></a>
   <ul class="collapse">
-  <li><a href="#case-studies-on-data-related-issues" id="toc-case-studies-on-data-related-issues" class="nav-link" data-scroll-target="#case-studies-on-data-related-issues">Case Studies on Data-Related Issues</a></li>
-  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency">Measures of Central Tendency 🦔</a>
+<li><a href="#case-studies-on-data-related-issues" id="toc-case-studies-on-data-related-issues" class="nav-link" data-scroll-target="#case-studies-on-data-related-issues">Case Studies on Data-Related Issues</a></li>
+  <li>
+<a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency">Measures of Central Tendency 🦔</a>
   <ul class="collapse">
-  <li><a href="#arithmetic-mean" id="toc-arithmetic-mean" class="nav-link" data-scroll-target="#arithmetic-mean">Arithmetic Mean</a></li>
+<li><a href="#arithmetic-mean" id="toc-arithmetic-mean" class="nav-link" data-scroll-target="#arithmetic-mean">Arithmetic Mean</a></li>
   <li><a href="#geometric-mean" id="toc-geometric-mean" class="nav-link" data-scroll-target="#geometric-mean">Geometric Mean</a></li>
   <li><a href="#harmonic-mean" id="toc-harmonic-mean" class="nav-link" data-scroll-target="#harmonic-mean">Harmonic Mean</a></li>
   <li><a href="#squared-mean" id="toc-squared-mean" class="nav-link" data-scroll-target="#squared-mean">Squared Mean</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles">Quantiles</a></li>
-  <li><a href="#measures-of-variability" id="toc-measures-of-variability" class="nav-link" data-scroll-target="#measures-of-variability">Measures of Variability</a>
+  <li>
+<a href="#measures-of-variability" id="toc-measures-of-variability" class="nav-link" data-scroll-target="#measures-of-variability">Measures of Variability</a>
   <ul class="collapse">
-  <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard Deviation</a></li>
+<li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation">Standard Deviation</a></li>
   <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance">Variance</a></li>
-  </ul></li>
-  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">Range</a>
+  </ul>
+</li>
+  <li>
+<a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">Range</a>
   <ul class="collapse">
-  <li><a href="#interquartile-range-iqr" id="toc-interquartile-range-iqr" class="nav-link" data-scroll-target="#interquartile-range-iqr">Interquartile range (IQR)</a></li>
+<li><a href="#interquartile-range-iqr" id="toc-interquartile-range-iqr" class="nav-link" data-scroll-target="#interquartile-range-iqr">Interquartile range (IQR)</a></li>
   <li><a href="#interdecile-range-idr" id="toc-interdecile-range-idr" class="nav-link" data-scroll-target="#interdecile-range-idr">Interdecile range (IDR)</a></li>
   <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
-  </ul></li>
-  </ul></li>
   </ul>
-</nav>
+</li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header">
-<h1 class="title display-7">Statistics in R</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">Statistics in R</h1>
 
 <div class="date-block bg-class text-white p-2">
   <p class="date">Readings and class materials for Tuesday, September 12, 2023</p>
 </div>
-</header>
-
-<section id="objectives-of-statistical-analysis-in-economics" class="level2">
-<h2 class="anchored" data-anchor-id="objectives-of-statistical-analysis-in-economics">Objectives of Statistical Analysis in Economics</h2>
+</header><section id="objectives-of-statistical-analysis-in-economics" class="level2"><h2 class="anchored" data-anchor-id="objectives-of-statistical-analysis-in-economics">Objectives of Statistical Analysis in Economics</h2>
 <p>Statistical analysis serves as an information-compressing mechanism. The primary objectives can be broadly categorized into:</p>
-<section id="predictive-tasks" class="level3">
-<h3 class="anchored" data-anchor-id="predictive-tasks">Predictive Tasks</h3>
+<section id="predictive-tasks" class="level3"><h3 class="anchored" data-anchor-id="predictive-tasks">Predictive Tasks</h3>
 <p>These tasks aim to forecast future outcomes based on historical data and current conditions.</p>
-</section>
-<section id="descriptive-tasks" class="level3">
-<h3 class="anchored" data-anchor-id="descriptive-tasks">Descriptive Tasks</h3>
+</section><section id="descriptive-tasks" class="level3"><h3 class="anchored" data-anchor-id="descriptive-tasks">Descriptive Tasks</h3>
 <p>These tasks focus on summarizing the main aspects of the data to provide an informative overview.</p>
-<section id="exploratory-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h4>
+<section id="exploratory-analysis" class="level4"><h4 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h4>
 <p>This involves identifying patterns, relationships, or anomalies in the data without a prior hypothesis.</p>
-</section>
-<section id="confirmatory-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="confirmatory-analysis">Confirmatory Analysis</h4>
+</section><section id="confirmatory-analysis" class="level4"><h4 class="anchored" data-anchor-id="confirmatory-analysis">Confirmatory Analysis</h4>
 <p>This involves testing predefined hypotheses to confirm or refute them.</p>
-</section>
-</section>
-</section>
-<section id="types-of-data" class="level2">
-<h2 class="anchored" data-anchor-id="types-of-data">Types of Data</h2>
-<section id="classification-based-on-structure" class="level3">
-<h3 class="anchored" data-anchor-id="classification-based-on-structure">Classification Based on Structure</h3>
-<section id="unstructured-data" class="level4">
-<h4 class="anchored" data-anchor-id="unstructured-data">Unstructured Data</h4>
+</section></section></section><section id="types-of-data" class="level2"><h2 class="anchored" data-anchor-id="types-of-data">Types of Data</h2>
+<section id="classification-based-on-structure" class="level3"><h3 class="anchored" data-anchor-id="classification-based-on-structure">Classification Based on Structure</h3>
+<section id="unstructured-data" class="level4"><h4 class="anchored" data-anchor-id="unstructured-data">Unstructured Data</h4>
 <p>Data that does not have a predefined format or organization.</p>
-</section>
-<section id="structured-data" class="level4">
-<h4 class="anchored" data-anchor-id="structured-data">Structured Data</h4>
+</section><section id="structured-data" class="level4"><h4 class="anchored" data-anchor-id="structured-data">Structured Data</h4>
 <p>Data that is organized in a specific manner, often in tabular form.</p>
-<section id="types-of-structured-data" class="level5">
-<h5 class="anchored" data-anchor-id="types-of-structured-data">Types of Structured Data</h5>
+<section id="types-of-structured-data" class="level5"><h5 class="anchored" data-anchor-id="types-of-structured-data">Types of Structured Data</h5>
 <ul>
 <li><p>Cross-sectional</p></li>
 <li><p>Time-series</p></li>
@@ -302,11 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>The type of data dictates the statistical tools and techniques that can be employed for analysis.</p>
 <p><img src="images/attributes_observations.png" class="img-fluid"></p>
-</section>
-</section>
-</section>
-<section id="attribute-types" class="level3">
-<h3 class="anchored" data-anchor-id="attribute-types">Attribute Types</h3>
+</section></section></section><section id="attribute-types" class="level3"><h3 class="anchored" data-anchor-id="attribute-types">Attribute Types</h3>
 <p>Different types of attributes require different statistical techniques for effective analysis.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -753,77 +744,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Attribute type">Attribute type</th>
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Attribute type">Attribute type</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Examples">Examples</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Operations">Operations</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Attribute type" class="gt_row gt_center">Nominal</td>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="Attribute type" class="gt_row gt_center">Nominal</td>
 <td headers="Description" class="gt_row gt_center">Nominal values provide only enough information to distinguish one object from another. (=, ≠)</td>
 <td headers="Examples" class="gt_row gt_center">Zip codes, employee ID numbers, eye color, gender</td>
-<td headers="Operations" class="gt_row gt_center">Mode, entropy, contingency correlation, chi2 test</td></tr>
-    <tr><td headers="Attribute type" class="gt_row gt_center">Ordinal</td>
+<td headers="Operations" class="gt_row gt_center">Mode, entropy, contingency correlation, chi2 test</td>
+</tr>
+<tr>
+<td headers="Attribute type" class="gt_row gt_center">Ordinal</td>
 <td headers="Description" class="gt_row gt_center">The values of an ordinal attribute provide enough information to order objects. (&lt;, &gt;)</td>
 <td headers="Examples" class="gt_row gt_center">Hardness of minerals, {good, better, best}, grades, street numbers</td>
-<td headers="Operations" class="gt_row gt_center">Quantiles, rank correlation</td></tr>
-    <tr><td headers="Attribute type" class="gt_row gt_center">Interval</td>
+<td headers="Operations" class="gt_row gt_center">Quantiles, rank correlation</td>
+</tr>
+<tr>
+<td headers="Attribute type" class="gt_row gt_center">Interval</td>
 <td headers="Description" class="gt_row gt_center">Differences between values are meaningful, i.e., a unit of measurement exists. (+, -)</td>
 <td headers="Examples" class="gt_row gt_center">Calendar dates, temperature in Celsius or Fahrenheit</td>
-<td headers="Operations" class="gt_row gt_center">mean, standard deviation, Pearson's correlation</td></tr>
-    <tr><td headers="Attribute type" class="gt_row gt_center">Ratio</td>
+<td headers="Operations" class="gt_row gt_center">mean, standard deviation, Pearson's correlation</td>
+</tr>
+<tr>
+<td headers="Attribute type" class="gt_row gt_center">Ratio</td>
 <td headers="Description" class="gt_row gt_center">For ratio variables, both differences and ratios are meaningful. (*, /)</td>
 <td headers="Examples" class="gt_row gt_center">Temperature in Kelvin, monetary quantities, counts, age, mass, length, electrical current</td>
-<td headers="Operations" class="gt_row gt_center">Geometric mean, harmonic mean, percent variation</td></tr>
-  </tbody>
-  
-  
+<td headers="Operations" class="gt_row gt_center">Geometric mean, harmonic mean, percent variation</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="quality-of-data" class="level2">
-<h2 class="anchored" data-anchor-id="quality-of-data">Quality of Data</h2>
+</section></section><section id="quality-of-data" class="level2"><h2 class="anchored" data-anchor-id="quality-of-data">Quality of Data</h2>
 <div class="columns">
 <div class="column">
 <p><img src="images/meme_clean_data.jpg" class="img-fluid" style="width:90.0%"></p>
 </div><div class="column">
-<section id="common-issues" class="level3">
-<h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
+<section id="common-issues" class="level3"><h3 class="anchored" data-anchor-id="common-issues">Common Issues</h3>
 <ul>
 <li><p>Missing data</p></li>
 <li><p>Outliers</p></li>
 <li><p>Duplication</p></li>
 <li><p>Inconsistent data</p></li>
-</ul>
-</section>
+</ul></section>
 </div>
 </div>
-<section id="some-examples" class="level3">
-<h3 class="anchored" data-anchor-id="some-examples">Some examples</h3>
+<section id="some-examples" class="level3"><h3 class="anchored" data-anchor-id="some-examples">Some examples</h3>
 <div class="columns">
 <div class="column" style="width: 70%">
 <p>Let us examine a sample data from the modeldata R package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(attrition, <span class="at">package =</span> <span class="st">"modeldata"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">attrition</span>, package <span class="op">=</span> <span class="st">"modeldata"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width: 70%">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/278798301_481570430317127_8457195516254737151_n.jpg" class="img-fluid figure-img" style="width:89.0%"></p>
+<figure class="figure"><p><img src="images/278798301_481570430317127_8457195516254737151_n.jpg" class="img-fluid figure-img" style="width:89.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(attrition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span><span class="va">attrition</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,470 × 31
      Age Attrition BusinessTravel    DailyRate Department       DistanceFromHome
@@ -849,8 +836,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>After loading data that we would like to work with, it is worthwhile to examine and create descriptive statistics. The <code>summary</code> function exists in almost every language, but in R, I suggest using a dedicated package for this purpose: <code>skmir</code> (although there are countless others available).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>attrition <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -903,16 +890,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 8%">
 <col style="width: 37%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">skim_variable</th>
 <th style="text-align: right;">n_missing</th>
 <th style="text-align: right;">complete_rate</th>
 <th style="text-align: left;">ordered</th>
 <th style="text-align: right;">n_unique</th>
 <th style="text-align: left;">top_counts</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Attrition</td>
@@ -1051,8 +1036,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 5%">
 <col style="width: 5%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">skim_variable</th>
 <th style="text-align: right;">n_missing</th>
 <th style="text-align: right;">complete_rate</th>
@@ -1064,8 +1048,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: right;">p75</th>
 <th style="text-align: right;">p100</th>
 <th style="text-align: left;">hist</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Age</td>
@@ -1279,14 +1262,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
-</section>
-</section>
-<section id="american-trends-panel-wave-110" class="level1">
-<h1><strong>American Trends Panel Wave 110</strong></h1>
+</section></section><section id="american-trends-panel-wave-110" class="level1"><h1><strong>American Trends Panel Wave 110</strong></h1>
 <p>Source: <a href="https://www.pewresearch.org/politics/dataset/american-trends-panel-wave-110/">Pew Research Center</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"../data/ATP W110.sav"</span>) <span class="sc">|&gt;</span> <span class="co"># .. = root folder</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"../data/ATP W110.sav"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># .. = root folder</span></span>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -1344,8 +1324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 8%">
 <col style="width: 4%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">skim_variable</th>
 <th style="text-align: right;">n_missing</th>
 <th style="text-align: right;">complete_rate</th>
@@ -1357,8 +1336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: right;">p75</th>
 <th style="text-align: right;">p100</th>
 <th style="text-align: left;">hist</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">QKEY</td>
@@ -3622,8 +3600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 17%">
 <col style="width: 7%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">skim_variable</th>
 <th style="text-align: right;">n_missing</th>
 <th style="text-align: right;">complete_rate</th>
@@ -3631,8 +3608,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: left;">max</th>
 <th style="text-align: left;">median</th>
 <th style="text-align: right;">n_unique</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">INTERVIEW_START_W110</td>
@@ -3656,8 +3632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
-<section id="case-studies-on-data-related-issues" class="level3">
-<h3 class="anchored" data-anchor-id="case-studies-on-data-related-issues">Case Studies on Data-Related Issues</h3>
+<section id="case-studies-on-data-related-issues" class="level3"><h3 class="anchored" data-anchor-id="case-studies-on-data-related-issues">Case Studies on Data-Related Issues</h3>
 <p>Statistician: So, you got the data for all the patients?</p>
 <p>Data Miner: Yes. I haven’t had much time for analysis, but I do have a few interesting results.</p>
 <p>Statistician: Amazing. There were so many data issues with this set of patients that I couldn’t do much.</p>
@@ -3673,50 +3648,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Statistician: What? Field 1 is just an identification number.</p>
 <p>Data Miner: Nonetheless, my results speak for themselves.</p>
 <p>Statistician: Oh, no! I just remembered. We assigned ID numbers after we sorted the records based on field 5. There is a strong connection, but it’s meaningless. Sorry.</p>
-</section>
-<section id="measures-of-central-tendency" class="level2">
-<h2 class="anchored" data-anchor-id="measures-of-central-tendency">Measures of Central Tendency 🦔</h2>
-<section id="arithmetic-mean" class="level3">
-<h3 class="anchored" data-anchor-id="arithmetic-mean">Arithmetic Mean</h3>
+</section><section id="measures-of-central-tendency" class="level2"><h2 class="anchored" data-anchor-id="measures-of-central-tendency">Measures of Central Tendency 🦔</h2>
+<section id="arithmetic-mean" class="level3"><h3 class="anchored" data-anchor-id="arithmetic-mean">Arithmetic Mean</h3>
 <p>The arithmetic mean is calculated as:</p>
 <p><span class="math display">\[\bar{Y}=\frac{Y_1+Y_2+\ldots+Y_N}{N}=\frac{\sum_{i=1}^N Y_i}{N}\]</span></p>
-</section>
-<section id="geometric-mean" class="level3">
-<h3 class="anchored" data-anchor-id="geometric-mean">Geometric Mean</h3>
+</section><section id="geometric-mean" class="level3"><h3 class="anchored" data-anchor-id="geometric-mean">Geometric Mean</h3>
 <p>The geometric mean is calculated as:</p>
 <p><span class="math display">\[\bar{Y}_g=\sqrt[N]{\prod_{i=1}^N Y_i}\]</span></p>
-<section id="example" class="level5">
-<h5 class="anchored" data-anchor-id="example">Example</h5>
+<section id="example" class="level5"><h5 class="anchored" data-anchor-id="example">Example</h5>
 <p>The average can also be interpreted as meaning that if all elements were replaced by this value, the sum of the elements would remain the same.</p>
 <p>Let us see the case of indexes:</p>
 <p>The GDP growth in one year was 5 percent and 5 percent in the following and 10 percent in the 3rd.</p>
 <p>What was the annual growth in the 3 years?</p>
 <p><span class="math display">\[1.05 \times 1.05 \times 1.10 = \sqrt[3]{1.21}=1.0656\]</span></p>
 <p>However, the arithmetic mean equals 20/3 = 6.66.</p>
-</section>
-</section>
-<section id="harmonic-mean" class="level3">
-<h3 class="anchored" data-anchor-id="harmonic-mean">Harmonic Mean</h3>
+</section></section><section id="harmonic-mean" class="level3"><h3 class="anchored" data-anchor-id="harmonic-mean">Harmonic Mean</h3>
 <p>The harmonic mean is calculated as:</p>
 <p><span class="math display">\[\bar{Y}_h=\frac{N}{\sum_{i=1}^N \frac{1}{Y_i}}\]</span></p>
-<section id="example-1" class="level5">
-<h5 class="anchored" data-anchor-id="example-1">Example</h5>
+<section id="example-1" class="level5"><h5 class="anchored" data-anchor-id="example-1">Example</h5>
 <p>Consider two car owners who seek to reduce their costs:</p>
 <ul>
 <li><p>Adam switches from a gas-guzzler of <strong>12 mpg to</strong> a slightly less voracious guzzler that runs at <strong>14 mpg</strong>.</p></li>
 <li><p>The environmentally virtuous Beth switches from a Bon ss es <strong>from 30 mpg car to</strong> one that runs at <strong>40 mpg</strong>.</p></li>
 </ul>
 <p>Suppose both drivers travel <strong>equal distances</strong> over a year. <em>Who will save more gas by switching?</em></p>
-</section>
-</section>
-<section id="squared-mean" class="level3">
-<h3 class="anchored" data-anchor-id="squared-mean">Squared Mean</h3>
+</section></section><section id="squared-mean" class="level3"><h3 class="anchored" data-anchor-id="squared-mean">Squared Mean</h3>
 <p>The squared mean is calculated as:</p>
 <p><span class="math display">\[\bar{Y_q}=\sqrt{\frac{\sum_{i=1}^N Y_i^2}{N}}\]</span></p>
-</section>
-</section>
-<section id="quantiles" class="level2">
-<h2 class="anchored" data-anchor-id="quantiles">Quantiles</h2>
+</section></section><section id="quantiles" class="level2"><h2 class="anchored" data-anchor-id="quantiles">Quantiles</h2>
 <p>Quantiles are values that divide a dataset into equal groups. The types of quantiles include:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -4163,31 +4122,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="# Groups"># Groups</th>
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="# Groups"># Groups</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NAME">NAME</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="# groups" class="gt_row gt_center">2</td>
-<td headers="Name" class="gt_row gt_center">Median</td></tr>
-    <tr><td headers="# groups" class="gt_row gt_center">3</td>
-<td headers="Name" class="gt_row gt_center">Tertiles</td></tr>
-    <tr><td headers="# groups" class="gt_row gt_center">4</td>
-<td headers="Name" class="gt_row gt_center">Quartiles</td></tr>
-    <tr><td headers="# groups" class="gt_row gt_center">5</td>
-<td headers="Name" class="gt_row gt_center">Quintiles</td></tr>
-    <tr><td headers="# groups" class="gt_row gt_center">10</td>
-<td headers="Name" class="gt_row gt_center">Deciles</td></tr>
-    <tr><td headers="# groups" class="gt_row gt_center">20</td>
-<td headers="Name" class="gt_row gt_center">Ventiles</td></tr>
-    <tr><td headers="# groups" class="gt_row gt_center">100</td>
-<td headers="Name" class="gt_row gt_center">Percentiles</td></tr>
-  </tbody>
-  
-  
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="# groups" class="gt_row gt_center">2</td>
+<td headers="Name" class="gt_row gt_center">Median</td>
+</tr>
+<tr>
+<td headers="# groups" class="gt_row gt_center">3</td>
+<td headers="Name" class="gt_row gt_center">Tertiles</td>
+</tr>
+<tr>
+<td headers="# groups" class="gt_row gt_center">4</td>
+<td headers="Name" class="gt_row gt_center">Quartiles</td>
+</tr>
+<tr>
+<td headers="# groups" class="gt_row gt_center">5</td>
+<td headers="Name" class="gt_row gt_center">Quintiles</td>
+</tr>
+<tr>
+<td headers="# groups" class="gt_row gt_center">10</td>
+<td headers="Name" class="gt_row gt_center">Deciles</td>
+</tr>
+<tr>
+<td headers="# groups" class="gt_row gt_center">20</td>
+<td headers="Name" class="gt_row gt_center">Ventiles</td>
+</tr>
+<tr>
+<td headers="# groups" class="gt_row gt_center">100</td>
+<td headers="Name" class="gt_row gt_center">Percentiles</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -4204,17 +4172,17 @@ Warning
 <div class="callout-body-container callout-body">
 <p>There will often be occasions when you need to reproduce a complete study or methodology for research or any other purpose. Generally, it’s not possible, and even the calculation of quantiles prevents precise reproduction, as everyone considers it completely obvious how to calculate the median or a quartile (and the choosen method is never documented). However, depending on the chosen methodology, we will obtain a very minimal but still different result.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">231</span>, <span class="dv">45342</span>, <span class="dv">2313</span>, <span class="dv">213</span>, <span class="dv">564</span>, <span class="dv">874543</span>, <span class="dv">92713</span>, <span class="dv">3941</span>, <span class="dv">31297</span>, <span class="dv">2654</span>, <span class="dv">4324</span>, <span class="dv">6542</span>) <span class="co"># random numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">231</span>, <span class="fl">45342</span>, <span class="fl">2313</span>, <span class="fl">213</span>, <span class="fl">564</span>, <span class="fl">874543</span>, <span class="fl">92713</span>, <span class="fl">3941</span>, <span class="fl">31297</span>, <span class="fl">2654</span>, <span class="fl">4324</span>, <span class="fl">6542</span><span class="op">)</span> <span class="co"># random numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(x, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     25%      50%      75% 
  1875.75  4132.50 34808.25 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(x, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>), <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span><span class="op">)</span>, type <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    25%     50%     75% 
  1438.5  4132.5 38319.5 </code></pre>
@@ -4222,18 +4190,13 @@ Warning
 </div>
 </div>
 </div>
-</section>
-<section id="measures-of-variability" class="level2">
-<h2 class="anchored" data-anchor-id="measures-of-variability">Measures of Variability</h2>
-<section id="standard-deviation" class="level3">
-<h3 class="anchored" data-anchor-id="standard-deviation">Standard Deviation</h3>
+</section><section id="measures-of-variability" class="level2"><h2 class="anchored" data-anchor-id="measures-of-variability">Measures of Variability</h2>
+<section id="standard-deviation" class="level3"><h3 class="anchored" data-anchor-id="standard-deviation">Standard Deviation</h3>
 <p>Standard deviation is the average difference between the observations and the mean??</p>
 <p>It was already mentioned that the sum of the deviations from the average is zero. If we divide zero by the number of observations it is still zero…</p>
 <p>Here comes the squared mean!</p>
 <p><span class="math display">\[\sigma=\sqrt{\frac{\sum_{i=1}^N\left(Y_i-\bar{Y}\right)^2}{N}}\]</span></p>
-</section>
-<section id="variance" class="level3">
-<h3 class="anchored" data-anchor-id="variance">Variance</h3>
+</section><section id="variance" class="level3"><h3 class="anchored" data-anchor-id="variance">Variance</h3>
 <p>Variance is simply the square of standard deviation.</p>
 <p><span class="math display">\[\sigma^2=\frac{\sum_{i=1}^N\left(Y_i-\bar{Y}\right)^2}{N}\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -4249,23 +4212,15 @@ Note
 <p>In many cases, we often use variance instead of standard deviation and not just for fun. If we recall what we learned about the ANOVA, variances are additive, while standard deviations are not.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="range" class="level2">
-<h2 class="anchored" data-anchor-id="range">Range</h2>
+</section></section><section id="range" class="level2"><h2 class="anchored" data-anchor-id="range">Range</h2>
 <p>The spread of your data from the lowest to the highest value.</p>
-<section id="interquartile-range-iqr" class="level3">
-<h3 class="anchored" data-anchor-id="interquartile-range-iqr">Interquartile range (IQR)</h3>
+<section id="interquartile-range-iqr" class="level3"><h3 class="anchored" data-anchor-id="interquartile-range-iqr">Interquartile range (IQR)</h3>
 <p><span class="math display">\[\text{IQR}=Q_3-Q1\]</span></p>
-</section>
-<section id="interdecile-range-idr" class="level3">
-<h3 class="anchored" data-anchor-id="interdecile-range-idr">Interdecile range (IDR)</h3>
+</section><section id="interdecile-range-idr" class="level3"><h3 class="anchored" data-anchor-id="interdecile-range-idr">Interdecile range (IDR)</h3>
 <p><span class="math display">\[\text{IDR}=D_9-D1\]</span></p>
-</section>
-<section id="boxplot" class="level3">
-<h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
+</section><section id="boxplot" class="level3"><h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(attrition<span class="sc">$</span>MonthlyIncome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">attrition</span><span class="op">$</span><span class="va">MonthlyIncome</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="02-content_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -4284,12 +4239,7 @@ Note
 </div>
 
 
-</section>
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -4486,8 +4436,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.marcellgranat.com">Marcell Granát</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
     <div class="nav-footer-center">
       &nbsp;
@@ -4497,7 +4446,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>

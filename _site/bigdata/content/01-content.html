@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="description" content="Learn how to analyse, understand, and communicate about your data!">
-
 <title>Big Data &amp; Data Visualisation - The base R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -75,8 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,21 +91,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-
-
 <meta property="og:title" content="Big Data &amp; Data Visualisation - The base R">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://marcellgranat.com/bigdata/files/social-image-s23.png">
 <meta property="og:site-name" content="Big Data &amp; Data Visualisation">
 <meta property="og:locale" content="en_US">
 </head>
-
 <body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Big Data &amp; Data Visualisation</span>
@@ -122,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../syllabus.html" rel="" target="">
  <span class="menu-text">Syllabus</span></a>
   </li>  
@@ -135,13 +125,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -149,15 +137,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Overview</span></a>
@@ -165,15 +149,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Readings, lectures, and videos</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -182,8 +166,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/01-content.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">The base R</span></a>
@@ -196,18 +180,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data manipulation I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-do-we-need-a-programming-language" id="toc-why-do-we-need-a-programming-language" class="nav-link active" data-scroll-target="#why-do-we-need-a-programming-language"><strong>Why do we need a programming language?</strong></a></li>
+<li><a href="#why-do-we-need-a-programming-language" id="toc-why-do-we-need-a-programming-language" class="nav-link active" data-scroll-target="#why-do-we-need-a-programming-language"><strong>Why do we need a programming language?</strong></a></li>
   <li><a href="#why-choose-fa-brands-r-project" id="toc-why-choose-fa-brands-r-project" class="nav-link" data-scroll-target="#why-choose-fa-brands-r-project"><strong>Why Choose</strong> <i class="fa-brands fa-r-project" aria-label="r-project"></i><strong>?</strong></a></li>
   <li><a href="#a-glimpse-of-rs-capabilities" id="toc-a-glimpse-of-rs-capabilities" class="nav-link" data-scroll-target="#a-glimpse-of-rs-capabilities"><strong>A Glimpse of R’s Capabilities</strong></a></li>
   <li><a href="#setting-up-fa-brands-r-project-and-rstudio" id="toc-setting-up-fa-brands-r-project-and-rstudio" class="nav-link" data-scroll-target="#setting-up-fa-brands-r-project-and-rstudio"><strong>Setting Up</strong> <i class="fa-brands fa-r-project" aria-label="r-project"></i> <strong>and RStudio</strong></a></li>
@@ -215,37 +220,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-types-in-fa-brands-r-project" id="toc-data-types-in-fa-brands-r-project" class="nav-link" data-scroll-target="#data-types-in-fa-brands-r-project">Data Types in <i class="fa-brands fa-r-project" aria-label="r-project"></i></a></li>
   <li><a href="#data-structures-in-fa-brands-r-project" id="toc-data-structures-in-fa-brands-r-project" class="nav-link" data-scroll-target="#data-structures-in-fa-brands-r-project">Data Structures in <i class="fa-brands fa-r-project" aria-label="r-project"></i></a></li>
   <li><a href="#basics-of-programming" id="toc-basics-of-programming" class="nav-link" data-scroll-target="#basics-of-programming">Basics of programming</a></li>
-  <li><a href="#example---fertility-rates-by-country-by-year-1" id="toc-example---fertility-rates-by-country-by-year-1" class="nav-link" data-scroll-target="#example---fertility-rates-by-country-by-year-1">Example - Fertility rates by country / by year</a>
+  <li>
+<a href="#example---fertility-rates-by-country-by-year-1" id="toc-example---fertility-rates-by-country-by-year-1" class="nav-link" data-scroll-target="#example---fertility-rates-by-country-by-year-1">Example - Fertility rates by country / by year</a>
   <ul class="collapse">
-  <li><a href="#data-from-oecd" id="toc-data-from-oecd" class="nav-link" data-scroll-target="#data-from-oecd">Data from OECD</a></li>
+<li><a href="#data-from-oecd" id="toc-data-from-oecd" class="nav-link" data-scroll-target="#data-from-oecd">Data from OECD</a></li>
   <li><a href="#apply---margin-1" id="toc-apply---margin-1" class="nav-link" data-scroll-target="#apply---margin-1">Apply - MARGIN = 1</a></li>
   <li><a href="#apply---margin-1-1" id="toc-apply---margin-1-1" class="nav-link" data-scroll-target="#apply---margin-1-1">Apply - MARGIN = 1</a></li>
   <li><a href="#apply---margin-2" id="toc-apply---margin-2" class="nav-link" data-scroll-target="#apply---margin-2">Apply - MARGIN = 2</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#lapply" id="toc-lapply" class="nav-link" data-scroll-target="#lapply">Lapply</a></li>
   <li><a href="#lapply-1" id="toc-lapply-1" class="nav-link" data-scroll-target="#lapply-1">Lapply</a></li>
   <li><a href="#sapply" id="toc-sapply" class="nav-link" data-scroll-target="#sapply">Sapply</a></li>
-  </ul>
-</nav>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header">
-<h1 class="title display-7">The base R</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">The base R</h1>
 
 <div class="date-block bg-class text-white p-2">
   <p class="date">Readings and class materials for Tuesday, September 12, 2023</p>
 </div>
-</header>
-
-<section id="why-do-we-need-a-programming-language" class="level3">
-<h3 class="anchored" data-anchor-id="why-do-we-need-a-programming-language"><strong>Why do we need a programming language?</strong></h3>
+</header><section id="why-do-we-need-a-programming-language" class="level3"><h3 class="anchored" data-anchor-id="why-do-we-need-a-programming-language"><strong>Why do we need a programming language?</strong></h3>
 <ol type="1">
-<li><strong>📈 Handling large datasets</strong>: Economic data often consists of thousands or even millions of observations. Programming enables us to organize and process this data effectively. By writing code, we can automate repetitive tasks, explore the data, and perform calculations on a scale that would be impractical or time-consuming with manual methods.</li>
-<li><strong>🧹 Data cleaning and preprocessing</strong>: Real-world data is often messy and inconsistent. Programming allows us to clean and preprocess the data, removing any errors, inconsistencies, or missing values. By writing code to handle such data cleaning tasks, we can ensure the accuracy and integrity of our analysis.</li>
-<li><strong>🔁 Reproducibility</strong>: Programming promotes reproducibility in statistical analysis. By documenting and sharing our code, others can replicate our analyses, verify our findings, and build upon our work. This promotes transparency and strengthens the validity of our results.</li>
-<li><strong>🛃 Flexibility and customization</strong>: Programming languages like <i class="fa-brands fa-r-project" aria-label="r-project"></i> and Python provide a wide range of statistical libraries and packages specifically designed for data analysis. These libraries offer various functions and algorithms to perform statistical tests, regression models, or other techniques. The ability to customize and tailor these tools to specific research questions allows for more precise and detailed analysis.</li>
+<li>
+<strong>📈 Handling large datasets</strong>: Economic data often consists of thousands or even millions of observations. Programming enables us to organize and process this data effectively. By writing code, we can automate repetitive tasks, explore the data, and perform calculations on a scale that would be impractical or time-consuming with manual methods.</li>
+<li>
+<strong>🧹 Data cleaning and preprocessing</strong>: Real-world data is often messy and inconsistent. Programming allows us to clean and preprocess the data, removing any errors, inconsistencies, or missing values. By writing code to handle such data cleaning tasks, we can ensure the accuracy and integrity of our analysis.</li>
+<li>
+<strong>🔁 Reproducibility</strong>: Programming promotes reproducibility in statistical analysis. By documenting and sharing our code, others can replicate our analyses, verify our findings, and build upon our work. This promotes transparency and strengthens the validity of our results.</li>
+<li>
+<strong>🛃 Flexibility and customization</strong>: Programming languages like <i class="fa-brands fa-r-project" aria-label="r-project"></i> and Python provide a wide range of statistical libraries and packages specifically designed for data analysis. These libraries offer various functions and algorithms to perform statistical tests, regression models, or other techniques. The ability to customize and tailor these tools to specific research questions allows for more precise and detailed analysis.</li>
 </ol>
 <div class="columns">
 <div class="column" style="width: 40%">
@@ -254,10 +258,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Programming, like any other skill, requires practice and persistence ⚒️. As Hadley Wickham, a prominent figure in the <i class="fa-brands fa-r-project" aria-label="r-project"></i> community, once said, “<strong>The only way to write good code is to write tons of subpar code first. Feeling shame about bad code stops you from getting to good code.</strong>” 🚀 This sentiment underscores the importance of perseverance and learning from mistakes in the journey of mastering <i class="fa-brands fa-r-project" aria-label="r-project"></i>.</p>
 </div>
 </div>
-<hr>
-</section>
-<section id="why-choose-fa-brands-r-project" class="level3">
-<h3 class="anchored" data-anchor-id="why-choose-fa-brands-r-project"><strong>Why Choose</strong> <i class="fa-brands fa-r-project" aria-label="r-project"></i><strong>?</strong></h3>
+<hr></section><section id="why-choose-fa-brands-r-project" class="level3"><h3 class="anchored" data-anchor-id="why-choose-fa-brands-r-project">
+<strong>Why Choose</strong> <i class="fa-brands fa-r-project" aria-label="r-project"></i><strong>?</strong>
+</h3>
 <p><i class="fa-brands fa-r-project" aria-label="r-project"></i> stands out as a free software, widely adopted across various domains such as statistics, data science, economics, and more. Beyond being a tool for data-related tasks, <i class="fa-brands fa-r-project" aria-label="r-project"></i> offers a rich ecosystem. With over 19,000 packages available on <strong>CRAN</strong>, <i class="fa-brands fa-r-project" aria-label="r-project"></i> extends its basic functionality to cater to diverse needs. Its graphical capabilities are unparalleled, and with the Shiny package, one can effortlessly craft minimalist web applications or dashboards. Our journey will encompass data manipulation, analysis, and visualization techniques.</p>
 <p>Yeah, it is not most popular language… But among researchers it is obviously in the top ones. Python, Matlab, <i class="fa-brands fa-r-project" aria-label="r-project"></i> and Julia are the most commonly used languages for data science tasks. All the languages have their pro and cons, and we will come back to this issue once we have some insight about programming.</p>
 <div class="cell" data-cap="TIOBE index of the most common popular languages in 2023">
@@ -705,81 +708,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">TIOBE index of the most common popular languages in 2023</td>
+<thead>
+<tr class="gt_heading">
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">TIOBE index of the most common popular languages in 2023</td>
     </tr>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Programming Language">Programming Language</th>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Programming Language">Programming Language</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Ratings">Ratings</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Compared to 2022">Compared to 2022</th>
     </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Programming Language" class="gt_row gt_center">Python</td>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Python</td>
 <td headers="Ratings" class="gt_row gt_center">14.16%</td>
-<td headers="Change" class="gt_row gt_center">-1.58%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">C</td>
+<td headers="Change" class="gt_row gt_center">-1.58%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">C</td>
 <td headers="Ratings" class="gt_row gt_center">11.27%</td>
-<td headers="Change" class="gt_row gt_center">-2.70%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">C++</td>
+<td headers="Change" class="gt_row gt_center">-2.70%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">C++</td>
 <td headers="Ratings" class="gt_row gt_center">10.65%</td>
-<td headers="Change" class="gt_row gt_center">+0.90%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Java</td>
+<td headers="Change" class="gt_row gt_center">+0.90%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Java</td>
 <td headers="Ratings" class="gt_row gt_center">9.49%</td>
-<td headers="Change" class="gt_row gt_center">-2.23%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">C#</td>
+<td headers="Change" class="gt_row gt_center">-2.23%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">C#</td>
 <td headers="Ratings" class="gt_row gt_center">7.31%</td>
-<td headers="Change" class="gt_row gt_center">+2.42%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">JavaScript</td>
+<td headers="Change" class="gt_row gt_center">+2.42%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">JavaScript</td>
 <td headers="Ratings" class="gt_row gt_center">3.30%</td>
-<td headers="Change" class="gt_row gt_center">+0.48%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Visual Basic</td>
+<td headers="Change" class="gt_row gt_center">+0.48%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Visual Basic</td>
 <td headers="Ratings" class="gt_row gt_center">2.22%</td>
-<td headers="Change" class="gt_row gt_center">-2.18%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">PHP</td>
+<td headers="Change" class="gt_row gt_center">-2.18%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">PHP</td>
 <td headers="Ratings" class="gt_row gt_center">1.55%</td>
-<td headers="Change" class="gt_row gt_center">-0.13%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Assembly language</td>
+<td headers="Change" class="gt_row gt_center">-0.13%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Assembly language</td>
 <td headers="Ratings" class="gt_row gt_center">1.53%</td>
-<td headers="Change" class="gt_row gt_center">-0.96%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">SQL</td>
+<td headers="Change" class="gt_row gt_center">-0.96%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">SQL</td>
 <td headers="Ratings" class="gt_row gt_center">1.44%</td>
-<td headers="Change" class="gt_row gt_center">-0.57%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Fortran</td>
+<td headers="Change" class="gt_row gt_center">-0.57%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Fortran</td>
 <td headers="Ratings" class="gt_row gt_center">1.28%</td>
-<td headers="Change" class="gt_row gt_center">+0.26%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Go</td>
+<td headers="Change" class="gt_row gt_center">+0.26%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Go</td>
 <td headers="Ratings" class="gt_row gt_center">1.19%</td>
-<td headers="Change" class="gt_row gt_center">+0.03%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">MATLAB</td>
+<td headers="Change" class="gt_row gt_center">+0.03%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">MATLAB</td>
 <td headers="Ratings" class="gt_row gt_center">1.19%</td>
-<td headers="Change" class="gt_row gt_center">+0.13%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Scratch</td>
+<td headers="Change" class="gt_row gt_center">+0.13%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Scratch</td>
 <td headers="Ratings" class="gt_row gt_center">1.08%</td>
-<td headers="Change" class="gt_row gt_center">+0.51%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Delphi/Object Pascal</td>
+<td headers="Change" class="gt_row gt_center">+0.51%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Delphi/Object Pascal</td>
 <td headers="Ratings" class="gt_row gt_center">1.02%</td>
-<td headers="Change" class="gt_row gt_center">-0.07%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Swift</td>
+<td headers="Change" class="gt_row gt_center">-0.07%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Swift</td>
 <td headers="Ratings" class="gt_row gt_center">1.00%</td>
-<td headers="Change" class="gt_row gt_center">+0.02%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Rust</td>
+<td headers="Change" class="gt_row gt_center">+0.02%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Rust</td>
 <td headers="Ratings" class="gt_row gt_center">0.97%</td>
-<td headers="Change" class="gt_row gt_center">+0.47%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center" style="font-weight: bold;">R</td>
+<td headers="Change" class="gt_row gt_center">+0.47%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center" style="font-weight: bold;">R</td>
 <td headers="Ratings" class="gt_row gt_center" style="font-weight: bold;">0.97%</td>
-<td headers="Change" class="gt_row gt_center" style="font-weight: bold;">+0.02%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Ruby</td>
+<td headers="Change" class="gt_row gt_center" style="font-weight: bold;">+0.02%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Ruby</td>
 <td headers="Ratings" class="gt_row gt_center">0.95%</td>
-<td headers="Change" class="gt_row gt_center">+0.30%</td></tr>
-    <tr><td headers="Programming Language" class="gt_row gt_center">Kotlin</td>
+<td headers="Change" class="gt_row gt_center">+0.30%</td>
+</tr>
+<tr>
+<td headers="Programming Language" class="gt_row gt_center">Kotlin</td>
 <td headers="Ratings" class="gt_row gt_center">0.90%</td>
-<td headers="Change" class="gt_row gt_center">+0.59%</td></tr>
-  </tbody>
-  
-  
+<td headers="Change" class="gt_row gt_center">+0.59%</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -793,17 +833,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/meme_free.jpg" class="img-fluid"></p>
 </div>
 </div>
-<hr>
-</section>
-<section id="a-glimpse-of-rs-capabilities" class="level3">
-<h3 class="anchored" data-anchor-id="a-glimpse-of-rs-capabilities"><strong>A Glimpse of R’s Capabilities</strong></h3>
+<hr></section><section id="a-glimpse-of-rs-capabilities" class="level3"><h3 class="anchored" data-anchor-id="a-glimpse-of-rs-capabilities"><strong>A Glimpse of R’s Capabilities</strong></h3>
 <p>R’s versatility can be showcased through various real-world applications:</p>
 <ol type="1">
 <li><p><strong>COVID Tracker</strong>: An application developed using <i class="fa-brands fa-r-project" aria-label="r-project"></i> (utilizing Shiny and Leaflet) provides real-time tracking of COVID cases. <a href="https://vac-lshtm.shinyapps.io/ncov_tracker/?_ga=2.146567862.383333130.1662737117-60780019.1662551588"><strong>View the tracker here</strong></a>.</p></li>
 <li><p><strong>Real-time Epidemiology of the Hungarian Coronavirus Epidemic</strong>: This application, crafted by Tamás Ferenci, offers insights into the progression of the coronavirus epidemic in Hungary. <a href="https://research.physcon.uni-obuda.hu/COVID19MagyarEpi/"><strong>Explore the application here</strong></a>.</p></li>
-<li><p><strong>Data Visualization</strong>: R’s prowess in data visualization can be demonstrated through intricate plots and graphs, which can be generated in a matter of minutes.</p>
+<li>
+<p><strong>Data Visualization</strong>: R’s prowess in data visualization can be demonstrated through intricate plots and graphs, which can be generated in a matter of minutes.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">The outcome</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Behind the scenes</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">The outcome</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Behind the scenes</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p><img src="images/demography.gif" class="img-fluid"></p>
@@ -812,12 +853,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/demograph-behind.gif" class="img-fluid"></p>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 </ol>
-<hr>
-</section>
-<section id="setting-up-fa-brands-r-project-and-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-fa-brands-r-project-and-rstudio"><strong>Setting Up</strong> <i class="fa-brands fa-r-project" aria-label="r-project"></i> <strong>and RStudio</strong></h3>
+<hr></section><section id="setting-up-fa-brands-r-project-and-rstudio" class="level3"><h3 class="anchored" data-anchor-id="setting-up-fa-brands-r-project-and-rstudio">
+<strong>Setting Up</strong> <i class="fa-brands fa-r-project" aria-label="r-project"></i> <strong>and RStudio</strong>
+</h3>
 <div class="columns">
 <div class="column" style="width: 30%">
 <p><img src="images/196093762_282749876865851_1722062313371734067_n.jpg" class="img-fluid"></p>
@@ -825,19 +866,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To embark on your <i class="fa-brands fa-r-project" aria-label="r-project"></i> journey, you’ll need to install both R and RStudio. RStudio serves as a dedicated Integrated Development Environment (IDE) for R. While it’s possible to run <i class="fa-brands fa-r-project" aria-label="r-project"></i> code without RStudio, using tools like Notepad, RStudio offers a more integrated experience tailored for <i class="fa-brands fa-r-project" aria-label="r-project"></i> (and recently Python). It provides features like code snippets, code completions, and rendering capabilities that enhance the coding experience.</p>
 </div>
 </div>
-<hr>
-</section>
-<section id="a-tour-of-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="a-tour-of-rstudio"><strong>A Tour of RStudio</strong></h3>
+<hr></section><section id="a-tour-of-rstudio" class="level3"><h3 class="anchored" data-anchor-id="a-tour-of-rstudio"><strong>A Tour of RStudio</strong></h3>
 <p>RStudio’s interface is divided into various panes:</p>
 <p><img src="images/rstudio-numbered.png" class="img-fluid"></p>
 <ol type="1">
-<li><strong>Source</strong>: This is where we write and save our <i class="fa-brands fa-r-project" aria-label="r-project"></i> scripts. Scripts are saved with a <code>.R</code> extension by default, but other formats are also supported. To execute a line of code, use <code>ctrl + enter</code>, and for the entire script, use <code>ctrl+shift+enter</code>.</li>
+<li>
+<strong>Source</strong>: This is where we write and save our <i class="fa-brands fa-r-project" aria-label="r-project"></i> scripts. Scripts are saved with a <code>.R</code> extension by default, but other formats are also supported. To execute a line of code, use <code>ctrl + enter</code>, and for the entire script, use <code>ctrl+shift+enter</code>.</li>
 </ol>
 <div class="columns">
 <div class="column" style="width:70%;">
 <ol start="2" type="1">
-<li><strong>Console</strong>: This pane displays executed codes and their outputs. For instance, typing <code>2 + 2</code> and pressing <code>enter</code> will display the result <code>4</code>.</li>
+<li>
+<strong>Console</strong>: This pane displays executed codes and their outputs. For instance, typing <code>2 + 2</code> and pressing <code>enter</code> will display the result <code>4</code>.</li>
 </ol>
 </div><div class="column" style="width:30%;">
 <p><img src="images/meme-brave.jpg" class="img-fluid"></p>
@@ -857,7 +897,8 @@ Tip
 </div>
 </div>
 <ol start="3" type="1">
-<li><strong>Environment</strong>: Here, you can view all the variables you’ve created. For instance, after assigning <code>x = 3</code>, you can see the variable <code>x</code> in this pane.</li>
+<li>
+<strong>Environment</strong>: Here, you can view all the variables you’ve created. For instance, after assigning <code>x = 3</code>, you can see the variable <code>x</code> in this pane.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -869,21 +910,22 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Go to to preferences -&gt; General -&gt; Advanced and activate the “Show <code>Last.value</code>”. This will help a lot 😉.<br>
-</p>
+<p>Go to to preferences -&gt; General -&gt; Advanced and activate the “Show <code>Last.value</code>”. This will help a lot 😉.<br></p>
 </div>
 </div>
 <div class="columns">
 <div class="column" style="width: 70%">
 <ol start="4" type="1">
-<li><strong>Help</strong>: This pane is invaluable when you’re unfamiliar with a function. By typing <code>?function_name</code>, you can access detailed documentation about the function.</li>
+<li>
+<strong>Help</strong>: This pane is invaluable when you’re unfamiliar with a function. By typing <code>?function_name</code>, you can access detailed documentation about the function.</li>
 </ol>
 </div><div class="column" style="width: 30%">
 <p><img src="images/meme-help.jpg" class="img-fluid"></p>
 </div>
 </div>
 <ol start="5" type="1">
-<li><strong>Files</strong>: This pane displays files in your current working directory. It’s crucial to set a project directory to streamline your workflow.</li>
+<li>
+<strong>Files</strong>: This pane displays files in your current working directory. It’s crucial to set a project directory to streamline your workflow.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -899,7 +941,8 @@ Tip
 </div>
 </div>
 <ol start="6" type="1">
-<li><strong>Packages</strong>: From this pane, you can install and activate <i class="fa-brands fa-r-project" aria-label="r-project"></i> packages. From this pane you can install only the packages that are available at CRAN. It requires tons of extra work to register a package there, so you may find a lot online (I spent a 1 week developing <code>currr</code> and one extra week to fulfil every requirement to finally publish). And please, please, please:</li>
+<li>
+<strong>Packages</strong>: From this pane, you can install and activate <i class="fa-brands fa-r-project" aria-label="r-project"></i> packages. From this pane you can install only the packages that are available at CRAN. It requires tons of extra work to register a package there, so you may find a lot online (I spent a 1 week developing <code>currr</code> and one extra week to fulfil every requirement to finally publish). And please, please, please:</li>
 </ol>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -931,10 +974,8 @@ Tip
 </p>
 </div>
 </div>
-<hr>
-</section>
-<section id="data-types-in-fa-brands-r-project" class="level3">
-<h3 class="anchored" data-anchor-id="data-types-in-fa-brands-r-project">Data Types in <i class="fa-brands fa-r-project" aria-label="r-project"></i></h3>
+<hr></section><section id="data-types-in-fa-brands-r-project" class="level3"><h3 class="anchored" data-anchor-id="data-types-in-fa-brands-r-project">Data Types in <i class="fa-brands fa-r-project" aria-label="r-project"></i>
+</h3>
 <p>R supports a variety of data types:</p>
 <ol type="1">
 <li><p><strong>Numeric</strong>: These are basic numerical values. For instance, assigning <code>x &lt;- 4</code> makes <code>x</code> a numeric type.</p></li>
@@ -944,47 +985,46 @@ Tip
 </ol>
 <p>Ever confused about what is the type of <code>x</code>? We can use the <code>class</code> command to answer this.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"2"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"2"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
-<hr>
-</section>
-<section id="data-structures-in-fa-brands-r-project" class="level3">
-<h3 class="anchored" data-anchor-id="data-structures-in-fa-brands-r-project">Data Structures in <i class="fa-brands fa-r-project" aria-label="r-project"></i></h3>
+<hr></section><section id="data-structures-in-fa-brands-r-project" class="level3"><h3 class="anchored" data-anchor-id="data-structures-in-fa-brands-r-project">Data Structures in <i class="fa-brands fa-r-project" aria-label="r-project"></i>
+</h3>
 <p>R offers several data structures to store and manipulate data:</p>
 <ol type="1">
-<li><strong>Vectors</strong>: These are one-dimensional arrays that can store numeric, character, or logical values.</li>
+<li>
+<strong>Vectors</strong>: These are one-dimensional arrays that can store numeric, character, or logical values.</li>
 </ol>
 <p>Some examples</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>) <span class="co"># combine</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span> <span class="co"># combine</span></span>
+<span><span class="va">v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "a" "b" "c" "d"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">1</span>] <span class="co"># 1st item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># 1st item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "a"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">2</span>] <span class="co"># 2nd item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="co"># 2nd item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "b"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># from 1 to 10</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="co"># from 1 to 10</span></span>
+<span><span class="va">v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"XL"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>, <span class="st">"S"</span>, <span class="st">"L"</span>, <span class="st">"other"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"XL"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>, <span class="st">"S"</span>, <span class="st">"L"</span>, <span class="st">"other"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "L"     "L"     "M"     "other" "S"     "XL"   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fv <span class="ot">&lt;-</span> <span class="fu">factor</span>(v, <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"XS"</span>, <span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>, <span class="st">"XL"</span>))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(fv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">v</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"XS"</span>, <span class="st">"S"</span>, <span class="st">"M"</span>, <span class="st">"L"</span>, <span class="st">"XL"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">fv</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] S  M  L  L  XL
 Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
@@ -992,17 +1032,18 @@ Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
 </div>
 <p><code>NA</code> stands for “Not Available” and is used to represent missing or undefined values in data. It is a special value that indicates the absence of a valid observation or result. <code>NA</code> is commonly used in data analysis and manipulation tasks to handle missing data and perform computations or operations without encountering errors.</p>
 <ol start="3" type="1">
-<li><strong>Data Frames</strong>: These are tables where each column is a variable and each row is an observation.</li>
+<li>
+<strong>Data Frames</strong>: These are tables where each column is a variable and each row is an observation.</li>
 </ol>
 <p>Example</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>avengers_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Captain America"</span>, <span class="st">"Hulk"</span>, <span class="st">"Groot"</span>,<span class="st">"Strange"</span>), </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"human"</span>, <span class="cn">NA</span>, <span class="st">"Flora colossus"</span>, <span class="st">"human"</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>avengers_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avengers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Captain America"</span>, <span class="st">"Hulk"</span>, <span class="st">"Groot"</span>,<span class="st">"Strange"</span><span class="op">)</span>, </span>
+<span>  species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"human"</span>, <span class="cn">NA</span>, <span class="st">"Flora colossus"</span>, <span class="st">"human"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">avengers_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id            name        species
 1  1 Captain America          human
@@ -1012,12 +1053,13 @@ Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
 </div>
 </div>
 <ol start="4" type="1">
-<li><strong>Lists</strong>: These are ordered collections of objects, which can be of different types and lengths.</li>
+<li>
+<strong>Lists</strong>: These are ordered collections of objects, which can be of different types and lengths.</li>
 </ol>
 <p>To store more complex data, the <code>list</code> function can be used. If you want to use the <code>data.frame</code> function, it is important to have vectors of equal length. However, in cases where you need to store a collection of data.frames, such as a big panel dataset with separate files for each year (e.g., <code>cis_survey2016.csv</code>, <code>cis_survey2017.csv</code>), using a <code>list</code> is a perfect solution. This situation is not uncommon, and I recommend storing your data in a list.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(avengers_df, v)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">avengers_df</span>, <span class="va">v</span><span class="op">)</span></span>
+<span><span class="va">mylist</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
   id            name        species
@@ -1032,18 +1074,15 @@ Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
 </div>
 <p>Now <code>mylist</code> stores a data.frame and two vectors. You can access the elements by <code>[[ ]]</code>. For example, the 2nd element:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mylist</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "XL"    "M"     "L"     "S"     "L"     "other"</code></pre>
 </div>
 </div>
-<hr>
-</section>
-<section id="basics-of-programming" class="level3">
-<h3 class="anchored" data-anchor-id="basics-of-programming">Basics of programming</h3>
+<hr></section><section id="basics-of-programming" class="level3"><h3 class="anchored" data-anchor-id="basics-of-programming">Basics of programming</h3>
 <p>In the following, I will introduce the most basic expressions that may arise during programming. If you already have experience in any language, these will surely not pose a difficulty for you, although syntax varies in every language. These are elements of coding that function in any language in this way, and they are essential foundations for transforming our thoughts into code.</p>
-<section id="conditional-statements-in-fa-brands-r-project" class="level4">
-<h4 class="anchored" data-anchor-id="conditional-statements-in-fa-brands-r-project">Conditional Statements in <i class="fa-brands fa-r-project" aria-label="r-project"></i></h4>
+<section id="conditional-statements-in-fa-brands-r-project" class="level4"><h4 class="anchored" data-anchor-id="conditional-statements-in-fa-brands-r-project">Conditional Statements in <i class="fa-brands fa-r-project" aria-label="r-project"></i>
+</h4>
 <p align="center">
 <iframe width="100%" height="500" src="https://www.youtube.com/embed/m2Ux2PnJe6E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 </iframe>
@@ -1051,23 +1090,23 @@ Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
 <p>Logical operators such as <code>&lt;</code>, <code>&gt;</code>, <code>==</code>, and <code>!=</code> can be used to form conditions.</p>
 <p>Let’s see some examples!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">&lt;</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">4</span> <span class="op">&lt;</span> <span class="fl">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">5</span> <span class="op">&lt;=</span> <span class="fl">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">4</span> <span class="op">&gt;</span> <span class="fl">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">==</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span> <span class="op">==</span> <span class="fl">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;=</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">5</span> <span class="op">&gt;=</span><span class="fl">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -1075,11 +1114,11 @@ Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
 <div class="columns">
 <div class="column" style="width: 45%">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span> <span class="co"># equal?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span> <span class="op">==</span> <span class="fl">3</span> <span class="co"># equal?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">!=</span> <span class="dv">3</span> <span class="co"># not equal?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">3</span> <span class="op">!=</span> <span class="fl">3</span> <span class="co"># not equal?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1087,53 +1126,47 @@ Levels: XS &lt; S &lt; M &lt; L &lt; XL</code></pre>
 </div><div class="column" style="width: 5%">
 
 </div><div class="column" style="width: 40%">
-<p><br>
-</p>
+<p><br></p>
 <div class="quarto-figure quarto-figure-right">
-<figure class="figure">
-<p><img src="images/meme_false.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="images/meme_false.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">3</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<section id="combining-conditions" class="level5">
-<h5 class="anchored" data-anchor-id="combining-conditions">Combining conditions</h5>
+<section id="combining-conditions" class="level5"><h5 class="anchored" data-anchor-id="combining-conditions">Combining conditions</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span> <span class="co"># and</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">&amp;</span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">3</span> <span class="co"># and</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span> <span class="sc">|</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span> <span class="co"># or</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">|</span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">3</span> <span class="co"># or</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>It is preferred to use <code>&amp;&amp;</code> and <code>||</code> in this case, as this forces R to only check the next condition if it can alter the final outcome. For example, if the first condition is <code>FALSE</code> and <code>&amp;&amp;</code> is used, the subsequent condition will not be evaluated.</p>
-</section>
-</section>
-<section id="conditional-evaluation" class="level4">
-<h4 class="anchored" data-anchor-id="conditional-evaluation">Conditional evaluation</h4>
+</section></section><section id="conditional-evaluation" class="level4"><h4 class="anchored" data-anchor-id="conditional-evaluation">Conditional evaluation</h4>
 <p>R supports conditional statements like <code>if</code>, <code>else if</code>, and <code>else</code> to execute code based on specific conditions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>students_at_class <span class="ot">=</span> <span class="dv">25</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (students_at_class <span class="sc">&gt;</span> <span class="dv">20</span>) {</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"You R great!"</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (students_at_class <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Would you like some additional assignment?"</span>)</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"You will all fail!"</span>)</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">students_at_class</span> <span class="op">=</span> <span class="fl">25</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">students_at_class</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"You R great!"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">students_at_class</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Would you like some additional assignment?"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"You will all fail!"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "You R great!"</code></pre>
 </div>
@@ -1151,37 +1184,31 @@ Tip
 <p>If you want to write an <code>if</code> … <code>else</code> statement in R, I highly recomment you to use the <strong>snippet</strong> for that. Snippet means, that when you type&nbsp;<code>if</code>&nbsp;and press <code>shift + tab</code>, then R will automaticly write the framework you have to use.</p>
 </div>
 </div>
-<section id="working-with-vectors" class="level5">
-<h5 class="anchored" data-anchor-id="working-with-vectors">Working with vectors</h5>
+<section id="working-with-vectors" class="level5"><h5 class="anchored" data-anchor-id="working-with-vectors">Working with vectors</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3 6 9</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"even"</span>, <span class="st">"odd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span>, <span class="st">"even"</span>, <span class="st">"odd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "odd"  "even" "odd"  "even" "odd"  "even" "odd"  "even" "odd"  "even"</code></pre>
 </div>
 </div>
-<hr>
-</section>
-</section>
-<section id="loops" class="level4">
-<h4 class="anchored" data-anchor-id="loops">Loops</h4>
+<hr></section></section><section id="loops" class="level4"><h4 class="anchored" data-anchor-id="loops">Loops</h4>
 <p>Loops are used to execute a block of code multiple times. <i class="fa-brands fa-r-project" aria-label="r-project"></i> supports loops like <code>for</code> and <code>while</code>.</p>
-<section id="for" class="level5">
-<h5 class="anchored" data-anchor-id="for">For</h5>
+<section id="for" class="level5"><h5 class="anchored" data-anchor-id="for">For</h5>
 <p><code>For</code> loop is used to <strong>iterate</strong> over a vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic for loop to print numbers from 1 to 5</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Basic for loop to print numbers from 1 to 5</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1
 [1] 2
@@ -1198,49 +1225,43 @@ Tip
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the first two Fibonacci numbers</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>fibonacci <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the next 8 Fibonacci numbers</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  next_fibonacci <span class="ot">&lt;-</span> fibonacci[i<span class="dv">-1</span>] <span class="sc">+</span> fibonacci[i<span class="dv">-2</span>]</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  fibonacci <span class="ot">&lt;-</span> <span class="fu">c</span>(fibonacci, next_fibonacci)</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the Fibonacci sequence</span></span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fibonacci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Initialize the first two Fibonacci numbers</span></span>
+<span><span class="va">fibonacci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate the next 8 Fibonacci numbers</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">next_fibonacci</span> <span class="op">&lt;-</span> <span class="va">fibonacci</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">fibonacci</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">2</span><span class="op">]</span></span>
+<span>  <span class="va">fibonacci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">fibonacci</span>, <span class="va">next_fibonacci</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Print the Fibonacci sequence</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">fibonacci</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  1  2  3  5  8 13 21 34</code></pre>
 </div>
 </div>
-</section>
-<section id="while" class="level5">
-<h5 class="anchored" data-anchor-id="while">While</h5>
+</section><section id="while" class="level5"><h5 class="anchored" data-anchor-id="while">While</h5>
 <p><code>While</code> loop is used to execute a given script <em>while</em> the condition is true.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the first two Fibonacci numbers</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>fibonacci <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Fibonacci numbers while the last value is less than 50</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">tail</span>(fibonacci, <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="dv">50</span>) {</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  next_fibonacci <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">tail</span>(fibonacci, <span class="dv">2</span>))</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  fibonacci <span class="ot">&lt;-</span> <span class="fu">c</span>(fibonacci, next_fibonacci)</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the last number which is greater than or equal to 50</span></span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>fibonacci <span class="ot">&lt;-</span> fibonacci[<span class="sc">-</span><span class="fu">length</span>(fibonacci)]</span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the Fibonacci sequence</span></span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fibonacci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Initialize the first two Fibonacci numbers</span></span>
+<span><span class="va">fibonacci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate Fibonacci numbers while the last value is less than 50</span></span>
+<span><span class="kw">while</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">fibonacci</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">50</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">next_fibonacci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">fibonacci</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">fibonacci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">fibonacci</span>, <span class="va">next_fibonacci</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Remove the last number which is greater than or equal to 50</span></span>
+<span><span class="va">fibonacci</span> <span class="op">&lt;-</span> <span class="va">fibonacci</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">fibonacci</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Print the Fibonacci sequence</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">fibonacci</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  1  2  3  5  8 13 21 34</code></pre>
 </div>
 </div>
-<hr>
-</section>
-</section>
-<section id="functions" class="level4">
-<h4 class="anchored" data-anchor-id="functions">Functions</h4>
+<hr></section></section><section id="functions" class="level4"><h4 class="anchored" data-anchor-id="functions">Functions</h4>
 <div class="columns">
 <div class="column" style="width: 25%">
 <p><img src="images/CleanShot 2023-09-07 at 22.16.03@2x.png" class="img-fluid" style="width:90.0%"></p>
@@ -1262,20 +1283,20 @@ Tip
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>fibonacci <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  fibonacci_seq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># initial = 2 elements</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">max</span>(n) <span class="sc">-</span> <span class="dv">2</span>)) { <span class="co"># n can be a vector</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    new_elem <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">tail</span>(fibonacci_seq, <span class="dv">2</span>))</span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    fibonacci_seq <span class="ot">&lt;-</span> <span class="fu">c</span>(fibonacci_seq, new_elem)</span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  fibonacci_seq[n]</span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fibonacci</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">fibonacci_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># initial = 2 elements</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="co"># n can be a vector</span></span>
+<span>    <span class="va">new_elem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">fibonacci_seq</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="va">fibonacci_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">fibonacci_seq</span>, <span class="va">new_elem</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="va">fibonacci_seq</span><span class="op">[</span><span class="va">n</span><span class="op">]</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fibonacci</span>(<span class="dv">13</span><span class="sc">:</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fibonacci</span><span class="op">(</span><span class="fl">13</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 144 233 377</code></pre>
 </div>
@@ -1293,51 +1314,43 @@ Note
 <p>Writing good functions can be challenging, but once you’ve got the basics down, here are some tips that could help: <a href="https://style.tidyverse.org/functions.html" class="uri">https://style.tidyverse.org/functions.html</a></p>
 </div>
 </div>
-</section>
-<section id="the-apply-family" class="level4">
-<h4 class="anchored" data-anchor-id="the-apply-family">The apply family</h4>
+</section><section id="the-apply-family" class="level4"><h4 class="anchored" data-anchor-id="the-apply-family">The apply family</h4>
 <p>The functions belonging to the Apply Family will not be used frequently, as there is a more modern and transparent alternative for them. We will encounter these in the following weeks, however, it is important to be familiar with them as they form the basis for many packages and solutions (for instance, in parallelisation), and we cannot avoid having colleagues who use them.</p>
 <p>The essence of these functions is to perform iteration on the input data. The difference between iteration and recursion is that in the latter case, it the previous result is used in the evaluation of the next step (for example, we saw this in the Fibonacci sequence). This is why, for example, processor cores cannot perform the given task separately at different points of the input data.</p>
-<section id="apply" class="level5">
-<h5 class="anchored" data-anchor-id="apply">Apply</h5>
+<section id="apply" class="level5"><h5 class="anchored" data-anchor-id="apply">Apply</h5>
 <p>The function <code>apply</code> calls a function on each row or column of a data.frame (or matrix). So its first argument is the <code>data.frame</code>, the third is the function which should use and the second is the MARGIN:</p>
 <ul>
 <li><p><code>MARGIN = 2</code>: apply the given function on each of the COLUMNS</p></li>
 <li><p><code>MARGIN = 1</code>: apply the given function on each of the ROWS</p></li>
 </ul>
 <hr>
-<section id="example---fertility-rates-by-country-by-year" class="level6">
-<h6 class="anchored" data-anchor-id="example---fertility-rates-by-country-by-year">Example - Fertility rates by country / by year</h6>
+<section id="example---fertility-rates-by-country-by-year" class="level6"><h6 class="anchored" data-anchor-id="example---fertility-rates-by-country-by-year">Example - Fertility rates by country / by year</h6>
 <p>Replacement Fertility Rate: Assuming there are no migration flows and that mortality rates remain unchanged, a total fertility rate of 2.1 children per woman generates a broad stability of the population.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>above_replacement_prop <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># proportion of observation above the replacement rate</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># exclude NAs</span></span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(x <span class="sc">&gt;=</span> <span class="fl">2.1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x))</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">above_replacement_prop</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># proportion of observation above the replacement rate</span></span>
+<span>  <span class="co"># exclude NAs</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">2.1</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">above_replacement_prop</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.3</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="fu">above_replacement_prop</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3333333</code></pre>
 </div>
 </div>
-<hr>
-</section>
-</section>
-</section>
-</section>
-<section id="example---fertility-rates-by-country-by-year-1" class="level2">
-<h2 class="anchored" data-anchor-id="example---fertility-rates-by-country-by-year-1">Example - Fertility rates by country / by year</h2>
-<section id="data-from-oecd" class="level3">
-<h3 class="anchored" data-anchor-id="data-from-oecd">Data from OECD</h3>
+<hr></section></section></section></section><section id="example---fertility-rates-by-country-by-year-1" class="level2"><h2 class="anchored" data-anchor-id="example---fertility-rates-by-country-by-year-1">Example - Fertility rates by country / by year</h2>
+<section id="data-from-oecd" class="level3"><h3 class="anchored" data-anchor-id="data-from-oecd">Data from OECD</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Code to reproduce</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Data</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Code to reproduce</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>fertility_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      AUS  AUT  BEL  CAN  CZE  DNK  FIN  FRA  DEU  GRC  HUN  ISL  IRL  ITA  JPN
 1960 3.45 2.69 2.54 3.90 2.11 2.54 2.71 2.74 2.37 2.23 2.02 4.26 3.76 2.41 2.00
@@ -1601,27 +1614,24 @@ Note
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Later, we will discuss the meanings of each step and the fact that there are much simpler solutions available.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>fertility_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://stats.oecd.org/sdmx-json/data/DP_LIVE/.FERTILITY.../OECD?contentType=csv&amp;detail=code&amp;separator=comma&amp;csv-lang=en"</span>)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>fertility_df <span class="ot">&lt;-</span> fertility_df[, <span class="fu">c</span>(<span class="st">"LOCATION"</span>, <span class="st">"TIME"</span>, <span class="st">"Value"</span>)]  </span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>fertility_df <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(fertility_df, <span class="at">names_from =</span> <span class="st">"LOCATION"</span>, </span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">values_from =</span> <span class="st">"Value"</span>)</span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>fertility_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">column_to_rownames</span>(fertility_df, <span class="st">"TIME"</span>)</span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>fertility_df <span class="ot">&lt;-</span> fertility_df[, <span class="sc">-</span> <span class="dv">51</span>] <span class="co"># OECD average</span></span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>fertility_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fertility_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://stats.oecd.org/sdmx-json/data/DP_LIVE/.FERTILITY.../OECD?contentType=csv&amp;detail=code&amp;separator=comma&amp;csv-lang=en"</span><span class="op">)</span></span>
+<span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="va">fertility_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LOCATION"</span>, <span class="st">"TIME"</span>, <span class="st">"Value"</span><span class="op">)</span><span class="op">]</span>  </span>
+<span></span>
+<span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span><span class="va">fertility_df</span>, names_from <span class="op">=</span> <span class="st">"LOCATION"</span>, </span>
+<span>                   values_from <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="va">fertility_df</span>, <span class="st">"TIME"</span><span class="op">)</span></span>
+<span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="va">fertility_df</span><span class="op">[</span>, <span class="op">-</span> <span class="fl">51</span><span class="op">]</span> <span class="co"># OECD average</span></span>
+<span></span>
+<span><span class="va">fertility_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">fertility_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <p>At the end of these steps, we have a table, each column of which shows the time series of the fertility rate of a country.</p>
-<hr>
-</section>
-<section id="apply---margin-1" class="level3">
-<h3 class="anchored" data-anchor-id="apply---margin-1">Apply - MARGIN = 1</h3>
+<hr></section><section id="apply---margin-1" class="level3"><h3 class="anchored" data-anchor-id="apply---margin-1">Apply - MARGIN = 1</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(fertility_df, <span class="at">MARGIN =</span> <span class="dv">1</span>, above_replacement_prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">fertility_df</span>, MARGIN <span class="op">=</span> <span class="fl">1</span>, <span class="va">above_replacement_prop</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      1960       1961       1962       1963       1964       1965       1966 
 0.92000000 0.92000000 0.92000000 0.92000000 0.92000000 0.92000000 0.88000000 
@@ -1644,28 +1654,22 @@ Note
 </div>
 </div>
 <p>If MARGIN == 1, the apply calculates the proportion of observation above 2.1 in each <strong>row</strong>. The returned value is a named vector, which means that you can refer to its values by index, or by name.</p>
-<hr>
-</section>
-<section id="apply---margin-1-1" class="level3">
-<h3 class="anchored" data-anchor-id="apply---margin-1-1">Apply - MARGIN = 1</h3>
+<hr></section><section id="apply---margin-1-1" class="level3"><h3 class="anchored" data-anchor-id="apply---margin-1-1">Apply - MARGIN = 1</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(fertility_df, <span class="at">MARGIN =</span> <span class="dv">1</span>, above_replacement_prop)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">fertility_df</span>, MARGIN <span class="op">=</span> <span class="fl">1</span>, <span class="va">above_replacement_prop</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1960 
 0.92 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(fertility_df, <span class="at">MARGIN =</span> <span class="dv">1</span>, above_replacement_prop)[<span class="st">"2020"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">fertility_df</span>, MARGIN <span class="op">=</span> <span class="fl">1</span>, <span class="va">above_replacement_prop</span><span class="op">)</span><span class="op">[</span><span class="st">"2020"</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2020 
 0.09433962 </code></pre>
 </div>
 </div>
-<hr>
-</section>
-<section id="apply---margin-2" class="level3">
-<h3 class="anchored" data-anchor-id="apply---margin-2">Apply - MARGIN = 2</h3>
+<hr></section><section id="apply---margin-2" class="level3"><h3 class="anchored" data-anchor-id="apply---margin-2">Apply - MARGIN = 2</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(fertility_df, <span class="at">MARGIN =</span> <span class="dv">2</span>, above_replacement_prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">fertility_df</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, <span class="va">above_replacement_prop</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       AUS        AUT        BEL        CAN        CZE        DNK        FIN 
 0.25806452 0.19354839 0.19354839 0.19354839 0.22580645 0.14285714 0.14516129 
@@ -1686,14 +1690,10 @@ Note
 </div>
 </div>
 <p>If MARGIN == 2, the apply calculates the proportion of observation above 2.1 in each <strong>column</strong>.</p>
-<hr>
-</section>
-</section>
-<section id="lapply" class="level1">
-<h1>Lapply</h1>
+<hr></section></section><section id="lapply" class="level1"><h1>Lapply</h1>
 <p><code>lapply</code> should be used for same purposes, but it can be used for lists or vectors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>mylist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mylist</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
   id            name        species
@@ -1706,14 +1706,11 @@ Note
 [1] "XL"    "M"     "L"     "S"     "L"     "other"</code></pre>
 </div>
 </div>
-<hr>
-</section>
-<section id="lapply-1" class="level1">
-<h1>Lapply</h1>
+<hr></section><section id="lapply-1" class="level1"><h1>Lapply</h1>
 <p><code>lapply</code> should be used for the same purposes, but it can be used for lists or vectors.</p>
 <p>Length of each element:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(mylist, length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">mylist</span>, <span class="va">length</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 3
@@ -1722,33 +1719,26 @@ Note
 [1] 6</code></pre>
 </div>
 </div>
-<hr>
-</section>
-<section id="sapply" class="level1">
-<h1>Sapply</h1>
+<hr></section><section id="sapply" class="level1"><h1>Sapply</h1>
 <div class="columns">
 <div class="column">
 <p><code>sapply</code> is fully identical but returns a vector (<em>s</em> stand for SIMPLIFY)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(mylist, length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mylist</span>, <span class="va">length</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3 6</code></pre>
 </div>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/120260494_137672854706888_5341618995594623085_n.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
+<figure class="figure"><p><img src="images/120260494_137672854706888_5341618995594623085_n.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1945,8 +1935,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.marcellgranat.com">Marcell Granát</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
     <div class="nav-footer-center">
       &nbsp;
@@ -1956,7 +1945,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 </body></html>

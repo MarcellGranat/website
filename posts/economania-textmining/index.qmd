@@ -10,7 +10,7 @@ image: featured.png
 
 TF-IDF to analyse the Economania blog.
 
----
+------------------------------------------------------------------------
 
 ```{css, echo=FALSE}
 .container {
@@ -35,10 +35,10 @@ TF-IDF to analyse the Economania blog.
 The MNB Institute organized the opening event of the Economania professional workshop, and I also had the opportunity to present the results of text analysis on the blog posts.
 
 ::: container
-<iframe class="responsive-iframe" src="https://marcellgranat.github.io/economania-textmining"></iframe>
+<iframe class="responsive-iframe" src="https://marcellgranat.github.io/economania-textmining">
+
+</iframe>
 :::
-
-
 
 My presentation was about the analysis of blog posts, based on TF-IDF indicators. TF-IDF is the frequency of the term (word) adjusted for how rarely it appears in the collection of documents (aggregated to years and authors in this case). This decreases the weight of the commonly used words and highlights the terms related only to that specific year or author.
 

@@ -1,0 +1,41 @@
+---
+title: "Central bank communication and quantitative text mining tools"
+date: '2023-09-27'
+slug: economania-textming
+categories: 
+  - Economania
+  - NLP
+image: featured.png
+bibliography: references.bib
+nocite: |
+  @akerlof2010animal
+  @dybowski2020
+  @gurkaynak2004
+---
+
+The communication of central banks often have at least as strong an impact on financial markets as their decisions themselves.
+
+------------------------------------------------------------------------
+
+*We are organizing educational presentations for universities, educational organizations, or other professional and popular science gatherings with the objective of highlighting the accomplishments of our department. Numerous captivating subjects will be presented by our colleagues, primarily about economics and finance. My [presentation](https://marcellgranat.com/cb-textmining) and [blogpost](https://economaniablog.hu/2023/09/27/jegybanki-kommunikacio-es-a-kvantitativ-szovegbanyaszati-eszkozok/) emphasizes the potential of text mining in relation to central banks.*
+
+```{=html}
+<iframe width="100%" height="500" src="https://marcellgranat.com/cb-textmining" title="Webpage example"></iframe>
+```
+George Akerlof and Robert Shiller (2010) raised in their classic book "Animal Spirits" that the most important factors driving the markets are the stories of the given "era". The value of the stock exchange and our assets are not only explained by our stories, but our stories also shape them. The Nobel laureate author duo cites the stock market boom until 2000 as an example, which was brought about by the emergence of the internet in 1994 and the emotional state surrounding it, the trust in technological development. Technological development is continuous in all other areas as well. However, agricultural and mechanical achievements do not make it to the front pages of magazines, do not generate numerous statistics about them, and do not trigger stock market mania. Therefore, stories are not equally attractive, but they definitely influence the functioning of the economy.
+
+Stories, like viruses, spread among the participants of the economy, and just like epidemiologists, there is room for the use of mathematical models here to predict the course of an epidemic. Our data analysis tools undergo continuous development, and the limits of our computational capacities are constantly expanding. Important new elements of the analytical toolkit are text mining and natural language processing (NLP) techniques, which make it possible to process and interpret large amounts of data that were previously not possible.
+
+Text mining has an important source (mine) in central bank communication, which often moves the markets. In the case of the USA, the largest movements in bond and stock markets typically revolve around Federal Reserve announcements. Gurkaynak, Sack, and Swanson (2004) used intraday data to examine to what extent these fluctuations depend on changes in the target interest rate and to what extent they depend on the accompanying communication. The authors find that 75% of the movements in 2- and 5-year bonds are explained by statements from the FOMC (Federal Open Market Committee) and only 25% by changes in the target rate. This does not imply that communication is an independent central bank tool. The tools exert their influence through the expectations of financial markets for the future. The cited study also argues that communication can be particularly useful in influencing the yield of long-term instruments, so its effective application can help stimulate the economy in the face of zero nominal interest rates.
+
+The question is whether the impact of communication arises from new information coming to the market, which changes market expectations, or whether the communication strategy also matters. For example, does it matter how much the topic changes that comes up in a press conference following a decision? Dybowski and Kempa (2020) used structural topic modeling (STM) to examine the statements made at the press conferences of the European Central Bank (ECB).
+
+Topic modeling is an unsupervised machine learning algorithm that models every document (text) as a mixture of topics and models every topic as a mixture of words. Its goal is to identify topics that essentially represent the clustering of words. Once it is determined how the individual topics are composed as mixtures of words, it is easy to estimate the proportion of a specific topic occurring in a given text or in the texts of a given month using the model.
+
+Using this tool, Dybowski and Kempa (2020) showed that the focus of ECB communication shifted to financial system stability after the 2007-08 crisis, instead of the usual monetary analysis. Although this shift occurred gradually, the difference is significant. Before the crisis, the prevalence of stability-related topics was around 20%, while by 2017 it reached 60-70%.
+
+However, despite the fact that financial stability became the dominant topic in ECB communication, it does not appear that the statements relating to it are necessarily reflected in their interest rate decisions. Dybowski and Kempa (2020) not only examined the time series of topic prevalence but also created a sentiment index (how positively or negatively they speak about financial system stability) for the given topics and placed it in an extended Taylor rule. The Taylor rule is a monetary policy guideline that suggests that the central bank should set the base interest rate based on changes in inflation and output gap. Its formal formulation, supplemented with information on the prevalence and assessment of financial stability in communication, allows testing whether there is a relationship between interest rate decisions and communication.
+
+Their results show that the statements of the European Central Bank regarding financial stability do not necessarily reflect in their interest rate decisions, neither before nor after the crisis (the authors do not examine whether there is a relationship with decisions related to other central bank tools).
+
+The available empirical results thus show that the words of central banks often have at least as strong an impact on financial markets as their decisions themselves, and they themselves are aware of this. For example, the ECB has taken steps in recent times to ensure that their messages reach as many people as possible, which you can read more about in a previous blog post here.

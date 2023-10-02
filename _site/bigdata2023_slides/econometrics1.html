@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bivariate and multivariate OLS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marcell Granát" />
+    <meta name="date" content="2023-01-01" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#378C95"],"pen_size":3,"eraser_size":4,"palette":[]}) })</script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/d3/d3.min.js"></script>
+    <script src="libs/dagre/dagre-d3.min.js"></script>
+    <link href="libs/mermaid/dist/mermaid.css" rel="stylesheet" />
+    <script src="libs/mermaid/dist/mermaid.slim.min.js"></script>
+    <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="libs/chromatography/chromatography.js"></script>
+    <script src="libs/DiagrammeR-binding/DiagrammeR.js"></script>
+    <script src="libs/plotly-binding/plotly.js"></script>
+    <script src="libs/typedarray/typedarray.min.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, title-slide
+
+.title[
+# Bivariate and multivariate OLS
+]
+.subtitle[
+## <img src="mnb_intezet.png" style="width:30.0%" />
+Big Data and Data Visualisation
+]
+.author[
+### Marcell Granát
+]
+.institute[
+### Central Bank of Hungary &amp; .blue[John von Neumann University]
+]
+.date[
+### 2023
+]
+
+---
+
+
+&lt;style type="text/css"&gt;
+.red { color: red; }
+.blue { color: #378C95; }
+strong { color: red; }
+a { color: #378C95; font-weight: bold; }
+.remark-inline-code { font-weight: 900; background-color: #a7d5e7; }
+.caption { color: #378C95; font-style: italic; text-align: center; }
+
+.content-box { 
+box-sizing: content-box;
+background-color: #378C95;
+/* Total width: 160px + (2 * 20px) + (2 * 8px) = 216px
+Total height: 80px + (2 * 20px) + (2 * 8px) = 136px
+Content box width: 160px
+Content box height: 80px */
+}
+
+.content-box-green {
+background-color: #d9edc2;
+}
+
+.content-box-red {
+background-color: #f9dbdb;
+}
+
+.fullprice {
+text-decoration: line-through;
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+
+class: inverse, middle, center
+
+# The concept
+
+
+
+---
+
+## What is econometrics?
+
+&gt; "The application of **statistical and mathematical methods** to the analysis of **economic** data, with the purpose
+of giving **empirical content** to economic theories and verifying them or refuting them."
+
+--
+
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e55741c2585fa92b39fe" style="width:700px;height:300px;"></div>
+<script type="application/json" data-for="htmlwidget-e55741c2585fa92b39fe">{"x":{"diagram":"\ngraph LR\n  A(Research question)-->B(Data collection)\n  A-->C(Formulate the model)\n  B-->D(Model estimation)\n  C-->D\n  D-->E(Testing the model)\n  E-.re-estimation.->D\n  E-->F(Policy decision)\n  E-->G(Prediction)\n"},"evals":[],"jsHooks":[]}</script>
+
+--
+
+A prominent tool: **regression** 
+
+---
+
+class: inverse, middle, center
+
+# Bivariate OLS
+
+---
+
+## Basics of OLS
+
+### Amsterdam house data
+
+
+```r
+amsterdam_house_df &lt;- read_rds("https://raw.githubusercontent.com/MarcellGranat/big_data2022/main/econometrics_files/amsterdam_house.rds")
+# source: https://www.kaggle.com/datasets/thomasnibb/amsterdam-house-price-prediction
+```
+
+
+
+
+
+```
+## # A tibble: 924 × 7
+##    Address                                Zip      Price  Area  Room   Lon   Lat
+##    &lt;chr&gt;                                  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Blasiusstraat 8 2, Amsterdam           1091 CR 685000    64     3  4.91  52.4
+##  2 Kromme Leimuidenstraat 13 H, Amsterdam 1059 EL 475000    60     3  4.85  52.3
+##  3 Zaaiersweg 11 A, Amsterdam             1097 SM 850000   109     4  4.94  52.3
+##  4 Tenerifestraat 40, Amsterdam           1060 TH 580000   128     6  4.79  52.3
+##  5 Winterjanpad 21, Amsterdam             1036 KN 720000   138     5  4.90  52.4
+##  6 De Wittenkade 134 I, Amsterdam         1051 AM 450000    53     2  4.88  52.4
+##  7 Pruimenstraat 18 B, Amsterdam          1033 KM 450000    87     3  4.90  52.4
+##  8 Da Costakade 32 II, Amsterdam          1053 WL 590000    80     2  4.87  52.4
+##  9 Postjeskade 41 2, Amsterdam            1058 DG 399000    49     3  4.85  52.4
+## 10 Van Ostadestraat 193 H, Amsterdam      1073 TM 300000    33     2  4.90  52.4
+## # ℹ 914 more rows
+```
+
+---
+
+## Basics of OLS
+
+.blue[What price do we expect, knowing the area of a given house?]
+
+Approach: ???
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-6-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Amsterdam house data
+
+.blue[What price do we expect, knowing the area of a given house?]
+
+Approach: Let's fit a straight line.
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-7-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Basics of OLS
+
+.blue[What parameters do we have to know to draw the line?]
+
+`$$Y_i = \beta_0 + \beta_1 \times X_i,$$`
+
+.pull-left[
+
+where
+
+`$$Y_i = \text{The price of a given house}$$`
+
+`$$\beta_0 = \text{The intercept of the line}$$`
+
+`$$\beta_1 = \text{The slope of the line}$$`
+
+`$$X_i = \text{The area of the given house}$$`
+]
+
+---
+
+## Basics of OLS
+
+.blue[What parameters do we have to know to draw the line?]
+
+`$$Y_i = \beta_0 + \beta_1 \times X_i + \epsilon_i,$$`
+
+.pull-left[
+
+
+where
+
+`$$Y_i = \text{The price of a given house}$$`
+
+`$$\beta_0 = \text{The intercept of the line}$$`
+
+`$$\beta_1 = \text{The slope of the line}$$`
+
+`$$X_i = \text{The area of the given house}$$`
+
+`$$\epsilon_i = \text{The error term}$$`
+
+]
+
+.pull-right[
+
+&lt;img src="econometrics_files/meme_error.JPG" width="260px" height="260px" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+### How to choose the value of the intercept and the slope?
+
+--
+
+.blue[Minimize the error?]
+
+--
+
+The result would be a line above the points...
+
+---
+
+## Basics of OLS
+
+.blue[What parameters do we have to know to draw the line?]
+
+`$$Y_i = \beta_0 + \beta_1 \times X_i + \epsilon_i,$$`
+
+.pull-left[
+
+
+where
+
+`$$Y_i = \text{The price of a given house}$$`
+
+`$$\beta_0 = \text{The intercept of the line}$$`
+
+`$$\beta_1 = \text{The slope of the line}$$`
+
+`$$X_i = \text{The area of the given house}$$`
+
+`$$\epsilon_i = \text{The error term}$$`
+
+]
+
+.pull-right[
+
+&lt;img src="econometrics_files/meme_error.JPG" width="260px" height="260px" style="display: block; margin: auto;" /&gt;
+
+]
+
+### How to choose the value of the intercept and the slope?
+
+
+.blue[Minimize the squared error?]
+
+--
+
+Exactly, that is what OLS is about. OLS = Ordinary Least Squares
+
+---
+
+## Basics of OLS
+
+#### Let's calculate the sum of squared errors assuming two random values for the intercept and the slope
+
+
+```r
+b0 &lt;- 1000
+b1 &lt;- 200
+
+amsterdam_house_df %&gt;% 
+  transmute(
+    Price,
+    Area,
+    fit = b0 + Area * b1,
+    e = Price - fit,
+    e2 = e^2
+  ) %$% 
+  sum(e2, na.rm = TRUE)
+```
+
+```
+## [1] 5.91045e+14
+```
+
+---
+
+## Basics of OLS
+
+#### Let's transform this into a function
+
+
+```r
+sse &lt;- function(b0 = 1000, b1 = 200) {
+  amsterdam_house_df %&gt;% 
+    transmute(
+      Price,
+      Area,
+      fit = b0 + Area * b1,
+      e = Price - fit,
+      e2 = e^2
+    ) %$% 
+    sum(e2, na.rm = TRUE)
+}
+
+sse(1000, 200)
+```
+
+```
+## [1] 5.91045e+14
+```
+
+---
+
+## Basics of OLS
+
+#### Let's apply the function on large set of values
+
+
+```r
+sse_df &lt;- crossing(
+  b0 = seq(from = 0, to = 1e4, length.out = 100),
+  b1 = seq(from = 0, to = 1e4, length.out = 100)
+) %&gt;% 
+  mutate(
+    sse = map2_dbl(b0, b1, sse)
+  ) %&gt;% 
+  arrange(sse)
+
+sse_df
+```
+
+```
+## # A tibble: 10,000 × 3
+##       b0    b1     sse
+##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+*##  1    0  6869. 8.52e13
+##  2  101. 6869. 8.52e13
+##  3  202. 6869. 8.52e13
+##  4  303. 6869. 8.52e13
+##  5  404. 6869. 8.52e13
+##  6  505. 6869. 8.52e13
+##  7  606. 6869. 8.52e13
+##  8  707. 6869. 8.52e13
+##  9  808. 6869. 8.52e13
+## 10  909. 6869. 8.52e13
+## # ℹ 9,990 more rows
+```
+
+---
+
+## Basics of OLS
+
+#### Let's apply the function on large set of values
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-13-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+## Basics of OLS
+
+Now we have run the function on 10,000 combination, but we are still not sure whether our solution is the best possible, or how far is it from that...
+
+--
+
+Fortunately, there is a much more efficient way to determine the line that produces the least squared errors
+
+The normal equations:
+
+`$$\sum Y_i =n \times \beta_0+\beta_1 \sum X_i$$`
+
+`$$\sum X_i Y_i =\beta_0 \sum X_i+\beta_1 \sum X_i^2$$`
+
+---
+
+## Basics of OLS
+
+In our case:
+
+
+```r
+amsterdam_house_df %&gt;% 
+  drop_na(Price, Area) %&gt;% 
+  summarise(n = n(), y = sum(Price), x = sum(Area), 
+            xz = sum(Price * Area), x2 = sum(Area^2))
+```
+
+```
+## # A tibble: 1 × 5
+##       n         y     x          xz       x2
+##   &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
+## 1   920 572300186 87959 78232126563 11379655
+```
+
+
+
+`$$572,300,186 =920 \times \beta_0+\beta_1 \times 87,959$$`
+
+`$$78,232,126,563 =\beta_0 \times 87,959+\beta_1 \times 11,379,655$$`
+
+---
+
+## Basics of OLS
+
+Of course, there are a simpler solution for fitting a **L**inear **M**odel
+
+
+```r
+lm(formula = Price ~ Area, data = amsterdam_house_df)
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Area, data = amsterdam_house_df)
+## 
+## Coefficients:
+## (Intercept)         Area  
+##     -134910         7918
+```
+
+--
+
+How to interpret the results?
+
+1. A house with one additional m^2 in the area would cost € 7918 more
+
+2. If the area would be zero, the price would be - 134910 (both parts are impossible, this is just a meaningless extrapolation)
+
+Now we see the estimated coefficients (beta values), but what else can we extract?
+
+---
+
+## Basics of OLS
+
+The old-school (and disadvantageous) method
+
+
+```r
+fit &lt;- lm(formula = Price ~ Area, data = amsterdam_house_df)
+summary(fit)
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Area, data = amsterdam_house_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1867573  -159054    21513   126639  3220591 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -134909.9    19145.1  -7.047  3.6e-12 ***
+## Area           7917.5      172.1  45.994  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 296700 on 918 degrees of freedom
+##   (4 observations deleted due to missingness)
+## Multiple R-squared:  0.6974,	Adjusted R-squared:  0.697 
+## F-statistic:  2115 on 1 and 918 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+
+## Basics of OLS
+
+The tidy method: {broom}
+
+
+```r
+library(broom)
+augment(fit)
+```
+
+```
+## # A tibble: 920 × 9
+##    .rownames  Price  Area .fitted   .resid    .hat  .sigma   .cooksd .std.resid
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 1         685000    64 371811.  313189. 0.00142 296650. 0.000795       1.06 
+##  2 2         475000    60 340141.  134859. 0.00151 296797. 0.000157       0.455
+##  3 3         850000   109 728100.  121900. 0.00115 296804. 0.0000971      0.411
+##  4 4         580000   128 878533. -298533. 0.00144 296667. 0.000731      -1.01 
+##  5 5         720000   138 957708. -237708. 0.00169 296727. 0.000545      -0.802
+##  6 6         450000    53 284719.  165281. 0.00170 296781. 0.000264       0.558
+##  7 7         450000    87 553914. -103914. 0.00111 296811. 0.0000684     -0.350
+##  8 8         590000    80 498492.   91508. 0.00117 296816. 0.0000557      0.309
+##  9 9         399000    49 253049.  145951. 0.00182 296792. 0.000221       0.492
+## 10 10        300000    33 126368.  173632. 0.00241 296775. 0.000414       0.586
+## # ℹ 910 more rows
+```
+
+---
+
+## Basics of OLS
+
+The tidy method: {broom}
+
+
+```r
+library(broom)
+glance(fit)
+```
+
+```
+## # A tibble: 1 × 12
+##   r.squared adj.r.squared  sigma statistic   p.value    df  logLik    AIC    BIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.697         0.697 2.97e5     2115. 1.71e-240     1 -12897. 25800. 25814.
+## # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
+```
+
+---
+
+## Basics of OLS
+
+The tidy method: {broom}
+
+
+```r
+library(broom)
+tidy(fit)
+```
+
+```
+## # A tibble: 2 × 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept) -134910.    19145.     -7.05 3.60e- 12
+## 2 Area           7918.      172.     46.0  1.71e-240
+```
+
+.content-box-green[
+The estimated coefficients have a standard error!
+]
+
+--
+
+And yes, they have a **confidence interval** as well.
+
+
+```
+## # A tibble: 2 × 7
+##   term        estimate std.error statistic   p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept) -134910.    19145.     -7.05 3.60e- 12 -172483.   -97337.
+## 2 Area           7918.      172.     46.0  1.71e-240    7580.     8255.
+```
+
+
+---
+
+## Basics of OLS
+
+
+```r
+coef_df &lt;- tidy(fit, conf.int = TRUE, conf.level = .95)
+```
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-23-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-24-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-25-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### What is the standard error of the coef?
+
+Let's create a function for the data-generating process (DGP), where coefficients can be specified.
+
+
+```r
+dgp &lt;- function(b0 = 100, b1 = 20, n = 100) {
+  tibble(x = rnorm(n, sd = 3)) %&gt;% 
+    mutate(y = b0 + b1 * x + rnorm(n, sd = 25))
+}
+```
+
+Let's generate several trajectories with that.
+
+
+```r
+tibble(data = rerun(5, dgp()))
+```
+
+```
+## # A tibble: 5 × 1
+##   data              
+##   &lt;list&gt;            
+## 1 &lt;tibble [100 × 2]&gt;
+## 2 &lt;tibble [100 × 2]&gt;
+## 3 &lt;tibble [100 × 2]&gt;
+## 4 &lt;tibble [100 × 2]&gt;
+## 5 &lt;tibble [100 × 2]&gt;
+```
+
+
+---
+
+### What is the standard error of the coef?
+
+
+```r
+rerun(1e3, dgp()) %&gt;% # 1000 generated trajectory
+  tibble(data = .) %&gt;% 
+  mutate(
+    # the model
+    fit = map(data, function(xx) lm(formula = y ~ x, data = xx)), 
+    tidied = map(fit, broom::tidy), # coeffients
+    estimate = map(tidied, pull, 2), # estimation of the coef
+    se = map(tidied, pull, 3), # SE of the coefs
+    b0 = map_dbl(estimate, 1),
+    b1 = map_dbl(estimate, 2),
+    se_b0 = map_dbl(se, 1),
+    se_b1 = map_dbl(se, 2),
+  ) %&gt;% 
+  summarise(
+    mean(se_b0), # mean of the estimated SEs
+    sd(b0), # sd of the point estimates
+    mean(se_b1), # mean of the estimated SEs
+    sd(b1), # sd of the point estimates
+  )
+```
+
+```
+## # A tibble: 1 × 4
+##   `mean(se_b0)` `sd(b0)` `mean(se_b1)` `sd(b1)`
+##           &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+## 1          2.51     2.50         0.845    0.851
+```
+
+---
+
+#### What is the standard error of the coef?
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-29-.gif" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+The visualization above shows the simulated data points with the previously created `dgp`. It can be seen that due to the random terms, the intercept and the slope will be slightly different for each trajectory. The standard deviations of the estimated parameters are the standard errors.
+
+---
+## Basics of OLS
+
+In the table containing the coefficients, a test statistic and a p-value are listed next to each term What hypothesis do they belong to?
+
+--
+
+`$$H_0: \beta_j=0$$`
+
+--
+
+How do we make a decision based on the p-value?
+
+--
+
+
+.pull-left[
+&lt;img src="econometrics_files/meme_lowp.JPG" width="250px" height="250px" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+**If the p-value is lower than the significance level (alpha), then we reject the null hypothesis.**
+
+]
+
+--
+
+.blue[And what is the probability of committing a type I error?]
+
+--
+
+Alpha.
+
+---
+
+### Type I error in regression
+
+Let's run the previously created dgp function, but set b1 to 0. How often is the H0 rejected?
+
+
+```r
+tibble(data = rerun(1e3, dgp(b1 = 0))) %&gt;% 
+  mutate(
+    fit = map(data, function(xx) lm(formula = y ~ x, data = xx)),
+    tidied = map(fit, broom::tidy),
+    pvalues = map(tidied, pull),
+    b1_p = map_dbl(pvalues, 2)
+  ) %&gt;% 
+  summarise(rate_type1 = sum(b1_p &lt; .05) / n())
+```
+
+```
+## # A tibble: 1 × 1
+##   rate_type1
+##        &lt;dbl&gt;
+## 1      0.053
+```
+
+---
+
+class: inverse, middle, center
+
+# Multivariate regression
+
+---
+
+## Multivariate regression
+
+- Let's say that Y does not only depend on one variable
+
+--
+
+- For instance, price can be determined based on the area size and the number of rooms
+
+
+`$$Y_i = \beta_0 + \beta_1 \times X_{i, 1} + \beta_2 \times X_{i, 2} + \epsilon_i,$$`
+where
+
+`$$X_i,2 = \text{The number of the rooms}$$`
+- Sure we could try to "find" the optimal coefficients as presented at the bivariate case, but the number of possibilities (infinity) increased a lot...
+
+- The mathematical background of solving the minimization problem requires the knowledge of algebra
+
+---
+
+## Visualisation
+
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-99003baded166d21c394" style="width:700px;height:450px;"></div>
+<script type="application/json" data-for="htmlwidget-99003baded166d21c394">{"x":{"visdat":{"3ec4638b4685":["function () ","plotlyVisDat"]},"cur_data":"3ec4638b4685","attrs":{"3ec4638b4685":{"x":{},"y":{},"z":{},"sizemode":"absolute","sizeref":0.40000000000000002,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Area"},"yaxis":{"title":"Room"},"zaxis":{"title":"Price"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[64,60,109,128,138,53,87,80,49,33,69,88,45,70,86,105,102,78,100,52,199,71,114,75,110,89,134,51,235,37,98,258,83,319,74,31,47,63,43,163,49,62,91,50,120,55,79,99,82,77,81,93,73,160,74,86,52,145,61,86,78,52,51,117,72,56,54,102,72,47,68,65,69,94,92,56,101,45,84,51,67,52,67,73,32,29,97,220,60,124,56,47,37,42,53,80,68,101,47,67,92,95,497,52,55,74,58,53,66,62,61,78,91,66,35,111,93,92,61,85,72,70,165,52,159,102,55,57,66,77,57,43,88,183,50,135,177,59,65,100,106,159,113,54,89,40,62,66,102,64,132,88,50,41,154,230,194,178,50,50,74,149,79,96,168,63,153,73,89,103,141,130,109,150,69,54,166,107,178,171,100,159,118,183,98,78,103,45,145,39,100,42,154,103,394,85,115,125,99,105,153,147,121,54,85,63,110,130,255,25,102,133,93,79,71,110,245,165,38,199,48,95,68,78,117,29,80,57,66,23,259,45,158,120,111,56,58,151,151,60,165,103,258,146,129,119,37,37,111,93,110,94,198,81,207,81,214,47,117,162,250,173,232,309,216,90,107,71,49,150,186,30,187,246,85,374,79,110,203,150,175,91,115,165,72,183,183,257,117,130,134,202,120,88,387,141,93,129,94,120,374,149,114,213,623,128,95,467,131,30,82,105,94,133,102,121,146,127,148,258,100,120,66,102,109,139,226,127,69,75,60,104,348,115,124,73,63,107,60,54,108,95,150,131,158,26,80,56,60,59,166,71,39,78,84,67,87,87,61,100,28,114,53,49,58,65,44,61,41,29,109,91,92,98,53,85,61,102,76,26,56,71,153,90,67,104,93,78,90,35,99,35,136,65,93,51,65,41,89,50,88,73,70,56,176,81,83,36,116,67,53,59,85,75,60,69,93,93,92,92,84,136,73,53,101,58,42,42,61,55,63,61,82,35,76,48,61,128,78,100,69,91,77,59,47,78,115,49,64,69,54,113,159,41,68,106,91,60,61,66,43,83,49,113,62,81,71,53,116,122,112,67,56,46,61,59,123,120,65,54,77,117,158,102,108,46,49,96,52,120,83,118,62,88,27,80,81,47,59,88,73,90,61,65,75,102,44,46,43,56,81,42,54,46,44,65,48,47,82,58,58,70,72,97,87,142,85,45,73,69,88,48,57,97,47,48,44,108,43,88,108,79,82,44,84,103,92,107,83,83,75,94,62,69,58,109,58,122,77,77,148,41,70,74,85,50,28,53,40,89,117,80,88,231,71,89,48,78,67,57,126,78,54,40,104,91,57,71,56,50,90,108,121,69,68,108,127,84,57,87,110,87,70,89,106,90,28,78,84,74,230,109,38,44,113,90,163,50,43,155,73,67,84,64,108,62,145,123,123,101,119,132,146,72,46,78,58,56,180,84,123,89,49,149,184,104,79,55,107,97,64,160,77,77,111,46,72,84,111,92,212,202,50,147,47,109,88,66,99,173,95,40,66,145,84,84,82,57,82,79,62,94,177,63,52,80,87,76,90,123,75,97,75,46,43,81,57,140,59,150,120,105,53,125,64,87,90,71,70,80,73,127,118,78,85,75,75,81,54,57,161,73,130,144,149,40,145,125,47,125,59,33,93,221,64,53,118,44,164,92,103,82,44,38,83,72,80,75,75,67,130,257,99,111,54,78,89,70,98,86,89,114,204,93,87,138,33,74,136,79,69,58,58,92,65,115,46,96,59,54,69,136,220,43,138,162,92,58,124,136,81,129,52,107,41,92,107,134,102,29,90,50,110,135,191,112,74,101,174,107,144,135,78,76,80,102,73,48,157,34,64,45,37,35,68,171,127,98,60,62,78,57,137,480,78,59,107,98,119,65,119,80,63,145,71,124,90,114,107,58,83,81,157,98,115,74,78,61,66,109,77,96,47,47,55,96,112,93,53,55,106,75,42,64,45,118,53,45,80,48,87,273,40,81,82,92,80,120,102,82,58,76,95,128,31,92,21,80,139,94,96,61,180,96,79,79,205,84,118,129,111,108,59,194,41,117,72,51,113,79],"y":[3,3,4,6,5,2,3,2,3,2,3,3,3,2,3,5,6,3,3,3,6,3,4,3,5,3,5,3,7,2,3,4,3,7,3,2,2,3,2,6,3,3,4,3,4,3,3,3,3,4,3,4,3,5,3,4,4,5,3,4,4,4,2,5,3,2,3,3,2,3,3,4,3,4,4,3,5,2,3,2,4,2,2,4,1,2,2,5,3,5,2,2,2,2,3,3,3,3,2,3,3,3,13,2,3,3,3,2,3,3,3,3,4,3,2,5,3,3,3,4,2,3,5,2,5,3,3,2,3,4,2,2,5,6,3,4,4,2,3,4,4,7,3,2,4,2,2,3,4,4,6,4,2,2,4,8,6,7,2,3,3,8,4,4,3,2,6,4,2,4,4,3,4,3,3,2,4,4,5,5,4,9,4,4,4,4,4,2,4,2,3,2,4,3,10,4,3,2,3,4,5,4,2,3,3,3,5,5,7,2,4,7,3,3,4,4,8,5,1,6,2,5,3,3,3,2,2,3,4,1,8,2,6,5,5,2,3,3,4,3,5,3,1,5,4,6,2,2,2,3,4,3,7,3,5,3,5,2,4,5,8,5,9,8,7,3,5,2,2,5,8,2,6,8,4,7,3,2,5,6,6,5,3,7,2,5,3,4,3,4,3,6,5,5,10,6,4,4,1,3,4,7,4,7,13,5,3,14,5,3,3,5,3,3,3,4,3,3,3,5,4,5,2,3,1,5,7,4,4,4,3,5,8,4,5,3,3,4,4,3,6,3,5,4,4,1,3,3,2,3,5,4,2,3,4,3,4,3,3,3,1,3,3,2,3,3,2,3,2,2,3,4,3,5,2,4,2,3,3,2,2,3,4,3,3,3,4,2,3,1,4,2,5,3,3,3,3,2,4,2,3,3,3,4,5,3,4,2,4,3,3,3,3,3,2,3,3,3,4,4,3,5,3,2,4,3,2,2,2,2,2,2,3,2,4,2,3,4,3,3,3,4,4,3,2,3,6,2,2,4,2,6,6,2,3,5,3,2,2,2,2,3,3,4,3,3,3,2,4,5,5,2,2,3,1,3,6,4,3,2,4,4,6,4,4,2,3,5,2,5,3,5,2,4,2,3,3,2,2,3,4,4,3,4,3,5,2,2,2,3,3,2,2,2,2,4,2,2,3,2,2,3,4,3,3,6,3,2,2,3,4,2,2,4,3,2,2,5,2,3,3,3,3,2,3,3,4,3,4,3,4,4,3,4,3,5,3,5,4,4,7,2,4,2,4,2,1,3,2,5,6,4,3,8,3,3,4,3,2,3,5,3,3,2,3,3,2,3,2,2,3,3,2,3,4,5,5,4,2,3,4,3,3,3,3,4,1,4,4,3,8,3,1,3,6,3,7,2,2,6,4,3,3,3,4,2,4,4,4,4,3,4,7,3,3,3,3,2,5,3,7,3,3,3,6,3,3,2,4,4,3,6,3,3,5,2,3,3,4,4,4,6,2,4,2,4,2,2,3,7,5,2,3,3,4,3,4,3,4,3,3,4,9,3,2,4,2,2,4,6,3,4,3,2,2,3,2,5,2,5,3,4,2,5,3,3,3,3,3,2,3,4,5,3,4,3,3,4,2,3,4,3,6,6,6,2,5,3,2,5,2,2,4,5,2,2,4,3,2,4,4,3,2,2,4,3,4,3,3,3,5,9,4,4,3,3,3,3,4,4,5,6,6,5,3,4,2,4,4,3,4,3,3,3,2,5,1,3,2,3,3,3,7,2,5,4,4,3,3,3,3,5,3,6,2,4,4,6,5,2,3,3,4,6,6,5,4,3,6,3,6,5,3,4,4,5,3,2,5,2,3,2,2,2,3,4,5,3,2,4,3,2,5,14,3,3,3,4,4,2,5,4,5,5,4,5,3,4,4,2,2,3,4,3,6,2,4,3,4,5,3,4,2,2,2,4,3,3,3,3,3,3,3,2,2,4,3,2,2,3,4,5,2,5,4,3,3,3,3,3,3,3,4,4,2,3,1,3,5,3,4,3,9,3,4,4,5,4,4,4,5,4,4,9,1,1,3,3,4,4],"z":[685000,475000,850000,580000,720000,450000,450000,590000,399000,300000,540000,539000,390000,575000,650000,475000,700000,325000,399000,375000,1625000,575000,600000,525000,350000,350000,575000,375000,1650000,325000,800000,1950000,735000,3925000,475000,275000,375000,570000,375000,895000,365000,550000,325000,429000,650000,350000,475000,325000,425000,350000,350000,375000,450000,1185000,385000,687500,585000,1295000,375000,500000,300000,375000,400000,850000,550000,275000,330000,700000,500000,369000,245000,350000,425000,375000,335000,450000,395000,300000,450000,415000,650000,425000,469000,485000,225000,285000,995000,1475000,475000,475000,395000,375000,400000,325000,400000,475000,425000,375000,365000,500000,450000,725000,4550000,225000,375000,495000,475000,450000,475000,475000,345000,369000,320000,465000,340000,375000,595000,525000,245000,275000,575000,250000,975000,375000,1100000,750000,439000,375000,445000,325000,415000,300000,915000,685000,350000,1025000,895000,350000,265000,500000,295000,1175000,995000,385000,550000,325000,225000,395000,425000,525000,800000,400000,250000,360000,1050000,799000,1700000,825000,290000,469000,625000,1050000,540000,285000,859000,275000,525000,375000,399500,430000,1300000,1750000,950000,1450000,285000,300000,1500000,685000,4495000,989000,765000,900000,665000,2475000,475000,300000,350000,450000,600000,350000,595000,335000,1295000,825000,5950000,325000,450000,1450000,585000,1200000,1550000,1250000,998000,395000,935000,1050000,729000,699000,1500000,400000,550000,950000,975000,295000,350000,685000,1499000,1275000,375000,1595000,439000,785000,395000,595000,875000,295000,520000,439000,410000,275000,2450000,350000,1795000,835000,985000,425000,635000,999500,1050000,225000,1099000,895000,899000,799000,719000,750000,285000,285000,900000,475000,545000,685000,2200000,650000,1100011,1200000,1495000,295000,1000000,1150000,2250000,1350000,1650000,2750000,1050000,469000,669000,300000,425000,749000,700000,389000,900000,1750000,275000,3500000,400000,850000,1700000,2325000,1495000,549000,1375000,1250000,500000,575000,2475000,1425000,1695000,515000,1095000,2500000,519900,700000,2650000,1149000,280000,600000,950000,849000,3680000,850000,750750,1400000,4900000,899000,895000,1695000,1085000,300000,649000,785000,565000,1395000,795000,1200000,995000,775000,825000,1249000,380000,450000,399000,650000,485000,1599000,950000,629000,359000,419000,250000,320000,3500000,415000,750000,420000,525000,550000,450000,425000,699000,675000,1150000,1250000,1450000,240000,345000,425000,250000,485000,1200000,325000,275000,365000,300000,485000,725000,325000,225000,690000,250000,825000,239000,400000,430000,485000,300000,550000,325000,250000,675000,295000,350000,375000,360000,325000,250000,550000,325000,235000,450000,245000,1400000,650000,465000,735000,675000,425000,635000,300000,375000,300000,910000,385000,775000,349500,375000,325000,295000,345000,325000,245000,650000,450000,525000,315000,500000,285000,600000,425000,225000,440000,450000,425000,230000,395000,550000,350000,335000,300000,270000,675000,450000,450000,549000,265000,395000,275000,400000,450000,395000,335000,425000,325000,590000,345000,398011,900000,400000,825000,415000,685000,610000,295000,339000,310000,395000,335000,275000,425000,225000,500000,600000,300000,350000,475000,510000,225000,545000,550000,225000,320000,360000,475000,425000,395000,265000,230000,750000,1000000,825000,425000,369000,300000,389000,300000,800000,600000,300000,415000,325000,775000,750000,650000,600000,325000,385000,875000,500000,900000,350000,350000,450000,325000,200000,575000,325000,400000,365000,350000,300000,375000,415000,300000,625000,315000,325000,370000,298000,375000,325000,325000,375000,295000,375000,295000,275000,345000,500000,390000,400000,250000,625000,550000,585000,425000,300000,300000,275000,525000,725000,350000,275000,450000,325000,425000,300000,330000,215000,695000,750000,400000,585000,395000,250000,725000,275000,700000,260000,275000,535000,465000,490000,375000,425000,265000,425000,525000,625000,380000,950000,350000,325000,550000,300000,245000,230000,395000,365000,698000,495000,375000,375000,1200000,425000,730000,325000,275000,535000,375000,775000,375000,400000,300000,375000,295000,345000,260000,225000,425000,475000,425000,1170000,520000,350000,289500,480000,325000,250000,350000,600000,350000,525000,500000,700000,300000,175000,365000,375000,425000,1320000,469000,270000,325000,650000,550000,1150000,385000,325000,750000,465000,300000,250000,500000,875000,399000,925000,875000,930000,725000,575000,600000,600000,265000,350000,340000,350000,430000,975000,500000,850000,645000,425000,1090000,895000,465000,700000,325000,695000,825000,280000,550000,325000,325000,275000,340000,550000,500000,750000,499000,1750000,1250000,319000,1100000,325000,475000,300000,265000,399500,725000,625000,399000,445000,550000,675000,325000,600000,375000,575000,475000,500000,275000,1775000,525000,400000,375000,550000,525000,760000,700000,675000,325000,459000,350000,325000,275000,275000,700000,209000,1325000,850000,485000,385000,650000,450000,450000,600000,245000,500000,600000,595000,995000,475000,275000,285000,585000,310000,495000,475000,425000,875000,560000,700000,1150000,1250000,275000,575000,1025000,340000,550000,400000,235000,335000,975000,450000,350000,725000,340000,1175000,325000,700000,295000,335000,300000,600000,675000,495000,539000,499000,475000,800000,1625000,315000,450000,495000,550000,400000,525000,350000,620000,375000,550000,1095000,485000,385000,1575000,249000,350000,600000,425000,345000,640000,645000,350000,350000,475000,400000,450000,450000,375000,485000,1100000,1000000,375000,525000,1325000,335000,400000,835000,885000,635000,1120000,375000,400000,285000,425137,549001,575000,500000,179000,790000,350000,425000,600000,1099000,525000,329000,445000,950000,800000,350000,875000,575000,700000,325000,750000,500000,300000,675000,345000,275000,245000,385000,375000,300000,1200000,499000,325000,480000,475000,685000,550000,550000,5850000,330000,375000,575000,825000,515000,225000,1050000,425000,375000,1150000,425000,1450000,850000,750000,450000,235000,600000,315000,1250000,699000,440000,450000,300000,475000,399000,790000,650000,375000,365000,210000,269000,570000,785000,500000,400000,425000,700000,350000,360000,512000,375000,750000,237000,375000,560000,250000,650000,1450000,275000,550000,349000,350000,575000,1000000,398000,280000,350000,500000,615000,575000,275000,644900,199000,685000,1300000,540000,475000,245000,1250000,695000,348738,348738,1698000,275000,375000,675000,849000,539000,525000,1500000,295000,750000,350000,350000,599000,300000],"sizemode":"absolute","sizeref":0.40000000000000002,"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+
+## Multivariate regression
+
+.content-box-red[This is not covered by the course!]
+
+`$$\mathbf{y}=\left[\begin{array}{c} y_1 \\ y_2 \\ \vdots \\ y_n \end{array}\right], \quad \mathbf{X}=\left[\begin{array}{ccccc} 1 &amp; x_{11} &amp; x_{21} &amp; \ldots &amp; x_{k 1} \\ 1 &amp; x_{12} &amp; x_{22} &amp; \ldots &amp; x_{k 2} \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; x_{1 n} &amp; x_{2 n} &amp; \ldots &amp; x_{k n} \end{array}\right], \quad \boldsymbol{\beta}=\left[\begin{array}{c} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_k \end{array}\right], \:\:\:\;  \boldsymbol{\varepsilon}=\left[\begin{array}{c} \varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_n \end{array}\right]$$`
+
+`$$\mathbf{e}^{\mathrm{T}} \mathbf{e}=(\mathbf{y}-\mathbf{X} \hat{\boldsymbol{\beta}})^{\mathrm{T}}(\mathbf{y}-\mathbf{X} \hat{\boldsymbol{\beta}})$$`
+
+`$$\hat{\boldsymbol{\beta}}=\left(\mathbf{X}^{\mathrm{T}} \mathbf{X}\right)^{-1} \mathbf{X}^T \mathbf{y}$$`
+
+---
+
+## Multivariate regression
+
+.pull-left[
+
+Fortunately, our work did not become more difficult in R.
+]
+
+.pull-right[
+&lt;img src="econometrics_files/meme_byhand.JPG" width="200px" height="200px" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+```r
+fit &lt;- lm(formula = Price ~ Area + Room, data = amsterdam_house_df)
+
+fit
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Area + Room, data = amsterdam_house_df)
+## 
+## Coefficients:
+## (Intercept)         Area         Room  
+##      -62040         9057       -51009
+```
+
+---
+
+## Multivariate regression
+
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Area + Room, data = amsterdam_house_df)
+## 
+## Coefficients:
+## (Intercept)         Area         Room  
+##      -62040         9057       -51009
+```
+
+.blue[Can this result be interpreted as if a house has more rooms, it is cheaper?]
+
+--
+
+Of course not.
+
+&lt;img src="econometrics_files/meme_opposite.JPG" width="315px" height="250px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Multivariate regression
+
+#### Multicollinearity
+
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-37-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+form &lt;- c("Price ~ Area", "Price ~ Area + Room", "Price ~ Room", 
+          "Area ~ Room", "Room ~ Area"
+)
+```
+
+
+```r
+tibble(form) %&gt;% 
+  mutate(
+    fit = map(form, lm, data = drop_na(
+      amsterdam_house_df, 
+      Price, Area, Room)
+    ),
+    tidied = map(fit, broom::tidy)
+  ) %&gt;% 
+  unnest(tidied) %&gt;% 
+  select(form, term, estimate) %&gt;% 
+  pivot_wider(names_from = term, values_from = estimate)
+```
+
+```
+## # A tibble: 5 × 4
+##   form                `(Intercept)`      Area     Room
+##   &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Price ~ Area           -134910.   7918.         NA  
+## 2 Price ~ Area + Room     -62040.   9057.     -51009. 
+## 3 Price ~ Room           -140283.     NA      213895. 
+## 4 Area ~ Room                 -8.64   NA          29.2
+## 5 Room ~ Area                  1.43    0.0223     NA
+```
+
+---
+
+.pull-left[
+
+
+<div id="htmlwidget-80ed7c431193261c9e5f" style="width:700px;height:400px;" class="DiagrammeR html-widget "></div>
+<script type="application/json" data-for="htmlwidget-80ed7c431193261c9e5f">{"x":{"diagram":"\n  graph TD\n  A(Room)-.29.2.->B(Area)\n  A-->|-51009.|C(Price)\n  B-->|29.2*9057|C\n                    \n                    "},"evals":[],"jsHooks":[]}</script>
+
+]
+
+.pull-right[
+`$$\text{Total effect} = \text{direct effect} + \text{indirect effect}$$`
+`$$213895 = 29.2 \times 9057 - 51009$$`
+]
+
+#### Path analysis
+
+1. .blue[Total effect: ]If we want to buy a house with one additional room, it is expected to cost 213,895 euros more.
+
+2. .blue[Indirect effect: ]A house with 1 additional room would be expected to be 29.2 square meters larger, and the average price per square meter is 9,057 euros.
+
+3. .blue[Direct effect: ] If we compare houses with exactly the same area size, then the one with one extra room would cost 51009 euros less.
+
+---
+
+## Type I error in multivariate model
+
+Let's create a function for a new DGP wtih two regressors.
+
+
+```r
+dgp_multi &lt;- function(b0 = 100, b1 = 0, b2 = 0, n = 100) {
+    tibble(x1 = rnorm(n, sd = .8), x2 = rnorm(n, sd = 5)) %&gt;% 
+    mutate(y = b0 + b1 * x1 + b2 * x2 + rnorm(n))
+  }
+
+dgp_multi()
+```
+
+```
+## # A tibble: 100 × 3
+##         x1       x2     y
+##      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1 -0.997    0.0555  99.8
+##  2 -0.0509   4.94    98.0
+##  3  0.813    0.892  100. 
+##  4  0.311    4.24   100. 
+##  5 -0.716    4.10   101. 
+##  6 -0.0961   4.99   100. 
+##  7 -1.73     3.38   101. 
+##  8  0.122   -2.19   102. 
+##  9  0.540  -17.6     99.4
+## 10  0.335   -0.272   98.4
+## # ℹ 90 more rows
+```
+
+---
+
+## Type I error in multivariate model
+
+
+```r
+tibble(data = rerun(1e3, dgp_multi())) %&gt;% 
+  mutate(
+    fit = map(data, function(xx) lm(y ~ x1 + x2, data = xx)),
+    tidied = map(fit, broom::tidy),
+    pvalues = map(tidied, pull),
+    p_b1 = map_dbl(pvalues, 2),
+    p_b2 = map_dbl(pvalues, 3),
+    error_commited = p_b1 &lt; .05 | p_b2 &lt; .05
+  ) %&gt;% 
+  summarise(sum(error_commited) / n())
+```
+
+```
+## # A tibble: 1 × 1
+##   `sum(error_commited)/n()`
+##                       &lt;dbl&gt;
+## 1                     0.096
+```
+
+--
+
+We run two test at each model!
+
+At each the probability of commiting a type I error is 5%. 
+
+--
+
+The joint probability to not commit type I error is:
+
+`$$1 - .95 \times .95 = 0.0975$$`
+
+---
+
+## Type I error in multivariate model
+
+As more and more variables are included in the model, the probability of making a type 1 error increases. 
+
+--
+
+In the case of many variables, even if the outcome variable is not related to any of them, we will still find a significant parameter.
+
+.blue[Solution:] F-test
+
+---
+
+## F-test
+
+.pull-left[
+`$$F=\frac{(\mathrm{RRSS}-\mathrm{URSS}) / r}{\mathrm{URSS} /(n-k-1)}$$`
+
+where
+
+URSS = unrestricted residual sum of squares
+
+RSSS = restricted residual sum of squares obtained by imposing the restrictions of the hypothesis
+
+r = number of restrictions imposed by hypothesis
+
+]
+
+.pull-right[
+&lt;img src="econometrics_files/meme_test.JPG" width="240px" height="300px" style="display: block; margin: auto;" /&gt;
+]
+
+Testing whether the explanatory variables jointly explain the variance significantly:
+
+`$$\beta_1=\beta_2=\cdots=\beta_k=0$$`
+
+---
+
+## F-test
+
+
+.pull-left[
+
+- The F distribution takes only positive values
+
+- Always "greater" alternative
+
+- Mainly report only the p-value
+]
+
+.pull-rigth[
+&lt;img src="econometrics1_files/figure-html/unnamed-chunk-44-1.png" width="300px" height="175px" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+```r
+broom::glance(fit)
+```
+
+```
+## # A tibble: 1 × 12
+##   r.squared adj.r.squared  sigma statistic   p.value    df  logLik    AIC    BIC
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.705         0.704 2.93e5     1096. 7.71e-244     2 -12885. 25778. 25797.
+## # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
+```
+
+---
+
+class: center, middle
+
+# Thank you for your attention!
+
+Slides are available at [www.marcellgranat.com](https://www.marcellgranat.com)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

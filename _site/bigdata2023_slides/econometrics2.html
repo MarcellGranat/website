@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Assumptions of the OLS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marcell Granát" />
+    <meta name="date" content="2022-01-01" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#378C95"],"pen_size":3,"eraser_size":4,"palette":[]}) })</script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, title-slide
+
+.title[
+# Assumptions of the OLS
+]
+.subtitle[
+## <img src="mnb_intezet.png" style="width:30.0%" />
+Big Data and Data Visualisation
+]
+.author[
+### Marcell Granát
+]
+.institute[
+### Central Bank of Hungary &amp; .blue[John von Neumann University]
+]
+.date[
+### 2022
+]
+
+---
+
+
+&lt;style type="text/css"&gt;
+.red { color: red; }
+.blue { color: #378C95; }
+strong { color: red; }
+a { color: #378C95; font-weight: bold; }
+.remark-inline-code { font-weight: 900; background-color: #a7d5e7; }
+.caption { color: #378C95; font-style: italic; text-align: center; }
+
+.content-box { 
+box-sizing: content-box;
+background-color: #378C95;
+/* Total width: 160px + (2 * 20px) + (2 * 8px) = 216px
+Total height: 80px + (2 * 20px) + (2 * 8px) = 136px
+Content box width: 160px
+Content box height: 80px */
+}
+
+.content-box-green {
+background-color: #d9edc2;
+}
+
+.content-box-red {
+background-color: #f9dbdb;
+}
+
+.fullprice {
+text-decoration: line-through;
+}
+&lt;/style&gt;
+
+
+
+
+
+class: inverse, middle, center
+
+# Heteroskedasticity
+
+---
+
+## Motivation
+
+&gt; "A study of the incidence of **kidney cancer in the 3,141 counties** of the United States reveals a remarkable pattern. The counties in which the incidence of kidney cancer is **lowest are mostly rural, sparsely populated, and located in traditionally Republican states** in the Midwest, the South, and the West. .blue[What do you make of this?]"
+
+--
+
+&gt; "Now consider the counties in which the incidence of **kidney cancer is highest**. These ailing counties tend to be **mostly rural, sparsely populated, and located in traditionally Republican states**"
+
+--
+
+&gt; "Something is wrong, of course. The rural lifestyle cannot explain both very high and very low incidence of kidney cancer."
+
+???
+
+Source: Kahneman 2011
+
+---
+
+## Motivation
+
+&gt; "**Half the marbles are red, half are white.** Next, imagine a very patient person (or a robot) who blindly draws 4 marbles from the urn, records the number of red balls in the sample, throws the balls back into the urn, and then does it all again, many times. [...] **Jack draws 4 marbles on each trial, Jill draws 7.** They both record each time they observe a homogeneous sample—all white or all red."
+
+--
+
+&gt; "If they go on long enough, **Jack will observe such extreme outcomes more often than Jill**—by a factor of 8 (the expected percentages are 12.5% and 1.56%)."
+
+???
+
+Source: Kahneman 2011
+
+## Heteroskedasticity
+
+&gt; One of the assumptions in the regression equation is that the errors are a common variance. This is known as the **homoskedasticity** assumption. If the errors do not have a
+**constant variance**, we say they are **heteroskedastic**.
+
+???
+
+source: Maddala
+
+---
+
+### Homoskedastic residuals
+
+.panelset.sideways[
+.panel[.panel-name[DGP]
+
+
+
+
+
+```r
+skedasticity_dgp &lt;- function(b0 = 100, b1 = 5,
+                             bs = 0, # new
+                             n = 100) {
+  tibble(x = runif(n = n)) %&gt;% 
+    mutate(
+*     x_rank = rank(x) / n(),
+*     e = rnorm(n = n, sd = (1 + x_rank * bs)),
+      y = b0 + b1 * x + e
+    )
+}
+
+skedasticity_dgp() %&gt;% 
+  lm(formula = y ~ x) %&gt;% 
+  broom::augment()
+```
+
+
+]
+.panel[.panel-name[Scatter plot]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-4-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Residuals]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-5-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[|Residuals|]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-6-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+
+---
+
+### Heteroskedastic residuals
+
+.panelset.sideways[
+.panel[.panel-name[DGP]
+
+
+
+```r
+skedasticity_dgp &lt;- function(b0 = 100, b1 = 5,
+                             bs = 0, # new
+                             n = 100) {
+  tibble(x = runif(n = n)) %&gt;% 
+    mutate(
+*     x_rank = rank(x) / n(),
+*     e = rnorm(n = n, sd = (1 + x_rank * bs)),
+      y = b0 + b1 * x + e
+    )
+}
+
+skedasticity_dgp(bs = 15) %&gt;% 
+  lm(formula = y ~ x) %&gt;% 
+  broom::augment()
+```
+
+
+]
+.panel[.panel-name[Scatter plot]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-8-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Residuals]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-9-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[|Residuals|]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-10-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+### Consequences of heteroskedasticity
+
+To demonstrate what causes heteroskedasticity, let's apply the simulation framework we saw last week with a new kind of data-generating process.
+
+
+```r
+skedasticity_dgp &lt;- function(b0 = 100, b1 = 5,
+                             bs = 0, # new
+                             n = 100) {
+  tibble(x = runif(n = n)) %&gt;% 
+    mutate(
+      x_rank = rank(x) / n(),
+      e = rnorm(n = n, sd = (1 + x_rank * bs)),
+      # sd = (1 + 0) | lowest x
+      # sd = (1 + bs) | highest x
+      y = b0 + b1 * x + e
+    )
+}
+```
+
+---
+
+### Consequences of heteroskedasticity
+
+If there is no heteroskedasticity ...
+
+
+```r
+rerun(.n = 1e5, skedasticity_dgp(b0 = 100, b1 = 0, bs = 0)) %&gt;% 
+  tibble(data = .) %&gt;% 
+  mutate(
+    fit = map(data, lm, formula = y ~ x),
+    tidied = map(fit, broom::tidy),
+    tidied = map_df(tidied, slice, 2)
+  ) %&gt;% 
+  unnest(tidied) %&gt;% 
+  summarise(
+    mean(estimate), sd(estimate),
+    mean(std.error), mean(p.value &lt; .05)
+  ) %&gt;% 
+  kable()
+```
+
+
+
+| mean(estimate)| sd(estimate)| mean(std.error)| mean(p.value &lt; 0.05)|
+|--------------:|------------:|---------------:|--------------------:|
+|      0.0001069|    0.3495389|       0.3484125|               0.0505|
+
+---
+
+### Consequences of heteroskedasticity
+
+If there is heteroskedasticity ...
+
+
+```r
+rerun(.n = 1e5, skedasticity_dgp(b0 = 100, b1 = 0, bs = 10)) %&gt;% 
+  tibble(data = .) %&gt;% 
+  mutate(
+    fit = map(data, lm, formula = y ~ x),
+    tidied = map(fit, broom::tidy),
+    tidied = map_df(tidied, slice, 2)
+  ) %&gt;% 
+  unnest(tidied) %&gt;% 
+  summarise(
+    mean(estimate), sd(estimate),
+    mean(std.error), mean(p.value &lt; .05)
+  ) %&gt;% 
+  kable()
+```
+
+
+
+| mean(estimate)| sd(estimate)| mean(std.error)| mean(p.value &lt; 0.05)|
+|--------------:|------------:|---------------:|--------------------:|
+|     -0.0042713|      2.51513|        2.328918|              0.06752|
+
+--
+
+**The estimated SEs become biased and inconsistent.** This results that the corresponding hypothesis tests also become incorrect. (The estimated effect remains unbiased)
+
+---
+
+### Baltimore
+
+.panelset.sideways[
+.panel[.panel-name[Data &amp; model]
+
+
+```r
+density_df &lt;- read_csv("https://gist.githubusercontent.com/MarcellGranat/94d19897ff0ae6ce019f0a960e7a7f62/raw/ec5a220ce8e91775284913562ef6f3ac71c69903/baltimore.csv")
+```
+
+
+
+
+```r
+fit &lt;- lm(data = density_df, formula = pop_density ~ dist_from_cent)
+```
+
+
+]
+.panel[.panel-name[Scatter plot]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-17-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[Residuals]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-18-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[|Residuals|]
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-19-1.png" width="600px" height="450px" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+## How to detect it? - Goldfeld-Quandt Test
+
+##### 1. Choose an explanatory variable, you want to test whether the variance is constant in line with that
+
+--
+
+##### 2. Sort the observations based on that variable into 3 groups and remove the middle one. (tercentiles are a common choice)
+
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-20-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## How to detect it? - Goldfeld-Quandt Test
+
+##### 3. Fit the model on both kept group
+
+&lt;img src="econometrics2_files/figure-html/unnamed-chunk-21-1.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+##### 4. Calculate the sum of squared errors in both groups and subsitute into the following test.
+
+$$F=\frac{\hat{\sigma}_2^2}{\hat{\sigma}_1^2}=\frac{\mathrm{ESS}_2 /\left(n_2-k\right)}{\mathrm{ESS}_1 /\left(n_1-k\right)} $$
+
+This gives you the estimated F statistics for the null hypothesis that the sum of squared errors do not differ from each other (constant variance).
+
+--
+
+
+```r
+fit &lt;- lm(data = density_df, formula = pop_density ~ dist_from_cent)
+
+lmtest::gqtest(fit, order.by = ~ pop_density, fraction = 13, data = density_df)
+```
+
+```
+## 
+## 	Goldfeld-Quandt test
+## 
+## data:  fit
+## GQ = 107.82, df1 = 11, df2 = 11, p-value = 1.46e-09
+## alternative hypothesis: variance increases from segment 1 to 2
+```
+
+.content-box-red[The disadvantage of this procedure is that by omitting the middle section, we lose information and we test the existence of heteroskedasticity against only one variable at a time.]
+
+---
+
+## How to detect it? - Breusch-Pagan Test
+
+#### Take the residuals from the estimated model and build an auxiliary regression on the squared errors.
+
+`$$\epsilon_i^2=\alpha_1+\alpha_2 Z_{i 2}+\alpha_3 Z_{i 3}+\cdots+\alpha_p Z_{i p}$$`
+
+--
+
+From this regression the test statistics:
+
+`$$\text{LM}=nR^2$$`
+
+--
+
+This must be compared with the corresponding Chi-square value
+
+`$$\text{p-value}=P(\chi^2_{p-1}&gt;\text{LM})$$`
+
+
+```r
+lmtest::bptest(fit) # default: the same covariates
+```
+
+```
+## 
+## 	studentized Breusch-Pagan test
+## 
+## data:  fit
+## BP = 1.9424, df = 1, p-value = 0.1634
+```
+
+---
+
+## How to detect it? - Breusch-Pagan Test
+
+#### Take the residuals from the estimated model and build an auxiliary regression on the squared errors.
+
+`$$\epsilon_i^2=\alpha_1+\alpha_2 Z_{i 2}+\alpha_3 Z_{i 3}+\cdots+\alpha_p Z_{i p}$$`
+
+.content-box-red[This test require large sample and it is proved that its result is sensitive to the normality of the residual.]
+
+.footnote[Ramanathan, 1992]
+
+---
+
+## How to detect it? - White Test
+
+#### Take the residuals from the estimated models and build an auxiliary regression on the squared errors.
+
+`$$\epsilon_i^2=\alpha_1+\alpha_2 X_{i 2}+\alpha_3 X_{i 3}+\alpha_4 X_{i 2}^2+\alpha_5 X_{i 3}^2+\alpha_6 X_{i 2} X_{i 3}$$`
+
+--
+
+From this regression the test statistics:
+
+`$$\text{LM}=nR^2$$`
+
+--
+
+This must be compared with the corresponding Chi-square value
+
+`$$\text{p-value}=P(\chi^2_{p-1}&gt;\text{LM})$$`
+
+
+```r
+whitestrap::white_test(fit)
+```
+
+```
+## White's test results
+## 
+## Null hypothesis: Homoskedasticity of the residuals
+## Alternative hypothesis: Heteroskedasticity of the residuals
+## Test Statistic: 6.07
+## P-value: 0.048159
+```
+
+---
+
+## How to detect it? - White Test
+
+#### Take the residuals from the estimated models and build an auxiliary regression on the squared errors.
+
+`$$\epsilon_i^2=\alpha_1+\alpha_2 X_{i 2}+\alpha_3 X_{i 3}+\alpha_4 X_{i 2}^2+\alpha_5 X_{i 3}^2+\alpha_6 X_{i 2} X_{i 3}$$`
+
+.content-box-green[This test also requires large sample, but it is not sensitive to normality. Also, you do not need prior expectation for the test (test against all the covariates).]
+
+---
+
+## And then what?
+
+We have shown that the estimated standard errors are biased in the presence of heteroskedasticity. .blue[We must repair that.]
+
+
+```r
+lmtest::coeftest(fit, vcov = sandwich::vcovHC(fit))
+```
+
+```
+## 
+## t test of coefficients:
+## 
+##                Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)    14568.68    2808.64  5.1871 7.903e-06 ***
+## dist_from_cent  -837.26     265.10 -3.1583  0.003155 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
+### Simulation
+
+Take out the p-value
+
+
+```r
+lmtest::coeftest(fit, vcov = sandwich::vcovHC(fit)) %&gt;% 
+  .[2, 4]
+```
+
+```
+## [1] 0.003155406
+```
+
+Assign a function
+
+
+```r
+heterosked_p_value &lt;- function(x) {
+  lmtest::coeftest(x, vcov = sandwich::vcovHC(x))[2, 4]
+}
+```
+
+
+```r
+rerun(.n = 1e5, skedasticity_dgp(b0 = 100, b1 = 0, bs = 10)) %&gt;% 
+  tibble(data = .) %&gt;% 
+  mutate(
+    fit = map(data, lm, formula = y ~ x),
+    p_value = map_dbl(fit, heterosked_p_value)
+  ) %$% 
+  mean(p_value &lt; .05)
+```
+
+```
+## [1] 0.05246
+```
+
+---
+
+class: inverse, middle, center
+
+# Multicollinearity
+
+---
+
+## Multicollinearity
+
+Multicollinearity = explanatory variables (regresors/covariates/independent variables) are highly intercorrelated
+
+--
+
+Think about the house data from the last week. If the area is bigger, the expected price is higher, just as the expected number of rooms.
+
+---
+
+## Exact (perfect) multicollinearity
+
+Suppose the following case:
+
+- if you have a degree, then your expected income is 1200 euros.
+
+- without a degree, it is 800.
+
+Let's estimate it with the following formula:
+
+`$$y_i=\beta_0+\beta_1 \times x_{i,1} + \beta_2 \times x_{i,2} + \epsilon_i,$$`
+
+where
+
+`$$x_{i,1}=\text{1, if the individual has a degree, 0 else}$$`
+`$$x_{i,2}=\text{1, if the individual does not have a degree, 0 else}$$`
+
+.pull-left[
+Problem: all the presented coefficient combinations would lead to the same estimated values.
+
+We can not use OLS!
+]
+
+.pull-right[
+
+
+| `\(\beta_0\)` | `\(\beta_1\)` | `\(\beta_2\)` |
+|:---------:|:---------:|:---------:|
+|     800     |     400     |     0     |
+|     700     |     500     |     100     |
+|     1200     |     0     |     -400     |
+
+]
+
+---
+
+## Exact (perfect) multicollinearity
+
+This is why you have to always create exactly as many coefficients for categorical variables as levels it has minus 1. This is called dummy coding.
+
+If you drop B2, there is only one appropriate solution.
+
+| `\(\beta_0\)` | `\(\beta_1\)` |
+|:---------:|:---------:|
+|     800     |     400     |
+
+---
+
+## Multicollinearity
+
+- Imagine that you add an almost fully irrelevant explanatory variable to the model. .blue[In which direction can the explanatory power of the model change?]
+
+--
+
+  - OLS perfectly finds the best "parameter combination" to minimize SSE
+  
+  - SST depends on the variance, thus it does not change.
+  
+--
+  
+  - If the additional variable is fully irrelevant, then its coefficient will be zero, and the model returns the same solution as previously
+  
+  - **R-squared can not reduce, if you add one additional explanatory variable**
+
+--
+
+.blue[So why do not we use all the available variables?]
+
+
+---
+
+
+## Multicollinearity
+
+Again, think about the house data from the last week. If the area is bigger, the expected price is higher, just as the expected number of rooms. .blue[By adding the number of rooms, does the variability of the estimate of the effect related to the size increase or decrease?]
+
+--
+
+&gt; "Explanatory variables are highly intercorrelated is referred to as multicollinearity. When the explanatory
+variables are highly intercorrelated, it becomes difficult to disentangle the separate effects of each
+of the explanatory variables on the explained variable." 
+
+Formally the variance of the estimated coef:
+
+.pull-left[
+`$$V(\hat{\beta_i})=\frac{\sigma^2}{S_{ii}(1-R^2_i)},$$`
+]
+
+.pull-right[
+where
+`$$\sigma^2 = \text{Variance of the residuals}$$`
+
+`$$S_{ii} = \text{Variance of the given covariate}$$`
+]
+
+`$$R^2_{i} = \text{Proportion of the variance of the investigated covariate}$$`
+
+`$$\text{explained by the other covariates}$$`
+
+---
+
+## Multicollinearity
+
+.blue[How to detect multicollinearity?]
+
+--
+
+We saw that higher intercorrelation among the covariates leads to higher variance in the estimated effects.
+
+So lets express the magnitude of this increase caused by the other explanatory variables.
+
+--
+
+#### Variance Inflation Factor
+
+`$$\text{VIF}(\hat{\beta_i})=\frac{1}{1-R^2_i}$$`
+
+We can interpret VIF as the ratio of the actual variance of coefficient to what
+the variance would have been if explanatory variables were uncorrelated.
+
+---
+
+### VIF in R
+
+
+```r
+amsterdam_house_df &lt;- read_rds("https://raw.githubusercontent.com/MarcellGranat/big_data2022/main/econometrics_files/amsterdam_house.rds") %&gt;% 
+  drop_na(Price, Area, Room)
+```
+
+
+
+
+```r
+fit_yxz &lt;- lm(Price ~ Area + Room, amsterdam_house_df)
+fit_yx &lt;- lm(Price ~ Area, amsterdam_house_df)
+fit_xz &lt;- lm(Area ~ Room, amsterdam_house_df)
+```
+
+
+```r
+broom::tidy(fit_yxz)
+```
+
+```
+## # A tibble: 3 × 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -62040.    24094.     -2.57 1.02e-  2
+## 2 Area           9057.      289.     31.4  2.81e-147
+## 3 Room         -51009.    10450.     -4.88 1.24e-  6
+```
+
+---
+
+### VIF in R
+
+
+```r
+broom::tidy(fit_yx)
+```
+
+```
+## # A tibble: 2 × 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept) -134910.    19145.     -7.05 3.60e- 12
+## 2 Area           7918.      172.     46.0  1.71e-240
+```
+
+```r
+1 / (1 - broom::glance(fit_xz)$r.squared)
+```
+
+```
+## [1] 2.884547
+```
+
+--
+
+The "easier" solution:
+
+
+```r
+car::vif(fit_yxz)
+```
+
+```
+##     Area     Room 
+## 2.884547 2.884547
+```
+
+---
+
+## Simulation
+
+
+```r
+multicol_dgp &lt;- function(b0 = 100, b1 = 5, b12 = 7, b2 = 5, n = 100) {
+  tibble(x1 = rnorm(n = n)) %&gt;% 
+    mutate(
+      x2 = b12 * x1 + rnorm(n = n),
+      y = b0 + b1 * x1 + b2 * x2 + rnorm(n = n) # &lt;
+    )
+}
+```
+
+
+```r
+multicol_dgp()
+```
+
+```
+## # A tibble: 100 × 3
+##          x1      x2     y
+##       &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 -1.35    -10.3    41.7
+##  2 -0.622    -2.43   84.3
+##  3  0.423     4.61  125. 
+##  4 -0.584    -4.90   72.3
+##  5 -0.00396  -0.363  99.6
+##  6 -2.01    -14.9    15.7
+##  7 -0.242     1.32  107. 
+##  8 -1.55    -10.0    42.7
+##  9  0.474     1.63  110. 
+## 10  2.62     19.2   208. 
+## # ℹ 90 more rows
+```
+
+
+---
+
+### Simulation I
+
+
+```r
+rerun(1e4, multicol_dgp()) %&gt;% 
+  tibble(data = .) %&gt;% 
+  mutate(
+    fit = map(data, lm, formula = y ~ x1 + x2),
+    tidied = map(fit, broom::tidy),
+    x1 = map_df(tidied, slice, 2),
+    x2 = map_df(tidied, slice, 3)
+  ) %&gt;% 
+  summarise(
+    x1_est = sd(x1$estimate),  x1_std = mean(x1$std.error), 
+    x2_est = sd(x2$estimate),  x2_std = mean(x2$std.error)
+  ) %&gt;% 
+  pivot_longer(everything())
+```
+
+.pull-left[
+
+```
+## # A tibble: 4 × 2
+##   name   value
+##   &lt;chr&gt;  &lt;dbl&gt;
+## 1 x1_est 0.719
+## 2 x1_std 0.719
+## 3 x2_est 0.102
+## 4 x2_std 0.102
+```
+]
+
+.pull-right[
+**Estimations are still consistent!**
+]
+
+---
+
+## Simulation II
+
+
+```r
+rerun(1e3, multicol_dgp(b1 = .1)) %&gt;% 
+  tibble(data = .) %&gt;% 
+  mutate(
+    fit_bivariate = map(data, lm, formula = y ~ x1),
+    fit_trivariate = map(data, lm, formula = y ~ x1 + x2),
+    tidied_bivariate = map(fit_bivariate, broom::tidy),
+    tidied_trivariate = map(fit_trivariate, broom::tidy),
+    x1_bi = map_df(tidied_bivariate, slice, 2),
+    x1_tri = map_df(tidied_trivariate, slice, 2)
+  ) %&gt;% 
+  summarise(mean(x1_bi$p.value), mean(x1_tri$p.value))
+```
+
+```
+## # A tibble: 1 × 2
+##   `mean(x1_bi$p.value)` `mean(x1_tri$p.value)`
+##                   &lt;dbl&gt;                  &lt;dbl&gt;
+## 1              5.11e-75                  0.499
+```
+
+---
+
+## Simulation III
+
+
+```r
+rerun(1e2, multicol_dgp(b1 = .1, b2 = .1)) %&gt;% 
+  tibble(data = .) %&gt;% 
+  mutate(
+    fit_bivariate = map(data, lm, formula = y ~ x1),
+    fit_trivariate = map(data, lm, formula = y ~ x1 + x2),
+*   bi = map_df(fit_bivariate, broom::glance),
+*   tr = map_df(fit_trivariate, broom::glance),
+  ) %&gt;% 
+  summarise(
+    mean(bi$r.squared &gt; tr$r.squared),
+    mean(bi$adj.r.squared &gt; tr$adj.r.squared),
+    mean(bi$AIC &lt; tr$AIC),
+    mean(bi$BIC &lt; tr$BIC)
+  ) %&gt;% 
+  pivot_longer(everything())
+```
+
+
+```
+## # A tibble: 4 × 2
+##   name                                      value
+##   &lt;chr&gt;                                     &lt;dbl&gt;
+## 1 mean(bi$r.squared &gt; tr$r.squared)          0   
+## 2 mean(bi$adj.r.squared &gt; tr$adj.r.squared)  0.55
+## 3 mean(bi$AIC &lt; tr$AIC)                      0.69
+## 4 mean(bi$BIC &lt; tr$BIC)                      0.85
+```
+
+---
+
+## Simulation III
+
+.blue[The listed criteria values can be used to chose the appropriate model.]
+
+r.squared = The decrease in the squared error compared to a null model (as we saw at the correlation coefficient).
+
+
+--
+
+`$$\text{Adjusted }R^2=1-\frac{SSE/(n - p)}{SST/(n-1)}$$`
+
+AIC:
+
+`$$AIC = SSE \times e^{2(k+1)/n}$$`
+
+BIC:
+
+`$$BIC = n \times ln(SSE/n) + k \times ln(n)$$`
+
+---
+
+class: inverse, middle, center
+
+## "All models are wrong, but some are useful"
+
+#### Model selection
+
+---
+
+## Motivation - Why we need to choose?
+
+--
+
+1. Number of explanatory variables
+
+--
+
+2. **Functional forms**
+
+---
+
+## Functional forms
+
+|  Model  |   Function   | interpretation of the m. effect                |
+|:-------:|:------------:|------------------------------------------------|
+| linear  |   `\(Y=\beta0+\beta_1x\)`   | 1 unit increase in X causes `\(\beta_1\)` unit change in Y |
+| lin-log |  `\(Y=\beta_0+\beta_1lnX\)`  | 1 % increase in X causes `\(\beta_1\)`/100 unit change in Y |
+| log-lin |  `\(lnY=\beta_0+\beta_1X\)`  | 1 unit increase in X causes 100 `\(\beta_1\)` % change in Y |
+| log-log | `\(lnY=\beta_0+\beta_1lnX\)` | 1 % increase in X causes `\(\beta_1\)` % change in Y |
+
+#### How to choose?
+
+1. The interpretation is different!
+
+2. Logarithm often useful for financial/consumption data
+
+3. Does it increase the R-squared? (never compare the R-squared from the model, if the depedent variable is different)
+
+???
+
+Source: Ramanathan
+
+
+---
+
+# References
+
+&lt;p&gt;&lt;cite&gt;Maddala, G. S.
+(1992).
+&lt;em&gt;Introduction to economics&lt;/em&gt;.
+Macmillan.&lt;/cite&gt;&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;Kahneman, D.
+(2011).
+&lt;em&gt;Thinking, fast and slow&lt;/em&gt;.
+Macmillan.&lt;/cite&gt;&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;Ramanathan, R.
+(1992).
+&lt;em&gt;Introductory econometrics with applications&lt;/em&gt;.
+Dryden Press.&lt;/cite&gt;&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;Estrella, A. and F. S. Mishkin
+(1996).
+&amp;ldquo;The yield curve as a predictor of US recessions&amp;rdquo;.
+In: &lt;em&gt;Current issues in economics and finance&lt;/em&gt; 2.7.&lt;/cite&gt;&lt;/p&gt;
+
+---
+
+class: center, middle
+
+# Thank you for your attention!
+
+Slides are available at [www.marcellgranat.com](https://www.marcellgranat.com)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

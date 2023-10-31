@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Learn how to analyse, understand, and communicate about your data!">
+<title>Big Data &amp; Data Visualisation - Clustering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<meta property="og:title" content="Big Data &amp; Data Visualisation - Clustering">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://marcellgranat.com/bigdata/files/social-image-s23.png">
+<meta property="og:site-name" content="Big Data &amp; Data Visualisation">
+<meta property="og:locale" content="en_US">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Big Data &amp; Data Visualisation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../content/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Classes and readings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignment.html" rel="" target="">
+ <span class="menu-text">Assignments</span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/13-content.html">Clustering, Dimension Reduction</a></li><li class="breadcrumb-item"><a href="../content/13-content.html">Clustering</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings, lectures, and videos</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics in R</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data manipulation I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Data manipulation II</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Regression, classification</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to ggplot2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced ggplot2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Casual Inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Casual Inference</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Web scraping</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Web scraping</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text">Clustering, Dimension Reduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Clustering</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link active" data-scroll-target="#hierarchical-clustering">Hierarchical Clustering</a>
+  <ul class="collapse">
+<li><a href="#proximity" id="toc-proximity" class="nav-link" data-scroll-target="#proximity">Proximity</a></li>
+  <li><a href="#merging-the-closest-clusters" id="toc-merging-the-closest-clusters" class="nav-link" data-scroll-target="#merging-the-closest-clusters">Merging the closest clusters</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-means clustering</a>
+  <ul class="collapse">
+<li><a href="#silhouette-indicator" id="toc-silhouette-indicator" class="nav-link" data-scroll-target="#silhouette-indicator">Silhouette Indicator</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#alternatives" id="toc-alternatives" class="nav-link" data-scroll-target="#alternatives">Alternatives</a>
+  <ul class="collapse">
+<li><a href="#k-medoids" id="toc-k-medoids" class="nav-link" data-scroll-target="#k-medoids">K-medoids</a></li>
+  <li><a href="#k-proto" id="toc-k-proto" class="nav-link" data-scroll-target="#k-proto">K-proto</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">Clustering</h1>
+
+<div class="date-block bg-class text-white p-2">
+  <p class="date">Readings and class materials for Tuesday, October 31, 2023</p>
+</div>
+</header><p>Cluster analysis is a powerful technique used to group similar observations together based on their characteristics and relationships. The goal of clustering is to identify patterns and structures within a dataset, allowing us to gain insights and make meaningful interpretations. By dividing objects into sets of clusters, we can uncover hidden similarities and differences, enabling us to understand the underlying structure of the data.</p>
+<p>One of the key ideas in clustering is that objects within a cluster should be similar or related to each other, while being different or unrelated to objects in other clusters. This notion of similarity and dissimilarity forms the basis for grouping objects together. The greater the similarity within a cluster and the greater the difference between clusters, the more distinct and meaningful the clustering becomes.</p>
+<p>However, determining what constitutes a cluster can be challenging. The definition of a cluster is not always well-defined and can vary depending on the nature of the data and the desired results. Different clustering techniques exist, each with its own approach to dividing objects into clusters. Some techniques focus on finding central points or prototypes, while others consider the density or connectivity of the data. Ultimately, the choice of clustering method depends on the specific goals and characteristics of the dataset.</p>
+<p>In this chapter, we will explore the different types of clustering techniques and how they can be applied to real-world problems. We will also discuss the advantages and disadvantages of each method and how to evaluate the results. Let’s look at some practical examples of clustering in action:</p>
+<ol type="1">
+<li><p>Market Segmentation: Clustering can be employed to segment customers based on their purchasing behavior, preferences, or demographic characteristics. By identifying distinct customer groups, businesses can tailor their marketing strategies and offerings to better meet the needs and preferences of each segment. This can lead to more targeted advertising campaigns, improved customer satisfaction, and increased sales.</p></li>
+<li><p>Financial Portfolio Analysis: Clustering can assist in analyzing financial portfolios by grouping stocks or assets with similar price fluctuations or risk profiles. This helps investors diversify their portfolios effectively and make informed decisions based on the characteristics of different clusters. By understanding the relationships and patterns within clusters, investors can optimize their investment strategies and manage risk more efficiently.</p></li>
+<li><p>Economic Development and Regional Planning: Clustering can aid in identifying regions or areas with similar economic characteristics or development potential. This information can be used by policymakers and urban planners to allocate resources, attract investments, and promote economic growth in specific regions. Clustering can also help identify industries or sectors that are thriving in certain areas, enabling policymakers to focus on supporting and nurturing those sectors further.</p></li>
+<li><p>Customer Behavior Analysis: Clustering can be utilized to analyze customer behavior, such as purchasing patterns, preferences, or churn prediction. By grouping customers into clusters based on their behavior, businesses can gain insights into customer segments with similar characteristics. This information can be leveraged to personalize marketing campaigns, improve customer retention strategies, and enhance overall customer satisfaction.</p></li>
+</ol>
+<p>An example from our current researches: <a href="https://www.marcellgranat.com/pecs-phd/">Daily inflation for used vehicles in Hungary</a></p>
+<section id="hierarchical-clustering" class="level2"><h2 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h2>
+<p>Hierarchical clustering is a clustering technique that aims to create a hierarchical structure of clusters in a dataset. It produces a set of nested clusters organized in the form of a tree-like diagram called a <a href="https://r-graph-gallery.com/340-custom-your-dendrogram-with-dendextend.html">dendrogram</a>. This dendrogram represents the sequences of merges or splits of clusters.</p>
+<p><img src="https://r-graph-gallery.com/340-custom-your-dendrogram-with-dendextend_files/figure-html/thecode-1.png" class="img-fluid"></p>
+<p>There are two main types of hierarchical clustering: agglomerative and divisive. Agglomerative hierarchical clustering starts with each data point as an individual cluster and then iteratively merges the closest pair of clusters at each step (you will mainly meet with this approach). This process continues until all data points are merged into a single cluster or until a desired number of clusters is reached. Divisive hierarchical clustering, on the other hand, starts with one cluster containing all data points and then splits clusters at each step until each cluster contains only one data point or until a desired number of clusters is obtained.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Step-by-step
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Compute the proximity matrix</p></li>
+<li><p>Let each data point be a cluster</p></li>
+<li><p>Repeat</p></li>
+<li><p>Merge the two closest clusters</p></li>
+<li><p>Update the proximity matrix</p></li>
+<li><p>Until only a single cluster remains</p></li>
+</ol>
+</div>
+</div>
+<p>Hierarchical clustering does not require specifying the number of clusters in advance, allowing for flexibility in the analysis. It can be visualized using a dendrogram, which displays the cluster-subcluster relationships and the distances between clusters. By “cutting” the dendrogram at a certain level, any desired number of clusters can be obtained.</p>
+<p>One advantage of hierarchical clustering is that it can capture both global and local structures in the data. It can reveal meaningful taxonomies or hierarchical relationships among the data points. Additionally, hierarchical clustering can be used with <strong>various proximity measures</strong>, allowing for flexibility in defining cluster similarity.</p>
+<p>The choice of proximity measure in clustering depends on the type of data being analyzed. Here are some commonly used proximity measures:</p>
+<section id="proximity" class="level3"><h3 class="anchored" data-anchor-id="proximity">Proximity</h3>
+<ol type="1">
+<li>Euclidean Distance (L2 Distance): The Euclidean distance is a popular proximity measure for numerical data in Euclidean space. It calculates the straight-line distance between two data points in a multidimensional space. The Euclidean distance between two points, x and y, in a d-dimensional space is given by the formula:</li>
+</ol>
+<p><span class="math display">\[ \sqrt{\sum_{i=1}^{d}(x_i - y_i)^2} \]</span></p>
+<ol start="2" type="1">
+<li>Manhattan Distance (L1 Distance): The Manhattan distance, also known as the city block distance or taxicab distance, is often used for numerical data. It measures the sum of the absolute differences between the coordinates of two points. The Manhattan distance between two points, x and y, in a d-dimensional space is given by the formula:</li>
+</ol>
+<p><span class="math display">\[ \sum_{i=1}^{d}\|x_i - y_i\| \]</span></p>
+<ol start="3" type="1">
+<li>Jaccard Similarity: The Jaccard similarity is often used for binary or categorical data. It measures the size of the intersection divided by the size of the union of two sets. The Jaccard similarity between two sets, A and B, is given by the formula:</li>
+</ol>
+<p><span class="math display">\[ \frac{{|A \cap B|}}{{|A \cup B|}} \]</span></p>
+<p>This approach is particularly useful in applications such as document recommendation systems, plagiarism detection, or topic modeling, where understanding the similarity between documents is crucial for effective analysis and decision-making. The Jaccard similarity provides a straightforward and intuitive measure to quantify the similarity between sets of binary or categorical data, making it a valuable tool in various information retrieval and text mining tasks.</p>
+<ol start="5" type="1">
+<li>Gower distance: Gower distance is a proximity measure commonly used in clustering for datasets that contain a mix of numerical, categorical, and ordinal variables. It is particularly useful when dealing with heterogeneous data types. Gower distance takes into account the different scales and types of variables in the dataset.</li>
+</ol>
+<p>The Gower distance is calculated as the weighted sum of the absolute differences between variables, normalized by the range of each variable. The formula for calculating the Gower distance between two data points, x and y, is as follows:</p>
+<p><span class="math display">\[
+\text{Gower distance}(x, y) = \frac{\sum_{i=1}^{n} w_i \cdot d_i(x_i, y_i)}{\sum_{i=1}^{n} w_i}
+\]</span></p>
+<p>where n is the number of variables, <span class="math inline">\(d_i(x_i, y_i)\)</span> is the distance or dissimilarity measure between the values of variable <span class="math inline">\(i\)</span> for data points <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and <span class="math inline">\(w_i\)</span> is the weight assigned to variable <span class="math inline">\(i\)</span>. The weights can be used to give more importance to certain variables in the calculation of the distance.</p>
+<p>The Gower distance can handle different types of variables, such as numerical, categorical, and ordinal, by using appropriate distance measures for each variable type. For numerical variables, the absolute difference is typically used. For categorical variables, the distance is 0 if the categories are the same and 1 if they are different. For ordinal variables, a suitable distance measure that considers the order or ranking of the categories is used.</p>
+<p>By incorporating the characteristics of different variable types, the Gower distance provides a comprehensive measure of dissimilarity that can effectively handle mixed data types in clustering analysis.</p>
+<p>These are just a few examples of proximity measures commonly used in clustering. The choice of measure depends on the nature of the data and the specific requirements of the clustering task.</p>
+<p>Overall, hierarchical clustering is a versatile and intuitive method for grouping data points into clusters based on their similarities, providing a hierarchical structure that can aid in understanding the relationships and structures within the data.</p>
+</section><section id="merging-the-closest-clusters" class="level3"><h3 class="anchored" data-anchor-id="merging-the-closest-clusters">Merging the closest clusters</h3>
+<p>In hierarchical clustering, the process of merging clusters is a key step in creating the hierarchical structure. One commonly used method for cluster merging is Ward’s method.</p>
+<p>Ward’s method calculates the proximity between two clusters based on the increase in the squared error that occurs when the clusters are merged. The objective is to minimize the increase in the total within-cluster sum of squares (SSE) when merging clusters.</p>
+<p>To perform cluster merging using Ward’s method, the following steps are typically followed:</p>
+<ol type="1">
+<li>Start with each data point as an individual cluster.</li>
+<li>Calculate the proximity between all pairs of clusters. This can be done using a proximity measure such as Euclidean distance.</li>
+<li>Merge the two clusters that result in the smallest increase in the SSE when combined. This is determined by comparing the proximity values.</li>
+<li>Update the proximity matrix to reflect the merged cluster.</li>
+<li>Repeat steps 3 and 4 until all data points are in a single cluster or until a desired number of clusters is reached.</li>
+</ol>
+<p>Ward’s method is known for its ability to handle clusters of different sizes and shapes. It aims to minimize the distortion caused by merging clusters and produces compact, well-separated clusters. However, it can be computationally expensive and may not be suitable for large datasets.</p>
+<p>It’s important to note that there are other methods for cluster merging in hierarchical clustering, such as single-linkage, complete-linkage, and average-linkage. Each method uses a different criterion to determine the proximity between clusters and has its own strengths and weaknesses. The choice of merging method depends on the specific requirements of the clustering task and the characteristics of the data.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/eurostat/">eurostat</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># GDP per capita in PPS (Purchasing Power Standards)</span></span>
+<span><span class="va">gdp_per_capita</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"tec00114"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, gdp_per_capita <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Unemployment rate</span></span>
+<span><span class="va">unemployment_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"tesem140"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"T"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, unemployment_rate <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Life expectancy at birth</span></span>
+<span><span class="va">life_expectancy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"sdg_03_10"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"T"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, life_expectancy <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># R&amp;D index - Human Resources in Science and Technology (HRST)</span></span>
+<span><span class="va">education_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"hrst_st_rcat"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_length</span><span class="op">(</span><span class="va">geo</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span>, <span class="va">category</span> <span class="op">==</span> <span class="st">"HRST"</span>, <span class="va">unit</span> <span class="op">==</span> <span class="st">"PC_ACT"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, education_index <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Gini coefficient - measure of income inequality</span></span>
+<span><span class="va">gini_coefficient</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"ilc_di12"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, gini <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Government debt as a percentage of GDP</span></span>
+<span><span class="va">public_debt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"gov_10dd_edpt1"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_length</span><span class="op">(</span><span class="va">geo</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span>, <span class="va">unit</span> <span class="op">==</span> <span class="st">"MIO_EUR"</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"S13"</span>, <span class="va">na_item</span> <span class="op">==</span> <span class="st">"B9"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, public_debt <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Join the datasets together on the 'geo' and 'time' columns</span></span>
+<span><span class="va">eu_indicators</span> <span class="op">&lt;-</span> <span class="va">gdp_per_capita</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">unemployment_rate</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geo"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">life_expectancy</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geo"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">education_index</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geo"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">gini_coefficient</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geo"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">inner_join</span><span class="op">(</span><span class="va">public_debt</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geo"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span> <span class="va">time</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">eu_indicators</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">gt</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">gt_finalise</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="tegvrrntjn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#tegvrrntjn table {
+  font-family: 'IBM Plex Sans Condensed', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tegvrrntjn thead, #tegvrrntjn tbody, #tegvrrntjn tfoot, #tegvrrntjn tr, #tegvrrntjn td, #tegvrrntjn th {
+  border-style: none;
+}
+
+#tegvrrntjn p {
+  margin: 0;
+  padding: 0;
+}
+
+#tegvrrntjn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 21px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tegvrrntjn .gt_title {
+  color: #333333;
+  font-size: 26px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tegvrrntjn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tegvrrntjn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(255, 255, 255, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #114853;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tegvrrntjn .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #114853;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tegvrrntjn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tegvrrntjn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tegvrrntjn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(255, 255, 255, 0);
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tegvrrntjn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tegvrrntjn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tegvrrntjn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tegvrrntjn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tegvrrntjn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tegvrrntjn .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #CCCCCC;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tegvrrntjn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tegvrrntjn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tegvrrntjn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tegvrrntjn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tegvrrntjn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tegvrrntjn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tegvrrntjn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tegvrrntjn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_striped {
+  background-color: #F9F9FB;
+}
+
+#tegvrrntjn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_footnote {
+  margin: 0px;
+  font-size: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tegvrrntjn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tegvrrntjn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tegvrrntjn .gt_left {
+  text-align: left;
+}
+
+#tegvrrntjn .gt_center {
+  text-align: center;
+}
+
+#tegvrrntjn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tegvrrntjn .gt_font_normal {
+  font-weight: normal;
+}
+
+#tegvrrntjn .gt_font_bold {
+  font-weight: bold;
+}
+
+#tegvrrntjn .gt_font_italic {
+  font-style: italic;
+}
+
+#tegvrrntjn .gt_super {
+  font-size: 65%;
+}
+
+#tegvrrntjn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tegvrrntjn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tegvrrntjn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tegvrrntjn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tegvrrntjn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tegvrrntjn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tegvrrntjn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="geo">geo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="gdp_per_capita">gdp_per_capita</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="unemployment_rate">unemployment_rate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="life_expectancy">life_expectancy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="education_index">education_index</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="gini">gini</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="public_debt">public_debt</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="geo" class="gt_row gt_center">AT</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">125</td>
+<td headers="unemployment_rate" class="gt_row gt_center">9.5</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.1</td>
+<td headers="education_index" class="gt_row gt_center">51.6</td>
+<td headers="gini" class="gt_row gt_center">27.8</td>
+<td headers="public_debt" class="gt_row gt_center">-15839.8</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">BE</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">120</td>
+<td headers="unemployment_rate" class="gt_row gt_center">16.4</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.8</td>
+<td headers="education_index" class="gt_row gt_center">57.1</td>
+<td headers="gini" class="gt_row gt_center">24.9</td>
+<td headers="public_debt" class="gt_row gt_center">-19608.9</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">BG</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">59</td>
+<td headers="unemployment_rate" class="gt_row gt_center">10.7</td>
+<td headers="life_expectancy" class="gt_row gt_center">74.3</td>
+<td headers="education_index" class="gt_row gt_center">37.2</td>
+<td headers="gini" class="gt_row gt_center">38.4</td>
+<td headers="public_debt" class="gt_row gt_center">-2484.6</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">CY</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">92</td>
+<td headers="unemployment_rate" class="gt_row gt_center">18.6</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.7</td>
+<td headers="education_index" class="gt_row gt_center">53.7</td>
+<td headers="gini" class="gt_row gt_center">29.4</td>
+<td headers="public_debt" class="gt_row gt_center">676.5</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">CZ</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">91</td>
+<td headers="unemployment_rate" class="gt_row gt_center">6.8</td>
+<td headers="life_expectancy" class="gt_row gt_center">79.1</td>
+<td headers="education_index" class="gt_row gt_center">41.1</td>
+<td headers="gini" class="gt_row gt_center">24.8</td>
+<td headers="public_debt" class="gt_row gt_center">-8871.3</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">DE</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">117</td>
+<td headers="unemployment_rate" class="gt_row gt_center">6.0</td>
+<td headers="life_expectancy" class="gt_row gt_center">80.7</td>
+<td headers="education_index" class="gt_row gt_center">50.3</td>
+<td headers="gini" class="gt_row gt_center">28.8</td>
+<td headers="public_debt" class="gt_row gt_center">-96910.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">DK</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">137</td>
+<td headers="unemployment_rate" class="gt_row gt_center">10.6</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.3</td>
+<td headers="education_index" class="gt_row gt_center">53.7</td>
+<td headers="gini" class="gt_row gt_center">27.7</td>
+<td headers="public_debt" class="gt_row gt_center">12722.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">EE</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">87</td>
+<td headers="unemployment_rate" class="gt_row gt_center">18.6</td>
+<td headers="life_expectancy" class="gt_row gt_center">78.2</td>
+<td headers="education_index" class="gt_row gt_center">52.9</td>
+<td headers="gini" class="gt_row gt_center">31.9</td>
+<td headers="public_debt" class="gt_row gt_center">-348.6</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">EL</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">68</td>
+<td headers="unemployment_rate" class="gt_row gt_center">31.4</td>
+<td headers="life_expectancy" class="gt_row gt_center">80.7</td>
+<td headers="education_index" class="gt_row gt_center">41.9</td>
+<td headers="gini" class="gt_row gt_center">31.4</td>
+<td headers="public_debt" class="gt_row gt_center">-4892.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">ES</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">85</td>
+<td headers="unemployment_rate" class="gt_row gt_center">29.8</td>
+<td headers="life_expectancy" class="gt_row gt_center">83.2</td>
+<td headers="education_index" class="gt_row gt_center">47.8</td>
+<td headers="gini" class="gt_row gt_center">32.0</td>
+<td headers="public_debt" class="gt_row gt_center">-63736.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">FI</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">109</td>
+<td headers="unemployment_rate" class="gt_row gt_center">14.2</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.2</td>
+<td headers="education_index" class="gt_row gt_center">53.0</td>
+<td headers="gini" class="gt_row gt_center">26.6</td>
+<td headers="public_debt" class="gt_row gt_center">-2097.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">FR</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">102</td>
+<td headers="unemployment_rate" class="gt_row gt_center">17.3</td>
+<td headers="life_expectancy" class="gt_row gt_center">82.3</td>
+<td headers="education_index" class="gt_row gt_center">53.9</td>
+<td headers="gini" class="gt_row gt_center">29.8</td>
+<td headers="public_debt" class="gt_row gt_center">-126795.9</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">HR</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">73</td>
+<td headers="unemployment_rate" class="gt_row gt_center">18.0</td>
+<td headers="life_expectancy" class="gt_row gt_center">77.7</td>
+<td headers="education_index" class="gt_row gt_center">37.0</td>
+<td headers="gini" class="gt_row gt_center">28.5</td>
+<td headers="public_debt" class="gt_row gt_center">75.7</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">HU</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">77</td>
+<td headers="unemployment_rate" class="gt_row gt_center">10.6</td>
+<td headers="life_expectancy" class="gt_row gt_center">76.2</td>
+<td headers="education_index" class="gt_row gt_center">41.0</td>
+<td headers="gini" class="gt_row gt_center">27.4</td>
+<td headers="public_debt" class="gt_row gt_center">-10544.7</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">IT</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">96</td>
+<td headers="unemployment_rate" class="gt_row gt_center">23.7</td>
+<td headers="life_expectancy" class="gt_row gt_center">83.0</td>
+<td headers="education_index" class="gt_row gt_center">36.3</td>
+<td headers="gini" class="gt_row gt_center">32.7</td>
+<td headers="public_debt" class="gt_row gt_center">-156442.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">LT</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">89</td>
+<td headers="unemployment_rate" class="gt_row gt_center">11.9</td>
+<td headers="life_expectancy" class="gt_row gt_center">76.0</td>
+<td headers="education_index" class="gt_row gt_center">54.4</td>
+<td headers="gini" class="gt_row gt_center">36.2</td>
+<td headers="public_debt" class="gt_row gt_center">-439.9</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">LU</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">261</td>
+<td headers="unemployment_rate" class="gt_row gt_center">17.6</td>
+<td headers="life_expectancy" class="gt_row gt_center">83.0</td>
+<td headers="education_index" class="gt_row gt_center">66.9</td>
+<td headers="gini" class="gt_row gt_center">29.5</td>
+<td headers="public_debt" class="gt_row gt_center">-222.3</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">LV</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">74</td>
+<td headers="unemployment_rate" class="gt_row gt_center">15.3</td>
+<td headers="life_expectancy" class="gt_row gt_center">74.8</td>
+<td headers="education_index" class="gt_row gt_center">48.4</td>
+<td headers="gini" class="gt_row gt_center">34.3</td>
+<td headers="public_debt" class="gt_row gt_center">-1789.3</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">MT</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">102</td>
+<td headers="unemployment_rate" class="gt_row gt_center">8.3</td>
+<td headers="life_expectancy" class="gt_row gt_center">82.7</td>
+<td headers="education_index" class="gt_row gt_center">46.7</td>
+<td headers="gini" class="gt_row gt_center">31.1</td>
+<td headers="public_debt" class="gt_row gt_center">-982.2</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">NL</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">129</td>
+<td headers="unemployment_rate" class="gt_row gt_center">7.6</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.7</td>
+<td headers="education_index" class="gt_row gt_center">57.5</td>
+<td headers="gini" class="gt_row gt_center">26.3</td>
+<td headers="public_debt" class="gt_row gt_center">-898.0</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">PL</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">80</td>
+<td headers="unemployment_rate" class="gt_row gt_center">10.8</td>
+<td headers="life_expectancy" class="gt_row gt_center">77.4</td>
+<td headers="education_index" class="gt_row gt_center">45.9</td>
+<td headers="gini" class="gt_row gt_center">26.3</td>
+<td headers="public_debt" class="gt_row gt_center">-24078.2</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">PT</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">77</td>
+<td headers="unemployment_rate" class="gt_row gt_center">19.0</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.7</td>
+<td headers="education_index" class="gt_row gt_center">43.0</td>
+<td headers="gini" class="gt_row gt_center">32.0</td>
+<td headers="public_debt" class="gt_row gt_center">-779.1</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">RO</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">77</td>
+<td headers="unemployment_rate" class="gt_row gt_center">22.8</td>
+<td headers="life_expectancy" class="gt_row gt_center">75.3</td>
+<td headers="education_index" class="gt_row gt_center">30.2</td>
+<td headers="gini" class="gt_row gt_center">32.0</td>
+<td headers="public_debt" class="gt_row gt_center">-17889.5</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">SE</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">120</td>
+<td headers="unemployment_rate" class="gt_row gt_center">21.7</td>
+<td headers="life_expectancy" class="gt_row gt_center">83.1</td>
+<td headers="education_index" class="gt_row gt_center">58.5</td>
+<td headers="gini" class="gt_row gt_center">27.6</td>
+<td headers="public_debt" class="gt_row gt_center">6225.2</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">SI</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">92</td>
+<td headers="unemployment_rate" class="gt_row gt_center">10.1</td>
+<td headers="life_expectancy" class="gt_row gt_center">81.3</td>
+<td headers="education_index" class="gt_row gt_center">52.8</td>
+<td headers="gini" class="gt_row gt_center">23.1</td>
+<td headers="public_debt" class="gt_row gt_center">-1717.2</td>
+</tr>
+<tr>
+<td headers="geo" class="gt_row gt_center">SK</td>
+<td headers="gdp_per_capita" class="gt_row gt_center">68</td>
+<td headers="unemployment_rate" class="gt_row gt_center">19.9</td>
+<td headers="life_expectancy" class="gt_row gt_center">77.2</td>
+<td headers="education_index" class="gt_row gt_center">42.0</td>
+<td headers="gini" class="gt_row gt_center">21.2</td>
+<td headers="public_debt" class="gt_row gt_center">-2215.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eu_indicators</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">column_to_rownames</span><span class="op">(</span><span class="st">"geo"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="13-content_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>What is the result? For example, France is close to Italy. Why? In terms of educational index, they are very far apart. Germany is most similar to Spain, but they are very far apart in terms of GDP per capita and unemployment. However, these countries are similar in terms of public debt! If distance is a simple Euclidean distance, then greater variability in absolute value distorts the analysis. Therefore, it is worth eliminating the units of measurement. One possible solution for this is standardization, which means subtracting the mean and dividing the standard deviations of the individual variables.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eu_indicators</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">column_to_rownames</span><span class="op">(</span><span class="st">"geo"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># &lt;- Standardization</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="13-content_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now the results are different. France is close to Germany, and CEE countries to each other.</p>
+</section></section><section id="k-means-clustering" class="level2"><h2 class="anchored" data-anchor-id="k-means-clustering">K-means clustering</h2>
+<p>K-means clustering is a popular algorithm used for partitioning a dataset into K distinct clusters. It is a partitional clustering approach, where each cluster is represented by a centroid, which is the center point of the cluster. The algorithm assigns each data point to the cluster with the closest centroid based on a distance measure, typically the Euclidean distance.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Step-by-step
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Initialization: Randomly select K data points as the initial centroids or use a different initialization method. These initial centroids represent the initial cluster centers.</p></li>
+<li><p>Assignment: Assign each data point to the cluster with the nearest centroid based on the chosen distance measure. This step forms K clusters.</p></li>
+<li><p>Update: Recalculate the centroids of each cluster by taking the mean of the data points assigned to that cluster. The centroids represent the new cluster centers.</p></li>
+<li><p>Iteration: Repeat steps 2 and 3 until convergence is reached. Convergence occurs when the centroids no longer change significantly or when a maximum number of iterations is reached.</p></li>
+</ol>
+</div>
+</div>
+<p><img src="http://shabal.in/visuals/kmeans/random.gif" class="img-fluid"></p>
+<p>The algorithm aims to minimize the within-cluster sum of squares (WCSS), which represents the sum of squared distances between each data point and its assigned centroid. By minimizing the WCSS, K-means tries to create compact and well-separated clusters.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span> <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span>centers <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>K-means clustering with 3 clusters of sizes 123, 71, 148
+
+Cluster means:
+  bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1      0.6562677    -1.0983711         1.1571696   1.0901639
+2      0.8898759     0.7564847        -0.3004658  -0.4487199
+3     -0.9723116     0.5499273        -0.8175594  -0.6907503
+
+Clustering vector:
+  [1] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+ [38] 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3
+ [75] 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 2
+[112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+[149] 3 3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[186] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[223] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[260] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2
+[297] 3 2 2 2 2 2 2 2 3 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2
+[334] 2 2 2 2 2 2 2 2 2
+
+Within cluster sum of squares by cluster:
+[1] 143.15025  81.56839 155.25908
+ (between_SS / total_SS =  72.1 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>cluster <span class="op">=</span> <span class="va">fit</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="13-content_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>It’s important to note that K-means requires the number of clusters, K, to be specified in advance. Choosing an appropriate value for K can be determined through domain knowledge or by using techniques like the elbow method or silhouette analysis.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
+<span><span class="va">wss</span> <span class="op">&lt;-</span> <span class="fu">map_dbl</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, <span class="kw">function</span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span>centers <span class="op">=</span> <span class="va">k</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pluck</span><span class="op">(</span><span class="st">"tot.withinss"</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">elbow_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, wss <span class="op">=</span> <span class="va">wss</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">elbow_plot</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">wss</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Elbow Method for Determining Optimal k"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Number of Clusters"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Within-cluster Sum of Squares"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="13-content_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>K-means clustering is widely used in various fields, including data mining, image segmentation, customer segmentation, and pattern recognition. It is relatively efficient and easy to implement, making it a popular choice for clustering tasks. However, it has limitations, such as sensitivity to initial centroid selection and the assumption of spherical-shaped clusters.</p>
+<section id="silhouette-indicator" class="level3"><h3 class="anchored" data-anchor-id="silhouette-indicator">Silhouette Indicator</h3>
+<p>The silhouette indicator is a metric used to evaluate the quality of clusters formed by clustering algorithms. This technique measures how similar each object in a cluster is to the objects in its own cluster compared to the nearest neighboring cluster. The silhouette indicator ranges from -1 to 1, where a high value indicates that the object is well-matched to its own cluster and poorly matched to neighboring clusters. Conversely, a low value suggests that the object is close to the boundary of its cluster and may be wrongly classified (Rousseeuw, 1987).</p>
+<p>For each sample <span class="math inline">\(i\)</span>, the silhouette value <span class="math inline">\(s(i)\)</span> is computed as:</p>
+<p><span class="math display">\[
+s(i)=\frac{b(i)−a(i)}{max({a(i),b(i))}}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><p><span class="math inline">\(a(i)\)</span> is the average distance from the ith sample to the other samples in the same cluster.</p></li>
+<li><p><span class="math inline">\(b(i)\)</span> is the smallest average distance from the ith sample to the samples in the other clusters, minimized over clusters.</p></li>
+</ul></section><section id="interpretation" class="level3"><h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<ul>
+<li><p>s(i)≈1: The sample is well clustered.</p></li>
+<li><p>s(i)≈0: The sample is close to the decision boundary between two clusters.</p></li>
+<li><p>s(i)≈−1: The sample is incorrectly clustered.</p></li>
+</ul>
+<p>The mean <span class="math inline">\(s(i)\)</span> over all points of a cluster is a measure of how tightly grouped all the points in the cluster are. Thus the mean s(i) over all data of the entire dataset is a measure of how appropriately the data have been clustered.</p>
+</section></section><section id="alternatives" class="level2"><h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
+<section id="k-medoids" class="level3"><h3 class="anchored" data-anchor-id="k-medoids">K-medoids</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Step-by-step
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Initialization: Randomly select k: data points (not centroids) to serve as the initial medoids.</p></li>
+<li><p>Assignment: Assign each data point to the nearest medoid based on a chosen distance metric, such as Euclidean, Manhattan, or more domain-specific metrics.</p></li>
+<li>
+<p>Update: For each medoid m and each non-medoid data point o:</p>
+<ul>
+<li><p>Swap m and o, and compute the total cost (i.e., the sum of distances from all points to their nearest medoid).</p></li>
+<li><p>If the total cost of the configuration decreases, accept the swap and update the medoid to o.</p></li>
+</ul>
+</li>
+<li><p>Convergence Check: Repeat the Assignment and Update steps until the medoids no longer change or a maximum number of iterations is reached.</p></li>
+</ol>
+</div>
+</div>
+</section><section id="k-proto" class="level3"><h3 class="anchored" data-anchor-id="k-proto">K-proto</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Step-by-step
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Initialization: Select K initial prototypes, one for each cluster. Each prototype is a point in the feature space and has both numerical and categorical attributes.</p></li>
+<li><p>Assignment: Assign each data point to the nearest prototype. The distance to a prototype is calculated as a weighted sum of the Euclidean distance for numerical attributes and a simple matching dissimilarity measure for categorical attributes. <span class="math inline">\(D(x, y) = a × D_{Euclidean} (2_{num}, Y_{num}) + (1 - a) × Categorical (2_{cat} &gt; Y_{cat})\)</span> where a is a weighting factor between O and 1, <span class="math inline">\(num\)</span> and <span class="math inline">\(Y_{num}\)</span> are the numerical attributes, and cat and <span class="math inline">\(Y_{cat}\)</span> are the categorical attributes.</p></li>
+<li><p>Update: Recalculate the prototypes for each cluster as the point that minimizes the sum of distances to all points in the cluster. For numerical attributes, this is the mean, and for categorical attributes, this is the mode.</p></li>
+<li><p>Convergence Check: If the prototypes do not change significantly or a maximum number of iterations is reached, stop the algorithm. Otherwise, go back to the Assignment step.</p></li>
+</ol>
+</div>
+</div>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.marcellgranat.com">Marcell Granát</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

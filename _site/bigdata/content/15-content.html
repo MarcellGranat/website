@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Learn how to analyse, understand, and communicate about your data!">
+<title>Big Data &amp; Data Visualisation - Algorithmic Modeling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<meta property="og:title" content="Big Data &amp; Data Visualisation - Algorithmic Modeling">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://marcellgranat.com/bigdata/files/social-image-s23.png">
+<meta property="og:site-name" content="Big Data &amp; Data Visualisation">
+<meta property="og:locale" content="en_US">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Big Data &amp; Data Visualisation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../content/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Classes and readings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignment.html" rel="" target="">
+ <span class="menu-text">Assignments</span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/15-content.html">ML</a></li><li class="breadcrumb-item"><a href="../content/15-content.html">Algorithmic Modeling</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings, lectures, and videos</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics in R</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data manipulation I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Data manipulation II</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A whole game</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Regression, classification</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to ggplot2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced ggplot2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Casual Inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Casual Inference</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Web scraping</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Web scraping</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text">Clustering, Dimension Reduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PCA</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+ <span class="menu-text">ML</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Algorithmic Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/16-content.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidy modeling</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#overfitting" id="toc-overfitting" class="nav-link active" data-scroll-target="#overfitting">Overfitting</a></li>
+  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree">Decision Tree🌲</a></li>
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest">Random Forest 🌲🌴🌳</a></li>
+  <li><a href="#mars" id="toc-mars" class="nav-link" data-scroll-target="#mars">MARS 🌎</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">Algorithmic Modeling</h1>
+
+<div class="date-block bg-class text-white p-2">
+  <p class="date">Readings and class materials for Tuesday, November 14, 2023</p>
+</div>
+</header><p>In the context of linear regression, we have examined a case where we have a clear understanding of how the value of the output variable follows from the explanatory variables: as a linear combination with some noise.</p>
+<p>On the contrary, another approach in a different culture does not aim to describe the “data generating process” that relates x to y, but rather aims to create an algorithm that accurately estimates the target variable. This approach includes neural networks and tree-based models, which were considered innovative in the 1980s. These tools have advanced to a level by the early 21st century where they are capable of tasks such as speech recognition, image recognition, and predicting nonlinear time series. The key is to focus on giving “good predictions”.</p>
+<p>Okay… How do we define “good predictions”?</p>
+<section id="overfitting" class="level3"><h3 class="anchored" data-anchor-id="overfitting">Overfitting</h3>
+<p>We can demonstrate overfitting, which refers to the use of a overly fitted model, by using a simple example where we fit a model using Ordinary Least Squares (OLS) method. Overfitting occurs when the model overly adapts to the training data and is unable to generalize well to new, unseen data.</p>
+<p>In the following steps, I will demonstrate how to create an overfitted model:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># linear dependency with noise</span></span>
+<span></span>
+<span><span class="va">train_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">70</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">train_df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">slice</span><span class="op">(</span><span class="va">train_indices</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">slice</span><span class="op">(</span><span class="op">-</span> <span class="va">train_indices</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu">map</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">x</span>, degree <span class="op">=</span> <span class="va">.x</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">train_df</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_dfr</span><span class="op">(</span><span class="va">models</span>, <span class="fu">broom</span><span class="fu">::</span><span class="va"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 12
+   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     0.796         0.793  2.97     266.  3.38e-25     1  -174.  355.  362.
+ 2     0.798         0.792  2.98     132.  5.59e-24     2  -174.  356.  365.
+ 3     0.801         0.792  2.98      88.5 4.40e-23     3  -174.  357.  369.
+ 4     0.804         0.792  2.98      66.7 2.64e-22     4  -173.  358.  372.
+ 5     0.814         0.799  2.92      55.9 4.82e-22     5  -171.  357.  372.
+ 6     0.818         0.801  2.91      47.2 1.85e-21     6  -171.  357.  375.
+ 7     0.822         0.801  2.91      40.8 7.18e-21     7  -170.  358.  378.
+ 8     0.822         0.799  2.93      35.3 4.22e-20     8  -170.  359.  382.
+ 9     0.822         0.796  2.95      30.9 2.59e-19     9  -170.  361.  386.
+10     0.825         0.796  2.95      27.9 9.30e-19    10  -169.  362.  389.
+11     0.841         0.811  2.84      27.8 3.71e-19    11  -166.  358.  387.
+12     0.847         0.815  2.81      26.3 6.60e-19    12  -164.  357.  388.
+13     0.854         0.821  2.76      25.3 9.21e-19    13  -163.  355.  389.
+14     0.854         0.817  2.79      23.1 4.70e-18    14  -163.  357.  393.
+15     0.858         0.818  2.78      21.7 1.25e-17    15  -162.  358.  396.
+16     0.858         0.815  2.81      20.0 5.90e-17    16  -162.  360.  400.
+17     0.858         0.812  2.83      18.5 2.69e-16    17  -162.  362.  404.
+18     0.868         0.822  2.75      18.7 1.87e-16    18  -159.  358.  403.
+19     0.869         0.819  2.78      17.4 7.86e-16    19  -159.  360.  407.
+20     0.869         0.816  2.80      16.3 3.08e-15    20  -159.  362.  411.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">test_r2</span> <span class="op">&lt;-</span> <span class="fu">map_dbl</span><span class="op">(</span><span class="va">models</span>, <span class="op">~</span> <span class="op">{</span></span>
+<span>  <span class="va">augmented</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">.x</span>, newdata <span class="op">=</span> <span class="va">test_df</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">augmented</span><span class="op">$</span><span class="va">y</span>, y <span class="op">=</span> <span class="va">augmented</span><span class="op">$</span><span class="va">.fitted</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">fitted_values</span> <span class="op">&lt;-</span> <span class="fu">map_dfr</span><span class="op">(</span><span class="va">models</span>, <span class="op">~</span> <span class="op">{</span></span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">.x</span>, newdata <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">10</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span>, .id <span class="op">=</span> <span class="st">"p"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">p</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bind_rows</span><span class="op">(</span></span>
+<span>  <span class="va">train_df</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"training"</span><span class="op">)</span>, </span>
+<span>  <span class="va">test_df</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"testing"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">type</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"training"</span>, <span class="st">"testing"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span>data <span class="op">=</span> <span class="va">fitted_values</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">.fitted</span>, color <span class="op">=</span> <span class="va">p</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span> <span class="va">type</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="va">custom_theme</span> <span class="op">+</span> </span>
+<span>  <span class="fu">theme</span><span class="op">(</span></span>
+<span>    panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As the degree of the polynomial increases, the model becomes more complex and the training error decreases. However, the test error increases as the model becomes more complex. This is because the model is overfitted to the training data and does not generalize well to new data. The figure above shows how the model fits the training data and the test data. As the model becomes more complex, it captures the noise in the training data and does not generalize well to the test data.</p>
+<p>Therefore, when evaluating the goodness of a model, if generalizability is the objective, we never assess the fit on the points on which it was built, but rather separate a portion of the observed data and train the model on one part while evaluating it on the other. This is called <strong>cross-validation</strong>.</p>
+</section><section id="decision-tree" class="level2"><h2 class="anchored" data-anchor-id="decision-tree">Decision Tree🌲</h2>
+<p>Decision trees are a type of supervised learning algorithm that can be used for both regression and classification tasks. Their goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features. Decision trees are easy to interpret and visualize, and they can easily capture nonlinear relationships. However, they are prone to overfitting.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">attrition</span>, package <span class="op">=</span> <span class="st">"modeldata"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bethatkinson/rpart">rpart</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">attrition_tree</span> <span class="op">&lt;-</span> <span class="va">attrition</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Attrition <span class="op">=</span> <span class="va">Attrition</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Attrition</span> <span class="op">~</span> <span class="va">.</span>,  cp <span class="op">=</span> <span class="fl">.03</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rattle</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rattle/man/fancyRpartPlot.html">fancyRpartPlot</a></span><span class="op">(</span><span class="va">attrition_tree</span>, palettes <span class="op">=</span> <span class="st">'PuRd'</span>, sub <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+CART
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The aim is to minimize the average heterogeneity of the tree’s leaves, weighted by numbers. If the task is classification, then the heterogeneity of a leaf is measured by the Gini index, which is the probability that two randomly selected elements from the leaf are of different classes. The Gini index is defined as follows:</p>
+<p><span class="math display">\[
+G = 1 - \sum_{i=1}^{k} f_i^2
+\]</span> If the task is regression, then the heterogeneity of a leaf is measured by the Sum of Squared Error of the target variable. The variance is defined as follows:</p>
+<p><span class="math display">\[
+SSE = \sum_{i=1}^{n} (y_i - \bar{y})^2
+\]</span></p>
+</div>
+</div>
+<p>If a predictor is categorical, then the tree will split the data into subsets based on the categories of the predictor. If a predictor is continuous, then the tree will split the data into subsets based on a deciles of the predictor.</p>
+<p>The tree will continue to split the data until the stopping criteria is met. The stopping criteria can be defined by the minimum number of observations in a leaf node, the maximum depth of the tree, or the minimum improvement in the Gini index or Sum of Squared Error (complexity parameter, <code>cp</code>).</p>
+<p>Let’s decrease the complexity parameter to see how the tree changes.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Attrition <span class="op">=</span> <span class="va">Attrition</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Attrition</span> <span class="op">~</span> <span class="va">.</span>,  cp <span class="op">=</span> <span class="fl">.021</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">rattle</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rattle/man/fancyRpartPlot.html">fancyRpartPlot</a></span><span class="op">(</span>palettes <span class="op">=</span> <span class="st">'PuRd'</span>, sub <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>How should we determine the complexity parameter? We can use cross-validation to determine the optimal complexity parameter for best predictions on a test set or if visualising the tree is the goal, we can try different values to draw a tree that highlights the splits that we find to be important, but the reader can still understand the tree.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advantages of Decision Trees
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Intuitive Understanding</strong>: Decision trees provide a clear and easy-to-understand model structure, which makes them particularly useful for interpretability. They mimic human decision-making processes, making their logic transparent. I personally recommend their use for descriptive statistics. They possess a highly intuitive and articulate approach to describe the data (<a href="https://marcellgranat.github.io/fertilityEU/Chapter-4.html" title="The impact of human development on fertility rates">example</a>).</p></li>
+<li><p><strong>No Need for Feature Scaling</strong>: These models don’t require feature normalization or standardization. They can handle varied scales of data effectively.</p></li>
+<li><p><strong>Handle Both Types of Data</strong>: Capable of handling both numerical and categorical variables.</p></li>
+<li><p><strong>Non-Parametric Method</strong>: As a non-parametric method, decision trees make no assumptions about the underlying distributions of the data, which is beneficial for analysis with less data preprocessing.</p></li>
+<li><p><strong>Capability of Feature Selection</strong>: They inherently perform feature selection by prioritizing the most informative features at the top splits.</p></li>
+<li><p><strong>Easy to Visualize</strong>: Their tree-like structure allows for easy visualization, aiding in understanding the decision-making process.</p></li>
+<li><p><strong>Can Model Non-Linear Relationships</strong>: Capable of capturing non-linear relationships between features and labels.</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Disadvantages of Decision Trees
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Overfitting</strong>: Decision trees are prone to overfitting, especially with complex trees. They can become too tailored to the training data and fail to generalize well.</p></li>
+<li><p><strong>Instability</strong>: Small variations in the data can result in a completely different tree structure. This lack of robustness can be a significant issue.</p></li>
+<li><p><strong>Not Suitable for Extrapolation</strong>: Decision trees cannot extrapolate or make predictions outside the range of the training data.</p></li>
+<li><p><strong>Poor Performance with Unbalanced Data</strong>: They can create biased trees if some classes dominate the dataset, leading to skewed decisions.</p></li>
+<li><p><strong>Difficulty with Large Number of Classes</strong>: The performance and computation time can degrade with a large number of target classes.</p></li>
+</ul>
+</div>
+</div>
+</section><section id="random-forest" class="level2"><h2 class="anchored" data-anchor-id="random-forest">Random Forest 🌲🌴🌳</h2>
+<p>Random forest is an ensemble learning method that combines multiple decision trees to create a “forest” that can make more accurate predictions than a single decision tree. It can be used for both regression and classification tasks. Random forest is a bagging technique and uses bootstrap sampling to create multiple decision trees. It also uses random feature selection to create each decision tree. The final prediction is the average prediction of all the decision trees.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">attrition_rf</span> <span class="op">&lt;-</span> <span class="va">attrition</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Attrition <span class="op">=</span> <span class="va">Attrition</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Attrition</span> <span class="op">~</span> <span class="va">.</span>, ntree <span class="op">=</span> <span class="fl">100</span>, importance <span class="op">=</span> <span class="cn">TRUE</span>, <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ROC</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://expasy.org/tools/pROC/">pROC</a></span><span class="op">)</span></span>
+<span><span class="va">attrition</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>fitted <span class="op">=</span> <span class="va">attrition_rf</span><span class="op">$</span><span class="va">votes</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">pROC</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pROC/man/roc.html">roc</a></span><span class="op">(</span><span class="va">Attrition</span>, <span class="va">fitted</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/pROC/man/ggroc.html">ggroc</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_abline</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, intercept <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">vip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vip/man/vi.html">vi</a></span><span class="op">(</span><span class="va">attrition_rf</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">Variable</span>, <span class="va">Importance</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Importance</span>, <span class="va">Variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="15-content_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Variable importance</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="mars" class="level2"><h2 class="anchored" data-anchor-id="mars">MARS 🌎</h2>
+<p>Multivariate adaptive regression splines (MARS) is a non-parametric regression method that can be used for both regression and classification tasks. It is a type of regression that uses piecewise linear basis functions to model the data. It is similar to decision trees, but it uses linear combinations of basis functions instead of a tree structure. It is also similar to polynomial regression, but it uses piecewise linear functions instead of polynomials. MARS is a type of additive model, which means that it is a linear combination of basis functions. The basis functions are defined as follows:</p>
+<p><span class="math display">\[
+h(x) = \beta_0 + \sum_{j=1}^{k} \beta_j B_j(x)
+\]</span> where <span class="math inline">\(B_j(x)\)</span> is a basis function. The basis functions are defined as follows:</p>
+<p><span class="math display">\[
+B_j(x) = \max(0, x - c_j)_+^p
+\]</span> where <span class="math inline">\(c_j\)</span> is a knot and <span class="math inline">\(p\)</span> is the degree of the basis function. The basis functions are piecewise linear functions with a knot at <span class="math inline">\(c_j\)</span>. The basis functions are also known as hinge functions. The basis functions are added to the model one at a time. The first basis function is a constant function. The second basis function is a constant function plus a hinge function. The third basis function is a constant function plus two hinge functions. The fourth basis function is a constant function plus three hinge functions. The process continues until the model reaches the maximum number of basis functions or the maximum number of basis functions that can be added without increasing the error. The model is then pruned to remove basis functions that do not improve the error.</p>
+<ol type="1">
+<li><p>The model starts from a null model.</p></li>
+<li><p>In each step, it adds the new hinge function pair that minimizes <span class="math inline">\(R^2\)</span> the most, where a hinge function is a variable pair <span class="math inline">\(max(x - c, 0)\)</span> and <span class="math inline">\(max(c - x, 0)\)</span>, with <span class="math inline">\(x\)</span> being the original variable and <span class="math inline">\(c\)</span> being a threshold value.</p></li>
+<li><p>This creates an overfitted model, so it eliminates the variables that prove to be redundant using Cross-validation method.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">earth</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/earth/man/earth.html">earth</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">MonthlyIncome</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">attrition</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Selected 14 of 14 terms, and 7 of 59 predictors
+Termination condition: RSq changed by less than 0.001 at 14 terms
+Importance: JobLevel, JobRoleResearch_Director, JobRoleManager, ...
+Number of terms at each degree of interaction: 1 6 7
+GCV 1067435    RSS 1498425944    GRSq 0.9518739    RSq 0.9539798</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: earth(formula=MonthlyIncome~., data=attrition, degree=2)
+
+                                                      coefficients
+(Intercept)                                              5638.0557
+JobRoleManager                                           3295.9923
+JobRoleResearch_Director                                 3351.7660
+h(2-JobLevel)                                           -2765.9146
+h(JobLevel-2)                                            3496.8878
+h(6-TotalWorkingYears)                                   -607.0069
+h(TotalWorkingYears-6)                                     51.2191
+JobRoleLaboratory_Technician * h(TotalWorkingYears-6)    -199.8807
+JobRoleResearch_Scientist * h(TotalWorkingYears-6)       -141.6059
+JobRoleSales_Representative * h(TotalWorkingYears-6)     -201.7847
+h(2-JobLevel) * h(TotalWorkingYears-7)                    152.9745
+h(2-JobLevel) * h(7-TotalWorkingYears)                    397.6352
+h(JobLevel-2) * h(TotalWorkingYears-15)                   -28.8981
+h(JobLevel-2) * h(15-TotalWorkingYears)                  -121.2103
+
+Selected 14 of 14 terms, and 7 of 59 predictors
+Termination condition: RSq changed by less than 0.001 at 14 terms
+Importance: JobLevel, JobRoleResearch_Director, JobRoleManager, ...
+Number of terms at each degree of interaction: 1 6 7
+GCV 1067435    RSS 1498425944    GRSq 0.9518739    RSq 0.9539798</code></pre>
+</div>
+</div>
+<p>It can be quite challenging to navigate through the meaning of these coefficients… Let’s visualise the response over a range of predictor values. A solution can be found in the <a href="http://www.milbo.users.sonic.net">plotmo</a> package. It keeps the value of every predictor at a constant (median or mode) and varies the value of the predictor of interest. The plot shows the predicted response as a function of the predictor of interest, with the other predictors held constant. It can also be used to visualize the relationship between the response and a pair of predictors.</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotmo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotmo/man/plotmo.html">plotmo</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> plotmo grid:    Age Attrition BusinessTravel DailyRate           Department
+                  36        No  Travel_Rarely       802 Research_Development
+ DistanceFromHome Education EducationField EnvironmentSatisfaction Gender
+                7  Bachelor  Life_Sciences                    High   Male
+ HourlyRate JobInvolvement JobLevel         JobRole JobSatisfaction
+         66           High        2 Sales_Executive       Very_High
+ MaritalStatus MonthlyRate NumCompaniesWorked OverTime PercentSalaryHike
+       Married       14236                  2       No                14
+ PerformanceRating RelationshipSatisfaction StockOptionLevel TotalWorkingYears
+         Excellent                     High                1                10
+ TrainingTimesLastYear WorkLifeBalance YearsAtCompany YearsInCurrentRole
+                     3          Better              5                  3
+ YearsSinceLastPromotion YearsWithCurrManager
+                       1                    3</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">vip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vip/man/vi.html">vi</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">Variable</span>, <span class="va">Importance</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Importance</span>, <span class="va">Variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="15-content_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Variable importance for MARS</figcaption></figure>
+</div>
+</div>
+</div>
+<p>We might see that the monthly income increases with the increasing the working years, but the relationship is not linear. The slope decreases after 6 years. This function can also be used for simple OLS models if it becomes complex (or you can develop a similar solution to <a href="https://www.marcellgranat.com/posts/portfolio-used-cars/">any other model</a>)</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">MonthlyIncome</span> <span class="op">~</span> <span class="va">JobLevel</span> <span class="op">+</span> <span class="va">JobRole</span> <span class="op">+</span> <span class="va">TotalWorkingYears</span>, data <span class="op">=</span> <span class="va">attrition</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">plotmo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotmo/man/plotmo.html">plotmo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> plotmo grid:    JobLevel         JobRole TotalWorkingYears
+                        2 Sales_Executive                10</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s focus again on the hinge functions.</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">earth</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/earth/man/earth.html">earth</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">MonthlyIncome</span> <span class="op">~</span> <span class="va">TotalWorkingYears</span>, data <span class="op">=</span> <span class="va">attrition</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: earth(formula=MonthlyIncome~TotalWorkingYears, data=attrition, degree=2)
+
+                        coefficients
+(Intercept)                7804.0544
+h(15-TotalWorkingYears)    -405.4382
+h(TotalWorkingYears-15)    -834.0226
+h(TotalWorkingYears-18)    3348.9434
+h(TotalWorkingYears-22)   -2482.4637
+
+Selected 5 of 6 terms, and 1 of 1 predictors
+Termination condition: RSq changed by less than 0.001 at 6 terms
+Importance: TotalWorkingYears
+Number of terms at each degree of interaction: 1 4 (additive model)
+GCV 7487091    RSS 10841924236    GRSq 0.6624387    RSq 0.6670189</code></pre>
+</div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotmo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotmo/man/plotmo.html">plotmo</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15-content_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.marcellgranat.com">Marcell Granát</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

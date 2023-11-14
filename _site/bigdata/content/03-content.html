@@ -322,6 +322,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Clustering</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PCA</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+ <span class="menu-text">ML</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithmic Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/16-content.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidy modeling</span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -736,15 +765,15 @@ Tip
 </div>
 </section><section id="mutate" class="level3"><h3 class="anchored" data-anchor-id="mutate">Mutate</h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> computes new column(s).</p>
-<p><code><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode::countrycode()</a></code> Translates from one country naming scheme to another.</p>
+<p><code><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode::countrycode()</a></code> Translates from one country naming scheme to another.</p>
 <div class="cell">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    country_name <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span>,</span>
-<span>    continent <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"continent"</span><span class="op">)</span></span>
+<span>    country_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span>,</span>
+<span>    continent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"continent"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3,294 × 5
@@ -769,9 +798,9 @@ Tip
 <span><span class="va">fertility_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="va">TIME</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    country_name <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span>,</span>
-<span>    continent <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"continent"</span><span class="op">)</span>,</span>
-<span>    LOCATION <span class="op">=</span> <span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"iso2c"</span><span class="op">)</span> <span class="co"># modify the original column</span></span>
+<span>    country_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"country.name"</span><span class="op">)</span>,</span>
+<span>    continent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"continent"</span><span class="op">)</span>,</span>
+<span>    LOCATION <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="va">LOCATION</span>, <span class="st">"iso3c"</span>, <span class="st">"iso2c"</span><span class="op">)</span> <span class="co"># modify the original column</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3,294 × 5

@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/15-content.html">ML</a></li><li class="breadcrumb-item"><a href="../content/15-content.html">Algorithmic Modeling</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/15-content.html">ML</a></li><li class="breadcrumb-item"><a href="../content/15-content.html">Algorithmic Modelling</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -342,12 +342,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/15-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Algorithmic Modeling</span></a>
+ <span class="menu-text">Algorithmic Modelling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/16-content.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../content/16-content.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tidy modeling</span></a>
   </div>
 </li>
@@ -373,10 +373,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="date-block bg-class text-white p-2">
   <p class="date">Readings and class materials for Tuesday, November 14, 2023</p>
 </div>
-</header><p>In the context of linear regression, we have examined a case where we have a clear understanding of how the value of the output variable follows from the explanatory variables: as a linear combination with some noise.</p>
+</header><section id="suggested-materials" class="level4"><h4 class="anchored" data-anchor-id="suggested-materials">Suggested materials</h4>
+<ul>
+<li><p><i class="fa-solid fa-book" aria-label="book"></i> <a href="https://www.marcellgranat.com/posts/data-cultures/">Data and Cultures</a> in <em>Economania</em></p></li>
+<li><p><i class="fa-solid fa-video" aria-label="video"></i> <a href="https://www.youtube.com/live/Zifh5GpyOBM?si=xH2R7oLpTh-mGjWl&amp;t=10030">My TEDx Talk</a></p></li>
+<li><p><i class="fa-solid fa-atom" aria-label="atom"></i> <a href="http://www.stat.yale.edu/~lc436/08Spring665/Mars_Friedman_91.pdf">Multivariate Adaptive Regression Splines</a> by Jerome H. Friedman. This is the original paper that introduced MARS.</p></li>
+<li><p><i class="fa-solid fa-book" aria-label="book"></i> <a href="https://web.stanford.edu/~hastie/ElemStatLearn/">Tidy Modeling with R</a></p></li>
+</ul>
+<hr>
+<p>In the context of linear regression, we have examined a case where we have a clear understanding of how the value of the output variable follows from the explanatory variables: as a linear combination with some noise.</p>
 <p>On the contrary, another approach in a different culture does not aim to describe the “data generating process” that relates x to y, but rather aims to create an algorithm that accurately estimates the target variable. This approach includes neural networks and tree-based models, which were considered innovative in the 1980s. These tools have advanced to a level by the early 21st century where they are capable of tasks such as speech recognition, image recognition, and predicting nonlinear time series. The key is to focus on giving “good predictions”.</p>
 <p>Okay… How do we define “good predictions”?</p>
-<section id="overfitting" class="level3"><h3 class="anchored" data-anchor-id="overfitting">Overfitting</h3>
+</section><section id="overfitting" class="level3"><h3 class="anchored" data-anchor-id="overfitting">Overfitting</h3>
 <p>We can demonstrate overfitting, which refers to the use of a overly fitted model, by using a simple example where we fit a model using Ordinary Least Squares (OLS) method. Overfitting occurs when the model overly adapts to the training data and is unable to generalize well to new, unseen data.</p>
 <p>In the following steps, I will demonstrate how to create an overfitted model:</p>
 <div class="cell">
@@ -550,6 +558,10 @@ Disadvantages of Decision Trees
 </div>
 </div>
 </section><section id="random-forest" class="level2"><h2 class="anchored" data-anchor-id="random-forest">Random Forest 🌲🌴🌳</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/251803749_379164740557697_98122015297146232_n.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
 <p>Random forest is an ensemble learning method that combines multiple decision trees to create a “forest” that can make more accurate predictions than a single decision tree. It can be used for both regression and classification tasks. Random forest is a bagging technique and uses bootstrap sampling to create multiple decision trees. It also uses random feature selection to create each decision tree. The final prediction is the average prediction of all the decision trees.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span></span>
@@ -660,8 +672,15 @@ GCV 1067435    RSS 1498425944    GRSq 0.9518739    RSq 0.9539798</code></pre>
 <p><img src="15-content_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Additionally, calculating the importance of variables can aid in the interpretation of the model. This can be easily done using the <a href="https://github.com/koalaverse/vip/">vip</a> package. However, in the case of the MARS model, the Variable Importance (VI) is calculated differently. By applying our advanced documentation reading skills, we can find the following:</p>
+<blockquote class="blockquote">
+<p>The earth package uses three criteria for estimating the variable importance in a MARS model (see evimp for details):</p>
+<p>The nsubsets criterion (type = “nsubsets”) counts the number of model subsets that include each feature. Variables that are included in more subsets are considered more important. This is the criterion used by summary.earth to print variable importance. By “subsets” we mean the subsets of terms generated by earth()’s backward pass. There is one subset for each model size (from one to the size of the selected model) and the subset is the best set of terms for that model size. (These subsets are specified in the $prune.terms component of earth()’s return value.) Only subsets that are smaller than or equal in size to the final model are used for estimating variable importance. This is the default method used by vip.</p>
+<p>The rss criterion (type = “rss”) first calculates the decrease in the RSS for each subset relative to the previous subset during earth()’s backward pass. (For multiple response models, RSS’s are calculated over all responses.) Then for each variable it sums these decreases over all subsets that include the variable. Finally, for ease of interpretation the summed decreases are scaled so the largest summed decrease is 100. Variables which cause larger net decreases in the RSS are considered more important.</p>
+<p>The gcv criterion (type = “gcv”) is similar to the rss approach, but uses the GCV statistic instead of the RSS. Note that adding a variable can sometimes increase the GCV. (Adding the variable has a deleterious effect on the model, as measured in terms of its estimated predictive power on unseen data.) If that happens often enough, the variable can have a negative total importance, and thus appear less important than unused variables.</p>
+</blockquote>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">vip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vip/man/vi.html">vi</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">vip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vip/man/vi.html">vi</a></span><span class="op">(</span><span class="va">fit</span>, type <span class="op">=</span> <span class="st">"gcv"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">Variable</span>, <span class="va">Importance</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_col</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Importance</span>, <span class="va">Variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -709,6 +728,16 @@ GCV 7487091    RSS 10841924236    GRSq 0.6624387    RSq 0.6670189</code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotmo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotmo/man/plotmo.html">plotmo</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="15-content_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/252016114_378098813997623_2156641995988664689_n-2.jpg" class="img-fluid figure-img" style="width:85.0%"></p>
+</figure>
+</div>
+</div><div class="column">
+<p>It is worth noting here that the implemented algorithm always represents the hinge function as max(x-c, 0) or max(c-x, 0), and only displays the x-c or c-x part for the coefficients. Therefore, it follows that the value of the hinge function denoted as <code>h(15-TotalWorkingYears)</code> decreases as work experience increases. Hence, the corresponding negative coefficient implies that the expected salary decreases as work experience increases and is below 15 years.</p>
 </div>
 </div>
 

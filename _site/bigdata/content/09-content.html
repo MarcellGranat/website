@@ -348,7 +348,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/16-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tidy modeling</span></a>
+ <span class="menu-text">Tidy modelling</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+ <span class="menu-text">Data bases</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/17-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with Data bases</span></a>
   </div>
 </li>
       </ul>
@@ -569,7 +586,7 @@ Caution
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span> <span class="co"># modify colors</span></span>
 <span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"grey"</span><span class="op">)</span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggdark</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggdark/man/ggdarktheme.html">dark_theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># dark theme</span></span>
+<span>  <span class="fu">ggdark</span><span class="fu">::</span><span class="fu">dark_theme_classic</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># dark theme</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span> <span class="co"># change title style</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="09-content_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
@@ -1240,7 +1257,7 @@ z     1.00000000</code></pre>
 </div>
 <section id="advanced-cases" class="level3"><h3 class="anchored" data-anchor-id="advanced-cases">Advanced cases</h3>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">eurostat</span><span class="fu">::</span><span class="fu"><a href="https://ropengov.github.io/eurostat/reference/search_eurostat.html">search_eurostat</a></span><span class="op">(</span><span class="st">"vacancy"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">eurostat</span><span class="fu">::</span><span class="fu">search_eurostat</span><span class="op">(</span><span class="st">"vacancy"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 8
    title   code  type  `last update of data` last table structure…¹ `data start`
@@ -1261,12 +1278,12 @@ z     1.00000000</code></pre>
 </div>
 <p>Lets see what to do with time-series data. We need some data for this from Eurostat.</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">eurostat</span><span class="fu">::</span><span class="fu"><a href="https://ropengov.github.io/eurostat/reference/search_eurostat.html">search_eurostat</a></span><span class="op">(</span><span class="st">"employment"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">eurostat</span><span class="fu">::</span><span class="fu">search_eurostat</span><span class="op">(</span><span class="st">"employment"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">title</span>, <span class="st">"quarter"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">unemployment_df</span> <span class="op">&lt;-</span> <span class="fu">eurostat</span><span class="fu">::</span><span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"une_rt_q"</span><span class="op">)</span></span>
-<span><span class="va">vacancy_df</span> <span class="op">&lt;-</span> <span class="fu">eurostat</span><span class="fu">::</span><span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"ei_lmjv_q_r2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">unemployment_df</span> <span class="op">&lt;-</span> <span class="fu">eurostat</span><span class="fu">::</span><span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"une_rt_q"</span><span class="op">)</span></span>
+<span><span class="va">vacancy_df</span> <span class="op">&lt;-</span> <span class="fu">eurostat</span><span class="fu">::</span><span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"ei_lmjv_q_r2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">unemployment_df</span> <span class="op">&lt;-</span> <span class="va">unemployment_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>

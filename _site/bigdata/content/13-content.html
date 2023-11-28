@@ -348,7 +348,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/16-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tidy modeling</span></a>
+ <span class="menu-text">Tidy modelling</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+ <span class="menu-text">Data bases</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/17-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with Data bases</span></a>
   </div>
 </li>
       </ul>
@@ -471,31 +488,31 @@ Step-by-step
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/eurostat/">eurostat</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># GDP per capita in PPS (Purchasing Power Standards)</span></span>
-<span><span class="va">gdp_per_capita</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"tec00114"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">gdp_per_capita</span> <span class="op">&lt;-</span> <span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"tec00114"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, gdp_per_capita <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Unemployment rate</span></span>
-<span><span class="va">unemployment_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"tesem140"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">unemployment_rate</span> <span class="op">&lt;-</span> <span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"tesem140"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"T"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, unemployment_rate <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Life expectancy at birth</span></span>
-<span><span class="va">life_expectancy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"sdg_03_10"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">life_expectancy</span> <span class="op">&lt;-</span> <span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"sdg_03_10"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"T"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, life_expectancy <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># R&amp;D index - Human Resources in Science and Technology (HRST)</span></span>
-<span><span class="va">education_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"hrst_st_rcat"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">education_index</span> <span class="op">&lt;-</span> <span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"hrst_st_rcat"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_length</span><span class="op">(</span><span class="va">geo</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span>, <span class="va">category</span> <span class="op">==</span> <span class="st">"HRST"</span>, <span class="va">unit</span> <span class="op">==</span> <span class="st">"PC_ACT"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, education_index <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Gini coefficient - measure of income inequality</span></span>
-<span><span class="va">gini_coefficient</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"ilc_di12"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">gini_coefficient</span> <span class="op">&lt;-</span> <span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"ilc_di12"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, gini <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># Government debt as a percentage of GDP</span></span>
-<span><span class="va">public_debt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat</a></span><span class="op">(</span><span class="st">"gov_10dd_edpt1"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">public_debt</span> <span class="op">&lt;-</span> <span class="fu">get_eurostat</span><span class="op">(</span><span class="st">"gov_10dd_edpt1"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_length</span><span class="op">(</span><span class="va">geo</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span>, <span class="va">unit</span> <span class="op">==</span> <span class="st">"MIO_EUR"</span>, <span class="va">sector</span> <span class="op">==</span> <span class="st">"S13"</span>, <span class="va">na_item</span> <span class="op">==</span> <span class="st">"B9"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">geo</span>, <span class="va">time</span>, public_debt <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span></span>
@@ -1253,7 +1270,7 @@ Step-by-step
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span> <span class="op">%&gt;%</span> </span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va">penguins</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span> <span class="va">year</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -1293,7 +1310,7 @@ Available components:
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span> <span class="op">%&gt;%</span> </span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va">penguins</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>cluster <span class="op">=</span> <span class="va">fit</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -1307,7 +1324,7 @@ Available components:
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute and plot wss for k = 1 to k = 15</span></span>
 <span><span class="va">wss</span> <span class="op">&lt;-</span> <span class="fu">map_dbl</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, <span class="kw">function</span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va">penguins</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span>centers <span class="op">=</span> <span class="va">k</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>

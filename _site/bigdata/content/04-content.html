@@ -370,6 +370,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+ <span class="menu-text">Text mining</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to text mining</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -1038,7 +1055,7 @@ Tip
 <span>    <span class="fu">aes</span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">x</span> <span class="op">}</span><span class="op">}</span>, <span class="op">{</span><span class="op">{</span> <span class="va">y</span> <span class="op">}</span><span class="op">}</span>, color <span class="op">=</span> <span class="op">{</span><span class="op">{</span> <span class="va">group</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_path</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, shape <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu">geom_text_repel</span><span class="op">(</span>data <span class="op">=</span> <span class="op">~</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">.</span>, <span class="op">{</span><span class="op">{</span> <span class="va">group</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">~</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">.</span>, <span class="op">{</span><span class="op">{</span> <span class="va">group</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                               <span class="fu">slice</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, to <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                                                      length.out <span class="op">=</span> <span class="va">n_label</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                             <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="op">{</span><span class="op">{</span> <span class="va">time</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>

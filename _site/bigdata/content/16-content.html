@@ -370,6 +370,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+ <span class="menu-text">Text mining</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to text mining</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -386,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a>
   <ul class="collapse">
-<li><a href="#variable-importance" id="toc-variable-importance" class="nav-link" data-scroll-target="#variable-importance">variable importance</a></li>
+<li><a href="#variable-importance" id="toc-variable-importance" class="nav-link" data-scroll-target="#variable-importance">Variable importance</a></li>
   </ul>
 </li>
   <li><a href="#predicting" id="toc-predicting" class="nav-link" data-scroll-target="#predicting">Predicting</a></li>
@@ -462,16 +479,16 @@ $ YearsWithCurrManager     &lt;int&gt; 5, 7, 0, 0, 2, 6, 0, 0, 8, 7, 3, 8, 3, 2,
 <pre><code># A tibble: 1,176 × 31
      Age Attrition BusinessTravel    DailyRate Department       DistanceFromHome
    &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;                 &lt;int&gt; &lt;fct&gt;                       &lt;int&gt;
- 1    42 No        Travel_Rarely          1147 Human_Resources                10
- 2    28 No        Travel_Rarely          1451 Research_Develo…                2
- 3    34 No        Travel_Rarely           665 Research_Develo…                6
- 4    34 No        Travel_Frequently      1003 Research_Develo…                2
- 5    40 No        Travel_Rarely           444 Sales                           2
- 6    59 No        Travel_Rarely           818 Human_Resources                 6
- 7    39 Yes       Travel_Frequently       203 Research_Develo…                2
- 8    45 No        Travel_Rarely          1329 Research_Develo…                2
- 9    36 No        Travel_Rarely           917 Research_Develo…                6
-10    38 No        Non-Travel             1336 Human_Resources                 2
+ 1    56 Yes       Travel_Rarely           310 Research_Develo…                7
+ 2    35 No        Travel_Rarely           672 Research_Develo…               25
+ 3    21 No        Travel_Rarely           501 Sales                           5
+ 4    33 Yes       Travel_Frequently       827 Research_Develo…               29
+ 5    34 No        Travel_Rarely          1351 Research_Develo…                1
+ 6    39 No        Travel_Rarely          1387 Research_Develo…               10
+ 7    38 No        Travel_Rarely          1495 Research_Develo…                4
+ 8    26 No        Travel_Rarely           991 Research_Develo…                6
+ 9    34 No        Travel_Rarely          1397 Research_Develo…                1
+10    38 No        Travel_Rarely          1009 Sales                           2
 # ℹ 1,166 more rows
 # ℹ 25 more variables: Education &lt;ord&gt;, EducationField &lt;fct&gt;,
 #   EnvironmentSatisfaction &lt;ord&gt;, Gender &lt;fct&gt;, HourlyRate &lt;int&gt;,
@@ -488,15 +505,15 @@ $ YearsWithCurrManager     &lt;int&gt; 5, 7, 0, 0, 2, 6, 0, 0, 8, 7, 3, 8, 3, 2,
      Age Attrition BusinessTravel    DailyRate Department       DistanceFromHome
    &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;                 &lt;int&gt; &lt;fct&gt;                       &lt;int&gt;
  1    33 No        Travel_Frequently      1392 Research_Develo…                3
- 2    32 No        Travel_Frequently      1005 Research_Develo…                2
+ 2    36 No        Travel_Rarely          1299 Research_Develo…               27
  3    31 No        Travel_Rarely           670 Research_Develo…               26
- 4    28 Yes       Travel_Rarely           103 Research_Develo…               24
- 5    22 No        Non-Travel             1123 Research_Develo…               16
- 6    46 No        Travel_Rarely           705 Sales                           2
- 7    35 No        Travel_Rarely           890 Sales                           2
- 8    36 No        Travel_Rarely           852 Research_Develo…                5
- 9    28 Yes       Travel_Rarely          1434 Research_Develo…                5
-10    44 No        Travel_Rarely          1488 Sales                           1
+ 4    29 No        Travel_Rarely          1389 Research_Develo…               21
+ 5    34 No        Travel_Rarely           419 Research_Develo…                7
+ 6    53 No        Travel_Rarely          1282 Research_Develo…                5
+ 7    30 No        Travel_Rarely           125 Research_Develo…                9
+ 8    24 Yes       Travel_Rarely           813 Research_Develo…                1
+ 9    43 No        Travel_Rarely          1273 Research_Develo…                2
+10    27 No        Travel_Rarely          1240 Research_Develo…                2
 # ℹ 284 more rows
 # ℹ 25 more variables: Education &lt;ord&gt;, EducationField &lt;fct&gt;,
 #   EnvironmentSatisfaction &lt;ord&gt;, Gender &lt;fct&gt;, HourlyRate &lt;int&gt;,
@@ -554,16 +571,16 @@ $ YearsWithCurrManager     &lt;int&gt; 5, 7, 0, 0, 2, 6, 0, 0, 8, 7, 3, 8, 3, 2,
 # A tibble: 100 × 2
    splits             id          
    &lt;list&gt;             &lt;chr&gt;       
- 1 &lt;split [1174/415]&gt; Bootstrap001
- 2 &lt;split [1174/444]&gt; Bootstrap002
- 3 &lt;split [1174/412]&gt; Bootstrap003
- 4 &lt;split [1174/422]&gt; Bootstrap004
- 5 &lt;split [1174/432]&gt; Bootstrap005
- 6 &lt;split [1174/429]&gt; Bootstrap006
- 7 &lt;split [1174/430]&gt; Bootstrap007
- 8 &lt;split [1174/442]&gt; Bootstrap008
- 9 &lt;split [1174/433]&gt; Bootstrap009
-10 &lt;split [1174/435]&gt; Bootstrap010
+ 1 &lt;split [1174/433]&gt; Bootstrap001
+ 2 &lt;split [1174/436]&gt; Bootstrap002
+ 3 &lt;split [1174/416]&gt; Bootstrap003
+ 4 &lt;split [1174/450]&gt; Bootstrap004
+ 5 &lt;split [1174/428]&gt; Bootstrap005
+ 6 &lt;split [1174/406]&gt; Bootstrap006
+ 7 &lt;split [1174/426]&gt; Bootstrap007
+ 8 &lt;split [1174/433]&gt; Bootstrap008
+ 9 &lt;split [1174/434]&gt; Bootstrap009
+10 &lt;split [1174/437]&gt; Bootstrap010
 # ℹ 90 more rows</code></pre>
 </div>
 </div>
@@ -784,101 +801,172 @@ Computational engine: glmnet </code></pre>
 <span>  <span class="va">linear_reg_glmnet_workflow</span>,</span>
 <span>  resamples <span class="op">=</span> <span class="va">attrition_vsplit</span>,</span>
 <span>  grid <span class="op">=</span> <span class="fl">30</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `check_installs()`:
-! Some package installs are required: 
-• 'glmnet'</code></pre>
-</div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition_glm_tn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'attrition_glm_tn' not found</code></pre>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">attrition_glm_tn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Tuning results
+# 10-fold cross-validation 
+# A tibble: 10 × 4
+   splits             id     .metrics          .notes          
+   &lt;list&gt;             &lt;chr&gt;  &lt;list&gt;            &lt;list&gt;          
+ 1 &lt;split [1323/147]&gt; Fold01 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 2 &lt;split [1323/147]&gt; Fold02 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 3 &lt;split [1323/147]&gt; Fold03 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 4 &lt;split [1323/147]&gt; Fold04 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 5 &lt;split [1323/147]&gt; Fold05 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 6 &lt;split [1323/147]&gt; Fold06 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 7 &lt;split [1323/147]&gt; Fold07 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 8 &lt;split [1323/147]&gt; Fold08 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+ 9 &lt;split [1323/147]&gt; Fold09 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;
+10 &lt;split [1323/147]&gt; Fold10 &lt;tibble [60 × 6]&gt; &lt;tibble [0 × 3]&gt;</code></pre>
 </div>
 </div>
 <p>With the code above, we tried 30 different combination of the hyperparameters. The model is built on th analysis sets and assessed on the assessment sets.</p>
 <p>We can show the best solutions:</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_best</span><span class="op">(</span><span class="va">attrition_glm_tn</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'attrition_glm_tn' not found</code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_best</span><span class="op">(</span><span class="va">attrition_glm_tn</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+       penalty mixture .metric .estimator  mean     n std_err .config           
+         &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;             
+1 0.000301       0.888 rmse    standard   1676.    10    25.4 Preprocessor1_Mod…
+2 0.0000000399   0.554 rmse    standard   1676.    10    25.4 Preprocessor1_Mod…
+3 0.00000245     0.560 rmse    standard   1676.    10    25.4 Preprocessor1_Mod…
+4 0.000000135    0.656 rmse    standard   1676.    10    25.4 Preprocessor1_Mod…
+5 0.0000000189   0.384 rmse    standard   1676.    10    25.4 Preprocessor1_Mod…</code></pre>
 </div>
 </div>
 <p>Or based on <span class="math inline">\(R^2\)</span> (if you used strata, then probably the same solutions will be shown):</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_best</span><span class="op">(</span><span class="va">attrition_glm_tn</span>, n <span class="op">=</span> <span class="fl">5</span>, metric <span class="op">=</span> <span class="st">"rsq"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'attrition_glm_tn' not found</code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_best</span><span class="op">(</span><span class="va">attrition_glm_tn</span>, n <span class="op">=</span> <span class="fl">5</span>, metric <span class="op">=</span> <span class="st">"rsq"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+       penalty mixture .metric .estimator  mean     n std_err .config           
+         &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;             
+1 0.000301       0.888 rsq     standard   0.871    10 0.00726 Preprocessor1_Mod…
+2 0.0000000399   0.554 rsq     standard   0.871    10 0.00726 Preprocessor1_Mod…
+3 0.00000245     0.560 rsq     standard   0.871    10 0.00726 Preprocessor1_Mod…
+4 0.000000135    0.656 rsq     standard   0.871    10 0.00726 Preprocessor1_Mod…
+5 0.0000691      0.835 rsq     standard   0.871    10 0.00726 Preprocessor1_Mod…</code></pre>
 </div>
 </div>
 <p>Now, we can finalise the workflow, with our best performing hyperparameters:</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_workflow_final</span> <span class="op">&lt;-</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_workflow_final</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">linear_reg_glmnet_workflow</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">finalize_workflow</span><span class="op">(</span></span>
 <span>    <span class="fu">select_best</span><span class="op">(</span><span class="va">attrition_glm_tn</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error: object 'attrition_glm_tn' not found</code></pre>
-</div>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_workflow_final</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'linear_reg_glmnet_workflow_final' not found</code></pre>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">linear_reg_glmnet_workflow_final</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>══ Workflow ════════════════════════════════════════════════════════════════════
+Preprocessor: Recipe
+Model: linear_reg()
+
+── Preprocessor ────────────────────────────────────────────────────────────────
+3 Recipe Steps
+
+• step_rm()
+• step_dummy()
+• step_corr()
+
+── Model ───────────────────────────────────────────────────────────────────────
+Linear Regression Model Specification (regression)
+
+Main Arguments:
+  penalty = 0.000300503848834594
+  mixture = 0.888056889081684
+
+Computational engine: glmnet </code></pre>
 </div>
 </div>
 </section><section id="training" class="level2"><h2 class="anchored" data-anchor-id="training">Training</h2>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">&lt;-</span></span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">linear_reg_glmnet_workflow_final</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">fit</span><span class="op">(</span>data <span class="op">=</span> <span class="op">(</span><span class="fu">training</span><span class="op">(</span><span class="va">attrition_split</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'linear_reg_glmnet_workflow_final' not found</code></pre>
 </div>
-</div>
-<section id="variable-importance" class="level3"><h3 class="anchored" data-anchor-id="variable-importance">variable importance</h3>
+<section id="variable-importance" class="level3"><h3 class="anchored" data-anchor-id="variable-importance">Variable importance</h3>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">pull_workflow_fit</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">vip</span><span class="fu">::</span><span class="fu"><a href="https://koalaverse.github.io/vip/reference/vi.html">vi</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'linear_reg_glmnet_fit' not found</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 52 × 3
+   Variable                      Importance Sign 
+   &lt;chr&gt;                              &lt;dbl&gt; &lt;chr&gt;
+ 1 JobRole_Manager                    7545. POS  
+ 2 JobRole_Research_Director          7268. POS  
+ 3 JobRole_Research_Scientist         3052. NEG  
+ 4 JobRole_Laboratory_Technician      3023. NEG  
+ 5 JobRole_Sales_Representative       2676. NEG  
+ 6 JobRole_Human_Resources            1904. NEG  
+ 7 PerformanceRating_1                 635. NEG  
+ 8 JobRole_Sales_Executive             574. POS  
+ 9 Department_Sales                    562. NEG  
+10 JobInvolvement_1                    336. NEG  
+# ℹ 42 more rows</code></pre>
 </div>
 </div>
 </section></section><section id="predicting" class="level2"><h2 class="anchored" data-anchor-id="predicting">Predicting</h2>
 <div class="cell">
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span>new_data <span class="op">=</span> <span class="fu">testing</span><span class="op">(</span><span class="va">attrition_split</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'linear_reg_glmnet_fit' not found</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 296 × 1
+   .pred
+   &lt;dbl&gt;
+ 1 3470.
+ 2 1973.
+ 3 2773.
+ 4 2468.
+ 5 1455.
+ 6 9262.
+ 7 2564.
+ 8 1643.
+ 9 6970.
+10 2921.
+# ℹ 286 more rows</code></pre>
 </div>
 </div>
 </section><section id="evaluating-yardstick" class="level2"><h2 class="anchored" data-anchor-id="evaluating-yardstick">Evaluating (yardstick)</h2>
 <div class="cell">
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span>new_data <span class="op">=</span> <span class="fu">testing</span><span class="op">(</span><span class="va">attrition_split</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">bind_cols</span><span class="op">(</span><span class="va">attrition_split</span> <span class="op">%&gt;%</span> <span class="fu">testing</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">yardstick</span><span class="fu">::</span><span class="fu"><a href="https://yardstick.tidymodels.org/reference/rsq.html">rsq</a></span><span class="op">(</span>truth <span class="op">=</span> <span class="va">MonthlyIncome</span>, estimate <span class="op">=</span> <span class="va">.pred</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'linear_reg_glmnet_fit' not found</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 rsq     standard       0.875</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">linear_reg_glmnet_fit</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span>new_data <span class="op">=</span> <span class="fu">testing</span><span class="op">(</span><span class="va">attrition_split</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">bind_cols</span><span class="op">(</span><span class="va">attrition_split</span> <span class="op">%&gt;%</span> <span class="fu">testing</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">yardstick</span><span class="fu">::</span><span class="fu"><a href="https://yardstick.tidymodels.org/reference/metrics.html">metrics</a></span><span class="op">(</span>truth <span class="op">=</span> <span class="va">MonthlyIncome</span>, estimate <span class="op">=</span> <span class="va">.pred</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'linear_reg_glmnet_fit' not found</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 rmse    standard    1682.   
+2 rsq     standard       0.875
+3 mae     standard    1337.   </code></pre>
 </div>
 </div>
 </section><section id="classification" class="level2"><h2 class="anchored" data-anchor-id="classification">Classification</h2>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rand_forest_randomForest_spec</span> <span class="op">&lt;-</span></span>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rand_forest_randomForest_spec</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">rand_forest</span><span class="op">(</span>mtry <span class="op">=</span> <span class="fu">tune</span><span class="op">(</span><span class="op">)</span>, min_n <span class="op">=</span> <span class="fu">tune</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">set_engine</span><span class="op">(</span><span class="st">'randomForest'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">set_mode</span><span class="op">(</span><span class="st">'classification'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition_recipe</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">Attrition</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">attrition</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition_recipe</span> <span class="op">&lt;-</span> <span class="fu">recipe</span><span class="op">(</span><span class="va">Attrition</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">attrition</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">step_rm</span><span class="op">(</span><span class="va">RelationshipSatisfaction</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">step_pca</span><span class="op">(</span><span class="fu">all_numeric</span><span class="op">(</span><span class="op">)</span>, threshold <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">step_corr</span><span class="op">(</span><span class="fu">all_numeric</span><span class="op">(</span><span class="op">)</span>, threshold <span class="op">=</span> <span class="fl">.6</span><span class="op">)</span></span>
@@ -889,35 +977,34 @@ Computational engine: glmnet </code></pre>
 <span>  <span class="fu">add_model</span><span class="op">(</span><span class="va">rand_forest_randomForest_spec</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition_rf_tn</span> <span class="op">&lt;-</span> <span class="fu">tune_grid</span><span class="op">(</span></span>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attrition_rf_tn</span> <span class="op">&lt;-</span> <span class="fu">tune_grid</span><span class="op">(</span></span>
 <span>  <span class="va">rand_forest_randomForest_workflow</span>,</span>
 <span>  resamples <span class="op">=</span> <span class="va">attrition_vsplit</span>,</span>
 <span>  grid <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `check_installs()`:
-! Some package installs are required: 
-• 'randomForest', 'randomForest'</code></pre>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_best</span><span class="op">(</span><span class="va">attrition_rf_tn</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+   mtry min_n .metric .estimator  mean     n std_err .config             
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1     6    12 roc_auc binary     0.791    10  0.0149 Preprocessor1_Model3
+2     2    33 roc_auc binary     0.791    10  0.0175 Preprocessor1_Model5
+3     8    18 roc_auc binary     0.786    10  0.0161 Preprocessor1_Model2
+4    13    28 roc_auc binary     0.784    10  0.0129 Preprocessor1_Model4
+5    10     6 roc_auc binary     0.776    10  0.0157 Preprocessor1_Model1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_best</span><span class="op">(</span><span class="va">attrition_rf_tn</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'attrition_rf_tn' not found</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rf_workflow_final</span> <span class="op">&lt;-</span> </span>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rf_workflow_final</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">rand_forest_randomForest_workflow</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">finalize_workflow</span><span class="op">(</span></span>
 <span>    <span class="fu">select_best</span><span class="op">(</span><span class="va">attrition_rf_tn</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error: object 'attrition_rf_tn' not found</code></pre>
-</div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># roc curve</span></span>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># roc curve</span></span>
 <span></span>
 <span><span class="va">rf_workflow_final</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">fit</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">training</span><span class="op">(</span><span class="va">attrition_split</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -925,8 +1012,8 @@ Computational engine: glmnet </code></pre>
 <span>  <span class="fu">bind_cols</span><span class="op">(</span><span class="va">attrition_split</span> <span class="op">%&gt;%</span> <span class="fu">testing</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">yardstick</span><span class="fu">::</span><span class="fu"><a href="https://yardstick.tidymodels.org/reference/roc_curve.html">roc_curve</a></span><span class="op">(</span>truth <span class="op">=</span> <span class="va">Attrition</span>, <span class="va">.pred_Yes</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">autoplot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'rf_workflow_final' not found</code></pre>
+<div class="cell-output-display">
+<p><img src="16-content_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

@@ -1,0 +1,209 @@
+---
+title: "The Russo-Ukrainian Crisis: Did Financial Markets See it Coming?"
+date: '2023-08-30'
+slug: expect
+author: Marcell Granát, Kristóf Lehmann, Olivér Nagy, Gábor Neszveda
+image: logo.jpg
+categories: 
+  - publication
+  - finance
+execute: 
+  echo: false
+  message: false
+  warning: false
+bibliography: references.bib
+nocite: |
+  @granát2023
+editor_options: 
+  chunk_output_type: console
+---
+
+
+[Our recent article](https://www.sciencedirect.com/science/article/pii/S1544612323006736) was published in Finance Research Letters.
+
+------------------------------------------------------------------------
+
+The economy of the second decade of the 21st century is characterised by sudden economic shocks. The Russian military operation in Ukraine on the 24th of February had a significant impact on the global financial markets and the economy. There are conflicting views on whether the event surprised the world or if it was already expected.
+
+On one hand, the escalation of the conflict had been building up for many years, giving the markets time to factor in this danger in advance. On the other hand, significant movements were observed in the financial markets after the outbreak of the war, indicating that the news came as a surprise to investors. The solution likely lies somewhere in between, with a gradually increasing number of investors anticipating the escalation of the conflict.
+
+We applied Kyle's \@-kyle1985 model, which is based on informed and uninformed investors, to investigate when and how the conviction of a war appeared among financial market participants.
+
+The empirical model assumes that after the outbreak, no one can doubt the fact of the war, so the observed prices at that time already reflect the value attributed to a financial security in a war scenario. This is referred to as liquidity value. Once this price is known, we examine historically how close the prices were to their liqudation values during specific periods. The simplest way to illustrate this is presented in @fig-motivation, the average absolute differences from the liquidation value over time.
+
+<a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_waad.csv" download class="btn btn-primary">Download in CSV</a>
+
+
+```{r}
+#| include: false
+library(tidyverse)
+library(lubridate)
+granatlib::create_pin("expect-the-unexpected")
+
+custom_theme_dark <- ggdark::dark_theme_bw() + 
+  theme(
+    plot.background = element_rect(fill = "#181818", colour = "#181818"),
+    panel.background = element_rect(fill = "#181818", colour = "#181818"),
+    legend.background = element_rect(fill = "#181818", colour = "#181818"),
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+four_factor_adj_price_df <- pin_read(.board, "four_factor_adj_price")
+```
+
+```{r}
+#| eval: false
+four_factor_adj_price_df |> 
+  group_by(geo) |> 
+  mutate(
+    v = adj_price[time == "2022-02-24"]
+  ) |> 
+  left_join(
+    pin_read(.board, "refintiv_df") |> 
+      select(time, geo, market_value)
+  ) |> 
+  group_by(time) |> 
+  summarise(
+    alr_w = weighted.mean(abs(adj_price / v -1), market_value)
+  ) |> 
+  write.csv(file = "waad.csv")
+
+c(
+  "If you use this data, please cite the original paper. This time-series is the datapoints from Figure 3 in Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. Finance Research Letters, 104301.", 
+  read_lines("waad.csv")
+) |> 
+  str_flatten("\n") |> 
+  writeLines(con = "granat_etal_waad.csv")
+```
+
+```{r}
+#| label: fig-motivation
+#| fig-cap: Average of the absolute differences between the current price indices and their value at the outbreak of the war.
+#| fig-height: 2
+
+four_factor_adj_price_df |> 
+  group_by(geo) |> 
+  mutate(
+    v = adj_price[time == "2022-02-24"]
+  ) |> 
+  left_join(
+    pin_read(.board, "refintiv_df") |> 
+      select(time, geo, market_value)
+  ) |> 
+  group_by(time) |> 
+  summarise(
+    alr_w = weighted.mean(abs(adj_price / v -1), market_value)
+  ) |> 
+  ggplot() +
+  aes(time, alr_w) +
+  geom_line() + 
+  geom_hline(yintercept = 0, linetype = "dotted") + 
+  granatlib::geom_tag(x = as.Date("2022-02-24"), y = 0, 
+                      label = "24th of Feb",
+                      nudge_y = -.001, nudge_x = -20,point_size = 2
+  ) +
+  scale_y_continuous(labels = scales::percent) + 
+  scale_x_date(
+    labels = \(x) ifelse(
+      lubridate::floor_date(x, "years") == x, 
+      paste(year(x), months(x, abbreviate = TRUE)),
+      months(x, abbreviate = TRUE)
+    )
+  ) +
+  labs(
+    x = NULL,
+    y = NULL
+  ) + 
+  custom_theme_dark
+```
+
+
+We applied two formal models. The first model examines, within 10 trading days divided into windows, to what extent the relative price to liquidity value explains the volatility of prices. In other words, it investigates how much can be said that traders started considering countries that would fall sharply in the event of a war outbreak as less valuable.
+
+
+```{r}
+#| eval: false
+
+famamacbeth_fitted_df |> 
+  left_join(x = pin_read(.board, "time_window")) |> 
+  filter(term == "relative_price") |> 
+  write.csv(file = "fm.csv")
+
+c(
+  "If you use this data, please cite the original paper. This time-series is the datapoints from Table 3 in Granát, M. P., Lehmann, K., Nagy, O., & Neszveda, G. (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. Finance Research Letters, 104301.", 
+  read_lines("fm.csv")
+) |> 
+  str_flatten("\n") |> 
+  writeLines(con = "granat_etal_fm.csv")  
+```
+
+
+<a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_fm.csv" download class="btn btn-primary">Download in CSV</a>
+
+
+```{r}
+#| label: fig-fm-coef
+#| fig-cap: Estimated coefficients for the Fama–MacBeth type regression models. The time series shows the effect of the difference from the liquidation value on the price change (a higher value means faster convergence).
+
+famamacbeth_fitted_df <- pin_read(.board, "famamacbeth")
+
+fm_bj_feb25 <- famamacbeth_fitted_df |> 
+  # estimated Bj on 25th of February from FM regression 
+  filter(term == "relative_price") |> 
+  left_join(x = pin_read(.board, "time_window")) |> 
+  filter(time == "2022-02-25") |> 
+  pull(estimate) |> 
+  unique()
+
+fm_bj_dec30 <- famamacbeth_fitted_df |> 
+  # estimated Bj on 25th of February from FM regression 
+  filter(term == "relative_price") |> 
+  left_join(x = pin_read(.board, "time_window")) |> 
+  filter(time == "2021-12-30") |> 
+  pull(estimate) |> 
+  unique()
+
+famamacbeth_fitted_df |> 
+  left_join(x = pin_read(.board, "time_window")) |> 
+  filter(term == "relative_price") |> 
+  ggplot(aes(time)) + 
+  geom_hline(yintercept = 0, lty = 2) +
+  geom_line(aes(y = estimate), size = 1.2) + 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = "95% confidence intervals"), alpha = .2, size = .2, color = "grey70") + 
+  granatlib::geom_tag(x = as.Date("2022-02-24"), y = fm_bj_feb25, 
+                      label = "24th of February",
+                      nudge_x = -15, nudge_y = -0.03) +
+  granatlib::geom_tag(x = as.Date("2021-12-30"), y = fm_bj_dec30,
+                      label = "30th of December",
+                      nudge_x = -15, nudge_y = 0.03) +
+  scale_fill_manual(values = "grey80") +
+  scale_y_continuous(labels = scales::percent, breaks = c(0, .05, .1)) +
+  labs(
+    x = "Time", 
+    y = expression(Beta[1][","][j]),
+    color = "Time-variant intercept:",
+    fill = NULL
+  ) + 
+  scale_x_date(
+    labels = \(x) ifelse(
+      lubridate::floor_date(x, "years") == x, 
+      paste(year(x), months(x, abbreviate = TRUE)),
+      months(x, abbreviate = TRUE)
+    )
+  ) +
+  custom_theme_dark
+```
+
+
+Our second formal model identifies the exact date of the pricing initiation. It is a non-linear regression with a behavioural equation that includes two states. In the first state, the difference from the liquidity value does not affect price movements, while in the second state, there is a monotonically increasing effect as the event approaches (as seen in @fig-fm-coef).
+
+The identification of the exact date was necessary because although the described behaviour can be captured well in the model presented by @fig-fm-coef, we only see time windows there. Based on the non-linear model, we can conclude that the pricing initiation is 50 days before the outbreak, so it can be set on January 6th.
+
+The predictability of war plays a role in numerous topics in economic and political fields, but the fact that the stock market priced this risk in just 50 days before its outbreak highlights that we are living in a decade of uncertainty.
+
+For citation, please use the version published in Finance Research Letters:
+
+> Marcell P. Granát, Krsitóf Lehmann, Olivér Nagy, & Gábor Neszveda (2023). Expect the unexpected: Did the equity markets anticipate the Russo-Ukrainian war?. *Finance Research Letters*, 104301. <https://doi.org/10.1016/j.frl.2023.104301>.
+

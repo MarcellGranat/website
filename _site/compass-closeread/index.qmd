@@ -188,7 +188,7 @@ library(ellmer)
 type_balance_item <- 
   type_object(
     name = type_string(),
-    fl = type_integer(),
+    fl = type_number(),
     kr = type_integer()
   )
 

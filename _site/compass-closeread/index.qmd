@@ -1,0 +1,214 @@
+---
+title: "Writing Classes, Methods & the History in R"
+author: "Marcell Granát, *Economist at the National Bank of Hungary*"
+format: 
+  closeread-html:
+    css: cr-tufte.css
+    remove-header-space: false
+    image: compass.png
+    description: A Tidy Approach to Archival Data
+    mainfont: 'et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
+    cr-style:
+      narrative-background-color-overlay: transparent
+      narrative-background-color-sidebar: transparent
+      section-background-color: transparent
+      narrative-text-color-overlay: black
+      narrative-font-family: 'et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
+---
+
+> Unstructured historical data limits analysis. This talk showcases how S7 structures hile Ellmer's AI extracts content, transforming a 150-year-old financial archive into research-ready data.
+>
+> The Compass, a financial yearbook spanning European economies, contains over 500,000 pages. Using S7 classes—books, pages, and lines—we organize data efficiently. A company class links businesses, while a line class preserves context. When regex fails, Ellmer extracts content via AI.
+>
+> This workflow improves access to historical data, benefiting economic history and large-scale document analysis.
+
+```{r}
+#| include: false
+source(here("R/utils.R"))
+library(gt)
+
+c("R/line_page_book.R") |> # set as priority
+  here::here() |>
+  append(
+    list.files(here("R"), full.names = TRUE, recursive = TRUE)
+  ) |> 
+  unique() |> 
+  walk(\(script) 
+    tryCatch({
+      source(script)
+    },
+    error = \(e) {
+      cli::cli_warn("Failed to source {.file {script}}")
+      cli::cli_alert_warning("{e}")
+    }
+  )
+  )
+```
+
+```{r}
+#| output: false
+#| eval: false
+
+Book1900 <- book("compass_raw/1900/1")
+
+cover <- Book1900@pages[[1]]
+
+show_on_page(cover, filename = "cover.png")
+```
+
+::::{.cr-section layout="sidebar-left"}
+
+
+::: {#cr-map}
+![](cover.png){align="center" width="600px"}
+:::
+
+@cr-map
+
+::: cr-title
+
+[@cr-map]{scale-by="0.7"}
+
+## The Austro-Hungarian Compass from 1900 
+
+The Compass a comprehensive financial and economic **yearbook** of the **19th and 20th century**, represents a cornerstone of economic historiography. It documents the **financial and operational details of enterprises**, institutions, and industries across seven decades, providing a unique opportunity to explore economic and corporate heritage.
+
+:::
+
+
+::: cr-codes
+
+## OOP with S7
+
+When working with 500,000 pages of historical data, organization is everything. That’s where **S7 and OOP** come in. Instead of dealing with messy, unstructured text, we designed a certain classes to easily navigate in the documents. For instance, the `book` class is an intuitive way to represent each financial yearbook. This class holds pages, links companies, and preserves context, making data extraction seamless. [@cr-map]{scale-by="0.7"}
+
+```{r}
+#| echo: true
+#| output: asis
+(Book1900 <- book("compass_raw/1900/1"))
+```
+
+:::
+
+::::
+
+
+::::{.cr-section layout="sidebar-right"}
+
+```{r}
+#| eval: false
+#| echo: false
+show_on_page(Page, Page@text_items_coords, filename = "200.png")
+```
+
+::: {#cr-page}
+![](200.png){width="600px" style="border: 1px solid #000000"}
+:::
+
+@cr-page
+
+::: cr-codes2
+
+[@cr-page]{scale-by=".8"}
+
+## Identify elements
+
+```{r}
+#| echo: true
+(Page <- Book1900@pages[[200]])
+```
+
+```{r}
+#| echo: true
+Page@text_items_coords
+```
+
+```{r}
+#| echo: true
+#| eval: false
+show_on_page(
+  Page, 
+  Page@text_items_coords
+)
+```
+
+:::
+
+::::
+
+
+
+::::{.cr-section layout="sidebar-left"}
+
+
+::: {#cr-example}
+![](example.png){width="600px" style="border: 1px solid #000000"}
+:::
+
+@cr-example
+
+::: cr-crop
+
+If custom regex attempt fails, we can still extract the content using AI with the ellmer package, since we can easily find the location of a line on the page and convert it to an image.
+
+```{r}
+#| echo: true
+Page@text_items_coords |> 
+  filter(
+    str_detect(
+      string = text, 
+      pattern = "ACTIVA"
+    )
+  )
+```
+
+```{r}
+#| echo: true
+#| eval: false
+Page |> 
+  to_page_image() |> 
+  set_borders(
+    ymax = 463, 
+    ymin = 400
+  )
+```
+
+:::
+
+[@cr-example]{pan-to="50%,50%" scale-by="2"}
+
+## Incorporating AI using {Ellmer}
+
+```{r}
+#| cache: true
+#| echo: true
+#| message: false
+library(ellmer)
+
+type_balance_item <- 
+  type_object(
+    name = type_string(),
+    fl = type_integer(),
+    kr = type_integer()
+  )
+
+type_financial_balance <- 
+  type_object(
+    activa = type_array(
+      items = type_balance_item
+    ),
+    passiva = type_array(
+      items = type_balance_item
+    )
+  )
+
+chat_openai()$extract_data(
+  content_image_file("example.png"),
+  type = type_financial_balance
+) |> 
+  pluck("activa") |> 
+  gt()
+```
+
+
+::::

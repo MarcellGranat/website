@@ -1,0 +1,217 @@
+---
+title: "A Compass to understanding the Hungarian economy of the 19th-20th centuries from unstructed data"
+author: "Marcell Granát, *Economist at the National Bank of Hungary*"
+format: 
+  closeread-html:
+    css: cr-tufte.css
+    remove-header-space: false
+    image: compass.png
+    description: A Tidy Approach to Archival Data
+    mainfont: 'et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
+    cr-style:
+      narrative-background-color-overlay: transparent
+      narrative-background-color-sidebar: transparent
+      section-background-color: transparent
+      narrative-text-color-overlay: black
+      narrative-font-family: 'et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
+---
+
+**Abstract**
+
+> The Hungarian Compass (1874–1944), a comprehensive financial and economic yearbook, represents a cornerstone of economic historiography. It documents the financial and operational details of enterprises, institutions, and industries across seven decades, providing a unique opportunity to explore Hungary’s economic and corporate heritage. However, the lack of structured format of its content has long limited its utility for empirical analysis. This research addresses this gap by leveraging state-of-the-art big data and artificial intelligence tools to systematically process, digitize, and analyze the Compass’s vast array of financial and economic data.
+>
+> The project involves creating a structured database from the Compass’s records, including balance sheets, financial statements, and corporate profiles, enabling quantitative analysis of economic development during a period marked by industrialization, war, and political transformation. Key challenges include overcoming inconsistencies in **historical unstructured data formats**, and validating the accuracy of extracted information. Advanced methods such as OCR technologies, natural language, optimal string alignment based methods and LLM solutions are employed to ensure reliability and scalability.
+>
+> This previously unprocessed data source provides unique insights into the historical economic processes during a time when Central European state boundaries were interwoven, their hierarchies were in flux, and the Compass publication extended to other states. This initiative not only illuminates key economic shocks and policy decisions but also contributes to broader discussions on the role of archives and artifacts in preserving corporate heritage. Through publications and open access resources, the project aims to inspire similar efforts in economic historiography and promote the integration of modern data science methodologies into historical research.
+
+
+```{r}
+#| include: false
+source(here("R/utils.R"))
+library(gt)
+
+c("R/line_page_book.R") |> # set as priority
+  here::here() |>
+  append(
+    list.files(here("R"), full.names = TRUE, recursive = TRUE)
+  ) |> 
+  unique() |> 
+  walk(\(script) 
+    tryCatch({
+      source(script)
+    },
+    error = \(e) {
+      cli::cli_warn("Failed to source {.file {script}}")
+      cli::cli_alert_warning("{e}")
+    }
+  )
+  )
+```
+
+```{r}
+#| output: false
+#| eval: false
+
+Book1900 <- book("compass_raw/1900/1")
+
+cover <- Book1900@pages[[1]]
+
+show_on_page(cover, filename = "cover.png")
+```
+
+::::{.cr-section layout="sidebar-left"}
+
+
+::: {#cr-map}
+![](cover.png){align="center" width="600px"}
+:::
+
+@cr-map
+
+::: cr-title
+
+[@cr-map]{scale-by="0.7"}
+
+## The Austro-Hungarian Compass from 1900 
+
+The Compass a comprehensive financial and economic **yearbook** of the **19th and 20th century**, represents a cornerstone of economic historiography. It documents the **financial and operational details of enterprises**, institutions, and industries across seven decades, providing a unique opportunity to explore economic and corporate heritage.
+
+:::
+
+
+::: cr-codes
+
+## OOP for structuring the unstructured source
+
+When working with 500,000 pages of historical data, organization is everything. That’s where **OOP** come in. Instead of dealing with messy, unstructured text, we designed a certain classes to easily navigate in the documents. For instance, the `book` class is an intuitive way to represent each financial yearbook. This class holds pages, links companies, and preserves context, making data extraction seamless. [@cr-map]{scale-by="0.7"}
+
+```{r}
+#| echo: true
+#| output: asis
+(Book1900 <- book("compass_raw/1900/1"))
+```
+
+:::
+
+::::
+
+
+::::{.cr-section layout="sidebar-right"}
+
+```{r}
+#| eval: false
+#| echo: false
+show_on_page(Page, Page@text_items_coords, linewidth = .05, filename = "200.png")
+```
+
+::: {#cr-page}
+![](200.png){width="600px" style="border: 1px solid #000000"}
+:::
+
+@cr-page
+
+::: cr-codes2
+
+[@cr-page]{scale-by=".8"}
+
+## Identify elements
+
+```{r}
+#| echo: true
+(Page <- Book1900@pages[[200]])
+```
+
+```{r}
+#| echo: true
+Page@text_items_coords
+```
+
+```{r}
+#| echo: true
+#| eval: false
+show_on_page(
+  Page, 
+  Page@text_items_coords
+)
+```
+
+:::
+
+::::
+
+
+
+::::{.cr-section layout="sidebar-left"}
+
+
+::: {#cr-example}
+![](example.png){width="600px" style="border: 1px solid #000000"}
+:::
+
+@cr-example
+
+::: cr-crop
+
+If custom regex attempt fails, we can still extract the content using AI with the ellmer package, since we can easily find the location of a line on the page and convert it to an image.
+
+```{r}
+#| echo: true
+Page@text_items_coords |> 
+  filter(
+    str_detect(
+      string = text, 
+      pattern = "ACTIVA"
+    )
+  )
+```
+
+```{r}
+#| echo: true
+#| eval: false
+Page |> 
+  to_page_image() |> 
+  set_borders(
+    ymax = 463, 
+    ymin = 400
+  )
+```
+
+:::
+
+[@cr-example]{pan-to="50%,50%" scale-by="2"}
+
+## Incorporating AI using {Ellmer}
+
+```{r}
+#| cache: true
+#| echo: true
+#| message: false
+library(ellmer)
+
+type_balance_item <- 
+  type_object(
+    name = type_string(),
+    fl = type_number(),
+    kr = type_integer()
+  )
+
+type_financial_balance <- 
+  type_object(
+    activa = type_array(
+      items = type_balance_item
+    ),
+    passiva = type_array(
+      items = type_balance_item
+    )
+  )
+
+chat_openai()$extract_data(
+  content_image_file("example.png"),
+  type = type_financial_balance
+) |> 
+  pluck("activa") |> 
+  gt()
+```
+
+
+::::

@@ -3,7 +3,7 @@ title: "A Compass to Understanding the Hungarian Economy of the 19th–20th Cent
 date: '2025-06-12'
 slug: eabh
 author: Marcell Granát
-image: logo.jpg
+image: logo.png
 categories: 
   - publication
   - history

@@ -1,0 +1,81 @@
+---
+title: "A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries"
+date: '2025-06-12'
+slug: eabh
+author: Marcell Granát
+image: logo.jpg
+categories: 
+  - publication
+  - history
+  - ai
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+My slides for the EABH 2025 conference
+
+------------------------------------------------------------------------
+
+<a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/eabh2025/eabh_small.pdf" download class="btn btn-primary">Download Slides</a>
+
+From the Austro-Hungarian Monarchy to the post-war transitional economy, Hungary’s economic structure underwent profound transformations between 1874 and 1944. Yet our quantitative understanding of these changes has remained limited, largely due to the fragmented and unstructured nature of historical financial records. The *Magyar Compass*, a yearbook published throughout this period, offers a rare longitudinal source documenting firms, financial institutions, and corporate networks with remarkable precision.
+
+Our objective is to reframe the *Magyar Compass* as a computational dataset—one that enables systematic economic-historical research through modern document processing techniques.
+
+The project begins with automated access to the Arcanum Digital Archives. Using a Playwright-based browser automation framework, we efficiently handle dynamic content loading, user session management, and page download limits (5,000 pages/day), ensuring reliable access and recovery. This step provides the raw material: over 70 years of digitized but unstructured publications.
+
+The core challenge is to convert these publications into analyzable form. Standard OCR is insufficient. To address this, we introduce a **domain-specific language (DSL)** designed in Python. The DSL represents books as nested data structures—books, chapters, pages, lines, and words—allowing precise navigation and transformation. With this tool, spatial relationships (e.g., identifying tables below company names or detecting balance sheet alignments) can be encoded directly into code.
+
+Key features of the DSL include:
+
+-   Bidirectional navigation across hierarchy levels
+
+-   Position-based cropping and comparison
+
+-   Automatic chapter detection and file organization
+
+-   Cached properties for performance efficiency
+
+Using this DSL, we define document anchors (e.g., company names, tabular data, balance sheets) and manipulate them using spatial algebra—operations such as containment, union, and distance.
+
+The next layer is hybrid information extraction. A rule-based parser identifies typical elements (e.g., dotted tables), attempts to extract and validate asset-liability items, and checks consistency by comparing both sides of the balance sheet. If a match fails or ambiguity arises, the system falls back to a **Vision-Language Model (VLLM)** which processes image crops and returns structured JSON.
+
+The workflow includes error detection and feedback. Extracted data is validated using Pydantic schemas. When errors occur—such as mismatched sums—feedback is sent to the model, enabling intelligent retries. For example:
+
+*“The sum of item’s values 1.993,545 does not match the sheet value 2.044,165.”*
+
+Our hybrid recognition pipeline achieves the following performance distribution:
+
+-   Rule-based success: 46%
+
+-   VLLM success: 22%
+
+-   VLLM failure: 32%
+
+The approach balances deterministic precision with the flexibility of AI. It allows for self-correcting workflows and supports performance benchmarking by method class.
+
+Planned improvements include:
+
+-   Integration of larger vision models (e.g., OpenAI, Gemini)
+
+-   Enhanced feedback generation based on sum discrepancies
+
+-   Improved sequence logic for detecting company sections
+
+-   OCR adaptation for historical typographies
+
+-   Packaging tools for broader archival integration
+
+-   Extension to other historical financial yearbooks
+
+By transforming the *Magyar Compass* into a structured corpus, we open a new frontier for data-driven economic history. The result is not only a technical achievement but also a methodological contribution: a scalable pipeline for making archival financial records computationally accessible.
+
+Explore the repositories here:
+
+-   https://github.com/MarcellGranat/arcanum-pw
+
+-   https://github.com/MarcellGranat/compassVLLM
+
+This is an invitation to rethink how we engage with history—not just by reading it, but by computing it.

@@ -11,7 +11,7 @@
 
   <meta name="author" content="Marcell P. Granat">
   <meta name="dcterms.date" content="2026-02-19">
-  <title>Cleaning the Whole House</title>
+  <title>Clean the Whole House</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,8 +29,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-aeca2f1aef52a4cd30314d92bd2df485.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0c2167fffd85b72800124a746e864df6.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -128,7 +194,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="figures/budapest_ai.jpg" data-background-opacity="1.0" data-background-position="right bottom" data-background-repeat="no-repeat" data-background-size="400px 400px" class="quarto-title-block center">
-  <h1 class="title">Cleaning the Whole House</h1>
+  <h1 class="title">Clean the Whole House</h1>
   <p class="subtitle">Address Reconstruction and Spatial Matching</p>
 
 <div class="quarto-title-authors">
@@ -141,16 +207,802 @@ Marcell P. Granat
 
   <p class="date">2026-02-19</p>
 </section>
-<section id="cleaning" class="slide level2">
-<h2>Cleaning</h2>
-<p>Empty slide</p>
-<p>This slide opts out of the default watermark.</p>
+<section id="section" class="slide level2 center-slide">
+<h2></h2>
+<div class="center-slide-content">
+<p>Marcell P. Granat</p>
+<p><img data-src="figures/logo.png" width="250"></p>
+<p>National Bank of Hungary · European Central Bank · Eötvös Loránd University</p>
+<p>Disclaimer: <strong>The views expressed in this presentation are solely those of the author and do not necessarily represent the views of the National Bank of Hungary or the European Central Bank.</strong></p>
+</div>
 </section>
-<section id="address-reconstruction" class="slide level2 bp">
-<h2>Address Reconstruction</h2>
-<p>Slide with backgorund</p>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>1. Introduction</h1>
 
 </section>
+<section id="why-the-hungarian-housing-market-is-an-important-case" class="slide level2 incremental">
+<h2>Why the Hungarian housing market is an important case</h2>
+<div class="r-fit-text">
+<ul>
+<li>Exceptionally strong house price growth over the past two decades, significantly outpacing the EU average and ranking among the highest in Europe</li>
+<li>Active policy interventions:
+<ul>
+<li><strong>3% housing loan cap (from 2025)</strong> and the <strong>corvin district renewal (from 2005)</strong>.</li>
+<li>The Corvin intervention illustrates a clear <strong>gentrification effect</strong> after large-scale redevelopment.</li>
+<li>Capturing this effect over time was an original motivation of the project, which required <strong>clean historical transaction data for Budapest</strong>.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="corvin-district" class="slide level2">
+<h2>Corvin district</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/corvin.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+
+<aside class="notes">
+<ul>
+<li>The report documents <strong>exceptional price increases</strong> in Corvin Quarter linked to large-scale redevelopment, standing out from the citywide neighborhood pattern.</li>
+<li>New-build prices first create <strong>a bimodal distribution</strong> (new vs.&nbsp;old stock) around <strong>2006</strong>, then adjacent older homes <strong>catch up over the cycle</strong>, shifting the neighborhood to a <strong>single higher-price mode</strong> by <strong>2019</strong> (with divergence from Budapest still evident in <strong>2022</strong>).</li>
+<li>The effect is <strong>spatially diffuse</strong>: in a <strong>50m × 100m</strong> grid, higher prices gradually spread to nearby areas (e.g., Market Hall Quarter), even where few new buildings appear.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: <a href="https://www.mnb.hu/letoltes/housing-market-report-2023-november.pdf">National Bank of Hungary - Housing Market Report 2023 November</a></p>
+</div></aside></section></section>
+<section>
+<section id="data" class="title-slide slide level1 center">
+<h1>2. Data</h1>
+
+</section>
+<section id="data-sources" class="slide level2">
+<h2>Data sources</h2>
+<ul>
+<li><strong>Transaction tax database (NAV):</strong> manually recorded addresses</li>
+<li><strong>Official address registry:</strong> street names, types, house numbers</li>
+<li>Scope: <strong>Budapest transactions from the 2000s</strong> (N = 959,942; 2001-2023)</li>
+</ul>
+</section>
+<section id="section-1" class="slide level2" data-background-color="black" style="color: white;">
+<h2></h2>
+<p>Last week, I had to register my permanent residence at the city office of Frankfurt.</p>
+<div class="fragment">
+<p><strong>Me:</strong> It’s a living hotel, and it’s address is XXX street, 141–145.</p>
+</div>
+<div class="fragment">
+<p><strong>Operator:</strong> The system only accepts one number for the address. So which one should it be?</p>
+</div>
+<div class="fragment">
+<p><strong>Me:</strong> The middle one???</p>
+</div>
+</section>
+<section id="harmonization-and-missing-fields" class="slide level2">
+<h2>Harmonization and missing fields</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Fields and formats <strong>changed over time</strong>, so we harmonize before matching.</p>
+<p>Example: some records store the full address in one text cell, others split it across <code>postal code</code>, <code>street name</code>, <code>street type</code>, <code>house number</code>, etc. Some fields (e.g.&nbsp;PIN) appear in multiple columns.</p>
+<p>Example typo: <strong>Batthány Lajos u.</strong> (recorded) vs Batthyány Lajos utca (official).</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><strong>Field completeness (missing rate)</strong></p>
+<div style="font-size: 0.78em; line-height: 1.1;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Missing rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Postal code</td>
+<td>66.78%</td>
+</tr>
+<tr class="even">
+<td>Public space name</td>
+<td>66.77%</td>
+</tr>
+<tr class="odd">
+<td>Address (free text)</td>
+<td>33.22%</td>
+</tr>
+<tr class="even">
+<td>Cleaned address</td>
+<td>35.31%</td>
+</tr>
+<tr class="odd">
+<td>Public space type</td>
+<td>66.71%</td>
+</tr>
+<tr class="even">
+<td>PIN number</td>
+<td>56.09%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div>
+</section>
+<section id="other-data-issues" class="slide level2">
+<h2>Other data issues</h2>
+<ul>
+<li><strong>Incomplete keys:</strong> postal code or district missing; we infer district from postal code when possible</li>
+<li><strong>Current registry only (2023):</strong> renamings limit full match rates</li>
+<li><strong>Ambiguous street names:</strong> same name with different type (e.g., Batthyány tér vs Batthyány utca)</li>
+<li><strong>Inconsistent entry:</strong> public space type missing or unrecoverable from free text</li>
+<li><strong>Baseline linkage:</strong> only ~50% of transactions have an identified address before cleaning</li>
+</ul>
+</section>
+<section id="typo-patterns-in-addresses" class="slide level2">
+<h2>Typo patterns in addresses</h2>
+<ul>
+<li>Most discrepancies are in <strong>street names</strong>, not in house numbers or districts</li>
+<li>Historical name spellings (e.g., <strong>th</strong>, <strong>y</strong>, Germanic/Slavic forms) create frequent typos</li>
+<li>First names are often missing or abbreviated, so we prioritize <strong>unique surname words</strong></li>
+</ul>
+</section></section>
+<section>
+<section id="pipeline" class="title-slide slide level1 center">
+<h1>3. Pipeline</h1>
+
+</section>
+<section id="section-2" class="slide level2" data-background-image="figures/batthyany.svg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="information-sets-matching-keys" class="slide level2">
+<h2>Information sets (matching keys)</h2>
+<div class="cell" data-code-annotations="below">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();" href="">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>information_sets <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">always_use =</span> <span class="fu">c</span>(<span class="st">"street_name"</span>, <span class="st">"housenr"</span>)) {</span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>  <span class="fu">list</span>(</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>    <span class="fu">c</span>(<span class="st">"zip_code"</span>, <span class="st">"street_type"</span>),</span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a>    <span class="fu">c</span>(<span class="st">"zip_code"</span>),</span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a>    <span class="fu">c</span>(<span class="st">"district"</span>, <span class="st">"street_type"</span>),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();" href="">2</a><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6"></a>    <span class="fu">c</span>(<span class="st">"district"</span>),</span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a>    <span class="fu">c</span>(<span class="st">"street_type"</span>),</span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a>    <span class="fu">character</span>()</span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10"></a>    <span class="fu">map</span>(\(x) <span class="fu">append</span>(x, always_use)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11"></a>    <span class="fu">keep</span>(<span class="sc">~</span> <span class="fu">length</span>(.x) <span class="sc">!=</span> <span class="dv">0</span>)</span>
+<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1"><code>always_use</code> keeps <code>street_name</code> + <code>housenr</code> so each information set works for both house‑level (with <code>housenr</code>) and street‑level (when <code>housenr</code> is missing) matching.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="2">We do not add a <code>{district, zip_code}</code> combo because the district is implied by the zip code in Hungary.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="information-sets" class="slide level2">
+<h2>Information sets</h2>
+
+<img data-src="figures/information_sets.drawio.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="deterministic-matching-high-confidence-rules" class="slide level2">
+<h2>Deterministic matching (high-confidence rules)</h2>
+<ul>
+<li>Standardize structure (split / normalize fields)</li>
+<li>Use multiple information sets:
+<ul>
+<li>{street name, type, district, house number}</li>
+<li>{street name, type, postal code, house number}</li>
+<li>{street name, type, house number}</li>
+</ul></li>
+<li>Keep <strong>only unique candidate matches</strong></li>
+</ul>
+</section>
+<section id="string-distance-correction-fuzzy-step" class="slide level2">
+<h2>String-distance correction (fuzzy step)</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Fix typos in street names using <strong>Optimal String Alignment</strong></li>
+<li>Replace unmatched words with closest valid street-name word</li>
+<li>Conservative similarity threshold (~70%)</li>
+</ul>
+</div><div class="column">
+<p><img data-src="figures/duck-housing-visual-selection-5.svg"></p>
+</div></div>
+</section>
+<section id="string-distance-example-bajcsy-zsilinszky" class="slide level2">
+<h2>String-distance example: “Bajcsy-Zsilinszky”</h2>
+<p>Manual entry yields many variants of the same street name.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Recorded string</th>
+<th>Similarity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bajcsy-Zsilinszky u.</td>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<td>Bajcsy Zsilinszky u</td>
+<td>0.97</td>
+</tr>
+<tr class="odd">
+<td>Bajcsi-Zsilinszki u</td>
+<td>0.92</td>
+</tr>
+<tr class="even">
+<td>Bajcsy-Zsilinszky ut</td>
+<td>0.98</td>
+</tr>
+<tr class="odd">
+<td>Bajcsy-Zsilinszky utca</td>
+<td>0.99</td>
+</tr>
+<tr class="even">
+<td>Bajcsy-Zsilinsky u.</td>
+<td>0.90</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pin-based-propagation" class="slide level2">
+<h2>PIN-based propagation</h2>
+<ul>
+<li>Use property identifiers (PIN) to propagate location once matched</li>
+<li><strong>Exact PIN match:</strong> if the same PIN appears elsewhere, inherit the full address</li>
+<li><strong>PIN prefix inference:</strong> when street is known but district is ambiguous, use the leading digits of PINs to infer the most plausible district</li>
+</ul>
+</section>
+<section id="pin-based-propagation-1" class="slide level2">
+<h2>PIN-based propagation</h2>
+<div class="cell" data-code-annotations="below">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>pin_first_digits <span class="ot">&lt;-</span> pin_numbers <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>  <span class="fu">transmute</span>(transaction_id, <span class="at">pin_digits =</span> <span class="fu">str_sub</span>(pin_number, <span class="at">end =</span> <span class="dv">3</span>))</span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a></span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>nonunique_pairs <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a>  <span class="fu">inner_join</span>(pin_first_digits, <span class="at">by =</span> <span class="st">"transaction_id"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6"></a>  <span class="fu">left_join</span>(<span class="fu">collect</span>(<span class="fu">mls_target</span>()), <span class="at">by =</span> <span class="st">"mls_id"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7"></a>  <span class="fu">inner_join</span>(pins_by_street, <span class="at">by =</span> <span class="fu">join_by</span>(pin_digits, street_name, street_type, zip_code)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a>  <span class="fu">group_by</span>(transaction_id) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();" href="">1</a><span id="annotated-cell-2-10" class="code-annotation-target"><a href="#annotated-cell-2-10"></a>  <span class="fu">filter</span>(</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();" href="">2</a><span id="annotated-cell-2-11" class="code-annotation-target"><a href="#annotated-cell-2-11"></a>    n <span class="sc">==</span> <span class="fu">max</span>(n),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();" href="">3</a><span id="annotated-cell-2-12" class="code-annotation-target"><a href="#annotated-cell-2-12"></a>    (<span class="fu">first</span>(n) <span class="sc">-</span> <span class="fu">nth</span>(n, <span class="dv">2</span>, <span class="at">default =</span> <span class="dv">0</span>)) <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">&gt;</span> .<span class="dv">1</span></span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-15"><a href="#annotated-cell-2-15"></a>  <span class="fu">distinct</span>(transaction_id, mls_id)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="10" data-code-annotation="1">Filter rows to enforce a single PIN‑prefix choice per transaction.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="11" data-code-annotation="2">Keep only the max‑count prefix for that transaction.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="12" data-code-annotation="3">Require a dominance gap of &gt;10% over the next‑best prefix.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="figures/pin_pivot.drawio.png" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
+<section id="results" class="title-slide slide level1 center">
+<h1>4. Results</h1>
+
+</section>
+<section id="what-improves-after-cleaning" class="slide level2">
+<h2>What improves after cleaning</h2>
+<ul>
+<li><strong>Automatic linkage ~93%</strong> overall</li>
+<li><strong>83% property-level</strong> matches, <strong>10% street-level</strong>, <strong>~7%</strong> remain unmatched</li>
+<li>House number available in <strong>~89%</strong> of transactions</li>
+</ul>
+</section>
+<section id="property-level-linkages-simple-rules" class="slide level2">
+<h2>Property-level linkages: Simple rules</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Information set</th>
+<th>N</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>District, Street name</td>
+<td>1,391</td>
+<td>0.14%</td>
+</tr>
+<tr class="even">
+<td>District, Street type, Street name</td>
+<td>27,712</td>
+<td>2.89%</td>
+</tr>
+<tr class="odd">
+<td>Street name</td>
+<td>96,763</td>
+<td>10.08%</td>
+</tr>
+<tr class="even">
+<td>Street type, Street name</td>
+<td>3,439</td>
+<td>0.36%</td>
+</tr>
+<tr class="odd">
+<td>Zip, Street name</td>
+<td>11,212</td>
+<td>1.17%</td>
+</tr>
+<tr class="even">
+<td>Zip, Street type, Street name</td>
+<td>484,629</td>
+<td>50.49%</td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><code>N</code> denotes the number of matches and <code>P</code> denotes the proportion of matches relative to the total population.</p>
+</div></aside></section>
+<section id="property-level-linkages-fuzzy-strings" class="slide level2">
+<h2>Property-level linkages: Fuzzy strings</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Information set</th>
+<th>N</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>District, Street name</td>
+<td>252</td>
+<td>0.03%</td>
+</tr>
+<tr class="even">
+<td>District, Street type, Street name</td>
+<td>1,830</td>
+<td>0.19%</td>
+</tr>
+<tr class="odd">
+<td>Street name</td>
+<td>58,888</td>
+<td>6.13%</td>
+</tr>
+<tr class="even">
+<td>Street type, Street name</td>
+<td>1,738</td>
+<td>0.18%</td>
+</tr>
+<tr class="odd">
+<td>Zip, Street name</td>
+<td>1,959</td>
+<td>0.20%</td>
+</tr>
+<tr class="even">
+<td>Zip, Street type, Street name</td>
+<td>30,007</td>
+<td>3.13%</td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><code>N</code> denotes the number of matches and <code>P</code> denotes the proportion of matches relative to the total population.</p>
+</div></aside></section>
+<section id="property-level-linkages-pin-based" class="slide level2">
+<h2>Property-level linkages: PIN-based</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Information set</th>
+<th>N</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exact PIN</td>
+<td>10,650</td>
+<td>1.11%</td>
+</tr>
+<tr class="even">
+<td>Street from PIN</td>
+<td>70,253</td>
+<td>7.32%</td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><code>N</code> denotes the number of matches and <code>P</code> denotes the proportion of matches relative to the total population.</p>
+</div></aside></section>
+<section id="street-level-linkages-simple-rules" class="slide level2">
+<h2>Street-level linkages: Simple rules</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Information set</th>
+<th>N</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>District, Street name</td>
+<td>31,197</td>
+<td>3.25%</td>
+</tr>
+<tr class="even">
+<td>District, Street type, Street name</td>
+<td>1,332</td>
+<td>0.14%</td>
+</tr>
+<tr class="odd">
+<td>Street name</td>
+<td>782</td>
+<td>0.08%</td>
+</tr>
+<tr class="even">
+<td>Street type, Street name</td>
+<td>344</td>
+<td>0.04%</td>
+</tr>
+<tr class="odd">
+<td>Zip, Street name</td>
+<td>1,085</td>
+<td>0.11%</td>
+</tr>
+<tr class="even">
+<td>Zip, Street type, Street name</td>
+<td>16,510</td>
+<td>1.72%</td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><code>N</code> denotes the number of matches and <code>P</code> denotes the proportion of matches relative to the total population.</p>
+</div></aside></section>
+<section id="street-level-linkages-fuzzy-strings" class="slide level2">
+<h2>Street-level linkages: Fuzzy strings</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Information set</th>
+<th>N</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>District, Street name</td>
+<td>14,323</td>
+<td>1.49%</td>
+</tr>
+<tr class="even">
+<td>District, Street type, Street name</td>
+<td>144</td>
+<td>0.02%</td>
+</tr>
+<tr class="odd">
+<td>Street name</td>
+<td>1,867</td>
+<td>0.19%</td>
+</tr>
+<tr class="even">
+<td>Street type, Street name</td>
+<td>196</td>
+<td>0.02%</td>
+</tr>
+<tr class="odd">
+<td>Zip, Street name</td>
+<td>180</td>
+<td>0.02%</td>
+</tr>
+<tr class="even">
+<td>Zip, Street type, Street name</td>
+<td>1,287</td>
+<td>0.13%</td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><code>N</code> denotes the number of matches and <code>P</code> denotes the proportion of matches relative to the total population.</p>
+</div></aside></section>
+<section id="street-level-linkages-pin-based" class="slide level2">
+<h2>Street-level linkages: PIN-based</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Information set</th>
+<th>N</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exact PIN</td>
+<td>28,408</td>
+<td>2.96%</td>
+</tr>
+<tr class="even">
+<td>Street from PIN</td>
+<td>592</td>
+<td>0.06%</td>
+</tr>
+</tbody>
+</table>
+
+<aside><div>
+<p><code>N</code> denotes the number of matches and <code>P</code> denotes the proportion of matches relative to the total population.</p>
+</div></aside></section>
+<section id="quality-checks" class="slide level2">
+<h2>Quality checks</h2>
+<ul>
+<li>Compared outcomes across <strong>information sets</strong> to flag inconsistencies</li>
+<li>In rare cases, two information sets implied different matches</li>
+<li>When <strong>district conflicted with street type</strong> (most frequent case), we prioritized the <strong>district number</strong></li>
+</ul>
+
+<img data-src="figures/inconsistency.drawio.png" style="width:85.0%" class="r-stretch quarto-figure-center"><p class="caption">Example for district-street type conflict</p></section>
+<section id="duckdb-performance-in-the-pipeline" class="slide level2" data-background-image="figures/duck-housing-visual-selection.svg" data-background-size="contain" data-background-position="center 65%" data-background-repeat="no-repeat">
+<h2>DuckDB performance in the pipeline</h2>
+</section>
+<section id="duckdb-benchmark-example" class="slide level2">
+<h2>DuckDB benchmark example</h2>
+<div class="cell" data-code-annotations="below">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(<span class="at">median_price =</span> {</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>  <span class="fu">tbl</span>(transaction_con, <span class="st">"transactions"</span>) <span class="sc">|&gt;</span> <span class="co"># * connect</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>    <span class="fu">group_by</span>(adev, adho, district) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>    <span class="fu">summarise</span>(<span class="at">med_price =</span> <span class="fu">median</span>(ar <span class="sc">/</span> lat)) <span class="sc">|&gt;</span> <span class="co"># * aggregate</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();" href="">1</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>    <span class="fu">collect</span>()</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>})</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a><span class="co">#&gt; # A tibble: 1 × 5</span></span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a><span class="co">#&gt; min   median `itr/sec` mem_alloc `gc/sec`</span></span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a><span class="co">#&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a><span class="co">#&gt; 60.1ms   65.4ms      15.0    10.2MB     15.0</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="1"><code>collect()</code> materializes the lazy DuckDB query result into R only at the end.</span>
+</dd>
+</dl>
+</div>
+</div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Min</th>
+<th>Median</th>
+<th>itr/sec</th>
+<th>mem_alloc</th>
+<th>gc/sec</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>60.1ms</td>
+<td>65.4ms</td>
+<td>15.0</td>
+<td>10.2MB</td>
+<td>15.0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spatial-distribution" class="slide level2">
+<h2>Spatial distribution</h2>
+
+<img data-src="figures/fixed.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section></section>
+<section>
+<section id="index-creation" class="title-slide slide level1 center">
+<h1>5. Index creation</h1>
+
+</section>
+<section id="choosing-the-right-index" class="slide level2">
+<h2>Choosing the Right Index</h2>
+
+<img data-src="figures/index-selection.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<ul>
+<li>We now have high-quality linked and geocoded Budapest transactions (2001–2025).</li>
+<li>With data cleaning solved, the main methodological decision is now index design.</li>
+<li>Goal: choose an index that best captures market dynamics under strong spatial heterogeneity.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="official-baseline-adjacent-period-hedonic-index" class="slide level2">
+<h2>Official baseline: Adjacent-period hedonic index</h2>
+<ul>
+<li>Official benchmark: <strong>adjacent-period hedonic OLS</strong> (Banai et al., 2017 style).</li>
+<li>Outcome and index step: <span class="math inline">\(\log(\text{price})\)</span> with period-pair dummy <span class="math inline">\(\text{growth}\)</span>.</li>
+<li>Main regressors: <span class="math inline">\(\log(\text{size})\)</span>, <span class="math inline">\(\log(\text{size})^2\)</span>, <span class="math inline">\(\text{district}\)</span>; after 2008 also <span class="math inline">\(\text{dwelling type} \times \log(\text{size})\)</span>, <span class="math inline">\(\text{dwelling type} \times \log(\text{size})^2\)</span>, and <span class="math inline">\(\text{new}\)</span> (dummy).</li>
+</ul>
+</section>
+<section id="spatial-effects-dominate-price-variation" class="slide level2">
+<h2>Spatial effects dominate price variation</h2>
+
+<img data-src="figures/variance.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="spatial-effects-dominate-price-variation-1" class="slide level2">
+<h2>Spatial effects dominate price variation</h2>
+<ul>
+<li>In Budapest, a large share of <strong>price variance</strong> is locational.</li>
+<li>District controls capture broad differences, but miss <strong>street/block-level</strong> amenities.</li>
+<li>Nearby properties share unobserved factors: micro-accessibility, school catchments, street quality, prestige effects.</li>
+<li>If spatial heterogeneity is under-modeled, index changes can mix true price dynamics with composition shifts.</li>
+</ul>
+</section>
+<section id="limits-of-classic-repeat-sales-winkler" class="slide level2">
+<h2>Limits of classic repeat-sales (Winkler)</h2>
+<div class="r-fit-text">
+<ul>
+<li>Repeated-sales transactions are <strong>not representative</strong> of total turnover: Budapest and multi-apartment units are overrepresented.</li>
+<li>Within Budapest multi-apartment stock, repeated-sales units are skewed toward <strong>smaller dwellings</strong>.</li>
+<li>Effective coverage is limited (about <strong>15.4%</strong> linked repeated sales), which weakens estimation for small segments and higher-frequency indices.</li>
+<li>The constant-quality assumption is fragile between sales (renovation and depreciation both matter).</li>
+<li>RS indices are typically more volatile and require <strong>continuous revisions</strong> as new pairs arrive.</li>
+</ul>
+</div>
+</section>
+<section id="why-ps-rs-is-a-strong-next-step" class="slide level2">
+<h2>Why ps-RS is a strong next step</h2>
+<ul>
+<li>ps-RS combines key strengths of both methods: RS-style differencing plus a small hybrid hedonic correction.</li>
+<li>It mitigates <strong>hedonic omitted-variable bias</strong> by differencing out shared local/context attributes within matched pairs.</li>
+<li>It avoids classic RS data scarcity by generating many more <strong>pseudo-pairs</strong> than same-property repeats.</li>
+<li>It reduces classic RS <strong>sample-selection bias</strong> by using a much broader transaction base.</li>
+<li>ps-RS can deliver lower volatility/noise than comparable hedonic benchmarks.</li>
+</ul>
+</section>
+<section id="our-ps-rs-design-block-based-matching" class="slide level2">
+<h2>Our ps-RS design: block-based matching</h2>
+<ul>
+<li>We adapt ps-RS to Budapest by defining similarity at the <strong>street-block</strong> level.</li>
+<li>Each pair uses sales that are close in location and market context, even if not the same unit.</li>
+<li>Block-based pairing keeps local amenity exposure comparable while increasing pair counts.</li>
+<li>This gives a practical balance: stronger control of unobserved location than district hedonics, but much broader coverage than classic RS.</li>
+</ul>
+</section>
+<section id="ps-rs-estimation-equation" class="slide level2">
+<h2>ps-RS estimation equation</h2>
+<ul>
+<li>Estimate pairwise log price differences:
+<ul>
+<li><span class="math inline">\(\Delta \log(\text{price})_{ij} = \sum_t \delta_t D_t + \Delta X_{ij}\gamma + u_{ij}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(D_t\)</span>: time-period dummies; estimated <span class="math inline">\(\delta_t\)</span> coefficients define the index path.</li>
+<li><span class="math inline">\(\Delta X_{ij}\)</span>: within-pair differences in observed attributes (when available).</li>
+<li>Interpretation: differencing removes shared local effects; time effects capture market-wide price movement.</li>
+</ul>
+</section>
+<section id="block-based-pairing-and-weighting-procedure" class="slide level2">
+<h2>Block-based pairing and weighting procedure</h2>
+
+<img data-src="figures/pairing.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p>Note: The red arrows indicate a new row in the repeat-sales regression.</p>
+</section>
+<section id="weighting-correction-in-ps-rs" class="slide level2">
+<h2>Weighting correction in ps-RS</h2>
+<ul>
+<li>Pair construction can over-weight segments with many transactions.</li>
+<li>We apply a weighting adjustment (Guo-style logic) to correct this amplification.</li>
+<li>Goal: keep estimates from being dominated by high-frequency submarkets and stabilize inference.</li>
+<li>This also makes comparison to hedonic benchmarks fairer (differences are not just frequency artifacts).</li>
+</ul>
+</section>
+<section id="goal-and-inputs" class="slide level2">
+<h2>Goal and inputs</h2>
+<ul>
+<li>Construct a <strong>street-paired pseudo repeat-sales</strong> index from cleaned, geocoded transactions</li>
+<li>Use <strong>house-level identifiers</strong> and transaction dates to form pairs</li>
+<li>Retain a <strong>hedonic benchmark</strong> for reference (no comparison here yet)</li>
+</ul>
+</section>
+<section id="spatial-pairing-logic-street-level" class="slide level2">
+<h2>Spatial pairing logic (street level)</h2>
+<ul>
+<li>Define “similar” sales by <strong>spatial proximity</strong> rather than identical properties</li>
+<li>Pair transactions <strong>within the same street block</strong> to share unobserved locational amenities</li>
+<li>Requires reliable geocoding from the cleaning pipeline</li>
+<li>Advantage: nearby units share neighborhood attributes (schools, transit, parks), so pairing helps <strong>difference out unobserved location effects</strong> and <strong>expands the sample</strong> when true repeats are rare</li>
+</ul>
+</section>
+<section id="weighting-guo-et-al.-approach" class="slide level2">
+<h2>Weighting (Guo et al.&nbsp;approach)</h2>
+<ul>
+<li>Apply weights to address <strong>uneven pairing frequency</strong> and <strong>heteroskedasticity</strong></li>
+<li>Prevent over‑representation of frequently traded segments</li>
+<li>Weights enter the <strong>ps‑RS regression</strong> directly</li>
+</ul>
+</section>
+<section id="psrs-model-setup" class="slide level2">
+<h2>ps‑RS model setup</h2>
+<ul>
+<li>Use <strong>log price differences</strong> between paired transactions</li>
+<li>Include <strong>time‑period dummies</strong> to define the index</li>
+<li>Control for <strong>differences in observable attributes</strong> when available</li>
+</ul>
+</section>
+<section id="hedonic-benchmark-setup-only" class="slide level2">
+<h2>Hedonic benchmark (setup only)</h2>
+<ul>
+<li>Adjacent‑period hedonic model with <strong>district‑level location controls</strong></li>
+<li>Uses the same cleaned dataset and time periods</li>
+</ul>
+</section></section>
+<section>
+<section id="takeaways" class="title-slide slide level1 center">
+<h1>6. Takeaways</h1>
+
+</section>
+<section id="contributions" class="slide level2">
+<h2>Contributions</h2>
+<ul>
+<li>An end-to-end <strong>address reconstruction pipeline</strong></li>
+<li>Practical strategy for <strong>large-scale fuzzy matching</strong></li>
+<li>Enables spatial price models and repeat-sales indices</li>
+</ul>
+</section>
+<section id="next-steps" class="slide level2">
+<h2>Next steps</h2>
+<ul>
+<li>Extend to historical street-name changes</li>
+<li>External validation against cadastral sources</li>
+<li>Publish a reproducible workflow for new transaction waves</li>
+</ul>
+</section>
+<section id="thank-you" class="slide level2">
+<h2>Thank you</h2>
+<p>Questions?</p>
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="figures/logo.png" class="slide-logo"></p>
@@ -367,6 +1219,44 @@ Marcell P. Granat
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

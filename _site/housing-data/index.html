@@ -6,7 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Marcell P. Granat">
@@ -95,7 +96,27 @@
     code span.va { color: #111111; } /* Variable */
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0c2167fffd85b72800124a746e864df6.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -862,7 +883,7 @@ Marcell P. Granat
 <section id="official-baseline-adjacent-period-hedonic-index" class="slide level2">
 <h2>Official baseline: Adjacent-period hedonic index</h2>
 <ul>
-<li>Official benchmark: <strong>adjacent-period hedonic OLS</strong> (Banai et al., 2017 style).</li>
+<li>Official benchmark: <strong>adjacent-period hedonic OLS</strong> (Banai et al., 2017 style <span class="citation" data-cites="banai2017mnb">(<a href="#/others-also-liked-references" role="doc-biblioref" onclick="">Banai, Vágó, and Winkler 2017</a>)</span>).</li>
 <li>Outcome and index step: <span class="math inline">\(\log(\text{price})\)</span> with period-pair dummy <span class="math inline">\(\text{growth}\)</span>.</li>
 <li>Main regressors: <span class="math inline">\(\log(\text{size})\)</span>, <span class="math inline">\(\log(\text{size})^2\)</span>, <span class="math inline">\(\text{district}\)</span>; after 2008 also <span class="math inline">\(\text{dwelling type} \times \log(\text{size})\)</span>, <span class="math inline">\(\text{dwelling type} \times \log(\text{size})^2\)</span>, and <span class="math inline">\(\text{new}\)</span> (dummy).</li>
 </ul>
@@ -880,8 +901,8 @@ Marcell P. Granat
 <li>If spatial heterogeneity is under-modeled, index changes can mix true price dynamics with composition shifts.</li>
 </ul>
 </section>
-<section id="limits-of-classic-repeat-sales-winkler" class="slide level2">
-<h2>Limits of classic repeat-sales (Winkler)</h2>
+<section id="limits-of-classic-repeat-sales-winkler2021tobbszori" class="slide level2">
+<h2>Limits of classic repeat-sales <span class="citation" data-cites="winkler2021tobbszori">(<a href="#/others-also-liked-references" role="doc-biblioref" onclick="">Winkler 2021</a>)</span></h2>
 <div class="r-fit-text">
 <ul>
 <li>Repeated-sales transactions are <strong>not representative</strong> of total turnover: Budapest and multi-apartment units are overrepresented.</li>
@@ -899,14 +920,14 @@ Marcell P. Granat
 <li>It mitigates <strong>hedonic omitted-variable bias</strong> by differencing out shared local/context attributes within matched pairs.</li>
 <li>It avoids classic RS data scarcity by generating many more <strong>pseudo-pairs</strong> than same-property repeats.</li>
 <li>It reduces classic RS <strong>sample-selection bias</strong> by using a much broader transaction base.</li>
-<li>ps-RS can deliver lower volatility/noise than comparable hedonic benchmarks.</li>
+<li>ps-RS can deliver lower volatility/noise than comparable hedonic benchmarks. Reference: <span class="citation" data-cites="guo2014new">(<a href="#/others-also-liked-references" role="doc-biblioref" onclick="">Guo et al. 2014</a>)</span>.</li>
 </ul>
 </section>
 <section id="our-ps-rs-design-block-based-matching" class="slide level2">
 <h2>Our ps-RS design: block-based matching</h2>
 <ul>
-<li>We adapt ps-RS to Budapest by defining similarity at the <strong>street-block</strong> level.</li>
-<li>Each pair uses sales that are close in location and market context, even if not the same unit.</li>
+<li>We adapt ps-RS to Budapest by defining similarity at the <strong>street-block</strong> level (basis: <span class="citation" data-cites="zhang2025approach">Zhang, Song, and Chen (<a href="#/others-also-liked-references" role="doc-biblioref" onclick="">2025</a>)</span>).</li>
+<li>Each pair uses sales that are not separated by any other street.</li>
 <li>Block-based pairing keeps local amenity exposure comparable while increasing pair counts.</li>
 <li>This gives a practical balance: stronger control of unobserved location than district hedonics, but much broader coverage than classic RS.</li>
 </ul>
@@ -914,13 +935,14 @@ Marcell P. Granat
 <section id="ps-rs-estimation-equation" class="slide level2">
 <h2>ps-RS estimation equation</h2>
 <ul>
-<li>Estimate pairwise log price differences:
+<li>Estimate pairwise log price differences:</li>
+</ul>
+<p><span class="math display">\[\Delta \log(\text{price})_{ij} = \sum_t \delta_t D_t + \Delta X_{ij}\gamma + u_{ij}\]</span></p>
 <ul>
-<li><span class="math inline">\(\Delta \log(\text{price})_{ij} = \sum_t \delta_t D_t + \Delta X_{ij}\gamma + u_{ij}\)</span></li>
-</ul></li>
 <li><span class="math inline">\(D_t\)</span>: time-period dummies; estimated <span class="math inline">\(\delta_t\)</span> coefficients define the index path.</li>
 <li><span class="math inline">\(\Delta X_{ij}\)</span>: within-pair differences in observed attributes (when available).</li>
-<li>Interpretation: differencing removes shared local effects; time effects capture market-wide price movement.</li>
+<li>Interpretation: pairing removes shared local effects; time effects capture market-wide price movement.</li>
+<li>To keep the index comparable to the hedonic benchmark, we use the same transformations and control variables.</li>
 </ul>
 </section>
 <section id="block-based-pairing-and-weighting-procedure" class="slide level2">
@@ -932,76 +954,110 @@ Marcell P. Granat
 <h2>Weighting correction in ps-RS</h2>
 <ul>
 <li>Pair construction can over-weight segments with many transactions.</li>
-<li>We apply a weighting adjustment (Guo-style logic) to correct this amplification.</li>
-<li>Goal: keep estimates from being dominated by high-frequency submarkets and stabilize inference.</li>
-<li>This also makes comparison to hedonic benchmarks fairer (differences are not just frequency artifacts).</li>
+<li>We apply a weighting adjustment to correct this amplification (basis: <span class="citation" data-cites="guo2014new">Guo et al. (<a href="#/others-also-liked-references" role="doc-biblioref" onclick="">2014</a>)</span>).</li>
 </ul>
+<p><span class="math display">\[
+w_{jrs} = \frac{N_{jr} + N_{js}}{N_{jr}N_{js}}
+\]</span></p>
+<p>where <span class="math inline">\(N_{jr}\)</span> and <span class="math inline">\(N_{js}\)</span> are transaction counts in periods <span class="math inline">\(r\)</span> and <span class="math inline">\(s\)</span> within matching unit <span class="math inline">\(j\)</span>. This adjustment prevents high-frequency submarkets from dominating estimation and supports fairer comparison with hedonic benchmarks.</p>
 </section>
-<section id="goal-and-inputs" class="slide level2">
-<h2>Goal and inputs</h2>
-<ul>
-<li>Construct a <strong>street-paired pseudo repeat-sales</strong> index from cleaned, geocoded transactions</li>
-<li>Use <strong>house-level identifiers</strong> and transaction dates to form pairs</li>
-<li>Retain a <strong>hedonic benchmark</strong> for reference (no comparison here yet)</li>
-</ul>
-</section>
-<section id="spatial-pairing-logic-street-level" class="slide level2">
-<h2>Spatial pairing logic (street level)</h2>
-<ul>
-<li>Define “similar” sales by <strong>spatial proximity</strong> rather than identical properties</li>
-<li>Pair transactions <strong>within the same street block</strong> to share unobserved locational amenities</li>
-<li>Requires reliable geocoding from the cleaning pipeline</li>
-<li>Advantage: nearby units share neighborhood attributes (schools, transit, parks), so pairing helps <strong>difference out unobserved location effects</strong> and <strong>expands the sample</strong> when true repeats are rare</li>
-</ul>
-</section>
-<section id="weighting-guo-et-al.-approach" class="slide level2">
-<h2>Weighting (Guo et al.&nbsp;approach)</h2>
-<ul>
-<li>Apply weights to address <strong>uneven pairing frequency</strong> and <strong>heteroskedasticity</strong></li>
-<li>Prevent over‑representation of frequently traded segments</li>
-<li>Weights enter the <strong>ps‑RS regression</strong> directly</li>
-</ul>
-</section>
-<section id="psrs-model-setup" class="slide level2">
-<h2>ps‑RS model setup</h2>
-<ul>
-<li>Use <strong>log price differences</strong> between paired transactions</li>
-<li>Include <strong>time‑period dummies</strong> to define the index</li>
-<li>Control for <strong>differences in observable attributes</strong> when available</li>
-</ul>
-</section>
-<section id="hedonic-benchmark-setup-only" class="slide level2">
-<h2>Hedonic benchmark (setup only)</h2>
-<ul>
-<li>Adjacent‑period hedonic model with <strong>district‑level location controls</strong></li>
-<li>Uses the same cleaned dataset and time periods</li>
-</ul>
-</section></section>
-<section>
-<section id="takeaways" class="title-slide slide level1 center">
-<h1>6. Takeaways</h1>
+<section id="index-comparison-ps-rs-hedonic-and-weighted-hedonic" class="slide level2">
+<h2>Index Comparison: ps-RS, hedonic, and weighted hedonic</h2>
 
+<img data-src="figures/index_compare.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p>Note: The weighted hedonic series is an adjacent-period hedonic index estimated using the ps-RS weighting scheme.</p>
 </section>
-<section id="contributions" class="slide level2">
-<h2>Contributions</h2>
-<ul>
-<li>An end-to-end <strong>address reconstruction pipeline</strong></li>
-<li>Practical strategy for <strong>large-scale fuzzy matching</strong></li>
-<li>Enables spatial price models and repeat-sales indices</li>
-</ul>
-</section>
-<section id="next-steps" class="slide level2">
-<h2>Next steps</h2>
-<ul>
-<li>Extend to historical street-name changes</li>
-<li>External validation against cadastral sources</li>
-<li>Publish a reproducible workflow for new transaction waves</li>
-</ul>
+<section id="index-comparison-no-clear-winner" class="slide level2">
+<h2>Index Comparison: no clear winner</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th style="text-align: right;">Vol</th>
+<th style="text-align: right;">AC1</th>
+<th style="text-align: right;">Detrended Vol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ps-RS</td>
+<td style="text-align: right;">0.0217</td>
+<td style="text-align: right;">-0.1650</td>
+<td style="text-align: right;">0.0428</td>
+</tr>
+<tr class="even">
+<td>Hedonic</td>
+<td style="text-align: right;">0.0222</td>
+<td style="text-align: right;">-0.0686</td>
+<td style="text-align: right;">0.0506</td>
+</tr>
+<tr class="odd">
+<td>Re-weighted hedonic</td>
+<td style="text-align: right;">0.0230</td>
+<td style="text-align: right;">-0.0257</td>
+<td style="text-align: right;">0.0567</td>
+</tr>
+</tbody>
+</table>
+<p>Note: Detrended Vol is volatility after removing the long-run trend with an HP-filter. Comparison diagnostics and interpretation follow <span class="citation" data-cites="guo2014new">Guo et al. (<a href="#/others-also-liked-references" role="doc-biblioref" onclick="">2014</a>)</span>.</p>
 </section>
 <section id="thank-you" class="slide level2">
 <h2>Thank you</h2>
-<p>Questions?</p>
+<p>The slides are avaialble at <a href="www.marcellgranat.com/housing-data">www.marcellgranat.com/housing-data</a>.</p>
+<div id="" class="qrcode"></div>
+<script type="text/javascript">
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorDark":"#000000","colorLight":"#ffffff","height":128,"text":"www.marcellgranat.com/housing-data","width":128});
+  script.remove();
+})();
+</script>
+    
+<p>I am happy to connect and share code/data after the conference. You can reach out to me at:</p>
+<ul>
+<li>Email: <a href="mailto:marcell_peter.granat@ecb.europa.eu">marcell_peter.granat@ecb.europa.eu</a></li>
+<li>LinkedIn: <a href="www.linkedin.com/in/marcell-granat">Marcell Granat</a></li>
+<li>Github: <a href="www.github.com/marcellgranat">Marcell Granat</a></li>
+</ul>
+</section>
+<section id="others-also-liked-references" class="slide level2 smaller scrollable">
+<h2>Others also liked (References)</h2>
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-banai2017mnb" class="csl-entry" role="listitem">
+Banai, Ádám, Nikolett Vágó, and Sándor Winkler. 2017. <span>“The MNB’s House Price Index Methodology.”</span> MNB Occasional Papers.
+</div>
+<div id="ref-can1992" class="csl-entry" role="listitem">
+Can, Ayse. 1992. <span>“Specification and Estimation of Hedonic Housing Price Models.”</span> <em>Regional Science and Urban Economics</em> 22 (3): 453–74. <a href="https://doi.org/10.1016/0166-0462(92)90039-4">https://doi.org/10.1016/0166-0462(92)90039-4</a>.
+</div>
+<div id="ref-guo2014new" class="csl-entry" role="listitem">
+Guo, Xiaoyang, Siqi Zheng, David Geltner, and Hongyu Liu. 2014. <span>“A New Approach for Constructing Home Price Indices: The Pseudo Repeat Sales Model and Its Application in China.”</span> <em>Journal of Housing Economics</em> 25: 20–38.
+</div>
+<div id="ref-kim2019" class="csl-entry" role="listitem">
+Kim, Kyoochul. 2019. <span>“The Value of Name in the Housing Market: Evidence from South Korea’s New Address System.”</span> <em>Journal of Real Estate Research</em> 41 (4): 669–92. <a href="https://doi.org/10.22300/0896-5803.41.4.669">https://doi.org/10.22300/0896-5803.41.4.669</a>.
+</div>
+<div id="ref-krause2016" class="csl-entry" role="listitem">
+Krause, Andy, and Clifford A. Lipscomb. 2016. <span>“The Data Preparation Process in Real Estate: Guidance and Review.”</span> <em>Journal of Real Estate Practice and Education</em> 19 (1): 15–42. <a href="https://doi.org/10.1080/10835547.2016.12091756">https://doi.org/10.1080/10835547.2016.12091756</a>.
+</div>
+<div id="ref-li2021" class="csl-entry" role="listitem">
+Li, Na, Rita Yi Man Li, and Ruihui Pu. 2021. <span>“What Is in a Name? A Modern Interpretation from Housing Price in Hong Kong.”</span> <em>Pacific Rim Property Research Journal</em> 27 (1): 55–74. <a href="https://doi.org/10.1080/14445921.2021.1961182">https://doi.org/10.1080/14445921.2021.1961182</a>.
+</div>
+<div id="ref-loo2014" class="csl-entry" role="listitem">
+Loo, Mark,P.J.,van,der. 2014. <span>“The Stringdist Package for Approximate String Matching.”</span> <em>The R Journal</em> 6 (1): 111. <a href="https://doi.org/10.32614/RJ-2014-011">https://doi.org/10.32614/RJ-2014-011</a>.
+</div>
+<div id="ref-mark1984" class="csl-entry" role="listitem">
+Mark, Jonathan H., and Michael A. Goldberg. 1984. <span>“Alternative Housing Price Indices: An Evaluation.”</span> <em>Real Estate Economics</em> 12 (1): 30–49. <a href="https://doi.org/10.1111/1540-6229.00309">https://doi.org/10.1111/1540-6229.00309</a>.
+</div>
+<div id="ref-pollakowski1995data" class="csl-entry" role="listitem">
+Pollakowski, Henry O. 1995. <span>“Data Sources for Measuring House Price Changes.”</span> <em>Journal of Housing Research</em>, 377387.
+</div>
+<div id="ref-winkler2021tobbszori" class="csl-entry" role="listitem">
+Winkler, Sándor. 2021. <span>“Repeat Sales House Price Indices Based on Hungarian Data.”</span> <em>STATISZTIKAI SZEMLE</em> 99 (11): 1023–48.
+</div>
+<div id="ref-zhang2025approach" class="csl-entry" role="listitem">
+Zhang, Haiyong, Zisheng Song, and Zhuo Chen. 2025. <span>“An Approach for Constructing Spatially Paired Pseudo Repeat-Sales Housing Price Indices in China.”</span> <em>Journal of Housing and the Built Environment</em> 40 (1): 1–17.
+</div>
+</div>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

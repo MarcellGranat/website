@@ -91,7 +91,7 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .surface-band { display: grid; grid-template-columns: minmax(260px, 1fr) 1.4fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
 .surface-band h2 { margin-bottom: 20px; }
 .surface-band p:not(.kicker) { color: var(--muted); }
-.surface-canvas, .city-canvas, .book-canvas { width: 100%; height: clamp(300px, 42vw, 480px); }
+.surface-canvas, .city-canvas, .book-canvas, .signal-canvas { width: 100%; height: clamp(300px, 42vw, 480px); }
 .surface-band.reverse { grid-template-columns: 1.4fr minmax(260px, 1fr); }
 .surface-band.reverse .surface-canvas, .surface-band.reverse .book-canvas { order: -1; }
 .research .surface-band + .surface-band { padding-top: 0; }
@@ -155,3 +155,7 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 
 [hidden] { display: none !important; }
 .post.collapsed { display: none; }
+
+/* Highlight: journal badge */
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border-radius: 999px; background: rgba(217, 138, 0, .12); border: 1px solid rgba(217, 138, 0, .38); color: #8a5a00; font: 600 .84rem/1 'Inter', sans-serif; }
+.badge svg { flex: none; }

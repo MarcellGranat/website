@@ -1,5 +1,14 @@
 project:
   type: website
+  # index.html (animated landing page) is hand-written and copied as-is.
+  # Render only the real Quarto sources.
+  render:
+    - blog.qmd
+    - about.qmd
+    - posts/*/index.qmd
+  resources:
+    - index.html
+    - home
 
 website:
   google-analytics:
@@ -9,6 +18,11 @@ website:
   title: "Marcell Granat"
   navbar:
     
+    left:
+      - text: Home
+        href: index.html
+      - text: Writing
+        href: blog.qmd
     right:
       # - about.qmd
       - icon: bar-chart-line

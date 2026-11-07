@@ -1,4 +1,5 @@
 ---
+title: "Writing"
 listing:
   contents: posts
   sort: "date desc"

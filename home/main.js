@@ -13,8 +13,8 @@ const grid = $('#post-grid');
 const fmt = (d) => new Date(d).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' });
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 grid.innerHTML = POSTS.map((p, i) => `
-  <a class="post reveal" style="--d:${i % 3}" href="../posts/${p.id}/" data-tags="${esc(p.tags.join('|'))}">
-    <div class="thumb">${p.image ? `<img src="../posts/${p.id}/${p.image}" alt="" loading="lazy" />` : ''}</div>
+  <a class="post reveal" style="--d:${i % 3}" href="posts/${p.id}/index.html" data-tags="${esc(p.tags.join('|'))}">
+    <div class="thumb">${p.image ? `<img src="posts/${p.id}/${p.image}" alt="" loading="lazy" />` : ''}</div>
     <div class="post-body">
       <time datetime="${p.date}">${fmt(p.date)}</time>
       <h3>${esc(p.title)}</h3>

@@ -66,7 +66,7 @@
   #v(0.25em)
   #text(size: 8.8pt, fill: muted)[
     Budapest, Hungary #h(0.5em) $dot$ #h(0.5em)
-    #link("mailto:granatcellmar98@gmail.com")[granatcellmar98\@gmail.com] #h(0.5em) $dot$ #h(0.5em)
+    #link("mailto:marcell.granat@icloud.com")[marcell.granat\@icloud.com] #h(0.5em) $dot$ #h(0.5em)
     #link("https://www.linkedin.com/in/granatmarcell")[LinkedIn] #h(0.5em) $dot$ #h(0.5em)
     #link("https://github.com/MarcellGranat")[GitHub]
   ]

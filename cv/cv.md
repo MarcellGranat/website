@@ -1,6 +1,6 @@
 # Marcell Granát
 **Senior Data Scientist & Quantitative Researcher**  
-Budapest, Hungary · [granatcellmar98@gmail.com](mailto:granatcellmar98@gmail.com) · [LinkedIn](https://www.linkedin.com/in/granatmarcell) · [GitHub](https://github.com/MarcellGranat)
+Budapest, Hungary · [marcell.granat@icloud.com](mailto:marcell.granat@icloud.com) · [LinkedIn](https://www.linkedin.com/in/granatmarcell) · [GitHub](https://github.com/MarcellGranat)
 
 ---
 

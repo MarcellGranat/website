@@ -36,8 +36,17 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 160px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
 .hero-inner { position: relative; z-index: 1; max-width: 880px; pointer-events: none; }
 .hero-inner a { pointer-events: auto; }
-.hero-logo { position: relative; z-index: 1; justify-self: end; width: clamp(150px, 17vw, 270px); pointer-events: none; }
-.hero-logo img { width: 100%; height: auto; display: block; filter: drop-shadow(0 30px 40px rgba(20, 24, 28, .18)); animation: float 7s ease-in-out infinite; }
+.hero-logo { position: relative; z-index: 1; justify-self: end; width: clamp(180px, 21vw, 330px); pointer-events: none; }
+/* Minimal CRT look: scanlines, a slow rolling band, faint RGB fringe and flicker - all clipped to the logo shape */
+.crt { position: relative; animation: float 7s ease-in-out infinite; }
+.crt img { width: 100%; height: auto; display: block; animation: crt-flicker 7s steps(1) infinite;
+  filter: drop-shadow(2px 0 0 rgba(255, 40, 90, .32)) drop-shadow(-2px 0 0 rgba(0, 200, 255, .32)) drop-shadow(0 30px 40px rgba(20, 24, 28, .18)); }
+.crt::before, .crt::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  -webkit-mask: url("../logo.png") center / contain no-repeat; mask: url("../logo.png") center / contain no-repeat; }
+.crt::after { background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, .11) 0 1px, transparent 1px 3px); }
+.crt::before { z-index: 1; background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .5), transparent) 0 -30% / 100% 24% no-repeat; mix-blend-mode: soft-light; animation: crt-roll 5.5s linear infinite; }
+@keyframes crt-roll { from { background-position: 0 -30%; } to { background-position: 0 135%; } }
+@keyframes crt-flicker { 0%, 100% { opacity: 1; } 91% { opacity: .93; } 92% { opacity: 1; } 96% { opacity: .96; } 97% { opacity: 1; } }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(-2.5deg); } 50% { transform: translateY(-28px) rotate(2.5deg); } }
 .eyebrow, .kicker { font: 500 .78rem/1 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .14em; color: var(--teal); margin: 0 0 22px; }
 .grad { background: linear-gradient(100deg, var(--teal), var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -144,7 +153,7 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .scroll-hint span { animation: none; }
+  .scroll-hint span, .crt, .crt img, .crt::before { animation: none; }
 }
 .more{margin-top:36px;text-align:center}
 .about .kicker { color: var(--teal); }

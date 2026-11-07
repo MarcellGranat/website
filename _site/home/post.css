@@ -39,7 +39,6 @@
 
 .listing { max-width: 1320px; margin: 0 auto; padding: 56px clamp(20px, 6vw, 96px) 100px; }
 .listing .filters { margin-top: 0; }
-@media (max-width: 600px) { 
 /* Plain header (Writing page) - same background as the homepage */
 .article-head { padding: 130px clamp(20px, 6vw, 96px) 24px; }
 .article-head-inner { max-width: 1320px; margin: 0 auto; animation: rise .9s var(--ease) both; }

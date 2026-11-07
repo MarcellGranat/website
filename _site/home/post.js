@@ -101,4 +101,5 @@ $$('.prose a[href^="http"]').forEach((a) => {
   const load = (sel, file) => { const cv = $(sel); if (cv) import(file).then((m) => m.mount(cv, { reduced: reducedMotion })); };
   load('.visual .city-canvas', './animations/city.js');
   load('.visual .book-canvas', './animations/book.js');
+  load('.visual .signal-canvas', './animations/signal.js');
 }

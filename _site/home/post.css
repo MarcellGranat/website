@@ -111,3 +111,4 @@
 .visual canvas { display: block; width: 100%; height: auto; }
 .visual canvas.city-canvas { aspect-ratio: 5 / 4; }
 .visual canvas.book-canvas { aspect-ratio: 640 / 440; }
+.visual canvas.signal-canvas { aspect-ratio: 640 / 440; }

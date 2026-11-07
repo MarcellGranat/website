@@ -6,8 +6,7 @@ export const POSTS = [
     "title": "Cleaning the whole house: address reconstruction and spatial matching",
     "date": "2026-02-27",
     "tags": [
-      "Housing",
-      "Conference"
+      "publication"
     ],
     "image": "featured.jpg"
   },
@@ -17,8 +16,7 @@ export const POSTS = [
     "date": "2025-06-12",
     "tags": [
       "publication",
-      "history",
-      "ai"
+      "AI"
     ],
     "image": "logo.png"
   },
@@ -27,7 +25,6 @@ export const POSTS = [
     "title": "Teaching R, data visualisation and text mining: my Big Data course, Fall 2023",
     "date": "2023-12-02",
     "tags": [
-      "Teaching",
       "R"
     ],
     "image": "featured.png"
@@ -37,7 +34,6 @@ export const POSTS = [
     "title": "Central bank communication and quantitative text mining tools",
     "date": "2023-09-27",
     "tags": [
-      "Economania",
       "NLP"
     ],
     "image": "featured.png"
@@ -57,8 +53,7 @@ export const POSTS = [
     "title": "Data and Cultures",
     "date": "2023-07-03",
     "tags": [
-      "ML",
-      "Economania"
+      "ML"
     ],
     "image": "logo.png"
   },
@@ -85,7 +80,6 @@ export const POSTS = [
     "title": "From John von Neumann to the ChatGPT: the rise, shine and shine of computer science",
     "date": "2023-03-09",
     "tags": [
-      "Economania",
       "NLP"
     ],
     "image": "featured.png"
@@ -94,18 +88,14 @@ export const POSTS = [
     "id": "ggprofessional",
     "title": "ggProfessional",
     "date": "2023-02-21",
-    "tags": [
-      "Package"
-    ],
+    "tags": [],
     "image": "featured.png"
   },
   {
     "id": "currr",
     "title": "Currr",
     "date": "2023-02-14",
-    "tags": [
-      "Package"
-    ],
+    "tags": [],
     "image": "featured.png"
   },
   {
@@ -121,20 +111,14 @@ export const POSTS = [
     "id": "mca-digitalisation",
     "title": "Digitalisation and business performance - focusing on Hungarian manufacturing firms",
     "date": "2023-01-15",
-    "tags": [
-      "Digitalisation",
-      "MCA"
-    ],
+    "tags": [],
     "image": "featured.png"
   },
   {
     "id": "inflation-and-stocks",
     "title": "Rising prices, rising returns: how does inflation affect stock returns?",
     "date": "2023-01-06",
-    "tags": [
-      "Economania",
-      "Inflation"
-    ],
+    "tags": [],
     "image": "featured.png"
   },
   {
@@ -142,7 +126,6 @@ export const POSTS = [
     "title": "Media Attention to Environmental Issues and ESG Investing",
     "date": "2022-12-22",
     "tags": [
-      "ESG",
       "NLP"
     ],
     "image": "featured.png"
@@ -152,9 +135,7 @@ export const POSTS = [
     "title": "Data Analysis in Practice",
     "date": "2022-12-15",
     "tags": [
-      "Used cars",
-      "ML",
-      "MCA"
+      "ML"
     ],
     "image": "featured.png"
   },
@@ -162,9 +143,7 @@ export const POSTS = [
     "id": "portfolio-used-cars",
     "title": "How long does it take to sell a used car?",
     "date": "2022-10-29",
-    "tags": [
-      "Used cars"
-    ],
+    "tags": [],
     "image": "featured.png"
   },
   {
@@ -172,7 +151,6 @@ export const POSTS = [
     "title": "Quantify the Economania Blog",
     "date": "2022-09-27",
     "tags": [
-      "Economania",
       "NLP"
     ],
     "image": "featured.png"
@@ -181,10 +159,7 @@ export const POSTS = [
     "id": "online-inflation",
     "title": "Can we measure inflation just with our laptop?",
     "date": "2022-08-08",
-    "tags": [
-      "Economania",
-      "Inflation"
-    ],
+    "tags": [],
     "image": "featured.svg"
   },
   {

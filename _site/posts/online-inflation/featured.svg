@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="A laptop showing product prices and a rising inflation chart">
+  <defs>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f8f86" stop-opacity=".28"/><stop offset="1" stop-color="#0f8f86" stop-opacity="0"/></linearGradient>
+    <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#14181c" flood-opacity=".16"/></filter>
+    <g id="tag"><path d="M0 -34 H78 L112 0 L78 34 H0 a10 10 0 0 1 -10 -10 V-24 a10 10 0 0 1 10 -10Z"/><circle cx="86" cy="0" r="6" fill="#f6f5f1"/></g>
+  </defs>
+
+  <!-- soft background shapes -->
+  <circle cx="470" cy="470" r="360" fill="#0f8f86" opacity=".09"/>
+  <circle cx="1170" cy="560" r="330" fill="#d98a00" opacity=".11"/>
+  <ellipse cx="800" cy="858" rx="520" ry="26" fill="#14181c" opacity=".22" filter="url(#blur)"/>
+
+  <!-- dashed "scraping" paths into the screen -->
+  <g fill="none" stroke="#0f8f86" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round" opacity=".7">
+    <path d="M250 330 C 300 300, 340 330, 420 360"/>
+    <path d="M1350 280 C 1300 250, 1250 290, 1190 340"/>
+    <path d="M200 640 C 280 660, 330 640, 420 600"/>
+  </g>
+
+  <!-- laptop -->
+  <g filter="url(#soft)">
+    <rect x="390" y="150" width="820" height="500" rx="30" fill="#14181c"/>
+    <rect x="414" y="174" width="772" height="452" rx="14" fill="#ffffff"/>
+    <path d="M300 650 H1300 L1344 706 Q1348 714 1338 714 H262 Q252 714 256 706Z" fill="#d9d8d2"/>
+    <rect x="700" y="650" width="200" height="14" rx="7" fill="#c3c2bb"/>
+  </g>
+
+  <!-- browser bar -->
+  <rect x="414" y="174" width="772" height="46" rx="14" fill="#f0efea"/>
+  <rect x="414" y="200" width="772" height="20" fill="#f0efea"/>
+  <circle cx="440" cy="197" r="7" fill="#e8806f"/><circle cx="464" cy="197" r="7" fill="#e5b84a"/><circle cx="488" cy="197" r="7" fill="#5fb89a"/>
+  <rect x="530" y="184" width="380" height="26" rx="13" fill="#ffffff"/>
+
+  <!-- product tiles with prices -->
+  <g>
+    <g transform="translate(440 246)">
+      <rect width="104" height="150" rx="14" fill="#f6f5f1"/><circle cx="52" cy="50" r="26" fill="#d98a00" opacity=".85"/>
+      <rect x="22" y="92" width="60" height="7" rx="3.5" fill="#c9c8c1"/><rect x="22" y="106" width="40" height="7" rx="3.5" fill="#dcdbd4"/>
+      <rect x="18" y="122" width="68" height="20" rx="10" fill="#0f8f86"/><text x="52" y="137" font-family="Inter,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">€2.49</text>
+    </g>
+    <g transform="translate(556 246)">
+      <rect width="104" height="150" rx="14" fill="#f6f5f1"/><rect x="28" y="26" width="48" height="48" rx="12" fill="#0f8f86" opacity=".85"/>
+      <rect x="22" y="92" width="60" height="7" rx="3.5" fill="#c9c8c1"/><rect x="22" y="106" width="40" height="7" rx="3.5" fill="#dcdbd4"/>
+      <rect x="18" y="122" width="68" height="20" rx="10" fill="#0f8f86"/><text x="52" y="137" font-family="Inter,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">€1.19</text>
+    </g>
+    <g transform="translate(672 246)">
+      <rect width="104" height="150" rx="14" fill="#f6f5f1"/><path d="M52 24 L78 74 H26Z" fill="#e8806f" opacity=".9"/>
+      <rect x="22" y="92" width="60" height="7" rx="3.5" fill="#c9c8c1"/><rect x="22" y="106" width="40" height="7" rx="3.5" fill="#dcdbd4"/>
+      <rect x="18" y="122" width="68" height="20" rx="10" fill="#0f8f86"/><text x="52" y="137" font-family="Inter,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">€3.30</text>
+    </g>
+    <g transform="translate(440 412)">
+      <rect width="104" height="150" rx="14" fill="#f6f5f1"/><rect x="26" y="28" width="52" height="46" rx="23" fill="#0f8f86" opacity=".55"/>
+      <rect x="22" y="92" width="60" height="7" rx="3.5" fill="#c9c8c1"/><rect x="22" y="106" width="40" height="7" rx="3.5" fill="#dcdbd4"/>
+      <rect x="18" y="122" width="68" height="20" rx="10" fill="#0f8f86"/><text x="52" y="137" font-family="Inter,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">€0.89</text>
+    </g>
+    <g transform="translate(556 412)">
+      <rect width="104" height="150" rx="14" fill="#f6f5f1"/><circle cx="52" cy="50" r="26" fill="#e5b84a" opacity=".9"/><circle cx="52" cy="50" r="10" fill="#f6f5f1"/>
+      <rect x="22" y="92" width="60" height="7" rx="3.5" fill="#c9c8c1"/><rect x="22" y="106" width="40" height="7" rx="3.5" fill="#dcdbd4"/>
+      <rect x="18" y="122" width="68" height="20" rx="10" fill="#0f8f86"/><text x="52" y="137" font-family="Inter,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">€4.75</text>
+    </g>
+    <g transform="translate(672 412)">
+      <rect width="104" height="150" rx="14" fill="#f6f5f1"/><rect x="28" y="28" width="48" height="46" rx="8" fill="#d98a00" opacity=".6"/>
+      <rect x="22" y="92" width="60" height="7" rx="3.5" fill="#c9c8c1"/><rect x="22" y="106" width="40" height="7" rx="3.5" fill="#dcdbd4"/>
+      <rect x="18" y="122" width="68" height="20" rx="10" fill="#0f8f86"/><text x="52" y="137" font-family="Inter,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">€2.05</text>
+    </g>
+  </g>
+
+  <!-- inflation chart card -->
+  <rect x="800" y="246" width="366" height="316" rx="16" fill="#ffffff" stroke="#e6e5de" stroke-width="2"/>
+  <text x="826" y="284" font-family="Inter,Helvetica,Arial,sans-serif" font-size="20" font-weight="700" fill="#14181c">Price index</text>
+  <g stroke="#ecebe5" stroke-width="2"><path d="M826 340 H1140 M826 400 H1140 M826 460 H1140 M826 520 H1140"/></g>
+  <path d="M826 500 L862 486 L898 494 L934 462 L970 470 L1006 420 L1042 392 L1078 354 L1112 330 L1140 306 V540 H826Z" fill="url(#area)"/>
+  <path d="M826 500 L862 486 L898 494 L934 462 L970 470 L1006 420 L1042 392 L1078 354 L1112 330 L1140 306" fill="none" stroke="#0f8f86" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1140" cy="306" r="18" fill="#d98a00" opacity=".25"/><circle cx="1140" cy="306" r="9" fill="#d98a00"/>
+
+  <!-- floating price tags -->
+  <g transform="translate(250 330) rotate(-14)" fill="#d98a00" filter="url(#soft)"><use href="#tag"/><text x="18" y="9" font-family="Inter,Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#fff">€2.79</text></g>
+  <g transform="translate(1350 280) rotate(12)" fill="#0f8f86" filter="url(#soft)"><use href="#tag"/><text x="18" y="9" font-family="Inter,Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#fff">€3.10</text></g>
+  <g transform="translate(210 650) rotate(8)" fill="#14181c" filter="url(#soft)"><use href="#tag"/><text x="18" y="9" font-family="Inter,Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#fff">€1.45</text></g>
+
+  <!-- up arrow badge -->
+  <g transform="translate(1290 640)" filter="url(#soft)"><circle r="46" fill="#ffffff"/><path d="M-16 12 L0 -14 L16 12 M0 -12 V22" fill="none" stroke="#0f8f86" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" transform="rotate(35)"/></g>
+</svg>

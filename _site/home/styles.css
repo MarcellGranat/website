@@ -37,7 +37,7 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .hero-inner { position: relative; z-index: 1; max-width: 760px; pointer-events: none; }
 .hero-inner a { pointer-events: auto; }
 .hero-logo { position: relative; z-index: 1; justify-self: center; width: clamp(180px, 21vw, 330px); pointer-events: none; }
-.logo-float { animation: float 7s ease-in-out infinite; }
+.logo-float { animation: float 4.5s ease-in-out infinite; }
 .logo-float img { width: 100%; height: auto; display: block; filter: drop-shadow(0 30px 40px rgba(20, 24, 28, .18)); }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(-2.5deg); } 50% { transform: translateY(-28px) rotate(2.5deg); } }
 .eyebrow, .kicker { font: 500 .78rem/1 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .14em; color: var(--teal); margin: 0 0 22px; }

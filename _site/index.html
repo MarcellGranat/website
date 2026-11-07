@@ -18,10 +18,9 @@
   <header class="nav" id="nav">
     <a class="brand" href="#top"><img src="logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
     <nav>
+      <a href="#research">Research</a>
+      <a href="#blog">Blog</a>
       <a href="#about">About</a>
-      <a href="#focus">Focus</a>
-      <a href="#writing">Writing</a>
-      <a href="#path">Path</a>
       <a href="#contact" class="pill">Contact</a>
     </nav>
   </header>
@@ -34,65 +33,74 @@
         <h1 class="reveal" style="--d:1">Economics,<br />read through <span class="grad">data</span>.</h1>
         <p class="lead reveal" style="--d:2">I work at the intersection of statistics, econometrics and machine learning, and I write most of it in R. Research notes, packages and lecture material live here.</p>
         <div class="cta reveal" style="--d:3">
-          <a class="btn primary" href="#writing">Read the writing</a>
+          <a class="btn primary" href="#blog">Read the blog</a>
           <a class="btn" href="https://marcellgranat.github.io/cv/">View CV</a>
         </div>
       </div>
+      <div class="hero-logo reveal" style="--d:2"><img src="logo.png" alt="Marcell Granát logo" /></div>
       <a class="scroll-hint" href="#about" aria-label="Scroll down"><span></span></a>
     </section>
 
-    <section id="about" class="section about">
-      <figure class="portrait reveal">
-        <img src="profile.jpg" alt="Portrait of Marcell Granát" loading="lazy" />
-      </figure>
-      <div>
-        <p class="kicker reveal">About</p>
-        <h2 class="reveal" style="--d:1">Analyst by day, teacher and researcher by habit.</h2>
-        <p class="reveal" style="--d:2">I am an economic analyst, researcher and assistant lecturer at John von Neumann University. I love statistics, econometrics, ML and mostly R programming. This website shares lecture slides, materials related to my <a href="https://marcellgranat.com/bigdata">Big Data &amp; Visualisation</a> course and posts about my current research.</p>
-        <ul class="stats">
-          <li class="reveal" style="--d:3"><b data-count="20">0</b><span>posts &amp; projects</span></li>
-          <li class="reveal" style="--d:4"><b data-count="4">0</b><span>years in central banking</span></li>
-          <li class="reveal" style="--d:5"><b data-count="3">0</b><span>degrees &amp; counting</span></li>
-        </ul>
-      </div>
-    </section>
+    <!-- Research: placeholders. Replace each band with a recent post (kicker, title, summary, link). -->
+    <div id="research" class="research">
+      <section class="section surface-band">
+        <div class="band-text">
+          <p class="kicker reveal">Research</p>
+          <h2 class="reveal" style="--d:1">From noisy surfaces to clear signals.</h2>
+          <p class="reveal" style="--d:2">Whether it is inflation scraped from the web or survival curves for used cars, the work is the same: model the structure, quantify the uncertainty, show it plainly.</p>
+        </div>
+        <canvas class="surface-canvas" aria-hidden="true"></canvas>
+      </section>
+      <section class="section surface-band reverse">
+        <div class="band-text">
+          <p class="kicker reveal">Research</p>
+          <h2 class="reveal" style="--d:1">From noisy surfaces to clear signals.</h2>
+          <p class="reveal" style="--d:2">Whether it is inflation scraped from the web or survival curves for used cars, the work is the same: model the structure, quantify the uncertainty, show it plainly.</p>
+        </div>
+        <canvas class="surface-canvas" data-phase="260" aria-hidden="true"></canvas>
+      </section>
+    </div>
 
-    <section id="focus" class="section focus">
-      <p class="kicker reveal">Focus</p>
-      <h2 class="reveal" style="--d:1">What I spend my time on</h2>
-      <div class="focus-grid">
-        <article class="card reveal" style="--d:1"><span class="idx">01</span><h3>Econometrics</h3><p>Survival analysis, panel models and careful causal thinking applied to real markets.</p></article>
-        <article class="card reveal" style="--d:2"><span class="idx">02</span><h3>Machine learning</h3><p>Prediction, text mining and NLP for central bank communication, media and labour data.</p></article>
-        <article class="card reveal" style="--d:3"><span class="idx">03</span><h3>R tooling</h3><p>Packages such as currr and ggProfessional that make daily analytical work faster.</p></article>
-        <article class="card reveal" style="--d:4"><span class="idx">04</span><h3>Teaching</h3><p>Big data and visualisation courses, with open slides and worked examples.</p></article>
-      </div>
-    </section>
-
-    <section class="section surface-band">
-      <div class="band-text">
-        <p class="kicker reveal">Method</p>
-        <h2 class="reveal" style="--d:1">From noisy surfaces to clear signals.</h2>
-        <p class="reveal" style="--d:2">Whether it is inflation scraped from the web or survival curves for used cars, the work is the same: model the structure, quantify the uncertainty, show it plainly.</p>
-      </div>
-      <canvas id="surface-canvas" aria-hidden="true"></canvas>
-    </section>
-
-    <section id="writing" class="section writing">
-      <p class="kicker reveal">Writing</p>
-      <h2 class="reveal" style="--d:1">Research notes &amp; projects</h2>
+    <section id="blog" class="section writing">
+      <p class="kicker reveal">Blog</p>
+      <h2 class="reveal" style="--d:1">Notes, packages &amp; projects</h2>
       <div class="filters reveal" id="filters" role="group" aria-label="Filter posts by topic"></div>
       <div class="post-grid" id="post-grid"></div>
     </section>
 
-    <section id="path" class="section path">
-      <p class="kicker reveal">Path</p>
-      <h2 class="reveal" style="--d:1">Experience &amp; education</h2>
-      <ol class="timeline" id="timeline">
-        <li class="reveal"><time>Feb 2022 - present</time><h3>Central Bank of Hungary</h3><p>Education and Research Expert</p></li>
-        <li class="reveal"><time>Aug 2022 - present</time><h3>John von Neumann University</h3><p>Teaching Assistant</p></li>
-        <li class="reveal"><time>Sept 2022 - present</time><h3>Eötvös Loránd University</h3><p>PhD in Economics</p></li>
-        <li class="reveal"><time>Sept 2017 - June 2022</time><h3>Corvinus University of Budapest</h3><p>MSc in Economics</p></li>
-      </ol>
+    <section id="about" class="section about">
+      <div class="about-grid">
+        <ol class="timeline" id="timeline" aria-label="Experience and education">
+          <li class="reveal"><time>Feb 2022 - present</time><h3>Central Bank of Hungary</h3><p>Education and Research Expert</p></li>
+          <li class="reveal"><time>Aug 2022 - present</time><h3>John von Neumann University</h3><p>Teaching Assistant</p></li>
+          <li class="reveal"><time>Sept 2022 - present</time><h3>Eötvös Loránd University</h3><p>PhD in Economics</p></li>
+          <li class="reveal"><time>Sept 2017 - June 2022</time><h3>Corvinus University of Budapest</h3><p>MSc in Economics</p></li>
+        </ol>
+        <div class="about-col">
+          <figure class="portrait reveal">
+            <img src="profile.jpg" alt="Portrait of Marcell Granát" loading="lazy" />
+          </figure>
+          <p class="kicker reveal">About</p>
+          <h2 class="reveal" style="--d:1">Analyst by day, teacher and researcher by habit.</h2>
+          <p class="reveal" style="--d:2">I am an economic analyst, researcher and assistant lecturer at John von Neumann University. I love statistics, econometrics, ML and mostly R programming. This website shares lecture slides, materials related to my <a href="https://marcellgranat.com/bigdata">Big Data &amp; Visualisation</a> course and posts about my current research.</p>
+          <div class="cta reveal" style="--d:3"><a class="btn primary" href="https://marcellgranat.github.io/cv/">View my CV</a></div>
+          <ul class="stats">
+            <li class="reveal" style="--d:3"><b data-count="20">0</b><span>posts &amp; projects</span></li>
+            <li class="reveal" style="--d:4"><b data-count="4">0</b><span>years in central banking</span></li>
+            <li class="reveal" style="--d:5"><b data-count="3">0</b><span>degrees &amp; counting</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="focus">
+        <h2 class="reveal">What I spend my time on</h2>
+        <div class="focus-grid">
+          <article class="card reveal" style="--d:1"><span class="idx">01</span><h3>Econometrics</h3><p>Survival analysis, panel models and careful causal thinking applied to real markets.</p></article>
+          <article class="card reveal" style="--d:2"><span class="idx">02</span><h3>Machine learning</h3><p>Prediction, text mining and NLP for central bank communication, media and labour data.</p></article>
+          <article class="card reveal" style="--d:3"><span class="idx">03</span><h3>R tooling</h3><p>Packages such as currr and ggProfessional that make daily analytical work faster.</p></article>
+          <article class="card reveal" style="--d:4"><span class="idx">04</span><h3>Teaching</h3><p>Big data and visualisation courses, with open slides and worked examples.</p></article>
+        </div>
+      </div>
     </section>
 
     <section id="contact" class="section contact">
@@ -106,7 +114,7 @@
     </section>
   </main>
 
-  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="index.html#writing">All posts</a></footer>
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="#blog">All posts</a></footer>
 
   <script type="module" src="home/main.js"></script>
 </body>

@@ -77,4 +77,4 @@ onScroll();
 
 // ---- Canvas animations ----
 mountNetwork($('#hero-canvas'), { reduced });
-mountSurface($('#surface-canvas'), { reduced });
+$$('.surface-canvas').forEach((cv) => mountSurface(cv, { reduced, phase: +cv.dataset.phase || 0 }));

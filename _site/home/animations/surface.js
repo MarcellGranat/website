@@ -1,11 +1,11 @@
 // Undulating 3D wireframe surface (two ribbons: teal over amber) drawn on a 2D canvas.
 // Only runs while visible. Light-theme palette.
-export function mount(canvas, { reduced = false } = {}) {
+export function mount(canvas, { reduced = false, phase = 0 } = {}) {
   const ctx = canvas.getContext('2d');
   const rows = 28, cols = 48, gridW = 460, gridD = 320;
   const rotX = 0.52, rotY = -0.58;
   const cX = Math.cos(rotX), sX = Math.sin(rotX), cY = Math.cos(rotY), sY = Math.sin(rotY);
-  let w = 0, h = 0, dpr = 1, tick = 0, raf = 0, running = false;
+  let w = 0, h = 0, dpr = 1, tick = phase, raf = 0, running = false;
 
   function project(x, y, z, cx, cy) {
     const x1 = x * cY - z * sY, z1 = x * sY + z * cY;

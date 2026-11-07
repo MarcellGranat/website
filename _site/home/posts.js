@@ -88,14 +88,18 @@ export const POSTS = [
     "id": "ggprofessional",
     "title": "ggProfessional",
     "date": "2023-02-21",
-    "tags": [],
+    "tags": [
+      "R"
+    ],
     "image": "featured.png"
   },
   {
     "id": "currr",
     "title": "Currr",
     "date": "2023-02-14",
-    "tags": [],
+    "tags": [
+      "R"
+    ],
     "image": "featured.png"
   },
   {
@@ -111,14 +115,18 @@ export const POSTS = [
     "id": "mca-digitalisation",
     "title": "Digitalisation and business performance - focusing on Hungarian manufacturing firms",
     "date": "2023-01-15",
-    "tags": [],
+    "tags": [
+      "publication"
+    ],
     "image": "featured.png"
   },
   {
     "id": "inflation-and-stocks",
     "title": "Rising prices, rising returns: how does inflation affect stock returns?",
     "date": "2023-01-06",
-    "tags": [],
+    "tags": [
+      "finance"
+    ],
     "image": "featured.png"
   },
   {
@@ -143,7 +151,9 @@ export const POSTS = [
     "id": "portfolio-used-cars",
     "title": "How long does it take to sell a used car?",
     "date": "2022-10-29",
-    "tags": [],
+    "tags": [
+      "ML"
+    ],
     "image": "featured.png"
   },
   {

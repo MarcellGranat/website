@@ -81,16 +81,6 @@ export const POSTS = [
     "image": "featured.png"
   },
   {
-    "id": "interfood",
-    "title": "Web scraping with Shiny - automate your weekly food order",
-    "date": "2023-03-06",
-    "tags": [
-      "shiny",
-      "scraping"
-    ],
-    "image": "featured.png"
-  },
-  {
     "id": "ggprofessional",
     "title": "ggProfessional",
     "date": "2023-02-21",
@@ -186,13 +176,6 @@ export const POSTS = [
       "Inflation"
     ],
     "image": "featured.svg"
-  },
-  {
-    "id": "tdk-best-paper",
-    "title": "Best Paper Award",
-    "date": "2022-03-18",
-    "tags": [],
-    "image": "featured.png"
   },
   {
     "id": "statwars",

@@ -40,6 +40,34 @@ filters.addEventListener('click', (e) => {
   });
 });
 
+// ---- Show more / fewer: 6 newest posts first, filters only when unfolded ----
+const VISIBLE = 6;
+const moreBtn = $('#more-posts');
+const cards = $$('.post', grid);
+function setExpanded(open) {
+  cards.forEach((card, i) => {
+    const extra = i >= VISIBLE;
+    card.classList.toggle('collapsed', extra && !open);
+    if (extra && open) card.classList.add('in');
+  });
+  filters.hidden = !open;
+  moreBtn.setAttribute('aria-expanded', String(open));
+  moreBtn.textContent = open ? 'Show less' : 'Show more';
+  if (!open) { // fold back: reset the topic filter
+    $$('.chip', filters).forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.t === 'All')));
+    cards.forEach((card) => card.classList.remove('hide'));
+  }
+}
+if (cards.length <= VISIBLE) { moreBtn.parentElement.hidden = true; filters.hidden = false; }
+else {
+  setExpanded(false);
+  moreBtn.addEventListener('click', () => {
+    const open = moreBtn.getAttribute('aria-expanded') !== 'true';
+    setExpanded(open);
+    if (!open) $('#blog').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  });
+}
+
 // ---- Scroll reveal ----
 const revealIO = new IntersectionObserver((entries) => {
   entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); } });

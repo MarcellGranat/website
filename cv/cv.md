@@ -12,7 +12,7 @@ Quantitative researcher and data scientist with deep expertise in applied machin
 ## Professional Experience
 
 ### European Central Bank (ECB)
-**Data Science Expert (F/G level), DG/S Financial Market Data** | *Frankfurt, Germany* | *Oct 2025 -- Present*
+**Data Science Expert (F/G level), DG/S Financial Market Data** | *Frankfurt, Germany* | *Oct 2025 -- Oct 2026*
 - **RAG Architecture & NLP:** Designed and deployed production RAG systems for the MMSR chatbot project, structuring semantic retrieval pipelines and grounding complex documentation for external stakeholders.
 - **Distributed Pipelines & Data Engineering:** Managed high-throughput data flows and Apache Iceberg workflows; processed granular financial datasets (TRAX, ABS, iBoxx, €STR, MMSR) with automated pipelines in Python and SQL.
 - **High-Precision Classification:** Engineered automated classification pipelines linking massive, granular SFTDS and BrokerTec datasets, achieving 99.9% classification accuracy on high-frequency transactions.

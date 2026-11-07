@@ -88,7 +88,7 @@ Quantitative researcher and data scientist with deep expertise in applied machin
 #exp-header(
   "European Central Bank (ECB)",
   "Data Science Expert (F/G level), DG/S Financial Market Data",
-  "Oct 2025 -- Present",
+  "Oct 2025 -- Oct 2026",
   "Frankfurt, Germany"
 )
 - *RAG Architecture & NLP:* Designed and deployed production RAG systems for the MMSR chatbot project, structuring semantic retrieval pipelines and grounding complex documentation for external stakeholders.

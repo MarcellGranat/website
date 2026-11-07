@@ -106,3 +106,8 @@
 .slides { display: grid; gap: 10px; }
 .slides-frame { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
 .slides-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* Animations in the left-column figure (replace the stock image) */
+.visual canvas { display: block; width: 100%; height: auto; }
+.visual canvas.city-canvas { aspect-ratio: 5 / 4; }
+.visual canvas.book-canvas { aspect-ratio: 640 / 440; }

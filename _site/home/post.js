@@ -94,3 +94,11 @@ $$('.prose a[href^="http"]').forEach((a) => {
     anchor.before(box);
   }
 }
+
+// Figure animations (posts that use a canvas instead of a stock image).
+{
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const load = (sel, file) => { const cv = $(sel); if (cv) import(file).then((m) => m.mount(cv, { reduced: reducedMotion })); };
+  load('.visual .city-canvas', './animations/city.js');
+  load('.visual .book-canvas', './animations/book.js');
+}

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f5f1" />
-  <meta name="description" content="My slides for the EABH 2025 conference From the Austro-Hungarian Monarchy to the post-war transitional economy, Hungary’s economic structure und" />
+  <meta name="description" content="The Magyar Compass was a Hungarian financial yearbook published from 1874 to 1944. How we turn its printed balance sheets into data with rules, a domain-specific language and a vision-language model." />
   <link rel="icon" href="../../logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../home/styles.css" />
@@ -33,6 +33,7 @@
           <img src="logo-transparent.png" alt="" />
           <figcaption>publication · history · ai</figcaption>
         </figure>
+        <div class="slides"><p class="dl-title">Slides</p><div class="slides-frame"><iframe src="eabh_small.pdf#view=Fit&amp;toolbar=0&amp;navpanes=0" title="Slides: A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries" loading="lazy"></iframe></div><a class="dl" href="eabh_small.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Open slides full screen</span></a></div>
         <div class="downloads"><p class="dl-title">Downloads</p><a class="dl" href="eabh_small.pdf" download><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg><span>Slides (PDF)</span></a></div>
         <dl class="facts">
           <div><dt>Published</dt><dd><time datetime="2025-06-12">June 12, 2025</time></dd></div>
@@ -42,11 +43,13 @@
       <div class="post-main">
         <h1 class="post-title">A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries</h1>
         <article class="prose">
-<p>My slides for the EABH 2025 conference</p>
-<hr>
+<p>The <em>Magyar Compass</em> was a Hungarian financial yearbook published from 1874 to 1944. In 2025 I presented our project to turn it into data at the EABH 2025 conference and at EHES 2025.</p>
+<h2>The source</h2>
 <p>From the Austro-Hungarian Monarchy to the post-war transitional economy, Hungary’s economic structure underwent profound transformations between 1874 and 1944. Yet our quantitative understanding of these changes has remained limited, largely due to the fragmented and unstructured nature of historical financial records. The <em>Magyar Compass</em>, a yearbook published throughout this period, offers a rare longitudinal source documenting firms, financial institutions, and corporate networks with remarkable precision.</p>
 <p>Our objective is to reframe the <em>Magyar Compass</em> as a computational dataset—one that enables systematic economic-historical research through modern document processing techniques.</p>
+<h2>Getting the pages</h2>
 <p>The project begins with automated access to the Arcanum Digital Archives. Using a Playwright-based browser automation framework, we efficiently handle dynamic content loading, user session management, and page download limits (5,000 pages/day), ensuring reliable access and recovery. This step provides the raw material: over 70 years of digitized but unstructured publications.</p>
+<h2>The DSL</h2>
 <p>The core challenge is to convert these publications into analyzable form. Standard OCR is insufficient. To address this, we introduce a <strong>domain-specific language (DSL)</strong> designed in Python. The DSL represents books as nested data structures—books, chapters, pages, lines, and words—allowing precise navigation and transformation. With this tool, spatial relationships (e.g., identifying tables below company names or detecting balance sheet alignments) can be encoded directly into code.</p>
 <p>Key features of the DSL include:</p>
 <ul>
@@ -56,17 +59,19 @@
 <li><p>Cached properties for performance efficiency</p></li>
 </ul>
 <p>Using this DSL, we define document anchors (e.g., company names, tabular data, balance sheets) and manipulate them using spatial algebra—operations such as containment, union, and distance.</p>
+<h2>Hybrid extraction</h2>
 <p>The next layer is hybrid information extraction. A rule-based parser identifies typical elements (e.g., dotted tables), attempts to extract and validate asset-liability items, and checks consistency by comparing both sides of the balance sheet. If a match fails or ambiguity arises, the system falls back to a <strong>Vision-Language Model (VLLM)</strong> which processes image crops and returns structured JSON.</p>
 <p>The workflow includes error detection and feedback. Extracted data is validated using Pydantic schemas. When errors occur—such as mismatched sums—feedback is sent to the model, enabling intelligent retries. For example:</p>
 <p><em>“The sum of item’s values 1.993,545 does not match the sheet value 2.044,165.”</em></p>
-<p>Our hybrid recognition pipeline achieves the following performance distribution:</p>
+<h2>Results</h2>
+<p>As of June 2025, our hybrid recognition pipeline achieves the following performance distribution:</p>
 <ul>
 <li><p>Rule-based success: 46%</p></li>
 <li><p>VLLM success: 22%</p></li>
 <li><p>VLLM failure: 32%</p></li>
 </ul>
 <p>The approach balances deterministic precision with the flexibility of AI. It allows for self-correcting workflows and supports performance benchmarking by method class.</p>
-<p>Planned improvements include:</p>
+<h2>Planned (as of June 2025)</h2>
 <ul>
 <li><p>Integration of larger vision models (e.g., OpenAI, Gemini)</p></li>
 <li><p>Enhanced feedback generation based on sum discrepancies</p></li>
@@ -75,8 +80,9 @@
 <li><p>Packaging tools for broader archival integration</p></li>
 <li><p>Extension to other historical financial yearbooks</p></li>
 </ul>
+<h2>Why it matters</h2>
 <p>By transforming the <em>Magyar Compass</em> into a structured corpus, we open a new frontier for data-driven economic history. The result is not only a technical achievement but also a methodological contribution: a scalable pipeline for making archival financial records computationally accessible.</p>
-<p>Explore the repositories here:</p>
+<h2>Explore the code</h2>
 <ul>
 <li><p><a href="https://github.com/MarcellGranat/arcanum-pw">https://github.com/MarcellGranat/arcanum-pw</a></p></li>
 <li><p><a href="https://github.com/MarcellGranat/compassVLLM">https://github.com/MarcellGranat/compassVLLM</a></p></li>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="My talk at the International Conference on Real Estate Statistics 2026 in Tokyo: how fragmented, hand-typed addresses become reliable locations for a residential property price index." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>Cleaning the whole house: address reconstruction and spatial matching | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured-transparent.png" alt="Illustration of Budapest with a magnifying glass over a missing address" />
+          <figcaption>Housing · Conference</figcaption>
+        </figure>
+        <div class="slides"><p class="dl-title">Slides</p><div class="slides-frame"><iframe src="../../housing-data/" title="Slides: Cleaning the whole house: address reconstruction and spatial matching" loading="lazy" allowfullscreen></iframe></div><a class="dl" href="../../housing-data/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Open slides full screen</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-02-27">February 27, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Housing</span><span>Conference</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Cleaning the whole house: address reconstruction and spatial matching</h1>
+        <article class="prose">
+<p>I had the privilege of presenting at the International Conference on Real Estate Statistics 2026 in Tokyo, hosted by the IMF, the BIS / Irving Fisher Committee, the OECD, Eurostat, the Bank of Japan and Hitotsubashi University.</p>
+<blockquote class="blockquote">
+<p>Give me six hours to chop down a tree and I will spend the first four sharpening the axe.</p>
+</blockquote>
+<p>My talk, <em>Cleaning the Whole House: Address Reconstruction and Spatial Matching</em>, was about the sharpening. It is the less visible but decisive part of producing a Residential Property Price Index: reconstructing fragmented addresses, correcting entry errors and inconsistencies in transaction records, and matching every transaction to a place, so that raw housing data becomes reliable and fit for rigorous analysis.</p>
+<h2>Why Budapest</h2>
+<p>Hungarian house prices have grown exceptionally fast over the past two decades. The Corvin redevelopment in Budapest shows a clear gentrification effect, and capturing that effect over time was the original motivation of the project. It needed clean historical transaction data.</p>
+<h2>The mess</h2>
+<p>The data are 959,942 Budapest transactions from 2001 to 2023, taken from the tax authority database, where addresses were typed in by hand. They have to be matched to the official address registry. Fields and formats changed over time, some records keep the whole address in a single text cell, and historical spellings create typos everywhere. Before cleaning, only about half of the transactions had an identifiable address. One street alone, Bajcsy-Zsilinszky, appears in 29 different versions.</p>
+<h2>How the matching works</h2>
+<ol>
+<li><strong>Deterministic matching.</strong> Standardise the fields, then match on several sets of keys (street name and type, district or postal code, house number), keeping only unique candidates.</li>
+<li><strong>Fixing typos.</strong> Correct street names with a string distance, using a conservative similarity threshold of about 70%.</li>
+<li><strong>Property identifiers.</strong> Use property IDs to pass a known location on to other records, or to infer the district when only the street is known.</li>
+</ol>
+<p>Where two sets of keys disagree, the pipeline flags it. In the most frequent conflict, between district and street type, the district wins.</p>
+<h2>What it delivers</h2>
+<p>After cleaning, about 93% of the transactions link automatically: 83% to a specific property, 10% to a street, and about 7% stay unmatched. A house number is available for about 89% of them. The whole pipeline runs in R on DuckDB.</p>
+<p>With clean, geocoded transactions, the next question is which index best captures a market with strong spatial differences. The slides on the left walk through the full pipeline and the index comparison.</p>
+<p>Dōmo arigatō to the organisers, and to the participants for the thoughtful comments and discussion.</p>
+<p><small>The views expressed here are solely my own and do not necessarily represent the views of the National Bank of Hungary or the European Central Bank.</small></p>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

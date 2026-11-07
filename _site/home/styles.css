@@ -91,7 +91,7 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .surface-band { display: grid; grid-template-columns: minmax(260px, 1fr) 1.4fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
 .surface-band h2 { margin-bottom: 20px; }
 .surface-band p:not(.kicker) { color: var(--muted); }
-.surface-canvas { width: 100%; height: clamp(300px, 42vw, 480px); }
+.surface-canvas, .city-canvas { width: 100%; height: clamp(300px, 42vw, 480px); }
 .surface-band.reverse { grid-template-columns: 1.4fr minmax(260px, 1fr); }
 .surface-band.reverse .surface-canvas { order: -1; }
 .research .surface-band + .surface-band { padding-top: 0; }
@@ -149,3 +149,6 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 }
 .more{margin-top:36px;text-align:center}
 .about .kicker { color: var(--teal); }
+
+.research-feature .cta { margin-top: 26px; }
+.surface-band .band-text p:not(.kicker) { max-width: 52ch; }

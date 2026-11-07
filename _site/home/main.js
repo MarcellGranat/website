@@ -1,6 +1,7 @@
 import { POSTS } from './posts.js';
 import { mount as mountNetwork } from './animations/network.js';
 import { mount as mountSurface } from './animations/surface.js';
+import { mount as mountCity } from './animations/city.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);
@@ -77,4 +78,5 @@ onScroll();
 
 // ---- Canvas animations ----
 mountNetwork($('#hero-canvas'), { reduced });
+$$('.city-canvas').forEach((cv) => mountCity(cv, { reduced }));
 $$('.surface-canvas').forEach((cv) => mountSurface(cv, { reduced, phase: +cv.dataset.phase || 0 }));

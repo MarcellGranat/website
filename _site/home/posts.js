@@ -2,6 +2,16 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
+    "id": "cleaning-the-whole-house",
+    "title": "Cleaning the whole house: address reconstruction and spatial matching",
+    "date": "2026-02-27",
+    "tags": [
+      "Housing",
+      "Conference"
+    ],
+    "image": "featured.jpg"
+  },
+  {
     "id": "eabh2025",
     "title": "A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries",
     "date": "2025-06-12",

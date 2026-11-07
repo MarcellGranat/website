@@ -159,3 +159,4 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 /* Highlight: journal badge */
 .badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border-radius: 999px; background: rgba(217, 138, 0, .12); border: 1px solid rgba(217, 138, 0, .38); color: #8a5a00; font: 600 .84rem/1 'Inter', sans-serif; }
 .badge svg { flex: none; }
+.about-head h2 .nb { display: inline-block; }

@@ -1,5 +1,5 @@
 // Shared behaviour for article pages: progress bar, nav shadow, reveal on scroll, code copy.
-import { POSTS } from './data/posts.js';
+import { POSTS } from './posts.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);

@@ -1,4 +1,4 @@
-import { POSTS } from './data/posts.js';
+import { POSTS } from './posts.js';
 import { mount as mountNetwork } from './animations/network.js';
 import { mount as mountSurface } from './animations/surface.js';
 

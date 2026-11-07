@@ -67,8 +67,8 @@ function onScroll() {
   const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
   bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
   nav.classList.toggle('scrolled', y > 24);
-  const r = timeline.getBoundingClientRect();
-  timeline.style.setProperty('--tl', Math.min(1, Math.max(0, (innerHeight * 0.7 - r.top) / r.height)));
+  const g = ($('.about-grid') || timeline).getBoundingClientRect();
+  timeline.style.setProperty('--tl', Math.min(1, Math.max(0, (innerHeight * 0.75 - g.top) / (g.height * 0.85))));
   if (!reduced && y < innerHeight) heroInner.style.transform = `translateY(${y * 0.18}px)`;
   ticking = false;
 }

@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Quantify the Economania Blog</h1>
-        <p class="meta"><time datetime="2022-09-27">September 27, 2022</time> · 1 min read</p>
-        <div class="tags"><span>Economania</span><span>NLP</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>Economania · NLP</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2022-09-27">September 27, 2022</time></dd></div>
+          <div><dt>Reading time</dt><dd>1 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Economania</span><span>NLP</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Quantify the Economania Blog</h1>
+        <article class="prose">
 <p>TF-IDF to analyse the Economania blog.</p>
 <hr>
 <div class="cell">
@@ -75,7 +83,14 @@
 </div>
 <p>To carry out the analysis, I collected the individual blog posts myself using the web scraping method and cleaned the data, the code is available at the following link: <a href="https://github.com/MarcellGranat/economania-textmining/blob/main/scrape.R" class="uri">https://github.com/MarcellGranat/economania-textmining/blob/main/scrape.R</a></p>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../portfolio-used-cars/index.html"><small>Newer</small><span>How long does it take to sell a used car?</span></a><a href="../online-inflation/index.html"><small>Older</small><span>Can we measure inflation just with our laptop?</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

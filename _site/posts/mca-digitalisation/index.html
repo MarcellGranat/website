@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Digitalisation and business performance - focusing on Hungarian manufacturing firms</h1>
-        <p class="meta"><time datetime="2023-01-15">January 15, 2023</time> · 1 min read</p>
-        <div class="tags"><span>Digitalisation</span><span>MCA</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>Digitalisation · MCA</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-01-15">January 15, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>1 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Digitalisation</span><span>MCA</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Digitalisation and business performance - focusing on Hungarian manufacturing firms</h1>
+        <article class="prose">
 <p>Our recent article in the <em>Economic Review</em> investigates the relationship between ICT usage and the profitability of Hungarian manufacturing firms.</p>
 <p>My contribution to the final paper is the data analysis part. We applied Multiple Correspondence Analysis (MCA) as dimension reduction, which can be applied to categorical variables rather than numerical ones. This methodology was suited to our problem, as all of ICT characteristics of the firms are represented by dummy or categorical variables.</p>
 <div class="cell">
@@ -55,7 +63,14 @@
 
 </section>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../whiteshield/index.html"><small>Newer</small><span>Application of NLP to reduce the unemployment</span></a><a href="../inflation-and-stocks/index.html"><small>Older</small><span>Rising prices, rising returns: how does inflation affect stock returns?</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

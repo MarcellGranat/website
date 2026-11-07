@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Media Attention to Environmental Issues and ESG Investing</h1>
-        <p class="meta"><time datetime="2022-12-22">December 22, 2022</time> · 1 min read</p>
-        <div class="tags"><span>ESG</span><span>NLP</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>ESG · NLP</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2022-12-22">December 22, 2022</time></dd></div>
+          <div><dt>Reading time</dt><dd>1 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>ESG</span><span>NLP</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Media Attention to Environmental Issues and ESG Investing</h1>
+        <article class="prose">
 <p>Our recent article in the <em>Financial and Economic Review</em> investigates the relationship between the future yield of ESG investment and the news in the media.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -48,7 +56,14 @@
 <p>We analyse how ESG scores affect future returns when environmental issues receive higher media coverage. Investors might take environmental aspects into account if they are confronted with the issue of global warming more frequently in the press. We assess the prevalence of environmental issues in the media with a machine learning-based Structural Topic Modelling (STM) methodology, using a news archive published in the USA. Running Fama-MacBeth regressions, we find that in periods when the media actively report on environmental issues, ESG scores have a significant negative impact on future returns, whereas, in months when fewer such articles are published, investors do not take sustainability measures into account, and ESG scores have no explanatory power.</p>
 <p>The article is accessible in <a href="https://en-hitelintezetiszemle.mnb.hu/letoltes/fer-21-4-st5-csillag-granat-neszveda.pdf">English</a> and <a href="https://hitelintezetiszemle.mnb.hu/letoltes/hsz-21-4-t5-csillag-granat-neszveda.pdf">Hungarian</a>.</p>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../inflation-and-stocks/index.html"><small>Newer</small><span>Rising prices, rising returns: how does inflation affect stock returns?</span></a><a href="../analysis-in-practice/index.html"><small>Older</small><span>Data Analysis in Practice</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

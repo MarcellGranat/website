@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Rising prices, rising returns: how does inflation affect stock returns?</h1>
-        <p class="meta"><time datetime="2023-01-06">January 6, 2023</time> · 4 min read</p>
-        <div class="tags"><span>Economania</span><span>Inflation</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>Economania · Inflation</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-01-06">January 6, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>4 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Economania</span><span>Inflation</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Rising prices, rising returns: how does inflation affect stock returns?</h1>
+        <article class="prose">
 <p>We have to consider several factors when making investment decisions, but one thing for sure: how will inflation change?</p>
 <p>Original blog post (Hungarian) available at: <a href="https://economaniablog.hu/2023/01/06/emelkedo-arak-emelkedo-hozamok-mikent-hat-az-inflacio-a-reszvenyek-hozamaira/">Economania</a></p>
 <hr>
@@ -54,7 +62,14 @@
 
 </section>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../mca-digitalisation/index.html"><small>Newer</small><span>Digitalisation and business performance - focusing on Hungarian manufacturing firms</span></a><a href="../media-esg/index.html"><small>Older</small><span>Media Attention to Environmental Issues and ESG Investing</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

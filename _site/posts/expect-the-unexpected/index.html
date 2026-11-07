@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>The Russo-Ukrainian Crisis: Did Financial Markets See it Coming?</h1>
-        <p class="meta"><time datetime="2023-08-30">August 30, 2023</time> · 3 min read</p>
-        <div class="tags"><span>publication</span><span>finance</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual logo" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="logo.jpg" alt="" />
+          <figcaption>publication · finance</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-08-30">August 30, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>3 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>publication</span><span>finance</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">The Russo-Ukrainian Crisis: Did Financial Markets See it Coming?</h1>
+        <article class="prose">
 <p><a href="https://www.sciencedirect.com/science/article/pii/S1544612323006736">Our recent article</a> was published at Finance Research Letters.</p>
 <hr>
 <p>The economy of the second decade of the 21st century is characterised by sudden economic shocks. The Russian military operation in Ukraine on the 24th of February had a significant impact on the global financial markets and the economy. There are conflicting views on whether the event surprised the world or if it was already expected.</p>
@@ -92,7 +100,14 @@ Kyle, Albert S. 1985. <span>“Continuous Auctions and Insider Trading.”</span
 </div>
 </div></section></div>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../cb-textmining/index.html"><small>Newer</small><span>Central bank communication and quantitative text mining tools</span></a><a href="../data-cultures/index.html"><small>Older</small><span>Data and Cultures</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

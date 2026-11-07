@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Central bank communication and quantitative text mining tools</h1>
-        <p class="meta"><time datetime="2023-09-27">September 27, 2023</time> · 5 min read</p>
-        <div class="tags"><span>Economania</span><span>NLP</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>Economania · NLP</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-09-27">September 27, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>5 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Economania</span><span>NLP</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Central bank communication and quantitative text mining tools</h1>
+        <article class="prose">
 <p>The communication of central banks often have at least as strong an impact on financial markets as their decisions themselves.</p>
 <hr>
 <p><em>We are organizing educational presentations for universities, educational organizations, or other professional and popular science gatherings with the objective of highlighting the accomplishments of our department. Numerous captivating subjects will be presented by our colleagues, primarily about economics and finance. My <a href="https://marcellgranat.com/cb-textmining">presentation</a> and <a href="https://economaniablog.hu/2023/09/27/jegybanki-kommunikacio-es-a-kvantitativ-szovegbanyaszati-eszkozok/">blogpost</a> emphasizes the potential of text mining in relation to central banks.</em></p>
@@ -64,7 +72,14 @@ Gurkaynak, Refet S., Brian P. Sack, and Eric T. Swanson. 2004. <span>“Do Actio
 </div>
 </div></section></div>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../eabh2025/index.html"><small>Newer</small><span>A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries</span></a><a href="../expect-the-unexpected/index.html"><small>Older</small><span>The Russo-Ukrainian Crisis: Did Financial Markets See it Coming?</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

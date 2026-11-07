@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>STAT WARS</h1>
-        <p class="meta"><time datetime="2022-01-27">January 27, 2022</time> · 1 min read</p>
-        <div class="tags"></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>Research note</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2022-01-27">January 27, 2022</time></dd></div>
+          <div><dt>Reading time</dt><dd>1 min</dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">STAT WARS</h1>
+        <article class="prose">
 <p>With my friend Bálint, we successfully won the 2021 “STAT WARS”, due to which we were also featured in a morning TV show and in newspapers</p>
 <p>In 2021, the Central Statistical Office announced its data analysis competition for MSc students. Since my friend Balint Mazzag and I successfully won this, we had the opportunity to talk about our experiences and the importance of statistical knowledge in the Hungarian TV2 television channel’s morning show. Also thanks to this, we gave an interview to <a href="https://digitalstand.hu/olvaso/129772#1">Figyelő</a>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ETKlsxuFk7g" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
@@ -50,7 +58,14 @@
 </div>
 <p>Source: <a href="https://www.linkedin.com/posts/corvinus-university-of-budapest_ksh-corvinus-activity-6892391371714760704-d4hH?utm_source=share&amp;utm_medium=member_desktop">LinkedIn</a></p>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../tdk-best-paper/index.html"><small>Newer</small><span>Best Paper Award</span></a><span></span></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

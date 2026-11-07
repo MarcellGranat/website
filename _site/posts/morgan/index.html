@@ -26,16 +26,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>QuantChallenge I</h1>
-        <p class="meta"><time datetime="2023-04-22">April 22, 2023</time> · 21 min read</p>
-        <div class="tags"><span>ML</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual logo" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="logo.png" alt="" />
+          <figcaption>ML</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-04-22">April 22, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>21 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>ML</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">QuantChallenge I</h1>
+        <article class="prose">
 <p><a href="https://balintmazzag.netlify.app">Bálint Mazzag</a> and I participated in the QuantChallenge organized by Morgan Stanley, where we competed against 120 teams. Our hard work and determination paid off as we secured the 2nd place at the finals. This post presents our solution to first task.</p>
 <p>Codes are available at the corresponding <a href="https://github.com/MarcellGranat/MorganStanley-QuantChallenge">GitHub repository</a>.</p>
 <hr>
@@ -586,7 +594,14 @@ Yu, Jina, David A Hennessy, Jesse Tack, and Felicia Wu. 2022. “Climate Change 
 </ol>
 </section></div>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../data-cultures/index.html"><small>Newer</small><span>Data and Cultures</span></a><a href="../morgan2/index.html"><small>Older</small><span>QuantChallenge II</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

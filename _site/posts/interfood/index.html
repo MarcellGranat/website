@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Web scraping with Shiny - automate your weekly food order</h1>
-        <p class="meta"><time datetime="2023-03-06">March 6, 2023</time> · 2 min read</p>
-        <div class="tags"><span>shiny</span><span>scraping</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured.png" alt="" />
+          <figcaption>shiny · scraping</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-03-06">March 6, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>2 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>shiny</span><span>scraping</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Web scraping with Shiny - automate your weekly food order</h1>
+        <article class="prose">
 <p>Simple, but useful application of static web scraping in a shiny web application to find your favorites in the menu.</p>
 <section id="web-scraping-with-shiny---automate-your-weekly-food-order" class="level1">
 <h1>Web scraping with Shiny - automate your weekly food order <img src="https://raw.githubusercontent.com/MarcellGranat/interfood/main/logo.png" align="right" width="120px"></h1>
@@ -60,7 +68,14 @@
 
 </section>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../neumann/index.html"><small>Newer</small><span>From John von Neumann to the ChatGPT: the rise, shine and shine of computer science</span></a><a href="../ggprofessional/index.html"><small>Older</small><span>ggProfessional</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

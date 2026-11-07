@@ -25,16 +25,24 @@
     </nav>
   </header>
 
-  <main>
-    <header class="article-head">
-      <div class="article-head-inner">
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
         <a class="back" href="../../blog.html">← All posts</a>
-        <h1>Data and Cultures</h1>
-        <p class="meta"><time datetime="2023-07-03">July 3, 2023</time> · 6 min read</p>
-        <div class="tags"><span>ML</span><span>Economania</span></div>
-      </div>
-    </header>
-    <article class="prose">
+        <figure class="visual logo" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="logo.png" alt="" />
+          <figcaption>ML · Economania</figcaption>
+        </figure>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-07-03">July 3, 2023</time></dd></div>
+          <div><dt>Reading time</dt><dd>6 min</dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>ML</span><span>Economania</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Data and Cultures</h1>
+        <article class="prose">
 <p>Hal R. Varian, the Chief Economist of Google stated back in 2009 that “the sexy job in the next 10 years will be statisticians.”</p>
 <p>Original blog post (Hungarian) available at: <a href="https://economaniablog.hu/2023/07/03/adatok-es-szekertaborok/">Economania</a></p>
 <p>This prediction has partly stood the test of time, but with some clarification. The average salaries of statisticians in the USA between 2009 and 2022 have grown less than the average salary itself, but a new profession has emerged (at least new to statistical records), which Varian might have actually been referring to. They are none other than data scientists, whose salaries in 2022 were surpassed only by those of managers and legal professionals.</p>
@@ -90,7 +98,14 @@ U. S. Bureau of Labor Statistics. 2022. <em>Occupational Employment and Wages</e
 </ol>
 </section></div>
     </article>
-    <nav class="pager" aria-label="More posts"><a href="../expect-the-unexpected/index.html"><small>Newer</small><span>The Russo-Ukrainian Crisis: Did Financial Markets See it Coming?</span></a><a href="../morgan/index.html"><small>Older</small><span>QuantChallenge I</span></a></nav>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../blog.html">All posts</a></footer>

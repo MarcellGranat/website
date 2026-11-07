@@ -1,10 +1,8 @@
 project:
   type: website
-  # index.html (animated landing page) is hand-written and copied as-is.
-  # Render only the real Quarto sources.
+  # Quarto only computes post content. The homepage, blog.html and about.html are
+  # hand-written, and post pages are wrapped by home/scripts/build-pages.mjs (see home/README.md).
   render:
-    - blog.qmd
-    - about.qmd
     - posts/*/index.qmd
   resources:
     - index.html

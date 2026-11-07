@@ -1,0 +1,51 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+$body-bg: #f6f5f1;
+$body-color: #14181c;
+$link-color: #0f8f86;
+$link-decoration: none;
+$primary: #0f8f86;
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+$font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
+$headings-font-weight: 650;
+$border-radius: 12px;
+$navbar-bg: rgba(246, 245, 241, 0.88);
+$navbar-fg: #5d676f;
+$navbar-hover-color: #14181c;
+$code-bg: #ecebe5;
+$code-block-bg: #ffffff;
+
+/*-- scss:rules --*/
+body { -webkit-font-smoothing: antialiased; line-height: 1.7; }
+h1, h2, h3, h4 { letter-spacing: -0.02em; line-height: 1.15; }
+a:hover { color: #d98a00; }
+
+.navbar { backdrop-filter: blur(14px); border-bottom: 1px solid rgba(20, 24, 28, 0.1); }
+.navbar .navbar-brand, .navbar .navbar-title { color: #14181c; font-weight: 600; }
+.navbar .nav-link:hover { color: #0f8f86; }
+
+.quarto-title-banner {
+  background: linear-gradient(120deg, #e4efed, #f4e8d2) !important;
+  color: #14181c;
+  border-bottom: 1px solid rgba(20, 24, 28, 0.08);
+}
+.quarto-title-banner .title, .quarto-title-banner .subtitle, .quarto-title-banner .quarto-categories .quarto-category,
+.quarto-title-banner .quarto-title-meta-heading, .quarto-title-banner .quarto-title-meta-contents { color: #14181c !important; }
+.quarto-title-banner .quarto-title h1.title { font-weight: 700; letter-spacing: -0.03em; }
+.quarto-categories .quarto-category { border: 1px solid rgba(15, 143, 134, 0.4); background: rgba(255, 255, 255, 0.6); border-radius: 999px; }
+
+.quarto-grid-item.card, .quarto-post .card {
+  border: 1px solid rgba(20, 24, 28, 0.1);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s;
+}
+.quarto-grid-item.card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -24px rgba(20, 24, 28, 0.35); }
+.listing-categories .listing-category { color: #0f8f86; background: rgba(15, 143, 134, 0.09); border: 0; border-radius: 999px; }
+.listing-category:hover { background: #14181c; color: #fff; }
+
+pre.sourceCode, div.sourceCode { border-radius: 12px; }
+.callout { border-radius: 12px; }
+img { border-radius: 6px; }

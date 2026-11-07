@@ -7,11 +7,11 @@ export function mount(canvas, { reduced = false } = {}) {
   const W = 640, H = 440, PERIOD = 13;
   const TEAL = '15, 143, 134', AMBER = '217, 138, 0';
   const ROWS = [
-    { k: 'Pénztár', v: '412,300', how: 'rules' },
-    { k: 'Váltók', v: '380,120', how: 'rules' },
-    { k: 'Adósok', v: '395,280', fix: '445,900', how: 'VLM' },
-    { k: 'Értékpapírok', v: '520,845', how: 'rules' },
-    { k: 'Ingatlan', v: '285,000', how: 'rules' },
+    { k: 'Cash', v: '412,300', how: 'rules' },
+    { k: 'Bills', v: '380,120', how: 'rules' },
+    { k: 'Debtors', v: '395,280', fix: '445,900', how: 'VLM' },
+    { k: 'Securities', v: '520,845', how: 'rules' },
+    { k: 'Real estate', v: '285,000', how: 'rules' },
   ];
   let w = 0, h = 0, dpr = 1, raf = 0, running = false, start = performance.now();
   const frozen = canvas.dataset.time !== undefined ? +canvas.dataset.time : null;
@@ -42,9 +42,9 @@ export function mount(canvas, { reduced = false } = {}) {
     ctx.strokeStyle = 'rgba(120,90,40,.28)'; rr(12, 14, 320, 412, 6); ctx.stroke();
     ctx.fillStyle = '#3b3328'; ctx.textBaseline = 'alphabetic';
     ctx.font = `600 9px ${SERIF}`; ctx.textAlign = 'center'; ctx.fillText('MAGYAR COMPASS · 1912', 172, 38);
-    ctx.font = `700 13px ${SERIF}`; ctx.fillText('Magyar Általános Hitelbank', 172, 68);
-    ctx.font = `italic 9px ${SERIF}`; ctx.fillStyle = '#6d6350'; ctx.fillText('Mérleg december 31-én', 172, 82);
-    ctx.textAlign = 'left'; ctx.fillStyle = '#3b3328'; ctx.font = `700 9px ${SERIF}`; ctx.fillText('AKTÍVÁK', 40, 112);
+    ctx.font = `700 13px ${SERIF}`; ctx.fillText('General Hungarian Credit Bank', 172, 68);
+    ctx.font = `italic 9px ${SERIF}`; ctx.fillStyle = '#6d6350'; ctx.fillText('Balance sheet, December 31', 172, 82);
+    ctx.textAlign = 'left'; ctx.fillStyle = '#3b3328'; ctx.font = `700 9px ${SERIF}`; ctx.fillText('ASSETS', 40, 112);
     ctx.fillStyle = 'rgba(59,51,40,.28)';
     for (let k = 0; k < 6; k++) { ctx.fillRect(34, 292 + k * 18, 270 - (k % 3) * 34, 4); }   // body text lines
     ROWS.forEach((r, i) => {
@@ -62,7 +62,7 @@ export function mount(canvas, { reduced = false } = {}) {
     });
     const totalOK = s > 9.2;
     ctx.fillStyle = 'rgba(59,51,40,.55)'; ctx.fillRect(40, 264, 258, 1);
-    ctx.fillStyle = '#3b3328'; ctx.font = `700 11px ${SERIF}`; ctx.fillText('Összesen', 40, 284);
+    ctx.fillStyle = '#3b3328'; ctx.font = `700 11px ${SERIF}`; ctx.fillText('Total', 40, 284);
     ctx.textAlign = 'right'; ctx.fillText('2.044,165', 298, 284); ctx.textAlign = 'left';
     if (totalOK) { ctx.strokeStyle = `rgba(${TEAL},${ease(clamp((s - 9.2) / 0.5))})`; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(304, 279); ctx.lineTo(309, 285); ctx.lineTo(319, 272); ctx.stroke(); ctx.lineWidth = 1; }
 

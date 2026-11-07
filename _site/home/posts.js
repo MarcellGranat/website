@@ -11,6 +11,17 @@ export const POSTS = [
     "image": "featured.jpg"
   },
   {
+    "id": "central-bank-tone",
+    "title": "Does central bank tone matter for Fama-French factor returns?",
+    "date": "2025-10-31",
+    "tags": [
+      "publication",
+      "NLP",
+      "finance"
+    ],
+    "image": "featured.png"
+  },
+  {
     "id": "eabh2025",
     "title": "A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries",
     "date": "2025-06-12",

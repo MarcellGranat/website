@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Joint research with Bence Siket, presented at AFMLC 2025 at Corvinus University of Budapest: does the tone of Federal Reserve speeches predict factor returns, and can an LLM measure it better than dictionaries?" />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>Does central bank tone matter for Fama-French factor returns? | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <!-- Custom animation slot: replace the <img> below (or mount a canvas into this figure). -->
+          <img src="featured-transparent.png" alt="Bar charts of R-squared for six factors and five sentiment measures, for speeches by the Chair" />
+          <figcaption>publication · NLP · finance</figcaption>
+        </figure>
+        <div class="slides"><p class="dl-title">Slides</p><div class="slides-frame"><iframe src="afmlc2025.pdf#view=Fit&amp;toolbar=0&amp;navpanes=0" title="Slides: Does central bank tone matter for Fama-French factor returns?" loading="lazy"></iframe></div><a class="dl" href="afmlc2025.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Open slides full screen</span></a></div>
+        <div class="downloads"><p class="dl-title">Downloads</p><a class="dl" href="afmlc2025.pdf" download><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg><span>Slides (PDF)</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2025-10-31">October 31, 2025</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>publication</span><span>NLP</span><span>finance</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Does central bank tone matter for Fama-French factor returns?</h1>
+        <article class="prose">
+<p>In October I presented our joint research with Bence Siket at the AFMLC 2025 conference at Corvinus University of Budapest. We asked whether the tone of central bank communication influences cross-sectional asset pricing, specifically the Fama-French factors.</p>
+<h2>Why tone matters</h2>
+<p>Since the 2008-2009 financial crisis, central bank communication, and speeches in particular, has become a crucial monetary policy tool. As Ben Bernanke put it: “Monetary policy is 98 percent talk and only two percent action.” Understanding how market participants perceive and respond to that talk matters for research and for investment practice alike.</p>
+<blockquote class="blockquote">
+<p><strong>Research question:</strong> Does the tone of Federal Reserve speeches have a predictive impact on the five Fama-French factors and the momentum factor?</p>
+</blockquote>
+<h2>Efficient markets or bounded rationality?</h2>
+<p>The question connects to an old debate. If markets are semi-strong efficient, public communication should not predict profitable factor returns, and only unexpected announcements should matter. Behavioural finance argues the opposite: investors process information imperfectly, and information may diffuse with a lag. Earlier studies find that the tone of ECB and Federal Reserve communication moves equity prices, volatility and trading volume, while others, such as Kurihara (2014) for the euro area, find no significant effect. Assessing the tone of speeches against factor returns is one way to test investors' bounded rationality.</p>
+<h2>Measuring tone</h2>
+<p>We compared several ways of scoring a speech as hawkish or dovish:</p>
+<ul>
+<li><strong>Loughran-McDonald (LM)</strong>, the most widely used dictionary for financial text, which may lack explanatory power in a monetary policy context.</li>
+<li><strong>Bennani and Neuenkirch (BN)</strong>, which sorts keywords into hawkish and dovish categories.</li>
+<li><strong>Apel-Grimaldi (ABG)</strong>, which captures combinations of words, such as “inflation” next to “high” or “low”.</li>
+<li><strong>Our own dictionary</strong>, also built from word combinations.</li>
+<li><strong>An LLM</strong>, Gemma 3 through Ollama, prompted to score each statement on a hawkish-dovish scale and on how relevant it is to core monetary policy decisions, with a few worked examples in the prompt and the option to answer “None”.</li>
+</ul>
+<h2>The data</h2>
+<p>We scraped every speech by Federal Reserve officials from 2006 to the end of 2023 and identified the speaker. Between 41 and 95 speeches a year, and the share given by the Chair fell from about a third in the early years to under 10% in 2023.</p>
+<h2>What we found</h2>
+<p>First, the measures agree. The Apel-Grimaldi index closely mirrors the LLM scores, and both correlate with inflation and with changes in the Federal Funds rate, so they do capture the monetary policy stance. The LLM is marginally more consistent in deflationary periods, but the difference is small. The dictionary has a real advantage: it is transparent and reproducible, unlike an LLM black box.</p>
+<p>Second, the factor returns. In bivariate regressions of each factor, in the same and in the next period, on tone, the picture across all speeches is weak: only a couple of dictionary-based results reach the 10% level. It changes when we keep only speeches by the Chair of the Federal Reserve. Then both the Apel-Grimaldi index and the LLM score are significant for all six factors, in the same and in the next period, while the Loughran-McDonald and Bennani-Neuenkirch dictionaries are not. The explanatory power is small in absolute terms, with an R² around 2%, but it is clearly there.</p>
+<p>As speeches turn more hawkish, value stocks and conservative portfolios tend to outperform growth stocks and aggressive portfolios.</p>
+<h2>What it means</h2>
+<ul>
+<li><strong>For investors:</strong> tone can be a useful input. A hawkish tone signals potential underperformance of momentum, growth and aggressive portfolios.</li>
+<li><strong>For policymakers:</strong> both intended and unintended effects of words in speeches can move asset prices, so careful and precise communication matters.</li>
+<li><strong>For academia:</strong> sentiment plays a meaningful role in asset pricing, which challenges the semi-strong form of market efficiency.</li>
+</ul>
+<p>These are preliminary results. I want to thank Bence, who led several of the key empirical and modelling components with exceptional precision and dedication, and the organisers of AFMLC 2025 for a rigorous and intellectually generous environment. It is encouraging to see how fast AI-augmented financial econometrics is advancing.</p>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

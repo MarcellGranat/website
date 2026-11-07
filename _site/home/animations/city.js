@@ -5,7 +5,7 @@ export function mount(canvas, { reduced = false } = {}) {
   const ctx = canvas.getContext('2d');
   const N = 7, PERIOD = 10;
   const TEAL = '15, 143, 134', AMBER = '217, 138, 0';
-  const LABELS = ['Bajcsy-Zsilinsky u.', 'Bajcsi Zsilinszki ut', 'Bajcsy Zsilinszky'];
+  const LABELS = ['Batthány Lajos u.', 'Andrasy ut', 'Váci ut.', 'Bajcsy-Zsilinsky u.', 'Üllöi út', 'Rákóczy u.']; // typo-style variants of real Budapest streets
   let w = 0, h = 0, dpr = 1, raf = 0, running = false, start = performance.now();
   const frozen = canvas.dataset.time !== undefined ? +canvas.dataset.time : null;
 
@@ -19,7 +19,7 @@ export function mount(canvas, { reduced = false } = {}) {
   buildings.sort((a, b) => a.gx + a.gy - (b.gx + b.gy));
   const pickRand = rng(5);
   const targets = [...buildings].sort(() => pickRand() - 0.5).slice(0, 13);
-  const pins = targets.map((b, i) => ({ b, i, sx: 0.08 + pickRand() * 0.84, sy: 0.15 + pickRand() * 0.3, ph: pickRand() * 6.28, label: i < 3 ? LABELS[i] : null }));
+  const pins = targets.map((b, i) => ({ b, i, sx: i < LABELS.length ? 0.14 + (i / (LABELS.length - 1)) * 0.72 : 0.08 + pickRand() * 0.84, sy: i < LABELS.length ? (i % 2 ? 0.27 : 0.14) : 0.15 + pickRand() * 0.3, ph: pickRand() * 6.28, label: i < LABELS.length ? LABELS[i] : null }));
 
   let u = 40, cx = 0, cy = 0;
   const P = (gx, gy, z = 0) => [cx + (gx - gy) * u, cy + (gx + gy) * u * 0.5 - z * u * 0.85];

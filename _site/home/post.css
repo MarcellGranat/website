@@ -46,18 +46,19 @@
 
 /* Post layout: sticky visual column + editorial reading column */
 .post-page { padding-top: 96px; }
-.post-layout { display: grid; grid-template-columns: minmax(250px, 340px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); max-width: 1240px; margin: 0 auto; padding: 40px clamp(20px, 6vw, 72px) 40px; align-items: start; }
+.post-layout { display: grid; grid-template-columns: minmax(280px, 430px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); max-width: 1320px; margin: 0 auto; padding: 40px clamp(20px, 6vw, 72px) 40px; align-items: start; }
 .post-aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 22px; animation: rise .9s var(--ease) both; }
-.visual { margin: 0; border-radius: 22px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 30px 60px -36px rgba(20, 24, 28, .4); }
-.visual img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 0; display: block; }
-.visual.logo img { object-fit: contain; padding: 28px; aspect-ratio: 1; }
-.visual figcaption { padding: 12px 16px; font: 500 .72rem/1.4 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); border-top: 1px solid var(--line); }
+/* No frame: the image sits directly on the page background */
+.visual { margin: 0; background: none; border: 0; box-shadow: none; border-radius: 0; overflow: visible; }
+.visual img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 14px; display: block; }
+.visual.logo img { object-fit: contain; padding: 0; aspect-ratio: 1; border-radius: 0; }
+.visual figcaption { padding: 12px 0 0; font: 500 .72rem/1.4 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 .facts { margin: 0; display: grid; gap: 14px; }
 .facts dt { font: 500 .7rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .12em; color: var(--teal); margin-bottom: 3px; }
 .facts dd { margin: 0; font-size: .95rem; color: var(--ink); }
 .facts .tags { padding-top: 4px; margin: 0; }
 .post-main { min-width: 0; animation: rise 1s .08s var(--ease) both; }
-.post-title { font-size: clamp(2.2rem, 5.2vw, 4rem); font-weight: 700; letter-spacing: -.04em; line-height: 1.04; margin: 0 0 40px; max-width: 16ch; text-wrap: balance; }
+.post-title { font-size: clamp(2.2rem, 5.2vw, 4rem); font-weight: 700; letter-spacing: -.04em; line-height: 1.04; margin: 0 auto 44px; max-width: 18ch; text-align: center; text-wrap: balance; }
 .post-main .prose { max-width: 720px; padding: 0; margin: 0; }
 .post-main .prose > p:first-of-type { font-size: 1.3rem; line-height: 1.55; color: var(--ink); font-weight: 400; letter-spacing: -.01em; }
 

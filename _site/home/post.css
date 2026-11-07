@@ -50,8 +50,8 @@
 .post-aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 22px; animation: rise .9s var(--ease) both; }
 /* No frame: the image sits directly on the page background */
 .visual { margin: 0; background: none; border: 0; box-shadow: none; border-radius: 0; overflow: visible; }
-.visual img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 14px; display: block; }
-.visual.logo img { object-fit: contain; padding: 0; aspect-ratio: 1; border-radius: 0; }
+.visual img { width: 100%; height: auto; max-height: 70vh; object-fit: contain; object-position: left top; border-radius: 14px; display: block; }
+.visual.logo img { border-radius: 0; }
 .visual figcaption { padding: 12px 0 0; font: 500 .72rem/1.4 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 .facts { margin: 0; display: grid; gap: 14px; }
 .facts dt { font: 500 .7rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .12em; color: var(--teal); margin-bottom: 3px; }

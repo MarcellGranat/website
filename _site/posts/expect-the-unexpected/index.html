@@ -34,6 +34,7 @@
           <img src="logo.jpg" alt="" />
           <figcaption>publication · finance</figcaption>
         </figure>
+        <div class="downloads"><p class="dl-title">Downloads</p><a class="dl" href="granat_etal_waad.csv" download><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg><span>WAAD data (CSV)</span></a><a class="dl" href="granat_etal_fm.csv" download><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg><span>Fama-MacBeth data (CSV)</span></a></div>
         <dl class="facts">
           <div><dt>Published</dt><dd><time datetime="2023-08-30">August 30, 2023</time></dd></div>
           <div><dt>Reading time</dt><dd>3 min</dd></div>
@@ -49,7 +50,6 @@
 <p>On one hand, the escalation of the conflict had been building up for many years, giving the markets time to factor in this danger in advance. On the other hand, significant movements were observed in the financial markets after the outbreak of the war, indicating that the news came as a surprise to investors. The solution likely lies somewhere in between, with a gradually increasing number of investors anticipating the escalation of the conflict.</p>
 <p>We applied <span class="citation" data-cites="kyle1985">Kyle (<a href="#ref-kyle1985" role="doc-biblioref">1985</a>)</span> model, which is based on informed and uninformed investors, to investigate when and how the conviction of a war appeared among financial market participants.</p>
 <p>The assumption of the empirical model is that after the outbreak, no one can doubt the fact of the war, so the observed prices at that time already reflect the value attributed to a financial security in a war scenario. This is referred to as liquidity value. Once this price is known, we examine historically how close the prices were to their liqudation values during specific periods. The simplest way to illustrate this is presented by <a href="#fig-motivation" class="quarto-xref">Figure&nbsp;1</a>, the average absolute differences from the liquidation value over time.</p>
-<p><a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_waad.csv" download="" class="btn btn-primary">Download in CSV</a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-motivation" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -65,7 +65,6 @@ Figure&nbsp;1: Average of the absolute differences between the current price ind
 </div>
 </div>
 <p>We applied two formal models. The first model examines, within 10 trading days divided into windows, to what extent the relative price to liquidity value explains the volatility of prices. In other words, it investigates how much can be said that traders started considering countries who would fall sharply in the event of a war outbreak as less valuable.</p>
-<p><a href="https://raw.githubusercontent.com/MarcellGranat/website/main/posts/expect-the-unexpected/granat_etal_fm.csv" download="" class="btn btn-primary">Download in CSV</a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-fm-coef" class="quarto-float quarto-figure quarto-figure-center anchored">

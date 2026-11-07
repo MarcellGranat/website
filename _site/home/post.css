@@ -72,3 +72,31 @@
   .visual { max-width: 420px; }
   .post-title { max-width: none; }
 }
+
+/* Links: coloured, with a link icon, always clickable */
+.prose a { color: var(--teal); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1.5px; text-decoration-color: rgba(15, 143, 134, .4); text-underline-offset: 3px; cursor: pointer; position: relative; z-index: 1; pointer-events: auto; transition: color .2s, text-decoration-color .2s; }
+.prose a:hover { color: var(--amber); text-decoration-color: currentColor; }
+.prose a:not([href^="#"]):not(:has(img)):not(.dl)::after {
+  content: ''; display: inline-block; width: .75em; height: .75em; margin-left: .25em; vertical-align: -.02em; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: .8;
+}
+.prose a[aria-hidden="true"] { pointer-events: none; text-decoration: none; }
+.prose a[aria-hidden="true"]::after { display: none; }
+
+/* Downloads: always directly below the image */
+.downloads { display: grid; gap: 8px; }
+.dl-title { margin: 0; font: 500 .7rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .12em; color: var(--teal); }
+.dl { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem; transition: transform .25s var(--ease), border-color .2s, color .2s, box-shadow .25s; }
+.dl svg { color: var(--teal); flex: none; }
+.dl:hover { transform: translateY(-2px); border-color: var(--teal); color: var(--teal); box-shadow: 0 12px 24px -16px rgba(20, 24, 28, .4); }
+
+/* Larger reading size on desktop */
+@media (min-width: 1024px) {
+  .post-main .prose { font-size: 1.25rem; line-height: 1.75; max-width: 860px; }
+  .post-main .prose > p:first-of-type { font-size: 1.6rem; line-height: 1.5; }
+  .prose h1 { font-size: 2.3rem; } .prose h2 { font-size: 1.9rem; } .prose h3 { font-size: 1.45rem; } .prose h4 { font-size: 1.2rem; }
+  .prose pre { font-size: .95rem; } .prose table { font-size: 1.05rem; } .prose .footnotes { font-size: 1rem; }
+  .facts dd { font-size: 1.02rem; } .dl { font-size: 1rem; }
+}

@@ -68,3 +68,8 @@ if (relatedBox) {
     $$('.post', relatedBox).forEach((el) => (reduced ? el.classList.add('in') : revealObs.observe(el)));
   }
 }
+
+// External links open in a new tab.
+$$('.prose a[href^="http"]').forEach((a) => {
+  if (new URL(a.href).origin !== location.origin) { a.target = '_blank'; a.rel = 'noopener'; }
+});

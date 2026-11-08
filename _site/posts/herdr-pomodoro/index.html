@@ -48,9 +48,12 @@
 <p>A popup on <code>prefix+ctrl+p</code> adapts to the current phase: start focus, end the session, leave the terminal, use another workspace, return to focus, end the break or open the activity dashboard. From the command line:</p>
 <pre><code>herdr-pomodoro status              # does this setup support activity capture?
 herdr-pomodoro watch --duration 10 # ten seconds of content-free observations</code></pre>
-<p>Building and installing:</p>
-<pre><code>cargo build --release --locked
+<p>The plugin is open source: <a href="https://github.com/MarcellGranat/herdr-pomodoro">github.com/MarcellGranat/herdr-pomodoro</a>. It needs herdr 0.9.5 or newer and a stable Rust toolchain. To install it:</p>
+<pre><code>git clone https://github.com/MarcellGranat/herdr-pomodoro
+cd herdr-pomodoro
+cargo build --release --locked
 herdr plugin link "$PWD" --enabled</code></pre>
+<p>On macOS, run <code>./target/release/herdr-pomodoro reconcile</code> once after linking if you do not restart the herdr server right away. It installs a small per-user LaunchAgent that keeps the watcher running when no plugin pane is open.</p>
 <h2>Tips from my setup</h2>
 <ul>
 <li><strong>It only counts real human input.</strong> The plugin compares access-time changes on the terminal device of the herdr client and of a workspace pane. Input that reaches both is human, input that reaches only the pane comes from an agent. It never reads the content of a terminal, never records keystrokes and stores only timestamps.</li>

@@ -47,7 +47,7 @@ export function mount(canvas, { reduced = false } = {}) {
     const tc = clamp((s - 0.8) / 7.6) * DAYS;               // the "now" cursor, in days
 
     // panel
-    ctx.save(); ctx.shadowColor = 'rgba(20,24,28,.10)'; ctx.shadowBlur = 22; ctx.shadowOffsetY = 8;
+    ctx.save(); 
     ctx.fillStyle = '#ffffff'; rr(14, 16, 612, 408, 16); ctx.fill(); ctx.restore();
     ctx.strokeStyle = 'rgba(20,24,28,.09)'; rr(14, 16, 612, 408, 16); ctx.stroke();
     ctx.fillStyle = '#5d676f'; ctx.font = `500 10px ${MONO}`; ctx.textAlign = 'left';

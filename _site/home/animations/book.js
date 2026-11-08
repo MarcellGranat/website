@@ -37,7 +37,7 @@ export function mount(canvas, { reduced = false } = {}) {
     ctx.globalAlpha = fade;
 
     // --- the old printed page ---
-    ctx.save(); ctx.shadowColor = 'rgba(20,24,28,.22)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 10;
+    ctx.save(); 
     ctx.fillStyle = '#f6efdc'; rr(12, 14, 320, 412, 6); ctx.fill(); ctx.restore();
     ctx.strokeStyle = 'rgba(120,90,40,.28)'; rr(12, 14, 320, 412, 6); ctx.stroke();
     ctx.fillStyle = '#3b3328'; ctx.textBaseline = 'alphabetic';
@@ -74,7 +74,7 @@ export function mount(canvas, { reduced = false } = {}) {
     }
 
     // --- JSON card ---
-    ctx.save(); ctx.shadowColor = 'rgba(20,24,28,.12)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 8;
+    ctx.save(); 
     ctx.fillStyle = '#ffffff'; rr(352, 60, 276, 300, 14); ctx.fill(); ctx.restore();
     ctx.strokeStyle = 'rgba(20,24,28,.10)'; rr(352, 60, 276, 300, 14); ctx.stroke();
     ctx.fillStyle = '#5d676f'; ctx.font = `500 10px ${MONO}`; ctx.fillText('balance_sheet.json', 372, 88);

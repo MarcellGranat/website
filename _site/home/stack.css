@@ -45,3 +45,7 @@
   .route::before, .route::after { left: 34px; }
 }
 @media (prefers-reduced-motion: reduce) { .metro-pulse { animation: none; } }
+
+/* Locomotive strip */
+.train-strip { max-width: 1320px; margin: -20px auto 0; padding: 0 clamp(20px, 6vw, 96px); }
+.train-canvas { width: 100%; height: clamp(170px, 20vw, 240px); display: block; }

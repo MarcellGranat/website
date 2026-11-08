@@ -5,6 +5,7 @@ import { mount as mountCity } from './animations/city.js';
 import { mount as mountBook } from './animations/book.js';
 import { mount as mountSignal } from './animations/signal.js';
 import { mount as mountMetro } from './animations/metro.js';
+import { mount as mountTrain } from './animations/train.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);
@@ -114,3 +115,4 @@ $$('.signal-canvas').forEach((cv) => mountSignal(cv, { reduced }));
 $$('.book-canvas').forEach((cv) => mountBook(cv, { reduced }));
 $$('.surface-canvas').forEach((cv) => mountSurface(cv, { reduced, phase: +cv.dataset.phase || 0 }));
 mountMetro($('#metro-mini'), { reduced, base: 'stack/index.html#' });
+$$('.train-canvas').forEach((cv) => mountTrain(cv, { reduced }));

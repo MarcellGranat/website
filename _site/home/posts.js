@@ -2,43 +2,6 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
-    "id": "uv",
-    "title": "uv: the cleanest way to manage Python",
-    "date": "2026-11-08",
-    "tags": [
-      "Terminal maximalist"
-    ],
-    "image": "featured.svg"
-  },
-  {
-    "id": "claude-code-setup",
-    "title": "My Claude Code setup: one CLAUDE.md, a skill for every chore and a dotfiles repo",
-    "date": "2026-11-08",
-    "tags": [
-      "AI"
-    ],
-    "image": "featured.svg"
-  },
-  {
-    "id": "openspec",
-    "title": "OpenSpec: agree on the change before the code",
-    "date": "2026-11-08",
-    "tags": [
-      "AI"
-    ],
-    "image": "featured.svg"
-  },
-  {
-    "id": "herdr",
-    "title": "herdr: one place for all agents and workspaces",
-    "date": "2026-11-08",
-    "tags": [
-      "AI",
-      "Terminal maximalist"
-    ],
-    "image": "featured.svg"
-  },
-  {
     "id": "herdr-pomodoro",
     "title": "herdr-pomodoro: a focus timer that knows what I am working on",
     "date": "2026-11-08",
@@ -61,6 +24,16 @@ export const POSTS = [
     "title": "TUIs you can open anywhere: lazygit, yazi and VisiData",
     "date": "2026-11-08",
     "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "herdr",
+    "title": "herdr: one place for all agents and workspaces",
+    "date": "2026-06-15",
+    "tags": [
+      "AI",
       "Terminal maximalist"
     ],
     "image": "featured.svg"
@@ -95,6 +68,15 @@ export const POSTS = [
     "image": "featured.png"
   },
   {
+    "id": "openspec",
+    "title": "OpenSpec: agree on the change before the code",
+    "date": "2025-10-20",
+    "tags": [
+      "AI"
+    ],
+    "image": "featured.svg"
+  },
+  {
     "id": "eabh2025",
     "title": "A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries",
     "date": "2025-06-12",
@@ -103,6 +85,15 @@ export const POSTS = [
       "AI"
     ],
     "image": "logo.png"
+  },
+  {
+    "id": "claude-code-setup",
+    "title": "My Claude Code setup: one CLAUDE.md, a skill for every chore and a dotfiles repo",
+    "date": "2025-04-10",
+    "tags": [
+      "AI"
+    ],
+    "image": "featured.svg"
   },
   {
     "id": "neovim-tips",
@@ -117,6 +108,15 @@ export const POSTS = [
     "id": "just-recipes",
     "title": "just: one command for every task in a project",
     "date": "2024-05-15",
+    "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "uv",
+    "title": "uv: the cleanest way to manage Python",
+    "date": "2024-02-15",
     "tags": [
       "Terminal maximalist"
     ],

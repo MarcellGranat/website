@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How I use just to give every project the same memorable commands, plus a global Justfile for the things I do everywhere." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>just: one command for every task in a project | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <img src="featured-transparent.svg" alt="Illustration of a terminal listing just recipes" />
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://just.systems/man/en/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>just manual</span></a><a class="dl" href="https://docs.astral.sh/uv/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>uv</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Stop</dt><dd class="tags"><span>Set your computer up</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">just: one command for every task in a project</h1>
+        <article class="prose">
+<p><a href="https://just.systems/man/en/">just</a> is a command runner: a file called <code>Justfile</code> holds named recipes, and <code>just name</code> runs one. It looks like make, without the build-system baggage. For a data project it solves a simple problem: how do I run, test and check this thing, and will I remember in three months?</p>
+<h2>A typical project Justfile</h2>
+<pre><code>default:
+    @just --list
+
+check:
+    ruff check --fix
+    ruff format
+    pyright
+
+test:
+    uv run pytest
+
+run *args:
+    uv run python -m project {{args}}</code></pre>
+<p>Every project gets the same names (<code>check</code>, <code>test</code>, <code>run</code>), so my fingers do not need to know which project I am in. The recipes also document how things are run, for me and for the coding agents that work in the repository.</p>
+<h2>Parameters and defaults</h2>
+<p>Recipes take arguments with default values, which is what turns small scripts into tools. A recipe of mine that sends a file to another computer is declared as <code>push force="false"</code>, and <code>just push force=true</code> overrides the safety check.</p>
+<h2>A global Justfile for the things I do everywhere</h2>
+<p><code>just -g</code> runs recipes from a Justfile in my dotfiles. It is organised in modules, one file per topic, and the module name becomes the prefix:</p>
+<pre><code>mod git    "~/dotfiles/just/git.just"
+mod watch  "~/dotfiles/just/watch.just"
+mod scp    "~/dotfiles/just/scp.just"
+mod vpn    "~/dotfiles/just/vpn.just"</code></pre>
+<p>So <code>just -g scp push</code> asks which of my computers I mean, lets me pick the file with a fuzzy finder and copies it over. The <code>[no-cd]</code> attribute keeps such a recipe in the directory I called it from, instead of jumping to the Justfile's folder.</p>
+<h2>Recipes for agents</h2>
+<p>I also keep launchers there for coding agents with a strict policy, for example a recipe that starts the agent so that it must show a diff and wait for my approval before touching a file. One word to start the agent in the mode I want, instead of a flag I would forget.</p>
+<h2>Find recipes with a fuzzy finder</h2>
+<p>I rarely type recipe names. A television channel lists the recipes of the local and the global Justfile with a preview of each one and runs the chosen one with a key. More in the post about <code>tv</code>.</p>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

@@ -2,6 +2,41 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
+    "id": "terminal-in-your-pocket",
+    "title": "A terminal in my pocket: Blink, Tailscale and a computer that never sleeps",
+    "date": "2026-11-08",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "neovim-tips",
+    "title": "Neovim tips from my setup: flash, smart splits and sending code to a REPL",
+    "date": "2026-11-08",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "just-recipes",
+    "title": "just: one command for every task in a project",
+    "date": "2026-11-08",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "television-fuzzy-finder",
+    "title": "tv: a fuzzy finder with channels for everything",
+    "date": "2026-11-08",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "tuis-lazygit-yazi-visidata",
+    "title": "Three terminal apps I would not work without: lazygit, yazi and VisiData",
+    "date": "2026-11-08",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
     "id": "cleaning-the-whole-house",
     "title": "Cleaning the whole house: address reconstruction and spatial matching",
     "date": "2026-02-27",

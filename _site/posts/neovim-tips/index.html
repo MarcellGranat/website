@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="A handful of Neovim habits from my own configuration that save the most time in data-science work." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>Neovim tips from my setup: flash, smart splits and sending code to a REPL | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <img src="featured-transparent.svg" alt="Illustration of a Neovim window" />
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://neovim.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Neovim</span></a><a class="dl" href="https://github.com/folke/flash.nvim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>flash.nvim</span></a><a class="dl" href="https://nvchad.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>NvChad</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Stop</dt><dd class="tags"><span>Set your computer up</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Neovim tips from my setup: flash, smart splits and sending code to a REPL</h1>
+        <article class="prose">
+<p>I write most of my code in Neovim. The configuration started from <a href="https://nvchad.com">NvChad</a> and grew with plugins managed by lazy.nvim. These are the habits from it that pay off every single day, in the order I would teach them.</p>
+<h2>flash.nvim: jump anywhere in two keystrokes</h2>
+<p><a href="https://github.com/folke/flash.nvim">flash.nvim</a> replaces a lot of counting and scrolling. Press <code>s</code>, type one or two characters of the place you want, and every match gets a label. Press the label and the cursor is there. My mappings:</p>
+<pre><code>{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
+{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end },
+{ "r", mode = "o", function() require("flash").remote() end },
+{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end },</code></pre>
+<ul>
+<li><code>s</code> jumps to any visible text.</li>
+<li><code>S</code> selects syntax nodes (a call, an argument, a function) through treesitter.</li>
+<li><code>r</code> in operator-pending mode is the remote action: yank or delete something far away without moving the cursor.</li>
+</ul>
+<h2>Small remaps that add up</h2>
+<pre><code>map("n", ";", ":")            -- command mode without Shift
+map("i", "jj", "&lt;ESC&gt;")        -- leave insert mode on the home row
+map("n", "H", "^")            -- start of the line
+map("n", "L", "$")            -- end of the line
+map("i", "&lt;C-s&gt;", "&lt;ESC&gt;:w&lt;CR&gt;")  -- save from anywhere</code></pre>
+<h2>smart-splits: one set of keys for splits and panes</h2>
+<p>With <a href="https://github.com/mrjones2014/smart-splits.nvim">smart-splits.nvim</a>, <code>Ctrl-h/j/k/l</code> moves between splits and <code>Alt-h/j/k/l</code> resizes them. Because it is aware of the terminal multiplexer, the same keys move across tmux panes when I reach the edge of the editor, so I never think about where the editor ends and the terminal begins.</p>
+<h2>vim-slime: send code to a REPL</h2>
+<p>For analysis I want to run code line by line, like in a notebook, but without leaving the editor. <a href="https://github.com/jpalardy/vim-slime">vim-slime</a> sends the current line or selection to a terminal buffer in Neovim. The terminal is chosen by file type:</p>
+<pre><code>python = "uv run python",
+r      = "R",
+sql    = "duckdb ",</code></pre>
+<p>So a Python file talks to a uv-managed Python, an R file to R and a SQL file to DuckDB.</p>
+<h2>Format, lint and test from the editor</h2>
+<ul>
+<li><code>conform.nvim</code> and <code>nvim-lint</code> run ruff; one mapping formats the file and organises imports.</li>
+<li>Another mapping toggles pyright diagnostics when the type checker is too noisy for exploration.</li>
+<li><code>neotest</code> with <code>nvim-dap-python</code> runs and debugs the test under the cursor.</li>
+</ul>
+<h2>Other tools one key away</h2>
+<p>yazi (file manager), lazygit and fzf-lua all open inside Neovim, quarto-nvim handles Quarto documents with the embedded code in the right language, and persistence.nvim restores the session when I come back to a project. The AI helpers (CodeCompanion and friends) live behind a <code>&lt;leader&gt;a</code> prefix so they never get in the way.</p>
+<p>If you only take one thing from this list, take flash. It is the single plugin that changed how fast I move through code.</p>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

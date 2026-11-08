@@ -39,8 +39,6 @@ export function mount(host, { reduced = false, base = '#', labels = true } = {})
     if (!reduced) a.style.opacity = 0;
     return a;
   });
-  const more = el('text', { x: 616, y: 86, class: 'metro-label soft', 'text-anchor': 'middle' }, svg);
-  more.textContent = 'more soon';
   const train = el('g', { class: 'metro-train' }, svg);
   el('circle', { r: 11, class: 'metro-pulse' }, train);
   el('circle', { r: 6, class: 'metro-core' }, train);

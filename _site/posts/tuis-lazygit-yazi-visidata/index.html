@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Terminal user interfaces for git, files and data, and how I extended them for data-science work." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>Three terminal apps I would not work without: lazygit, yazi and VisiData | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <img src="featured-transparent.svg" alt="Illustration of a terminal data table" />
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://github.com/jesseduffield/lazygit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>lazygit</span></a><a class="dl" href="https://yazi-rs.github.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>yazi</span></a><a class="dl" href="https://www.visidata.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>VisiData</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Stop</dt><dd class="tags"><span>Set your computer up</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Three terminal apps I would not work without: lazygit, yazi and VisiData</h1>
+        <article class="prose">
+<p>A terminal user interface (TUI) sits between a command line and a graphical app: you see the state of things and move with the keyboard. Three of them carry a large part of my daily work.</p>
+<h2>lazygit: version control at the speed of thought</h2>
+<p><a href="https://github.com/jesseduffield/lazygit">lazygit</a> shows files, branches, commits and the stash in one screen. Staging single hunks or lines, amending a commit, cherry-picking or resolving a conflict takes a few keys instead of a long command. It also opens inside Neovim through a plugin, so I commit without leaving the editor. One small configuration detail: I point its clipboard commands at tmux, so copying works the same over SSH, which matters when I work on a remote machine.</p>
+<h2>yazi: a file manager that knows my data</h2>
+<p><a href="https://yazi-rs.github.io">yazi</a> is a fast file manager with previews for almost everything: images, PDFs, archives, tables. It is extensible with small Lua plugins and I added a few for data work:</p>
+<ul>
+<li><strong>Enter on a <code>.duckdb</code> file opens it in the DuckDB shell</strong>, directories and other files behave as usual.</li>
+<li><strong>Diff</strong> the selected file with the hovered one, on one key.</li>
+<li>A <strong>space menu</strong> with my custom tools, and quick archive and extract commands.</li>
+</ul>
+<h2>VisiData: a spreadsheet for the terminal</h2>
+<p><a href="https://www.visidata.org">VisiData</a> opens CSV, Parquet, JSON, SQLite and many other formats as a sheet, and handles millions of rows without complaint. The two keys I use most are <kbd>Shift-F</kbd>, which turns a column into a frequency table, and <kbd>Shift-I</kbd>, which describes the whole sheet with summary statistics. It is the fastest way I know to answer "what is actually in this file?" before writing any code.</p>
+<p>VisiData is written in Python and is easy to extend, so I added some commands of my own for the questions I keep asking:</p>
+<ul>
+<li><strong>Association heatmaps</strong> across all columns: Pearson r for numeric pairs, Cramér's V for categorical ones and the variance explained (η²) for mixed pairs.</li>
+<li><strong>OLS regression</strong> and a <strong>decision tree</strong> on the current sheet.</li>
+<li><strong>Deduplication</strong>, <strong>binning</strong> and automatic column typing.</li>
+<li><strong>Terminal charts</strong> drawn with plotext.</li>
+</ul>
+<h2>What they have in common</h2>
+<p>All three show the whole picture first and let me act on it with a couple of keys. And because they are terminal apps, they work exactly the same on my laptop and on the computer at home that I reach from my phone, as described in the post about the terminal.</p>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

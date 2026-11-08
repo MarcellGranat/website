@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How television (tv) became my one fuzzy finder, with custom channels for just recipes, pytest and Python modules." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>tv: a fuzzy finder with channels for everything | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <img src="featured-transparent.svg" alt="Illustration of a fuzzy finder window" />
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://alexpasmantier.github.io/television/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>television</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Stop</dt><dd class="tags"><span>Set your computer up</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">tv: a fuzzy finder with channels for everything</h1>
+        <article class="prose">
+<p><a href="https://alexpasmantier.github.io/television/">television</a> (the command is <code>tv</code>) is a fuzzy finder with one big idea: <em>channels</em>. A channel is a small TOML file that says where the candidates come from, how to preview the selected one and what to do with it. Files, git branches, shell history, running processes: each is a channel, and you can write your own in a few lines.</p>
+<h2>The channels I use most</h2>
+<ul>
+<li><strong>files</strong> (the default) and <strong>dirs</strong>, to open or jump to things.</li>
+<li><strong>git-branch</strong>, <strong>git-log</strong> and <strong>git-repos</strong>, to move around version control.</li>
+<li><strong>zsh-history</strong>, a filtered version of my shell history.</li>
+<li>Channels I wrote myself: <strong>just-recipes</strong>, <strong>pytest</strong> and <strong>python-modules</strong>.</li>
+</ul>
+<h2>Writing a channel: pytest</h2>
+<p>This channel lists test files and individual test functions, and runs the chosen one with uv:</p>
+<pre><code>[metadata]
+name = "pytest"
+description = "Select a test file or function to run with pytest"
+
+[source]
+command = "{ find test tests -name '*.py' -not -path '*/.*' -type f 2&gt;/dev/null; grep -rn '^\\s*def test_' test tests 2&gt;/dev/null | sed -E 's|:[0-9]+:[[:space:]]*def (test_[^( ]+).*|::\\1|'; } | awk 'NF'"
+no_sort = true
+
+[actions.execute]
+description = "Run"
+command = "uv run pytest -s '{}'"
+mode = "execute"</code></pre>
+<p>The <code>source</code> command prints the candidates, one per line. An <code>actions</code> block says what happens on the selected entry, and <code>{}</code> stands for it. That is the whole mechanism.</p>
+<h2>Channel: just recipes</h2>
+<p>The <code>just-recipes</code> channel collects the recipes of the local Justfile and of the global one, shows <code>just -s name</code> as the preview (so I read the recipe before running it) and binds a function key to run the selection:</p>
+<pre><code>[preview]
+command = "just -s '{split:\t:1}'"
+
+[keybindings]
+f5 = "actions:execute-recipe"</code></pre>
+<h2>Shell integration</h2>
+<p>With the shell integration, <code>Ctrl-T</code> opens the channel that fits what I am typing. After <code>cd</code> it offers directories, after <code>git checkout</code> branches, and so on. The mapping from commands to channels is a few lines in the config, for example:</p>
+<pre><code>[shell_integration.channel_triggers]
+"git-branch" = ["git checkout", "git switch"]
+"dirs" = ["cd", "ls"]
+"files" = ["cat", "nvim"]</code></pre>
+<h2>Why I like it</h2>
+<p>It replaced a drawer full of one-off fzf scripts. Every channel looks and behaves the same, previews are built in, and a new channel is a file, not a project. When I notice that I look for the same kind of thing twice, I write a channel.</p>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

@@ -29,7 +29,7 @@
       <aside class="post-aside">
         <a class="back" href="../../index.html#blog">← All posts</a>
         <figure class="visual cover" data-visual>
-          <img src="featured-transparent.svg" alt="Illustration of a terminal listing just recipes" />
+          <canvas class="tool-canvas" data-tool="just" role="img" aria-label="Animation: a terminal lists just recipes and runs one with a single word"></canvas>
         </figure>
         <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://just.systems/man/en/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>just manual</span></a><a class="dl" href="https://docs.astral.sh/uv/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>uv</span></a></div>
         <dl class="facts">
@@ -40,8 +40,12 @@
       <div class="post-main">
         <h1 class="post-title">just: one command for every task in a project</h1>
         <article class="prose">
-<p><a href="https://just.systems/man/en/">just</a> is a command runner: a file called <code>Justfile</code> holds named recipes, and <code>just name</code> runs one. It looks like make, without the build-system baggage. For a data project it solves a simple problem: how do I run, test and check this thing, and will I remember in three months?</p>
-<h2>A typical project Justfile</h2>
+<h2>The problem it solves</h2>
+<p>Every project has a handful of commands: run the checks, run the tests, start the app, build the docs. Each one has flags and an order, and three months later nobody (including me) remembers them. The same task is called something different in every repository, and a coding agent working in the project has to guess.</p>
+<h2>The general idea</h2>
+<p><a href="https://just.systems/man/en/">just</a> is a command runner. A file called <code>Justfile</code> holds named recipes, and <code>just name</code> runs one. It looks like make without the build-system baggage. If every project uses the same names, my fingers do not need to know which project I am in, and the Justfile documents how things are run, for me and for agents.</p>
+<h2>Examples</h2>
+<p>A typical project Justfile:</p>
 <pre><code>default:
     @just --list
 
@@ -55,20 +59,19 @@ test:
 
 run *args:
     uv run python -m project {{args}}</code></pre>
-<p>Every project gets the same names (<code>check</code>, <code>test</code>, <code>run</code>), so my fingers do not need to know which project I am in. The recipes also document how things are run, for me and for the coding agents that work in the repository.</p>
-<h2>Parameters and defaults</h2>
-<p>Recipes take arguments with default values, which is what turns small scripts into tools. A recipe of mine that sends a file to another computer is declared as <code>push force="false"</code>, and <code>just push force=true</code> overrides the safety check.</p>
-<h2>A global Justfile for the things I do everywhere</h2>
-<p><code>just -g</code> runs recipes from a Justfile in my dotfiles. It is organised in modules, one file per topic, and the module name becomes the prefix:</p>
+<p>Recipes take arguments with default values, which turns small scripts into tools. A recipe of mine that sends a file to another computer is declared as <code>push force="false"</code>, and <code>just push force=true</code> overrides its safety check.</p>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>A global Justfile for what I do everywhere.</strong> <code>just -g</code> runs recipes from a Justfile in my dotfiles, organised in modules, one file per topic:
 <pre><code>mod git    "~/dotfiles/just/git.just"
 mod watch  "~/dotfiles/just/watch.just"
 mod scp    "~/dotfiles/just/scp.just"
-mod vpn    "~/dotfiles/just/vpn.just"</code></pre>
-<p>So <code>just -g scp push</code> asks which of my computers I mean, lets me pick the file with a fuzzy finder and copies it over. The <code>[no-cd]</code> attribute keeps such a recipe in the directory I called it from, instead of jumping to the Justfile's folder.</p>
-<h2>Recipes for agents</h2>
-<p>I also keep launchers there for coding agents with a strict policy, for example a recipe that starts the agent so that it must show a diff and wait for my approval before touching a file. One word to start the agent in the mode I want, instead of a flag I would forget.</p>
-<h2>Find recipes with a fuzzy finder</h2>
-<p>I rarely type recipe names. A television channel lists the recipes of the local and the global Justfile with a preview of each one and runs the chosen one with a key. More in the post about <code>tv</code>.</p>
+mod vpn    "~/dotfiles/just/vpn.just"</code></pre></li>
+<li><strong>Recipes that move files.</strong> <code>just -g scp push</code> asks which of my computers I mean, lets me pick the file with a fuzzy finder and copies it over.</li>
+<li><strong><code>[no-cd]</code> for global recipes.</strong> The attribute keeps a recipe in the directory I called it from, instead of jumping to the Justfile's folder.</li>
+<li><strong>Launchers for coding agents.</strong> A recipe starts the agent with a strict policy, for example one that must show a diff and wait for my approval before touching a file. One word instead of a flag I would forget.</li>
+<li><strong>Find recipes with a fuzzy finder.</strong> A television channel lists the recipes of the local and the global Justfile with a preview of each and runs the chosen one with a key. See the post about <code>tv</code>.</li>
+</ul>
     </article>
       </div>
     </div>

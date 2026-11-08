@@ -29,7 +29,7 @@
       <aside class="post-aside">
         <a class="back" href="../../index.html#blog">← All posts</a>
         <figure class="visual cover" data-visual>
-          <img src="featured-transparent.svg" alt="Illustration of a Neovim window" />
+          <canvas class="tool-canvas" data-tool="neovim" role="img" aria-label="Animation: Neovim with flash.nvim labels, jumping the cursor to a spot in three keystrokes"></canvas>
         </figure>
         <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://neovim.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Neovim</span></a><a class="dl" href="https://github.com/folke/flash.nvim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>flash.nvim</span></a><a class="dl" href="https://nvchad.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>NvChad</span></a></div>
         <dl class="facts">
@@ -40,9 +40,12 @@
       <div class="post-main">
         <h1 class="post-title">Neovim tips from my setup: flash, smart splits and sending code to a REPL</h1>
         <article class="prose">
-<p>I write most of my code in Neovim. The configuration started from <a href="https://nvchad.com">NvChad</a> and grew with plugins managed by lazy.nvim. These are the habits from it that pay off every single day, in the order I would teach them.</p>
-<h2>flash.nvim: jump anywhere in two keystrokes</h2>
-<p><a href="https://github.com/folke/flash.nvim">flash.nvim</a> replaces a lot of counting and scrolling. Press <code>s</code>, type one or two characters of the place you want, and every match gets a label. Press the label and the cursor is there. My mappings:</p>
+<h2>The problem it solves</h2>
+<p>Most of editing is not typing, it is moving: to the function above, to the argument at the end of the line, to the variable three screens down. With arrow keys or a mouse that is slow and it takes the hands off the keyboard. Over a day it adds up to a lot of wasted seconds and broken concentration.</p>
+<h2>The general idea</h2>
+<p>Neovim is a modal editor: in normal mode every key is a command, so movement and editing become short phrases. On top of that, <a href="https://github.com/folke/flash.nvim">flash.nvim</a> adds a jump anywhere on screen: press <code>s</code>, type one or two characters of the place you want, and every match gets a label. Press the label and the cursor is there. My configuration started from <a href="https://nvchad.com">NvChad</a> and grew with plugins managed by lazy.nvim.</p>
+<h2>Examples</h2>
+<p>My flash mappings:</p>
 <pre><code>{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
 { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end },
 { "r", mode = "o", function() require("flash").remote() end },
@@ -52,28 +55,20 @@
 <li><code>S</code> selects syntax nodes (a call, an argument, a function) through treesitter.</li>
 <li><code>r</code> in operator-pending mode is the remote action: yank or delete something far away without moving the cursor.</li>
 </ul>
-<h2>Small remaps that add up</h2>
+<p>Small remaps that add up:</p>
 <pre><code>map("n", ";", ":")            -- command mode without Shift
 map("i", "jj", "&lt;ESC&gt;")        -- leave insert mode on the home row
 map("n", "H", "^")            -- start of the line
 map("n", "L", "$")            -- end of the line
 map("i", "&lt;C-s&gt;", "&lt;ESC&gt;:w&lt;CR&gt;")  -- save from anywhere</code></pre>
-<h2>smart-splits: one set of keys for splits and panes</h2>
-<p>With <a href="https://github.com/mrjones2014/smart-splits.nvim">smart-splits.nvim</a>, <code>Ctrl-h/j/k/l</code> moves between splits and <code>Alt-h/j/k/l</code> resizes them. Because it is aware of the terminal multiplexer, the same keys move across tmux panes when I reach the edge of the editor, so I never think about where the editor ends and the terminal begins.</p>
-<h2>vim-slime: send code to a REPL</h2>
-<p>For analysis I want to run code line by line, like in a notebook, but without leaving the editor. <a href="https://github.com/jpalardy/vim-slime">vim-slime</a> sends the current line or selection to a terminal buffer in Neovim. The terminal is chosen by file type:</p>
-<pre><code>python = "uv run python",
-r      = "R",
-sql    = "duckdb ",</code></pre>
-<p>So a Python file talks to a uv-managed Python, an R file to R and a SQL file to DuckDB.</p>
-<h2>Format, lint and test from the editor</h2>
+<h2>Tips from my setup</h2>
 <ul>
-<li><code>conform.nvim</code> and <code>nvim-lint</code> run ruff; one mapping formats the file and organises imports.</li>
-<li>Another mapping toggles pyright diagnostics when the type checker is too noisy for exploration.</li>
-<li><code>neotest</code> with <code>nvim-dap-python</code> runs and debugs the test under the cursor.</li>
+<li><strong>One set of keys for splits and panes.</strong> With <a href="https://github.com/mrjones2014/smart-splits.nvim">smart-splits.nvim</a>, <code>Ctrl-h/j/k/l</code> moves between splits and <code>Alt-h/j/k/l</code> resizes them. It is aware of the terminal multiplexer, so the same keys cross from the editor into tmux panes.</li>
+<li><strong>Send code to a REPL.</strong> <a href="https://github.com/jpalardy/vim-slime">vim-slime</a> sends the current line or selection to a terminal buffer, chosen by file type: <code>uv run python</code> for Python, <code>R</code> for R and <code>duckdb</code> for SQL. It gives me notebook-style running without leaving the editor.</li>
+<li><strong>Format, lint and test from the editor.</strong> conform.nvim and nvim-lint run ruff, one mapping formats and organises imports, another toggles pyright diagnostics when the type checker is too noisy for exploration, and neotest with nvim-dap-python runs and debugs the test under the cursor.</li>
+<li><strong>Other tools one key away.</strong> yazi, lazygit and fzf-lua open inside Neovim, quarto-nvim handles Quarto documents, and persistence.nvim restores the session when I come back to a project.</li>
+<li><strong>AI helpers stay out of the way.</strong> CodeCompanion and friends live behind a <code>&lt;leader&gt;a</code> prefix.</li>
 </ul>
-<h2>Other tools one key away</h2>
-<p>yazi (file manager), lazygit and fzf-lua all open inside Neovim, quarto-nvim handles Quarto documents with the embedded code in the right language, and persistence.nvim restores the session when I come back to a project. The AI helpers (CodeCompanion and friends) live behind a <code>&lt;leader&gt;a</code> prefix so they never get in the way.</p>
 <p>If you only take one thing from this list, take flash. It is the single plugin that changed how fast I move through code.</p>
     </article>
       </div>

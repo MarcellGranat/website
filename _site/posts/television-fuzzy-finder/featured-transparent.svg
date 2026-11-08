@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 889 556" width="889" height="556">
-<rect x="96" y="92" width="697" height="372" rx="18" fill="#14181c"/>
-<rect x="96" y="92" width="697" height="46" rx="18" fill="#232a30"/><rect x="96" y="120" width="697" height="18" fill="#232a30"/>
-<circle cx="128" cy="115" r="7" fill="#ff6b5e"/><circle cx="152" cy="115" r="7" fill="#f5b83d"/><circle cx="176" cy="115" r="7" fill="#3ccf6e"/>
-<text x="444" y="121" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" fill="#8d98a0">tv — pytest</text>
-<text x="150" y="170" font-family="JetBrains Mono, ui-monospace, monospace" font-size="21" fill="#7ee0d6">&gt; test_load</text><text x="150" y="208" font-family="JetBrains Mono, ui-monospace, monospace" font-size="21" fill="#f5b83d">▌tests/test_io.py::test_load_csv</text><text x="150" y="246" font-family="JetBrains Mono, ui-monospace, monospace" font-size="21" fill="#e6e8ea"> tests/test_io.py::test_load_json</text><text x="150" y="284" font-family="JetBrains Mono, ui-monospace, monospace" font-size="21" fill="#e6e8ea"> tests/test_clean.py::test_load_rules</text><text x="150" y="322" font-family="JetBrains Mono, ui-monospace, monospace" font-size="21" fill="#8d98a0">3 / 128</text>
-<rect x="96" y="432" width="697" height="6" fill="#d98a00"/>
-</svg>

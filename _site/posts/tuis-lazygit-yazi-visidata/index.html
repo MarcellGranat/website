@@ -29,7 +29,7 @@
       <aside class="post-aside">
         <a class="back" href="../../index.html#blog">← All posts</a>
         <figure class="visual cover" data-visual>
-          <img src="featured-transparent.svg" alt="Illustration of a terminal data table" />
+          <canvas class="tool-canvas" data-tool="tuis" role="img" aria-label="Animation: three terminal apps in turn: lazygit staging and committing, yazi browsing data files, VisiData showing a table and a frequency count"></canvas>
         </figure>
         <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://github.com/jesseduffield/lazygit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>lazygit</span></a><a class="dl" href="https://yazi-rs.github.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>yazi</span></a><a class="dl" href="https://www.visidata.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>VisiData</span></a></div>
         <dl class="facts">
@@ -40,27 +40,22 @@
       <div class="post-main">
         <h1 class="post-title">Three terminal apps I would not work without: lazygit, yazi and VisiData</h1>
         <article class="prose">
-<p>A terminal user interface (TUI) sits between a command line and a graphical app: you see the state of things and move with the keyboard. Three of them carry a large part of my daily work.</p>
-<h2>lazygit: version control at the speed of thought</h2>
-<p><a href="https://github.com/jesseduffield/lazygit">lazygit</a> shows files, branches, commits and the stash in one screen. Staging single hunks or lines, amending a commit, cherry-picking or resolving a conflict takes a few keys instead of a long command. It also opens inside Neovim through a plugin, so I commit without leaving the editor. One small configuration detail: I point its clipboard commands at tmux, so copying works the same over SSH, which matters when I work on a remote machine.</p>
-<h2>yazi: a file manager that knows my data</h2>
-<p><a href="https://yazi-rs.github.io">yazi</a> is a fast file manager with previews for almost everything: images, PDFs, archives, tables. It is extensible with small Lua plugins and I added a few for data work:</p>
+<h2>The problem it solves</h2>
+<p>Three jobs eat a surprising amount of time: remembering the right git command, hunting for a file in a deep folder tree, and finding out what is actually inside a data file before writing a line of code. Typed commands are precise but you cannot see the state, and graphical apps show the state but are slow to drive and do not work over SSH.</p>
+<h2>The general idea</h2>
+<p>A terminal user interface (TUI) sits in between: it shows the whole picture on one screen and you act on it with a couple of keys. They are fast, keyboard-first, work exactly the same on my laptop and on the computer at home that I reach from my phone, and they can be extended. Three carry most of my daily work.</p>
+<h2>Examples</h2>
 <ul>
-<li><strong>Enter on a <code>.duckdb</code> file opens it in the DuckDB shell</strong>, directories and other files behave as usual.</li>
-<li><strong>Diff</strong> the selected file with the hovered one, on one key.</li>
-<li>A <strong>space menu</strong> with my custom tools, and quick archive and extract commands.</li>
+<li><strong><a href="https://github.com/jesseduffield/lazygit">lazygit</a></strong> shows files, branches, commits and the stash together. Staging single hunks or lines, amending a commit, cherry-picking or resolving a conflict takes a few keys instead of a long command. It also opens inside Neovim through a plugin, so I commit without leaving the editor.</li>
+<li><strong><a href="https://yazi-rs.github.io">yazi</a></strong> is a fast file manager with previews for almost everything: images, PDFs, archives, tables. Move with <kbd>j</kbd>/<kbd>k</kbd>, go in with <kbd>l</kbd>, and the preview of the hovered file is always there.</li>
+<li><strong><a href="https://www.visidata.org">VisiData</a></strong> opens CSV, Parquet, JSON, SQLite and many other formats as a sheet and handles millions of rows without complaint. <kbd>Shift-F</kbd> turns a column into a frequency table and <kbd>Shift-I</kbd> describes the whole sheet with summary statistics. It is the fastest way I know to answer "what is actually in this file?".</li>
 </ul>
-<h2>VisiData: a spreadsheet for the terminal</h2>
-<p><a href="https://www.visidata.org">VisiData</a> opens CSV, Parquet, JSON, SQLite and many other formats as a sheet, and handles millions of rows without complaint. The two keys I use most are <kbd>Shift-F</kbd>, which turns a column into a frequency table, and <kbd>Shift-I</kbd>, which describes the whole sheet with summary statistics. It is the fastest way I know to answer "what is actually in this file?" before writing any code.</p>
-<p>VisiData is written in Python and is easy to extend, so I added some commands of my own for the questions I keep asking:</p>
+<h2>Tips from my setup</h2>
 <ul>
-<li><strong>Association heatmaps</strong> across all columns: Pearson r for numeric pairs, Cramér's V for categorical ones and the variance explained (η²) for mixed pairs.</li>
-<li><strong>OLS regression</strong> and a <strong>decision tree</strong> on the current sheet.</li>
-<li><strong>Deduplication</strong>, <strong>binning</strong> and automatic column typing.</li>
-<li><strong>Terminal charts</strong> drawn with plotext.</li>
+<li><strong>Clipboard over tmux.</strong> I point lazygit's clipboard commands at tmux, so copying works the same over SSH, which matters when I work on a remote machine.</li>
+<li><strong>yazi plugins for data work.</strong> <kbd>Enter</kbd> on a <code>.duckdb</code> file opens it in the DuckDB shell while directories and other files behave as usual, one key diffs the selected file with the hovered one, and a space menu holds my custom tools and quick archive and extract commands.</li>
+<li><strong>VisiData extensions of my own</strong> for the questions I keep asking: association heatmaps across all columns (Pearson r for numeric pairs, Cramér's V for categorical ones, variance explained η² for mixed pairs), OLS regression, a decision tree on the current sheet, deduplication, binning, automatic column typing and terminal charts with plotext. VisiData is written in Python, so adding a command is a small function.</li>
 </ul>
-<h2>What they have in common</h2>
-<p>All three show the whole picture first and let me act on it with a couple of keys. And because they are terminal apps, they work exactly the same on my laptop and on the computer at home that I reach from my phone, as described in the post about the terminal.</p>
     </article>
       </div>
     </div>

@@ -29,7 +29,7 @@
       <aside class="post-aside">
         <a class="back" href="../../index.html#blog">← All posts</a>
         <figure class="visual cover" data-visual>
-          <img src="featured-transparent.svg" alt="Illustration of a terminal window with an ssh session" />
+          <canvas class="tool-canvas" data-tool="remote" role="img" aria-label="Animation: a phone connects over Tailscale to a home computer that keeps a scraping job running"></canvas>
         </figure>
         <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://blink.sh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Blink Shell (iOS)</span></a><a class="dl" href="https://tailscale.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Tailscale</span></a><a class="dl" href="https://www.clicks.tech" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Clicks keyboard for iPhone</span></a><a class="dl" href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>tmux</span></a></div>
         <dl class="facts">
@@ -40,25 +40,32 @@
       <div class="post-main">
         <h1 class="post-title">A terminal in my pocket: Blink, Tailscale and a computer that never sleeps</h1>
         <article class="prose">
-<p>Most of my data-science work does not fit into a laptop session. Scrapers run for days, model fits take hours, and a pipeline should not die because I closed a lid. The answer I settled on is boring and works: the long-running jobs live on a computer at home that is always on, and I reach it from everything else through a terminal.</p>
-<h2>Why the terminal</h2>
-<p>A terminal is the one interface that works the same on a MacBook, a Linux box and a phone. It is tiny in bandwidth, it survives bad connections, scripts can drive it, and anything I can do in it I can also automate. That is why even the editor, the file manager and the git client I use are terminal apps.</p>
-<h2>Why a computer that is always on</h2>
-<p>A job that needs to run for six hours should not depend on my laptop staying awake, charged and online. A cheap desktop in the corner does not care. I start the job, detach, and look at it later from wherever I am. Scraping is the typical case: it is slow by design (be polite to the server), it must not stop halfway, and it does not need my attention while it runs.</p>
-<h2>Tailscale: one private network</h2>
-<p><a href="https://tailscale.com">Tailscale</a> puts all my devices on one private network, wherever they physically are. Every machine gets a stable name, there is no port forwarding and nothing is exposed to the internet. My own network has a Mac Studio, a MacBook, two Linux computers, an iPad and an iPhone, and from any of them <code>ssh machine-name</code> just works.</p>
-<h2>Blink on the iPhone</h2>
-<p><a href="https://blink.sh">Blink Shell</a> is a proper terminal for iOS with SSH and Mosh. With Tailscale running on the phone, I can open Blink, connect to the machine at home and attach to the session that is already running. Mosh is the detail that makes it pleasant on mobile: the connection survives switching between Wi-Fi and mobile data and the phone going to sleep.</p>
-<p>Typing code on a glass keyboard is the weak spot. For that I use a <a href="https://www.clicks.tech">Clicks</a> keyboard case, which gives the iPhone a physical keyboard with real keys. It is not a laptop replacement, but fixing a path, restarting a job or reading a log from the sofa becomes comfortable.</p>
-<h2>Everything in one place: tmux and herdr</h2>
-<p>On every machine the work lives inside a tmux session, so closing the terminal never kills anything. From one terminal I connect to any computer over its Tailscale name and attach to whatever is running there. herdr, the terminal workspace manager I use next to tmux, shows my workspaces and their state in one sidebar, so I see at a glance which session is busy and which agent is waiting for me.</p>
-<p>Moving files between machines is a one-liner too: a small <code>just</code> recipe asks which device I mean, lets me pick the file with a fuzzy finder and runs <code>scp</code>. More about that in the post about <code>just</code>.</p>
-<h2>The checklist</h2>
+<h2>The problem it solves</h2>
+<p>Most of my data-science work does not fit into a laptop session. Scrapers run for days, model fits take hours, and a pipeline should not die because I closed a lid or left the house. On top of that I work on several computers, and I want to check on a job from the sofa, the train or a conference hall, not only from my desk.</p>
+<h2>The general idea</h2>
+<p>Four small pieces that fit together:</p>
 <ul>
-<li>A computer that is always on, with sleep disabled and a wired connection if possible.</li>
-<li>Tailscale on every device, including the phone.</li>
-<li>tmux for every long job, started on the machine that runs it.</li>
-<li>A terminal app on the phone (Blink) and, if you type a lot, a physical keyboard.</li>
+<li><strong>A computer at home that is always on</strong> runs the long jobs. It does not care about batteries, lids or Wi-Fi hotels.</li>
+<li><strong><a href="https://tailscale.com">Tailscale</a></strong> puts all my devices on one private network, with a stable name for each. No port forwarding, nothing exposed to the internet.</li>
+<li><strong>The terminal</strong> is the one interface that is identical on a laptop, a Linux box and a phone, and it is tiny in bandwidth.</li>
+<li><strong><a href="https://github.com/tmux/tmux/wiki">tmux</a></strong> keeps every job in a session that survives disconnects, so I can detach, leave and attach again later.</li>
+</ul>
+<h2>Examples</h2>
+<p>Starting a long scrape on the home computer and leaving it running:</p>
+<pre><code>ssh home-pc
+tmux new -s scrape
+uv run python scrape.py      # detach with Ctrl-b d</code></pre>
+<p>Checking on it from anywhere, for example from my phone:</p>
+<pre><code>ssh home-pc
+tmux attach -t scrape</code></pre>
+<p>On the phone I use <a href="https://blink.sh">Blink Shell</a>, a proper terminal for iOS with SSH and Mosh. Mosh is what makes it pleasant on mobile: the connection survives switching between Wi-Fi and mobile data and the phone going to sleep.</p>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Tailscale on every device, the phone included.</strong> My network has a Mac Studio, a MacBook, two Linux computers, an iPad and an iPhone, and <code>ssh machine-name</code> works between all of them.</li>
+<li><strong>A physical keyboard for the phone.</strong> I use a <a href="https://www.clicks.tech">Clicks</a> keyboard case. Typing code on glass is the weak spot, and with real keys, fixing a path or restarting a job from the sofa becomes comfortable.</li>
+<li><strong>One place for everything.</strong> Work on every machine lives in tmux, and herdr, the terminal workspace manager I use next to it, shows my workspaces and their state in one sidebar, so I see which session is busy and which agent is waiting for me.</li>
+<li><strong>Move files without thinking.</strong> A small <code>just</code> recipe asks which device I mean, lets me pick the file with a fuzzy finder and runs <code>scp</code>. See the post about <code>just</code>.</li>
+<li><strong>Make the home computer boring.</strong> Sleep disabled, a wired connection and nothing else running on it.</li>
 </ul>
     </article>
       </div>

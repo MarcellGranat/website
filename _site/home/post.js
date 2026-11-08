@@ -102,4 +102,5 @@ $$('.prose a[href^="http"]').forEach((a) => {
   load('.visual .city-canvas', './animations/city.js');
   load('.visual .book-canvas', './animations/book.js');
   load('.visual .signal-canvas', './animations/signal.js');
+  load('.visual .tool-canvas', './animations/tools.js');
 }

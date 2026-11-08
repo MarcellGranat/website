@@ -6,7 +6,8 @@ export const POSTS = [
     "title": "herdr-pomodoro: a focus timer that knows what I am working on",
     "date": "2026-11-08",
     "tags": [
-      "Terminal maximalist"
+      "Terminal maximalist",
+      "Coding"
     ],
     "image": "featured.svg"
   },
@@ -15,7 +16,8 @@ export const POSTS = [
     "title": "dvcat: a terminal UI for DVC",
     "date": "2026-11-08",
     "tags": [
-      "Terminal maximalist"
+      "Terminal maximalist",
+      "dev"
     ],
     "image": "featured.svg"
   },
@@ -25,7 +27,8 @@ export const POSTS = [
     "date": "2026-06-15",
     "tags": [
       "AI",
-      "Terminal maximalist"
+      "Terminal maximalist",
+      "Coding"
     ],
     "image": "featured.svg"
   },
@@ -33,14 +36,18 @@ export const POSTS = [
     "id": "dvc",
     "title": "DVC: git for data, and pipelines that know what is stale",
     "date": "2026-04-19",
-    "tags": [],
+    "tags": [
+      "dev"
+    ],
     "image": "featured.svg"
   },
   {
     "id": "git",
     "title": "git: the minimal setup that keeps me safe",
     "date": "2026-03-04",
-    "tags": [],
+    "tags": [
+      "dev"
+    ],
     "image": "featured.svg"
   },
   {
@@ -56,7 +63,9 @@ export const POSTS = [
     "id": "jj",
     "title": "jj: I tried it so you do not have to",
     "date": "2026-01-27",
-    "tags": [],
+    "tags": [
+      "dev"
+    ],
     "image": "featured.svg"
   },
   {
@@ -93,7 +102,8 @@ export const POSTS = [
     "title": "OpenSpec: agree on the change before the code",
     "date": "2025-10-20",
     "tags": [
-      "AI"
+      "AI",
+      "Coding"
     ],
     "image": "featured.svg"
   },
@@ -101,14 +111,18 @@ export const POSTS = [
     "id": "gcloud-run",
     "title": "Google Cloud: a nightly job without my laptop",
     "date": "2025-08-21",
-    "tags": [],
+    "tags": [
+      "dev"
+    ],
     "image": "featured.svg"
   },
   {
     "id": "marimo",
     "title": "marimo: notebooks that stay in sync, in any browser",
     "date": "2025-08-12",
-    "tags": [],
+    "tags": [
+      "Data Science"
+    ],
     "image": "featured.svg"
   },
   {
@@ -135,7 +149,8 @@ export const POSTS = [
     "title": "My Claude Code setup: one CLAUDE.md, a skill for every chore and a dotfiles repo",
     "date": "2025-04-10",
     "tags": [
-      "AI"
+      "AI",
+      "Coding"
     ],
     "image": "featured.svg"
   },
@@ -143,7 +158,9 @@ export const POSTS = [
     "id": "snakemake",
     "title": "Snakemake: file-based workflows for Python and anything else",
     "date": "2025-04-08",
-    "tags": [],
+    "tags": [
+      "dev"
+    ],
     "image": "featured.svg"
   },
   {
@@ -151,7 +168,8 @@ export const POSTS = [
     "title": "VisiData: far better than Excel, and it speaks Python",
     "date": "2025-01-18",
     "tags": [
-      "Terminal maximalist"
+      "Terminal maximalist",
+      "Data Science"
     ],
     "image": "featured.svg"
   },
@@ -159,7 +177,9 @@ export const POSTS = [
     "id": "duckdb",
     "title": "DuckDB: my favourite tool for data work",
     "date": "2024-07-10",
-    "tags": [],
+    "tags": [
+      "Data Science"
+    ],
     "image": "featured.svg"
   },
   {
@@ -185,7 +205,8 @@ export const POSTS = [
     "title": "uv: the cleanest way to manage Python",
     "date": "2024-02-15",
     "tags": [
-      "Terminal maximalist"
+      "Terminal maximalist",
+      "Coding"
     ],
     "image": "featured.svg"
   },
@@ -194,7 +215,8 @@ export const POSTS = [
     "title": "Teaching R, data visualisation and text mining: my Big Data course, Fall 2023",
     "date": "2023-12-02",
     "tags": [
-      "R"
+      "R",
+      "Data Science"
     ],
     "image": "featured.png"
   },
@@ -203,7 +225,8 @@ export const POSTS = [
     "title": "targets: pipelines for R that only rebuild what changed",
     "date": "2023-11-26",
     "tags": [
-      "R"
+      "R",
+      "dev"
     ],
     "image": "featured.svg"
   },
@@ -211,7 +234,9 @@ export const POSTS = [
     "id": "quarto",
     "title": "Quarto: one source for reports, papers and slides",
     "date": "2023-11-20",
-    "tags": [],
+    "tags": [
+      "Data Science"
+    ],
     "image": "featured.svg"
   },
   {
@@ -231,7 +256,7 @@ export const POSTS = [
       "publication",
       "finance"
     ],
-    "image": "logo.jpg"
+    "image": "featured.svg"
   },
   {
     "id": "data-cultures",

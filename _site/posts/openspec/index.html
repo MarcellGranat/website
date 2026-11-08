@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How I use OpenSpec to write down what a change should do, in plain Markdown, before a coding agent implements it." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>OpenSpec: agree on the change before the code | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="openspec" role="img" aria-label="Animation: proposal, design and tasks files, then implementation and archiving"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>OpenSpec</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>AI</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">OpenSpec: agree on the change before the code</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Give an agent a big request and it will build something plausible, which is not always what I meant. The intent lives in a chat that vanishes, so a week later nobody knows why the code looks the way it does, and the next session starts the argument again.</p>
+<h2>The general idea</h2>
+<p><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a> is spec-driven development in plain files. Every change gets its own folder with a <code>proposal.md</code> (what and why), a <code>design.md</code> (how) and a <code>tasks.md</code> (the steps). The agent implements the tasks, and when the change is done it is archived: the spec deltas merge into <code>specs/</code>, which stays as the current description of the system. OpenSpec does not call a model itself. It manages the files, and my agent does the writing and the coding.</p>
+<h2>Examples</h2>
+<pre><code>openspec/
+  specs/                 # what the system does today
+  changes/
+    add-dark-mode/
+      proposal.md        # what and why
+      design.md          # how
+      tasks.md           # - [ ] steps the agent ticks off</code></pre>
+<p>The workflow in commands:</p>
+<pre><code>openspec new change "add-dark-mode"
+openspec status --change "add-dark-mode"
+openspec list
+# in the agent: propose, explore, apply, update, sync, archive</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>One skill per step.</strong> Propose, explore, apply, update, sync and archive each have a skill, so a whole change is a few short commands in the agent.</li>
+<li><strong>Explore before proposing.</strong> The explore step is a thinking partner: I describe the problem, it investigates the code and asks questions, and nothing is written yet.</li>
+<li><strong>A cheap worker for the paperwork.</strong> Exploring and generating the artifacts run on a small Haiku agent, and the stronger model implements the tasks.</li>
+<li><strong>Visible in herdr.</strong> A herdr plugin shows the active change of each project in the sidebar, and one key opens a browser of the changes. See the post about herdr.</li>
+<li><strong>Keep changes small.</strong> One change, one folder, a handful of tasks. The herdr-pomodoro plugin was built like this, one archived change at a time.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

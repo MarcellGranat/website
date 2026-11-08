@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="A pomodoro plugin for herdr that filters the agent list to the project I focus on and counts only real human input." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>herdr-pomodoro: a focus timer that knows what I am working on | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="pomodoro" role="img" aria-label="Animation: a focus timer that hides the agents of other projects"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://herdr.dev" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>herdr</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Terminal maximalist</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">herdr-pomodoro: a focus timer that knows what I am working on</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>With agents running in several projects, something is always asking for attention, and every glance at another project breaks my focus. An ordinary pomodoro timer does not help: it counts minutes, not work, and it has no idea what is happening on my screen.</p>
+<h2>The general idea</h2>
+<p>herdr-pomodoro is a plugin for herdr, written in Rust, that lives where the work is. A focus session runs for 25 minutes on one workspace, and during it the agent list shows only that workspace, so the other projects wait. A five-minute break follows and everything is visible again. If I need to look elsewhere, a three-minute grace period keeps the session alive, and returning in time resumes the original deadline.</p>
+<h2>Examples</h2>
+<p>A popup on <code>prefix+ctrl+p</code> adapts to the current phase: start focus, end the session, leave the terminal, use another workspace, return to focus, end the break or open the activity dashboard. From the command line:</p>
+<pre><code>herdr-pomodoro status              # does this setup support activity capture?
+herdr-pomodoro watch --duration 10 # ten seconds of content-free observations</code></pre>
+<p>Building and installing:</p>
+<pre><code>cargo build --release --locked
+herdr plugin link "$PWD" --enabled</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>It only counts real human input.</strong> The plugin compares access-time changes on the terminal device of the herdr client and of a workspace pane. Input that reaches both is human, input that reaches only the pane comes from an agent. It never reads the content of a terminal, never records keystrokes and stores only timestamps.</li>
+<li><strong>It works over SSH and mosh</strong>, because the input still passes through both devices on the machine that runs herdr. That includes sessions from the phone. Remote workspaces are sampled over SSH without installing anything on the other machine.</li>
+<li><strong>The timer is always visible.</strong> A sidebar token shows the phase and the tab bar shows the countdown, refreshed every second.</li>
+<li><strong>The sidebar is locked during focus.</strong> It starts hidden, and a guard binding blocks the toggle until the session ends, which removes the temptation.</li>
+<li><strong>Restarts are safe.</strong> Deadlines are stored, not recomputed, so the timer survives a restart of the plugin or of herdr.</li>
+<li><strong>Built with OpenSpec,</strong> one small change at a time. See the post about OpenSpec.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

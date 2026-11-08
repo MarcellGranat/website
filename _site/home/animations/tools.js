@@ -248,7 +248,112 @@ function tuis(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.textAlign = 'right'; c.fillText('same apps on laptop · iPad · phone', 600, 413); c.textAlign = 'left';
 }
 
-const SCENES = { remote, neovim, just, tv, tuis };
+/* ---------- 6. CLAUDE.md rules -> agent behaviour (T = 13) ---------- */
+function claude(c, t) {
+  t %= 13;
+  const rules = ['uv for Python', 'strict type hints', 'tests in tests/', 'minimal git', 'ask in bold'];
+  const acts = [['$ uv run pytest', '42 passed'], ['$ pyright --strict', '0 errors'], ['$ uv run pytest tests/', 'ok'], ['$ git add -- changed.py', ''], ['**Which file?**', '']];
+  c.fillStyle = '#fff'; rr(c, 30, 50, 250, 330, 14); c.fill(); c.strokeStyle = LINE; c.stroke();
+  c.fillStyle = TEAL; c.font = `700 14px ${MONO}`; c.fillText('CLAUDE.md', 52, 86);
+  c.fillStyle = LINE; c.fillRect(52, 98, 206, 1);
+  win(c, 310, 50, 300, 330, 'claude · agent');
+  const step = 1.9; let y = 140;
+  rules.forEach((r, i) => {
+    const at = 0.8 + i * step, shown = t > at, hot = t > at + 0.7 && t < at + step + 0.2;
+    if (hot) { c.fillStyle = 'rgba(217,138,0,.16)'; c.fillRect(40, 124 + i * 44 - 4, 230, 34); }
+    if (shown) { c.fillStyle = INK; c.font = `500 14px ${MONO}`; c.fillText(typed('- ' + r, seg(t, at, at + 0.7)), 52, 144 + i * 44); }
+    const a = at + 0.9;
+    if (t > a) {
+      c.font = `500 12px ${MONO}`; c.fillStyle = '#7ee0d6'; c.fillText(typed(acts[i][0], seg(t, a, a + 0.6)), 326, 100 + i * 52);
+      if (acts[i][1] && t > a + 0.7) { c.fillStyle = '#3ccf6e'; c.fillText('✓ ' + acts[i][1], 326, 118 + i * 52); }
+    }
+  });
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('write the rules once, every session follows them', 30, 412);
+}
+
+/* ---------- 7. OpenSpec: proposal -> design -> tasks -> archive (T = 14) ---------- */
+function openspec(c, t) {
+  t %= 14;
+  const cards = [['proposal.md', 'what & why'], ['design.md', 'how'], ['tasks.md', 'steps'], ['specs/', 'archived']];
+  const stage = Math.min(3, Math.floor(t / 3));
+  cards.forEach(([name, sub], i) => {
+    const x = 28 + i * 150, y = 100, w = 128, h = 190, on = i <= stage, cur = i === stage;
+    c.fillStyle = '#fff'; rr(c, x, y, w, h, 12); c.fill(); c.strokeStyle = cur ? TEAL : LINE; c.lineWidth = cur ? 2.5 : 1; c.stroke(); c.lineWidth = 1;
+    c.fillStyle = on ? INK : '#a5afb6'; c.font = `700 13px ${MONO}`; c.fillText(name, x + 14, y + 28);
+    c.fillStyle = MUTED; c.font = `500 11px ${SANS}`; c.fillText(sub, x + 14, y + 46);
+    const fill = on ? ease(seg(t - i * 3, 0, 1.6)) : 0;
+    if (i < 2) for (let l = 0; l < 5; l++) { c.fillStyle = 'rgba(20,24,28,.08)'; c.fillRect(x + 14, y + 66 + l * 20, w - 28, 8); c.fillStyle = cur || on ? TEAL : '#c9d1d6'; c.fillRect(x + 14, y + 66 + l * 20, (w - 28) * clamp(fill * 1.4 - l * 0.12) * (l === 4 ? 0.6 : 1), 8); }
+    if (i === 2) ['write spec', 'implement', 'run tests'].forEach((tk, l) => {
+      const ticked = t > 6 + l * 1.1 + 0.5 && t < 12.6; c.strokeStyle = '#8d98a0'; c.strokeRect(x + 14, y + 66 + l * 34, 14, 14);
+      if (ticked) { c.fillStyle = TEAL; c.fillRect(x + 14, y + 66 + l * 34, 14, 14); c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.moveTo(x + 17, y + 73 + l * 34); c.lineTo(x + 21, y + 77 + l * 34); c.lineTo(x + 26, y + 69 + l * 34); c.stroke(); c.lineWidth = 1; }
+      c.fillStyle = on ? INK : '#a5afb6'; c.font = `500 11px ${SANS}`; c.fillText(tk, x + 36, y + 77 + l * 34);
+    });
+    if (i === 3) { c.fillStyle = on ? '#3ccf6e' : '#c9d1d6'; c.font = `700 30px ${SANS}`; c.fillText(t > 9.4 ? '✓' : '·', x + 14, y + 100); c.fillStyle = MUTED; c.font = `500 11px ${SANS}`; c.fillText('deltas merged', x + 14, y + 126); c.fillText('into the specs', x + 14, y + 142); }
+    if (i < 3) { c.fillStyle = on && i < stage ? TEAL : '#c9d1d6'; c.font = `700 20px ${SANS}`; c.fillText('›', x + w + 6, y + h / 2); }
+  });
+  const px = 28 + stage * 150 + 64; c.fillStyle = AMBER; c.beginPath(); c.arc(px, 322, 7, 0, 7); c.fill();
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.textAlign = 'center'; c.fillText(['propose', 'design', 'apply the tasks', 'archive'][stage], px, 350); c.textAlign = 'left';
+  c.font = `500 12px ${SANS}`; c.fillText('agree on the change in plain Markdown before any code is written', 30, 412);
+}
+
+/* ---------- 8. herdr: workspaces and agent states in one sidebar (T = 12) ---------- */
+function herdr(c, t) {
+  t %= 12;
+  win(c, 30, 40, 580, 340, 'herdr');
+  const names = ['website', 'compass', 'housing', 'cv'], st = ['working', 'waiting', 'done', 'idle'];
+  const state = (i) => st[(Math.floor(t / 3) + i) % 4];
+  c.fillStyle = '#1b2227'; c.fillRect(30, 70, 190, 280);
+  names.forEach((n, i) => {
+    const y = 104 + i * 62, s = state(i), col = { working: '#7ee0d6', waiting: '#f5b83d', done: '#3ccf6e', idle: '#6b757c' }[s];
+    c.fillStyle = 'rgba(255,255,255,.04)'; rr(c, 42, y - 22, 166, 52, 8); c.fill();
+    c.fillStyle = col;
+    if (s === 'working') { const a = t * 6; c.strokeStyle = col; c.lineWidth = 3; c.beginPath(); c.arc(64, y - 2, 8, a, a + 4.2); c.stroke(); c.lineWidth = 1; }
+    else if (s === 'waiting') { c.font = `700 18px ${MONO}`; c.fillText('!', 59, y + 4); } else if (s === 'done') { c.font = `700 16px ${MONO}`; c.fillText('✓', 56, y + 4); } else { c.beginPath(); c.arc(64, y - 2, 5, 0, 7); c.fill(); }
+    c.fillStyle = '#e6e8ea'; c.font = `600 13px ${MONO}`; c.fillText(n, 84, y - 4);
+    c.fillStyle = '#8d98a0'; c.font = `500 10px ${MONO}`; c.fillText(`main · ${s}`, 84, y + 14);
+  });
+  // panes
+  [[236, 70], [424, 70], [236, 212], [424, 212]].forEach(([x, y], i) => {
+    const s = state(i), col = { working: '#7ee0d6', waiting: '#f5b83d', done: '#3ccf6e', idle: '#4a5560' }[s];
+    c.strokeStyle = col; c.lineWidth = s === 'waiting' ? 2.5 : 1.5; rr(c, x, y, 176, 128, 8); c.stroke(); c.lineWidth = 1;
+    c.fillStyle = col; c.font = `700 10px ${MONO}`; c.fillText(`claude · ${names[i]}`, x + 10, y + 18);
+    for (let l = 0; l < 4; l++) { c.fillStyle = 'rgba(255,255,255,.14)'; c.fillRect(x + 10, y + 36 + l * 20, 60 + ((l * 37 + i * 23) % 90), 7); }
+    if (s === 'waiting') { c.fillStyle = '#f5b83d'; c.font = `500 11px ${MONO}`; c.fillText('approve edit? y/n', x + 10, y + 118); }
+  });
+  // bar
+  c.fillStyle = '#232a30'; c.fillRect(30, 350, 580, 30);
+  c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`; c.fillText('1 website   2 shell   3 yazi', 44, 369);
+  c.fillStyle = '#f38ba8'; c.textAlign = 'right'; c.fillText('● 18:42', 520, 369); c.fillStyle = '#8d98a0'; c.fillText('14:32', 594, 369); c.textAlign = 'left';
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('every workspace and its agent, at a glance', 30, 412);
+}
+
+/* ---------- 9. herdr-pomodoro: focus filters the agent list (T = 16) ---------- */
+function pomodoro(c, t) {
+  t %= 16;
+  const focus = t < 10, p = focus ? t / 10 : (t < 13 ? (t - 10) / 3 : 1);
+  const cx = 190, cy = 210, R = 110;
+  c.lineWidth = 16; c.lineCap = 'round';
+  c.strokeStyle = 'rgba(20,24,28,.08)'; c.beginPath(); c.arc(cx, cy, R, 0, 7); c.stroke();
+  c.strokeStyle = focus ? '#f38ba8' : (t < 13 ? TEAL : 'rgba(20,24,28,.12)');
+  c.beginPath(); c.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (focus ? 1 - p : (t < 13 ? 1 - p : 0)) + 0.001); c.stroke(); c.lineWidth = 1;
+  const secs = focus ? Math.round(25 * 60 * (1 - p)) : (t < 13 ? Math.round(5 * 60 * (1 - p)) : 0);
+  c.fillStyle = INK; c.font = `700 44px ${MONO}`; c.textAlign = 'center';
+  c.fillText(`${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`, cx, cy + 10);
+  c.fillStyle = MUTED; c.font = `600 14px ${SANS}`; c.fillText(focus ? 'focus' : (t < 13 ? 'break' : 'idle'), cx, cy + 40); c.textAlign = 'left';
+  // sidebar: only the focus workspace while focusing
+  c.fillStyle = '#14181c'; rr(c, 360, 70, 250, 280, 14); c.fill();
+  c.fillStyle = '#8d98a0'; c.font = `600 11px ${MONO}`; c.fillText(focus ? 'agents · focus workspace only' : 'agents · all workspaces', 376, 98);
+  ['website', 'compass', 'housing', 'cv'].forEach((n, i) => {
+    const show = !focus || i === 0, y = 132 + i * 52, a = show ? 1 : 0.1; c.globalAlpha = a;
+    c.fillStyle = 'rgba(255,255,255,.05)'; rr(c, 374, y - 22, 222, 42, 8); c.fill();
+    c.fillStyle = i === 0 ? '#7ee0d6' : '#f5b83d'; c.beginPath(); c.arc(394, y - 1, 5, 0, 7); c.fill();
+    c.fillStyle = '#e6e8ea'; c.font = `600 13px ${MONO}`; c.fillText(n, 412, y + 4); c.globalAlpha = 1;
+  });
+  c.fillStyle = '#f38ba8'; c.font = `500 11px ${MONO}`; c.fillText(focus ? 'sidebar toggle locked' : '', 376, 330);
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('25 minutes of focus, then a break; the agents of other projects wait', 30, 412);
+}
+
+const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro };
 export function mount(cv, { reduced = false } = {}) {
   const c = cv.getContext('2d'), scene = SCENES[cv.dataset.tool];
   const frozen = cv.dataset.time !== undefined ? +cv.dataset.time : null;

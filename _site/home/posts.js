@@ -2,6 +2,43 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
+    "id": "claude-code-setup",
+    "title": "My Claude Code setup: one CLAUDE.md, a skill for every chore and parallel agents",
+    "date": "2026-11-08",
+    "tags": [
+      "AI"
+    ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "openspec",
+    "title": "OpenSpec: agree on the change before the code",
+    "date": "2026-11-08",
+    "tags": [
+      "AI"
+    ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "herdr",
+    "title": "herdr: one place for all agents and workspaces",
+    "date": "2026-11-08",
+    "tags": [
+      "AI",
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "herdr-pomodoro",
+    "title": "herdr-pomodoro: a focus timer that knows what I am working on",
+    "date": "2026-11-08",
+    "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
     "id": "television-fuzzy-finder",
     "title": "tv: a fuzzy finder with channels for everything",
     "date": "2026-11-08",

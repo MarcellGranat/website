@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How I use herdr, a terminal workspace manager, to keep track of several coding agents and projects at once." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>herdr: one place for all agents and workspaces | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="herdr" role="img" aria-label="Animation: a sidebar with workspaces and agent states next to tiled panes"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://herdr.dev" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>herdr</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>AI</span><span>Terminal maximalist</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">herdr: one place for all agents and workspaces</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>With agents, I rarely work on one thing. Three or four projects are in flight, and each agent is either working, waiting for my approval or done. With plain terminal windows or tmux panes I lose track of which is which, and an agent waiting for a yes sits idle until I happen to look.</p>
+<h2>The general idea</h2>
+<p>herdr is a terminal workspace manager built for this. It runs inside the terminal I already use and organises work into workspaces, tabs and tiled panes. It recognises coding agents and shows their state in a sidebar, so I see at a glance which workspace needs me. Sessions keep running when I disconnect, like tmux, and plugins extend it.</p>
+<h2>Examples</h2>
+<p>The sidebar rows in my <code>herdr.toml</code> show the agent state, the workspace, the git branch and the project status:</p>
+<pre><code>[ui.sidebar.spaces]
+rows = [
+  ["state_icon", "workspace"],
+  ["branch", "git_status"],
+  [{ token = "$pomodoro", fg = "#f38ba8", bold = true }],
+  [{ token = "$openspec", fg = "#89b4fa" }],
+]</code></pre>
+<p>Keys are bound to plugin actions, for example a fuzzy command bar and Yazi in a split:</p>
+<pre><code>[[keys.command]]
+key = "prefix+k"
+type = "plugin_action"
+command = "herdr-bar.open"
+description = "command bar"</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Claude Code reports its state</strong> through a small hook, so the sidebar icon reflects what the agent is really doing. A sound or a toast tells me when one finishes.</li>
+<li><strong>Plugins I use:</strong> a command bar to jump between tabs, agents, repositories and branches, a file viewer, Yazi in a split, a diff viewer, a review sidebar, automatic tab names, the Neovim integration, an OpenSpec browser and two of my own, notify and the pomodoro timer.</li>
+<li><strong>The sidebar stays collapsed by default.</strong> I open it when I want the overview and keep the screen for the code otherwise.</li>
+<li><strong>Other machines in the same place.</strong> herdr can save machines and open their workspaces over SSH, which fits the setup from the post about working from anywhere.</li>
+<li><strong>Agents can read each other's tabs.</strong> A skill lets an agent read the last lines of a named tab in its workspace, to check what is failing or stuck there.</li>
+<li><strong>A clock and a timer in the tab bar</strong>, next to a small system monitor.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

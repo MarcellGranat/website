@@ -67,10 +67,9 @@
         <span class="stop-n">4</span>
         <p class="kicker">Stop 4</p>
         <h2>How to bring this to production.</h2>
-        <p>A pipeline is plain scripts with a locked environment: uv pins the dependencies, just recipes give every task one memorable command, and pytest runs before anything ships. Code and results are versioned with git and DVC and hosted on GitHub, scheduled jobs run on cron, files move through rclone and cloud storage, and hot paths can be rewritten in Rust. Static outputs, like this very website, go live on Netlify.</p>
-        <ul class="tools"><li>uv lockfile</li><li>just</li><li>pytest</li><li>GitHub</li><li>DVC pipelines</li><li>cron</li><li>rclone</li><li>Rust</li><li>Netlify</li></ul>
+        <p>Production starts with a pipeline that knows what is outdated: I began with targets in R and Snakemake in Python and now use DVC, with dvcat as its terminal UI I built. git carries the code, and I tried jj but it does not work with DVC. A daily job runs on Google Cloud as a container on Cloud Run, scheduled by Cloud Scheduler and released with one just recipe, so nothing depends on my laptop.</p>
         <p class="stop-posts-title">Posts for this stop</p>
-        <div class="stop-posts" data-posts=""></div>
+        <div class="stop-posts" data-posts="targets snakemake gcloud-run jj git dvc dvcat"></div>
       </section>
 
       <p class="more-stops reveal">More stops coming</p>

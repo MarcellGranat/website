@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How I use git for data science: a few habits, a global gitignore, lazygit, just recipes and a small course I built on the terminal." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>git: the minimal setup that keeps me safe | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="git" role="img" aria-label="Animation: commits, a feature branch and a merge grow into a graph, with the git commands shown on top"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://git-scm.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>git</span></a><a class="dl" href="https://cli.github.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>GitHub CLI</span></a><a class="dl" href="https://git-scm.com/book" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Pro Git book</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-03-04">March 4, 2026</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">git: the minimal setup that keeps me safe</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Without version control the project is a folder of files called <code>final</code>, <code>final_v2</code> and <code>final_really</code>. You cannot see what changed, you cannot go back, you cannot try an idea without risking the working version, and you cannot share the work with anyone. With coding agents editing files it gets worse, because they change a lot of files quickly.</p>
+<h2>The general idea</h2>
+<p><a href="https://git-scm.com">git</a> stores snapshots of the whole project, called commits, with a message each. Branches let you try an idea on the side and merge it when it works, and a remote such as GitHub keeps a copy and shares the work. The idea is simple. The habits around it are what keep it simple.</p>
+<h2>Examples</h2>
+<pre><code>git init
+git add -- analysis.py README.md
+git commit -m "Add the loader"
+
+git switch -c feature          # try an idea on a branch
+git commit -m "Try a new model"
+git switch main
+git merge feature
+
+gh repo create my-project --private --source . --remote origin --push</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Minimal git, in writing.</strong> My global agent instructions say: when the task is finished, run the checks and commit only the files you changed with <code>git add -- &lt;files&gt;</code>. No branches, stash, reset, clean, rebase, amend or push unless I ask, and never stage unrelated files. The history stays readable even when an agent does the typing. See the post about my Claude setup.</li>
+<li><strong>A global gitignore.</strong> One file keeps the things that never belong in git out of every repository: <code>data/</code>, <code>*.env</code>, logs, zip files, caches and the folders of my coding agents. Data goes to DVC instead.</li>
+<li><strong>Recipes for the boring parts.</strong> <code>just create</code> makes a private GitHub repository from the current folder, sets the remote and pushes, and <code>just clone</code> clones one of mine. See the post about just.</li>
+<li><strong>lazygit for everything interactive.</strong> Staging single hunks, amending and resolving conflicts are faster in lazygit than in the command line. See the post about TUIs.</li>
+<li><strong>A small course.</strong> I built <a href="https://github.com/MarcellGranat/modern_git">modern_git</a>, a repository that teaches git from the terminal with a just recipe for every step: create the repository with the GitHub CLI, clone it, and walk through a small Shiny app from a flat history to a branch with a merge conflict.</li>
+<li><strong>Imperative commit messages</strong>, one change per commit, and a commit at the end of every finished task.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

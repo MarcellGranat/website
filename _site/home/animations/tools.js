@@ -466,7 +466,115 @@ function visidata(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('a terminal spreadsheet that I extend with Python', 30, 412);
 }
 
-const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata };
+/* ---------- shared: a pipeline of steps that re-runs only what is outdated ---------- */
+function dag(c, t, o) {
+  t %= 14;
+  win(c, 30, 40, 580, 340, o.title);
+  const n = o.nodes.length, step = (580 - 80) / n, y = 168;
+  // phase A (0-5): everything runs; phase B (7-12): one input changes, only the downstream steps re-run
+  const runA = (i) => seg(t, 0.8 + i * 1.0, 1.6 + i * 1.0);
+  const B0 = 7.4, runB = (i) => (i < o.hit ? 0 : seg(t, B0 + 0.4 + (i - o.hit) * 1.0, B0 + 1.2 + (i - o.hit) * 1.0));
+  c.fillStyle = '#8d98a0'; c.font = `500 12px ${MONO}`;
+  c.fillText(t < 6.6 ? '$ ' + typed(o.cmd, seg(t, 0.2, 0.9)) : '# ' + o.edit, 52, 76);
+  o.nodes.forEach((nm, i) => {
+    const x = 50 + i * step + 4, w = step - 26;
+    const a = runA(i), b = runB(i), inB = t >= B0;
+    let state = 'idle'; if (!inB) state = a >= 1 ? 'done' : a > 0 ? 'run' : 'idle'; else state = i < o.hit ? 'skip' : (b >= 1 ? 'done2' : b > 0 ? 'run' : 'stale');
+    const col = { idle: '#4a5560', run: '#7ee0d6', done: '#3ccf6e', skip: '#6b757c', stale: '#f5b83d', done2: '#3ccf6e' }[state];
+    c.fillStyle = 'rgba(255,255,255,.05)'; rr(c, x, y - 36, w, 72, 10); c.fill(); c.strokeStyle = col; c.lineWidth = state === 'run' ? 3 : 1.5; rr(c, x, y - 36, w, 72, 10); c.stroke(); c.lineWidth = 1;
+    c.fillStyle = '#e6e8ea'; c.font = `600 11px ${MONO}`; c.textAlign = 'center'; c.fillText(nm, x + w / 2, y - 6);
+    c.fillStyle = col; c.font = `500 10px ${MONO}`; c.fillText(state === 'skip' ? 'up to date' : state === 'stale' ? 'outdated' : state === 'run' ? 'running…' : state === 'idle' ? '' : 'done', x + w / 2, y + 16); c.textAlign = 'left';
+    if (i < n - 1) { c.strokeStyle = 'rgba(255,255,255,.25)'; c.beginPath(); c.moveTo(x + w + 2, y); c.lineTo(x + w + 22, y); c.stroke(); c.fillStyle = 'rgba(255,255,255,.35)'; c.fillText('›', x + w + 14, y + 4); }
+  });
+  // log lines
+  const lines = t < 6.6 ? o.nodes.map((nm, i) => [runA(i) > 0, (runA(i) >= 1 ? '✓ ' : '› ') + nm]) : o.nodes.map((nm, i) => [i >= o.hit ? runB(i) > 0 : t > B0 + 0.2, i < o.hit ? '· ' + nm + ' (skipped)' : (runB(i) >= 1 ? '✓ ' : '› ') + nm]);
+  lines.forEach(([show, ln], i) => { if (!show) return; c.fillStyle = ln.startsWith('·') ? '#6b757c' : ln.startsWith('✓') ? '#3ccf6e' : '#7ee0d6'; c.font = `500 12px ${MONO}`; c.fillText(ln, 52 + (i % 2) * 280, 262 + Math.floor(i / 2) * 22); });
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText(o.caption, 30, 412);
+}
+function snakemake(c, t) { dag(c, t, { title: 'snakemake', cmd: 'snakemake --cores 4', edit: 'edit run_model.py, then snakemake again', nodes: ['preprocess', 'run_model', 'prediction', 'visualize'], hit: 1, caption: 'rules with inputs and outputs: only the outdated ones run again' }); }
+function targets(c, t) { dag(c, t, { title: 'R · targets', cmd: 'tar_make()', edit: 'change clean(), then tar_make() again', nodes: ['raw', 'clean', 'model', 'report'], hit: 1, caption: 'a pipeline of R objects that rebuilds only what changed' }); }
+function dvc(c, t) { dag(c, t, { title: 'dvc repro', cmd: 'dvc repro', edit: 'params.yaml: lr 0.1 → 0.2, then dvc repro', nodes: ['panel', 'split', 'fit', 'evaluate'], hit: 2, caption: 'stages with dependencies, params and outputs, tracked next to git' }); }
+
+/* ---------- git: commits, a branch and a merge (T = 14) ---------- */
+function git(c, t) {
+  t %= 14;
+  win(c, 30, 40, 580, 340, 'git');
+  const main = [[90, 150], [180, 150], [270, 150], [440, 150], [530, 150]], feat = [[270, 250], [360, 250]];
+  const cmds = [[0.4, '$ git commit -m "add loader"'], [3.6, '$ git switch -c feature'], [5.4, '$ git commit -m "try new model"'], [8.6, '$ git merge feature']];
+  const cur = [...cmds].reverse().find(([at]) => t > at); if (cur) { c.fillStyle = '#7ee0d6'; c.font = `500 13px ${MONO}`; c.fillText(typed(cur[1], seg(t, cur[0], cur[0] + 0.9)), 52, 82); }
+  const showMain = [0.9, 1.7, 2.5, 9.6, 10.2];
+  const edge = (a, b, col, k) => { c.strokeStyle = col; c.lineWidth = 3; c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k); c.stroke(); c.lineWidth = 1; };
+  for (let i = 1; i < 3; i++) edge(main[i - 1], main[i], '#6aa7ff', ease(seg(t, showMain[i] - 0.4, showMain[i] + 0.2)));
+  edge(main[2], main[3], '#6aa7ff', ease(seg(t, 9.0, 10)));
+  edge(main[3], main[4], '#6aa7ff', ease(seg(t, 10.0, 10.6)));
+  edge(main[2], [feat[0][0] + 0, feat[0][1]], '#f5b83d', ease(seg(t, 4.2, 4.9)));
+  edge(feat[0], feat[1], '#f5b83d', ease(seg(t, 6.2, 6.9)));
+  edge(feat[1], main[3], '#f5b83d', ease(seg(t, 9.0, 9.8)));
+  const dot = (p, col, at, lab) => { const k = ease(seg(t, at, at + 0.4)); if (k <= 0) return; c.globalAlpha = k; c.fillStyle = col; c.beginPath(); c.arc(p[0], p[1], 11, 0, 7); c.fill(); c.fillStyle = '#14181c'; c.beginPath(); c.arc(p[0], p[1], 4, 0, 7); c.fill(); if (lab) { c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`; c.textAlign = 'center'; c.fillText(lab, p[0], p[1] + 30); c.textAlign = 'left'; } c.globalAlpha = 1; };
+  main.forEach((p, i) => dot(p, '#6aa7ff', showMain[i] - 0.2, i === 4 ? 'merged' : i === 3 ? 'merge' : ''));
+  dot(feat[0], '#f5b83d', 5.2, ''); dot(feat[1], '#f5b83d', 7.0, 'feature');
+  if (t > 1) { c.fillStyle = '#3ccf6e'; c.font = `700 11px ${MONO}`; c.fillText('main', 74, 120); }
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('snapshots of the whole project, branches for ideas', 30, 412);
+}
+
+/* ---------- jj: an editable working copy, undo, and the DVC catch (T = 15) ---------- */
+function jj(c, t) {
+  t %= 15;
+  win(c, 30, 40, 580, 340, 'jj');
+  const rows = [['@', 'qpvuntsm', 'try a new idea', '#f5b83d'], ['○', 'kkmpptxz', 'add the loader', '#6aa7ff'], ['○', 'zzzzzzzz', 'root()', '#6b757c']];
+  const ids = t < 4.5 ? ['qpvuntsm', 'a1f3c9e0'] : t < 7 ? ['qpvuntsm', '7be2d041'] : ['qpvuntsm', 'c90e5518'];
+  const act = t < 2 ? '$ jj log' : t < 4.5 ? '# edit a file: the working copy is already a commit' : t < 7 ? '$ jj undo' : t < 9.5 ? '# one more edit...' : '$ dvc exp run';
+  c.fillStyle = t < 9.5 ? '#7ee0d6' : '#f5b83d'; c.font = `500 13px ${MONO}`; c.fillText(act, 52, 82);
+  rows.forEach(([g, id, msg, col], i) => { const y = 124 + i * 46; c.fillStyle = col; c.font = `700 18px ${MONO}`; c.fillText(g, 56, y); c.font = `600 13px ${MONO}`; c.fillStyle = col; c.fillText(id, 90, y - 2); c.fillStyle = '#e6e8ea'; c.fillText(msg, 200, y - 2); c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`; c.fillText(i === 0 ? 'commit ' + ids[1] : i === 1 ? 'commit 3d90ab12' : '', 90, y + 14); });
+  c.fillStyle = 'rgba(255,255,255,.06)'; c.fillRect(46, 262, 548, 1);
+  c.fillStyle = '#8d98a0'; c.font = `500 12px ${MONO}`; c.fillText('change id stays, commit id follows every edit', 52, 286);
+  if (t > 9.5) { const k = ease(seg(t, 10, 10.8)); c.globalAlpha = k; c.fillStyle = 'rgba(229,72,77,.14)'; rr(c, 46, 296, 548, 66, 10); c.fill(); c.strokeStyle = '#e5484d'; c.stroke(); c.fillStyle = '#ff7b80'; c.font = `700 13px ${MONO}`; c.fillText('✗ dvc: needs git state that jj does not give it', 62, 322); c.fillStyle = '#e6e8ea'; c.font = `500 12px ${MONO}`; c.fillText('so I stay with git', 62, 346); c.globalAlpha = 1; }
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('nice ideas, but not compatible with DVC', 30, 412);
+}
+
+/* ---------- dvcat: the pipeline in a terminal UI (T = 14) ---------- */
+function dvcat(c, t) {
+  t %= 14;
+  win(c, 30, 40, 580, 340, 'dvcat');
+  const stages = ['panel', 'split', 'fit', 'evaluate'], run = t > 5.6, fin = (i) => i < 2 || (i === 2 && t > 10.4);
+  c.fillStyle = '#1b2227'; c.fillRect(30, 70, 200, 310);
+  stages.forEach((nm, i) => {
+    const y = 104 + i * 40, stale = i >= 2 && !fin(i), cur = i === 2;
+    if (cur) { c.fillStyle = 'rgba(203,166,247,.18)'; c.fillRect(30, y - 20, 200, 34); }
+    c.fillStyle = stale ? '#f9e2af' : '#a6e3a1'; c.font = `700 14px ${MONO}`; c.fillText(stale ? '●' : '✓', 46, y); c.fillStyle = '#cdd6f4'; c.font = `600 13px ${MONO}`; c.fillText(nm, 72, y);
+    c.fillStyle = '#6c7086'; c.font = `500 10px ${MONO}`; c.fillText(stale ? 'stale' : 'fresh', 160, y);
+  });
+  c.fillStyle = '#cba6f7'; c.font = `700 12px ${MONO}`; c.fillText(t > 10.4 ? 'fit · fresh' : run ? 'fit · running' : 'fit · stale', 250, 100);
+  c.fillStyle = '#9399b2'; c.font = `500 12px ${MONO}`;
+  if (!run) { ['why stale:', '  params changed: train.lr', '  0.1 → 0.2', '', 'r  run this stage', 'R  run with upstream'].forEach((ln, i) => { c.fillStyle = i === 0 ? '#f9e2af' : (ln.startsWith('r') || ln.startsWith('R') ? '#89b4fa' : '#cdd6f4'); c.fillText(ln, 250, 132 + i * 24); }); }
+  else { const logs = ['$ dvc repro --single-item fit', 'Running stage \'fit\':', 'epoch 1  loss 0.412', 'epoch 2  loss 0.297', 'epoch 3  loss 0.251', 'Updating lock file', '✓ fit done']; logs.forEach((ln, i) => { if (t > 5.8 + i * 0.7) { c.fillStyle = i === 6 ? '#a6e3a1' : (i === 0 ? '#89b4fa' : '#cdd6f4'); c.fillText(ln, 250, 132 + i * 24); } }); }
+  c.fillStyle = '#6c7086'; c.font = `500 11px ${MONO}`; c.fillText('j/k move · r run · e experiments · g graph · q quit', 46, 366);
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('see what is stale, and why, then run it', 30, 412);
+}
+
+/* ---------- Google Cloud: a daily job (T = 14) ---------- */
+function gcloud(c, t) {
+  t %= 14;
+  const box = (x, y, w, h, title, sub, col, on) => { c.fillStyle = '#fff'; rr(c, x, y, w, h, 12); c.fill(); c.strokeStyle = on ? col : LINE; c.lineWidth = on ? 2.5 : 1; c.stroke(); c.lineWidth = 1; c.fillStyle = INK; c.font = `700 13px ${SANS}`; c.textAlign = 'center'; c.fillText(title, x + w / 2, y + 28); c.fillStyle = MUTED; c.font = `500 11px ${MONO}`; c.fillText(sub, x + w / 2, y + 48); c.textAlign = 'left'; };
+  const ph = t < 4 ? 0 : t < 7 ? 1 : 2; // 0 release, 1 scheduled run, 2 results
+  box(30, 60, 150, 70, 'just release', 'build · update', AMBER, ph === 0);
+  box(245, 60, 150, 70, 'Artifact Registry', 'image v12', TEAL, ph === 0 && t > 1.6);
+  box(460, 60, 150, 70, 'Cloud Run job', 'the pipeline', '#4285f4', ph >= 1);
+  box(245, 230, 150, 70, 'Cloud Scheduler', '0 3 * * *', '#d98a00', ph === 1);
+  box(460, 230, 150, 70, 'Prefect', 'run history', '#6d4fc2', ph === 2);
+  box(30, 230, 150, 70, 'the shop', 'updated', '#3ccf6e', ph === 2 && t > 9);
+  const arrow = (x1, y1, x2, y2, k, col) => { c.strokeStyle = col; c.lineWidth = 3; c.setLineDash([6, 6]); c.beginPath(); c.moveTo(x1, y1); c.lineTo(x1 + (x2 - x1) * k, y1 + (y2 - y1) * k); c.stroke(); c.setLineDash([]); c.lineWidth = 1; c.fillStyle = col; c.beginPath(); c.arc(x1 + (x2 - x1) * k, y1 + (y2 - y1) * k, 5, 0, 7); c.fill(); };
+  arrow(180, 95, 245, 95, ease(seg(t, 0.8, 1.8)), AMBER); arrow(395, 95, 460, 95, ease(seg(t, 2.2, 3.2)), TEAL);
+  arrow(395, 265, 500, 130, ease(seg(t, 4.4, 5.8)), '#d98a00');
+  arrow(535, 130, 535, 230, ease(seg(t, 7.2, 8.2)), '#6d4fc2'); arrow(460, 265, 180, 265, ease(seg(t, 9, 10.4)), '#3ccf6e');
+  // clock
+  c.strokeStyle = '#d98a00'; c.lineWidth = 2; c.beginPath(); c.arc(300, 340, 22, 0, 7); c.stroke(); c.lineWidth = 1;
+  const a = -Math.PI / 2 + (t / 14) * Math.PI * 2 * 3; c.beginPath(); c.moveTo(300, 340); c.lineTo(300 + Math.cos(a) * 16, 340 + Math.sin(a) * 16); c.stroke();
+  c.fillStyle = '#d98a00'; c.font = `700 13px ${MONO}`; c.fillText(ph === 1 || ph === 2 ? '03:00' : '', 334, 345);
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('release once, then it runs every night without my laptop', 30, 412);
+}
+
+const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata, snakemake, targets, dvc, git, jj, dvcat, gcloud };
 export function mount(cv, { reduced = false } = {}) {
   const c = cv.getContext('2d'), scene = SCENES[cv.dataset.tool];
   const frozen = cv.dataset.time !== undefined ? +cv.dataset.time : null;

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How I run a daily data job on Google Cloud: a container, a Cloud Run job, Cloud Scheduler and Prefect, released with one command." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>Google Cloud: a nightly job without my laptop | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="gcloud" role="img" aria-label="Animation: just release builds the image, updates the Cloud Run job, and Cloud Scheduler triggers it every night"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://cloud.google.com/run/docs/create-jobs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Cloud Run jobs</span></a><a class="dl" href="https://cloud.google.com/scheduler/docs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Cloud Scheduler</span></a><a class="dl" href="https://www.prefect.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Prefect</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2025-08-21">August 21, 2025</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Google Cloud: a nightly job without my laptop</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Some jobs have to run every day whether or not my laptop is open: scrape a few sites, process the results and push the updates to a web shop. Cron on my own machine fails the first time the machine sleeps. A virtual machine that runs all day for a ten-minute job is a waste, and one more server to maintain.</p>
+<h2>The general idea</h2>
+<p>Package the job as a container and let Google Cloud run it only when it is needed. Cloud Run jobs run a container to completion and then stop, so I pay for minutes, not for a server. Cloud Scheduler triggers the job on a cron schedule, and Prefect records every run so I can see what happened. The whole release is a few commands, wrapped in one <code>just</code> recipe.</p>
+<h2>Examples</h2>
+<p>A Dockerfile on the Playwright image, which already has the browsers, with dependencies from the lockfile:</p>
+<pre><code>FROM mcr.microsoft.com/playwright/python:v1.53.0-jammy
+WORKDIR /app
+RUN pip install -U pip uv
+COPY pyproject.toml uv.lock* ./
+RUN uv sync --frozen --no-editable
+COPY . .
+CMD ["uv", "run", "-m", "myjob.workflow"]</code></pre>
+<p>Build, update the job, run it once and schedule it:</p>
+<pre><code>gcloud builds submit --tag "$REGION-docker.pkg.dev/$PROJECT/$REPO/$IMAGE:$VERSION"
+gcloud run jobs update "$JOB" --image="..." --region="$REGION"
+gcloud run jobs execute "$JOB" --region="$REGION"
+gcloud scheduler jobs update http "$JOB-daily" \
+  --schedule="0 3 * * *" --time-zone="Europe/Budapest" --location="$REGION"</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>One word for the whole release.</strong> In the Justfile, <code>deploy</code> is <code>build</code> followed by <code>update-job</code>, and <code>release</code> adds <code>update-scheduler</code>. <code>just release</code> is the only command I remember. See the post about just.</li>
+<li><strong>The same command locally and in the cloud.</strong> <code>just run-local</code> and the container both start the same <code>uv run -m</code> entry point, so what works on my laptop works in the job.</li>
+<li><strong>Reproducible builds.</strong> <code>uv sync --frozen</code> installs exactly what the lockfile says, and the image tag carries a version, so I can go back to the previous one.</li>
+<li><strong>Test before shipping.</strong> <code>just test</code> runs pytest, including a test that mimics the workflow.</li>
+<li><strong>Secrets stay out of git.</strong> Keys live in untracked env files and are never committed. A dedicated secret manager is the next step.</li>
+<li><strong>Observability.</strong> Prefect gives every run a history and logs, so a failed night is something I see in the morning, not something I find out from the shop.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

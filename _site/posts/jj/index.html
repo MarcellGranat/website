@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="What I liked about Jujutsu (jj), and why I went back to git: it is not compatible with DVC." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>jj: I tried it so you do not have to | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="jj" role="img" aria-label="Animation: the jj working copy is always a commit, undo rewinds it, and a DVC command meets a wall"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://github.com/jj-vcs/jj" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Jujutsu (jj)</span></a><a class="dl" href="https://jj-vcs.github.io/jj/latest/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>jj documentation</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-01-27">January 27, 2026</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">jj: I tried it so you do not have to</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Git is powerful, and it is also full of rough edges: the staging area, detached HEADs, interactive rebases that go wrong, work you lose because you forgot to stash. Jujutsu, jj, promises the same power with fewer ways to hurt yourself.</p>
+<h2>The general idea</h2>
+<p>jj is a version control system that stores its data in a normal Git repository, so it can work with GitHub and with colleagues who use git. It changes the model. There is no staging area: the working copy is itself a commit that is amended as you edit. Every change has a stable change ID that survives rewriting, history editing is a normal operation, and an operation log lets you undo almost anything, including a botched rebase.</p>
+<h2>Examples</h2>
+<pre><code>jj git init --colocate     # use jj inside an existing git repo
+jj new -m "try a new idea" # start a new change
+jj log                     # the graph, with change ids
+jj undo                    # rewind the last operation
+jj git push                # publish a bookmark to the git remote</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>I tried it for real.</strong> I made a playground repository, learned the vocabulary (changes, bookmarks, the operation log) and wrote a <code>just jj push</code> recipe in my dotfiles: it fetches, lets me pick a bookmark with a fuzzy finder, previews the revisions to publish and pushes.</li>
+<li><strong>What I liked.</strong> No staging, an always-safe working copy and a real undo. Rewriting history feels natural instead of dangerous.</li>
+<li><strong>Why I went back to git.</strong> It is not compatible with DVC. DVC expects a git repository: it tracks its metadata in git, and experiments are built on git state. In my try the two did not work together, and since DVC is central to my pipelines, git stays. See the posts about git and DVC.</li>
+<li><strong>If you do not use DVC,</strong> give it a try. It is a good idea, and it works on top of the git you already have.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

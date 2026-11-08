@@ -29,6 +29,15 @@ export const POSTS = [
     "image": "featured.svg"
   },
   {
+    "id": "dvcat",
+    "title": "dvcat: a terminal UI for DVC",
+    "date": "2026-11-06",
+    "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
     "id": "herdr",
     "title": "herdr: one place for all agents and workspaces",
     "date": "2026-06-15",
@@ -39,6 +48,20 @@ export const POSTS = [
     "image": "featured.svg"
   },
   {
+    "id": "dvc",
+    "title": "DVC: git for data, and pipelines that know what is stale",
+    "date": "2026-04-19",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "git",
+    "title": "git: the minimal setup that keeps me safe",
+    "date": "2026-03-04",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
     "id": "cleaning-the-whole-house",
     "title": "Cleaning the whole house: address reconstruction and spatial matching",
     "date": "2026-02-27",
@@ -46,6 +69,13 @@ export const POSTS = [
       "publication"
     ],
     "image": "featured.jpg"
+  },
+  {
+    "id": "jj",
+    "title": "jj: I tried it so you do not have to",
+    "date": "2026-01-27",
+    "tags": [],
+    "image": "featured.svg"
   },
   {
     "id": "terminal-in-your-pocket",
@@ -77,6 +107,13 @@ export const POSTS = [
     "image": "featured.svg"
   },
   {
+    "id": "gcloud-run",
+    "title": "Google Cloud: a nightly job without my laptop",
+    "date": "2025-08-21",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
     "id": "marimo",
     "title": "marimo: notebooks that stay in sync, in any browser",
     "date": "2025-08-12",
@@ -100,6 +137,13 @@ export const POSTS = [
     "tags": [
       "AI"
     ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "snakemake",
+    "title": "Snakemake: file-based workflows for Python and anything else",
+    "date": "2025-04-08",
+    "tags": [],
     "image": "featured.svg"
   },
   {
@@ -153,6 +197,15 @@ export const POSTS = [
       "R"
     ],
     "image": "featured.png"
+  },
+  {
+    "id": "targets",
+    "title": "targets: pipelines for R that only rebuild what changed",
+    "date": "2023-11-26",
+    "tags": [
+      "R"
+    ],
+    "image": "featured.svg"
   },
   {
     "id": "quarto",

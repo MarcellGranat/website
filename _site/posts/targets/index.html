@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How the R package targets turns an analysis into a pipeline of cached steps, and what I took from it." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>targets: pipelines for R that only rebuild what changed | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="targets" role="img" aria-label="Animation: an R targets pipeline runs, then after a change only the outdated targets are rebuilt"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://books.ropensci.org/targets/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>targets manual</span></a><a class="dl" href="https://docs.ropensci.org/targets/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>targets on rOpenSci</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-11-26">November 26, 2023</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>R</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">targets: pipelines for R that only rebuild what changed</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>An analysis starts as one long R script. Soon it takes ten minutes to run, and every small change means running everything from the top, or, worse, running only the lines you remember and trusting that the rest is still up to date. A month later you are not sure that the figure in the paper comes from the current data.</p>
+<h2>The general idea</h2>
+<p><a href="https://docs.ropensci.org/targets/">targets</a> turns the script into a pipeline. Each step, a target, is a named R object computed by a function. targets stores the results, remembers which code and which upstream objects each one depends on, and on the next run rebuilds only what is outdated. The dependency graph comes from the code itself, so there is nothing to wire up by hand.</p>
+<h2>Examples</h2>
+<pre><code># _targets.R
+library(targets)
+library(tarchetypes)
+tar_option_set(packages = c("dplyr", "readr"))
+
+list(
+  tar_target(raw,   read_csv("data/raw.csv")),
+  tar_target(clean, raw |> filter(!is.na(price))),
+  tar_target(model, lm(price ~ rooms, data = clean)),
+  tar_quarto(report, "report.qmd")
+)</code></pre>
+<pre><code>tar_make()          # build what is outdated
+tar_visnetwork()    # draw the dependency graph
+tar_read(model)     # load a result</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Functions in <code>R/</code>, a thin <code>_targets.R</code>.</strong> The pipeline file only lists the steps, and the logic lives in functions in an <code>R/</code> folder, which keeps both readable and testable.</li>
+<li><strong>Feed a Quarto document.</strong> I tried it on a project where the pipeline's results flow into a Quarto manuscript, so the numbers and figures in the text always come from the current run. See the post about Quarto.</li>
+<li><strong>Why I moved on.</strong> targets is wonderful if everything is R. My work became Python first, and I wanted one tool for data, parameters and experiments, so the pipelines moved to Snakemake and then to DVC. The idea, though, is the same, and it is the one I took with me: a pipeline is a graph of steps that knows what is outdated.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="dvcat is a minimal terminal UI I built for DVC, in Rust: browse the pipeline, see what is stale and why, run stages and compare experiments." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>dvcat: a terminal UI for DVC | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="dvcat" role="img" aria-label="Animation: dvcat lists the stages, shows why one is stale and runs it with a live log"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://dvc.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DVC</span></a><a class="dl" href="https://ratatui.rs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>ratatui</span></a><a class="dl" href="https://catppuccin.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Catppuccin</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-06">November 6, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Terminal maximalist</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">dvcat: a terminal UI for DVC</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>DVC does its job, and its command line output is not friendly. Which stages are stale, and why? Did the parameters change, a dependency, the command or an output? What does the experiment table look like across five runs? The answers are there, but you have to piece them together from several commands.</p>
+<h2>The general idea</h2>
+<p><a href="https://github.com/MarcellGranat/dvcat">dvcat</a> (DVC and cat) is a minimal terminal UI for DVC that I built in Rust with ratatui, in Catppuccin colours. It shows the pipeline, marks every stage as fresh or stale and tells you the reason, runs a stage with a live log you can cancel, draws the stage graph and has a table of experiments with deltas, a chart and actions to create, apply, remove or branch an experiment.</p>
+<h2>Examples</h2>
+<pre><code>cargo install --git https://github.com/MarcellGranat/dvcat --locked
+
+cd my-dvc-project
+dvcat</code></pre>
+<p>The keys are the ones from the other terminal tools:</p>
+<ul>
+<li><kbd>j</kbd>/<kbd>k</kbd> move, <kbd>Enter</kbd> steps into a stage's files, <kbd>o</kbd> opens a file in the editor.</li>
+<li><kbd>r</kbd> runs the selected stage only, <kbd>R</kbd> runs it with its stale upstream stages, <kbd>x</kbd> cancels.</li>
+<li><kbd>g</kbd> shows the stage graph, <kbd>e</kbd> the experiments table with <kbd>m</kbd> for differences from the baseline, <kbd>n</kbd> for a new experiment.</li>
+</ul>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Staleness with a reason.</strong> The stage detail says whether the parameters, the dependencies, the command or the outputs changed, and which parameter exactly. That is the view I missed most.</li>
+<li><strong>A run survives the UI.</strong> Quitting leaves a running stage running, and dvcat picks it up again when I open it in the project, which fits long runs on the computer at home. See the post about working from anywhere.</li>
+<li><strong>It finds DVC through the project.</strong> dvcat looks for the DVC of the project's virtual environment first, then for one on the path, so it works with the uv setup.</li>
+<li><strong>Built with agents and OpenSpec.</strong> The plan for each feature is an OpenSpec change in the repository, and a coding agent implemented it. See the posts about OpenSpec and my Claude setup.</li>
+<li><strong>A demo.</strong> <code>just demo</code> builds a small project with three experiments, so you can try everything without your own pipeline.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

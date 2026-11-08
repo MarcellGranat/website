@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="How I use DVC to version data, define pipelines with parameters and compare experiments." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>DVC: git for data, and pipelines that know what is stale | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="dvc" role="img" aria-label="Animation: a DVC pipeline runs, then after a parameter change only the stale stages run again"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://dvc.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DVC</span></a><a class="dl" href="https://dvc.org/doc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DVC documentation</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-04-19">April 19, 2026</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">DVC: git for data, and pipelines that know what is stale</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Git is built for code, not for gigabytes of data, and results depend on more than code: the data, the parameters and the order of the steps. A few weeks into a project nobody can say which data and which parameters produced which model, and comparing five runs means a folder of results with names like <code>model_new_2</code>.</p>
+<h2>The general idea</h2>
+<p><a href="https://dvc.org">DVC</a> adds data and pipelines on top of git. Data files stay out of git: git tracks small pointer files and DVC keeps the data in a cache and in a remote. A pipeline is a <code>dvc.yaml</code> file listing stages with their command, their dependencies, their parameters and their outputs. DVC records hashes of everything in <code>dvc.lock</code>, so it knows exactly which stages are stale and runs only those. Experiments are runs with different parameters that you can queue, compare and keep.</p>
+<h2>Examples</h2>
+<pre><code>stages:
+  panel:
+    cmd: uv run python -m src.panel
+    deps: [data/raw, src/panel.py]
+    outs: [data/process/panel.jsonl]
+
+  fit:
+    foreach: ${split.folds}
+    do:
+      cmd: uv run python -m src.fit ${item}
+      deps: [artifacts/split/${item}]
+      params: [model, sampler]
+      outs: [artifacts/fit/${item}]</code></pre>
+<pre><code>uv run dvc repro                                  # run what is stale
+uv run dvc exp run --queue -S model=nb -n nb      # queue an experiment
+uv run dvc queue start
+uv run dvc exp show                               # compare the runs</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Always through uv.</strong> DVC is a dependency of the project and is run as <code>uv run dvc</code>, never installed globally. My DVC skill makes the coding agents follow the same rule.</li>
+<li><strong>Parameters in one file.</strong> Every stage reads its settings from <code>params.yaml</code>, so an experiment is a changed parameter and nothing else. <code>foreach</code> turns one stage definition into one stage per cross-validation fold.</li>
+<li><strong>Data out of git, results in.</strong> The global gitignore keeps <code>data/</code> out of git, and DVC versions it. The lock file and the pointer files are what git commits.</li>
+<li><strong>A terminal UI on top.</strong> The command line output of <code>dvc exp show</code> is hard to read, so I built dvcat. See the next post.</li>
+<li><strong>It needs git.</strong> DVC builds on git state, which is why I could not switch to jj. See the post about jj.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

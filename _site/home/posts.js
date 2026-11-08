@@ -42,15 +42,6 @@ export const POSTS = [
     "image": "featured.svg"
   },
   {
-    "id": "git",
-    "title": "git: the minimal setup that keeps me safe",
-    "date": "2021-11-12",
-    "tags": [
-      "dev"
-    ],
-    "image": "featured.svg"
-  },
-  {
     "id": "cleaning-the-whole-house",
     "title": "Cleaning the whole house: address reconstruction and spatial matching",
     "date": "2026-02-27",
@@ -388,5 +379,14 @@ export const POSTS = [
     "date": "2022-01-27",
     "tags": [],
     "image": "featured.png"
+  },
+  {
+    "id": "git",
+    "title": "git: the minimal setup that keeps me safe",
+    "date": "2021-11-12",
+    "tags": [
+      "dev"
+    ],
+    "image": "featured.svg"
   }
 ];

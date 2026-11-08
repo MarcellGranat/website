@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Why uv is the one tool I use for Python versions, environments and dependencies, for myself and for my coding agents." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>uv: the cleanest way to manage Python | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="uv" role="img" aria-label="Animation: uv init, add and run create the project files, the lockfile and the environment"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://docs.astral.sh/uv/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>uv documentation</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Terminal maximalist</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">uv: the cleanest way to manage Python</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Python environments are the classic mess. There is the system Python and the project Python, pip next to conda next to poetry next to pipx, a virtual environment you have to remember to activate, a <code>requirements.txt</code> that nobody pinned and a version that works on one machine only. Coding agents make it worse: left alone they happily <code>pip install</code> into whatever Python they find first.</p>
+<h2>The general idea</h2>
+<p><a href="https://docs.astral.sh/uv/">uv</a> is one fast tool, written in Rust, for all of it: Python versions, virtual environments, dependencies, a lockfile, scripts and command-line tools. A project is a <code>pyproject.toml</code>, a <code>uv.lock</code> and a <code>.venv</code> that uv manages for you. You never activate anything: <code>uv run</code> always runs inside the right, up-to-date environment, creating or syncing it first if needed. That makes it the cleanest way I know to manage Python, for me and for the agents.</p>
+<h2>Examples</h2>
+<p>A new project, dependencies and a test run:</p>
+<pre><code>uv init analysis &amp;&amp; cd analysis
+uv add duckdb pydantic
+uv add --dev pytest ruff pyright
+uv run pytest</code></pre>
+<p>Pin the Python version of the project, and run a tool without installing it:</p>
+<pre><code>uv python pin 3.13
+uvx ruff check</code></pre>
+<p>A single script can carry its own dependencies in a comment, and <code>uv run</code> builds a throwaway environment for it:</p>
+<pre><code># /// script
+# dependencies = ["requests"]
+# ///
+import requests
+print(requests.get("https://example.com").status_code)</code></pre>
+<pre><code>uv run script.py</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>One line in CLAUDE.md</strong> tells every agent that I use uv and that packages are added with <code>uv add</code>. Since then nothing gets installed into a random Python. See the post about my Claude setup.</li>
+<li><strong><code>uv run</code> everywhere.</strong> My tv channel runs tests with <code>uv run pytest</code>, the Neovim REPL starts <code>uv run python</code>, and my just recipes call <code>uv run</code>, so tools and editor always use the project environment.</li>
+<li><strong>A dependency for one run only.</strong> A helper recipe that reads a YAML file is started with <code>uv run --with pyyaml python3 script.py</code>: pyyaml is available for that run and installed nowhere.</li>
+<li><strong>Commit the lockfile.</strong> The laptop, the computer at home and the agent all get exactly the same packages, which matters when a job runs on one machine and I check it from another.</li>
+<li><strong>Environments are cheap.</strong> Because creating one is so fast, a throwaway environment for an experiment is no longer a decision.</li>
+<li><strong>Few, plain packages.</strong> uv makes adding a dependency easy, so I keep the habit of writing vanilla Python with dataclasses, pydantic and numpy and limiting what gets imported.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

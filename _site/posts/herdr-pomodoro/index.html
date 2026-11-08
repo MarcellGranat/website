@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f5f1" />
-  <meta name="description" content="A pomodoro plugin for herdr that filters the agent list to the project I focus on and counts only real human input." />
+  <meta name="description" content="A pomodoro plugin I built for herdr that blocks me from vibing on several projects at once, and counts only real human input." />
   <link rel="icon" href="../../logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../home/styles.css" />
@@ -41,9 +41,9 @@
         <h1 class="post-title">herdr-pomodoro: a focus timer that knows what I am working on</h1>
         <article class="prose">
 <h2>The problem it solves</h2>
-<p>With agents running in several projects, something is always asking for attention, and every glance at another project breaks my focus. An ordinary pomodoro timer does not help: it counts minutes, not work, and it has no idea what is happening on my screen.</p>
+<p>Agents made editing so fast that it is tempting to vibe on several projects at the same time: a prompt here, a review there, three agents running in three repositories. Every moment feels productive, but the project that matters gets scraps of attention and every switch costs me the thread. Willpower is a weak tool against a sidebar full of blinking agents. An ordinary pomodoro timer does not help either: it counts minutes, not work, and has no idea what is happening on my screen.</p>
 <h2>The general idea</h2>
-<p>herdr-pomodoro is a plugin for herdr, written in Rust, that lives where the work is. A focus session runs for 25 minutes on one workspace, and during it the agent list shows only that workspace, so the other projects wait. A five-minute break follows and everything is visible again. If I need to look elsewhere, a three-minute grace period keeps the session alive, and returning in time resumes the original deadline.</p>
+<p>I built herdr-pomodoro, a plugin for herdr written in Rust, to enforce the focus instead of hoping for it. A focus session runs for 25 minutes on one workspace. During it the agent list shows only that workspace and the sidebar toggle is locked, so the other projects cannot pull me away. A five-minute break follows and everything is visible again. If I really need to look elsewhere, a three-minute grace period keeps the session alive, and returning in time resumes the original deadline.</p>
 <h2>Examples</h2>
 <p>A popup on <code>prefix+ctrl+p</code> adapts to the current phase: start focus, end the session, leave the terminal, use another workspace, return to focus, end the break or open the activity dashboard. From the command line:</p>
 <pre><code>herdr-pomodoro status              # does this setup support activity capture?

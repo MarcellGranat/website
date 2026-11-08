@@ -2,8 +2,17 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
+    "id": "uv",
+    "title": "uv: the cleanest way to manage Python",
+    "date": "2026-11-08",
+    "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
     "id": "claude-code-setup",
-    "title": "My Claude Code setup: one CLAUDE.md, a skill for every chore and parallel agents",
+    "title": "My Claude Code setup: one CLAUDE.md, a skill for every chore and a dotfiles repo",
     "date": "2026-11-08",
     "tags": [
       "AI"

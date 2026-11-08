@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f5f1" />
-  <meta name="description" content="The parts of my Claude Code setup that make coding agents predictable: a global CLAUDE.md, skills, a cheap worker agent, an allowlist and git worktrees." />
+  <meta name="description" content="The parts of my Claude Code setup that make coding agents predictable: a global CLAUDE.md, skills, a cheap worker agent, an allowlist and a dotfiles repository that carries it to every machine." />
   <link rel="icon" href="../../logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../home/styles.css" />
   <link rel="stylesheet" href="../../home/post.css" />
   <link rel="stylesheet" href="../../home/syntax.css" />
-  <title>My Claude Code setup: one CLAUDE.md, a skill for every chore and parallel agents | Marcell Granát</title>
+  <title>My Claude Code setup: one CLAUDE.md, a skill for every chore and a dotfiles repo | Marcell Granát</title>
 </head>
 <body>
   <div class="progress" id="progress"></div>
@@ -31,19 +31,19 @@
         <figure class="visual cover" data-visual>
           <canvas class="tool-canvas" data-tool="claude" role="img" aria-label="Animation: rules written in CLAUDE.md turn into the commands the agent runs"></canvas>
         </figure>
-        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Claude Code docs</span></a><a class="dl" href="https://github.com/raine/workmux" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>workmux</span></a></div>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Claude Code docs</span></a></div>
         <dl class="facts">
           <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
           <div><dt>Topics</dt><dd class="tags"><span>AI</span></dd></div>
         </dl>
       </aside>
       <div class="post-main">
-        <h1 class="post-title">My Claude Code setup: one CLAUDE.md, a skill for every chore and parallel agents</h1>
+        <h1 class="post-title">My Claude Code setup: one CLAUDE.md, a skill for every chore and a dotfiles repo</h1>
         <article class="prose">
 <h2>The problem it solves</h2>
-<p>Coding agents are fast but forgetful. Every session starts from zero: they ask the same questions, pick a different style each time, make git choices I did not want and sometimes touch files I never mentioned. And once I run several agents at once, they step on each other.</p>
+<p>Coding agents are fast but forgetful. Every session starts from zero: they ask the same questions, pick a different style each time, make git choices I did not want and sometimes touch files I never mentioned. And on a new computer I would have to explain everything again.</p>
 <h2>The general idea</h2>
-<p>Treat the agent like a new colleague that I onboard once, in writing. A global instructions file says how I work, skills package the jobs I repeat, a permission allowlist removes the routine prompts, and every task gets its own copy of the repository. All of it lives in my dotfiles repository, so every machine behaves the same.</p>
+<p>Treat the agent like a new colleague that I onboard once, in writing. A global instructions file says how I work, skills package the jobs I repeat, and a permission allowlist removes the routine prompts. All of it lives in my dotfiles repository, so a new machine gets the same setup with one clone.</p>
 <h2>Examples</h2>
 <p>The heart is a global <code>CLAUDE.md</code>. A few lines from mine:</p>
 <pre><code>Version control: Git, kept minimal. When the task is finished, run the
@@ -59,10 +59,10 @@ Write the tests via pytest in the tests/ folder.</code></pre>
 ]</code></pre>
 <h2>Tips from my setup</h2>
 <ul>
+<li><strong>Everything lives in <code>~/dotfiles</code>, so the setup travels.</strong> The <code>claude/</code> folder holds CLAUDE.md, the settings, the skills, the agents and the hooks, next to my Neovim, tmux, herdr, yazi and just configuration and a Brewfile that lists my tools. On a new computer I clone the repository, link the folders and the same rules, skills and keys are there. I improve the setup in one place and every machine gets it.</li>
 <li><strong>Rules about the answers too.</strong> Blocking questions come in bold and finished items in italic, so I can skim a long reply in a second.</li>
-<li><strong>A skill for every chore.</strong> I keep around thirty-five: reading data files with DuckDB, DVC, Quarto slides, OpenAlex literature search, and git helpers such as <code>worktree</code>, <code>merge</code>, <code>rebase</code> and <code>open-pr</code>. A repeated instruction becomes a skill the second time I type it.</li>
+<li><strong>A skill for every chore.</strong> I keep around thirty-five: reading data files with DuckDB, DVC, Quarto slides, OpenAlex literature search, and git helpers such as <code>merge</code>, <code>rebase</code> and <code>open-pr</code>. A repeated instruction becomes a skill the second time I type it.</li>
 <li><strong>A cheap worker for cheap jobs.</strong> A small custom agent runs on Haiku and does the exploring and the paperwork for OpenSpec, so the expensive model only does the thinking. See the post about OpenSpec.</li>
-<li><strong>Parallel agents in worktrees.</strong> <a href="https://github.com/raine/workmux">workmux</a> opens a git worktree and a tmux window per task with an agent inside. Finished branches are merged by rebase, and a <code>coordinator</code> skill can spawn and watch several agents.</li>
 <li><strong>Strict mode when I want it.</strong> Launcher recipes start an agent that must show every diff and wait for my approval, for the code I want to read line by line.</li>
 <li><strong>Hooks tell herdr what the agent is doing</strong>, so the sidebar shows which one is working and which one is waiting for me. See the post about herdr.</li>
 </ul>

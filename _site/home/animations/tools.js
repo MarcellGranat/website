@@ -353,7 +353,32 @@ function pomodoro(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('25 minutes of focus, then a break; the agents of other projects wait', 30, 412);
 }
 
-const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro };
+/* ---------- 10. uv: commands -> pyproject, lockfile, environment (T = 13) ---------- */
+function uv(c, t) {
+  t %= 13;
+  win(c, 30, 50, 320, 330, 'uv');
+  const cmds = [['$ uv init analysis', 'Initialized project'], ['$ uv add duckdb', 'Resolved 4 packages'], ['$ uv add --dev pytest', 'Added pytest'], ['$ uv run pytest', '42 passed']];
+  cmds.forEach(([cmd, out], i) => {
+    const at = 0.6 + i * 2.7; if (t < at) return;
+    const y = 96 + i * 62; c.font = `500 13px ${MONO}`; c.fillStyle = '#7ee0d6'; c.fillText(typed(cmd, seg(t, at, at + 0.9)), 48, y);
+    if (t > at + 1.1) { c.fillStyle = '#3ccf6e'; c.fillText('✓ ' + out, 48, y + 22); }
+  });
+  // files
+  const card = (x, y, w, h, name, on) => { c.globalAlpha = on; c.fillStyle = '#fff'; rr(c, x, y, w, h, 12); c.fill(); c.strokeStyle = LINE; c.stroke(); c.fillStyle = INK; c.font = `700 13px ${MONO}`; c.fillText(name, x + 14, y + 26); };
+  card(370, 50, 240, 150, 'pyproject.toml', ease(seg(t, 1.2, 1.8)));
+  c.font = `500 12px ${MONO}`; c.fillStyle = MUTED; c.fillText('[project]', 384, 92); c.fillText('name = "analysis"', 384, 112);
+  if (t > 3.6) { c.fillStyle = TEAL; c.fillText('dependencies = [', 384, 134); c.fillText('  "duckdb",', 384, 152); c.fillText(']', 384, 170); }
+  if (t > 6.4) { c.fillStyle = AMBER; c.fillText('dev = ["pytest"]', 384, 188); }
+  c.globalAlpha = 1;
+  card(370, 214, 240, 80, 'uv.lock', ease(seg(t, 3.6, 4.2)));
+  for (let l = 0; l < 3; l++) { c.fillStyle = 'rgba(20,24,28,.08)'; c.fillRect(384, 242 + l * 14, 210, 7); c.fillStyle = '#6d4fc2'; c.fillRect(384, 242 + l * 14, 210 * clamp((t - 4 - l * 0.3) / 1.2) * (l === 2 ? 0.55 : 1), 7); }
+  c.globalAlpha = 1;
+  card(370, 308, 240, 72, '.venv/', ease(seg(t, 4.0, 4.6)));
+  c.fillStyle = MUTED; c.font = `500 11px ${SANS}`; c.fillText(t > 8 ? 'managed by uv, never activated' : 'created on demand', 384, 358);
+  c.globalAlpha = 1; c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('one tool for Python versions, environments and dependencies', 30, 412);
+}
+
+const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv };
 export function mount(cv, { reduced = false } = {}) {
   const c = cv.getContext('2d'), scene = SCENES[cv.dataset.tool];
   const frozen = cv.dataset.time !== undefined ? +cv.dataset.time : null;

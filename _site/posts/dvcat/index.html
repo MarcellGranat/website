@@ -31,7 +31,7 @@
         <figure class="visual cover" data-visual>
           <canvas class="tool-canvas" data-tool="dvcat" role="img" aria-label="Animation: dvcat lists the stages, shows why one is stale and runs it with a live log"></canvas>
         </figure>
-        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://dvc.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DVC</span></a><a class="dl" href="https://ratatui.rs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>ratatui</span></a><a class="dl" href="https://catppuccin.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Catppuccin</span></a></div>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://github.com/MarcellGranat/dvcat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>dvcat on GitHub</span></a><a class="dl" href="https://dvc.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DVC</span></a><a class="dl" href="https://ratatui.rs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>ratatui</span></a><a class="dl" href="https://catppuccin.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Catppuccin</span></a></div>
         <dl class="facts">
           <div><dt>Published</dt><dd><time datetime="2026-11-08">November 8, 2026</time></dd></div>
           <div><dt>Topics</dt><dd class="tags"><span>Terminal maximalist</span><span>dev</span></dd></div>
@@ -41,27 +41,50 @@
         <h1 class="post-title">dvcat: a terminal UI for DVC</h1>
         <article class="prose">
 <h2>The problem it solves</h2>
-<p>DVC does its job, and its command line output is not friendly. Which stages are stale, and why? Did the parameters change, a dependency, the command or an output? What does the experiment table look like across five runs? The answers are there, but you have to piece them together from several commands.</p>
+<p>DVC does its job, and its command line output is not friendly. Which stages are stale, and why? Did the parameters change, a dependency, the command or an output? What does the experiment table look like across five runs? The answers are there, but you have to piece them together from <code>dvc status</code>, <code>dvc params diff</code>, <code>dvc exp show</code> and a look into <code>dvc.lock</code>.</p>
+<p>It gets worse with long pipelines. A run takes an hour on the computer at home, you close the terminal, and an hour later you do not know if it is still going, if it failed, or if someone else started a second <code>dvc repro</code> that is fighting for the same lock. I wanted one screen that answers all of this and stays out of the way.</p>
 <h2>The general idea</h2>
-<p><a href="https://github.com/MarcellGranat/dvcat">dvcat</a> (DVC and cat) is a minimal terminal UI for DVC that I built in Rust with ratatui, in Catppuccin colours. It shows the pipeline, marks every stage as fresh or stale and tells you the reason, runs a stage with a live log you can cancel, draws the stage graph and has a table of experiments with deltas, a chart and actions to create, apply, remove or branch an experiment.</p>
+<p><a href="https://github.com/MarcellGranat/dvcat">dvcat</a> (DVC and cat) is a minimal terminal UI for DVC. I built it in Rust with <a href="https://ratatui.rs">ratatui</a>, in <a href="https://catppuccin.com">Catppuccin</a> Mocha colours (it needs a true-colour terminal). It does not replace DVC and it does not store anything about your pipeline. It reads <code>dvc.yaml</code>, <code>dvc.lock</code> and <code>params.yaml</code>, calls the real <code>dvc</code> for everything that changes something, and shows you the result. The views:</p>
+<ul>
+<li><strong>Pipeline.</strong> A list of stages with a status glyph, a detail pane and a files pane. <code>✓</code> is up to date, <code>●</code> stale, <code>○</code> never run, <code>?</code> unverified and <code>…</code> still checking.</li>
+<li><strong>Graph.</strong> The stages as boxes in dependency layers, left to right, with an arrow for each dependency. The cursor is shared with the pipeline view.</li>
+<li><strong>Experiments.</strong> A table of all experiments with their params and metrics, sortable, with differences from the baseline, a chart and actions.</li>
+<li><strong>Plots.</strong> The <code>plots:</code> section of <code>dvc.yaml</code> drawn in the terminal from your CSV, TSV, JSON or YAML files.</li>
+</ul>
 <h2>Examples</h2>
 <pre><code>cargo install --git https://github.com/MarcellGranat/dvcat --locked
 
 cd my-dvc-project
-dvcat</code></pre>
-<p>The keys are the ones from the other terminal tools:</p>
+dvcat                    # or: dvcat path/to/project</code></pre>
+<h3>Why is this stage stale?</h3>
+<p>A stage is stale when its command, parameters, dependencies or recorded outputs differ from <code>dvc.lock</code>. The detail pane tells you which of the four, and which one exactly: the parameter that changed, a deleted output (<code>missing output: data/clean.parquet</code>) or an edited one (<code>modified output: ...</code>). Outputs are compared by size first and hashed only when the size matches, so the check is fast. Directories and files over 256 MiB are shown as unverified instead of slowing you down.</p>
+<h3>Run, watch, cancel</h3>
+<p><kbd>r</kbd> runs the selected stage only (<code>dvc repro --single-item</code>), <kbd>R</kbd> runs it together with its stale upstream stages (<code>dvc repro</code>), and <kbd>x</kbd> cancels. The log is live, the title shows how long the run has taken, and the stage list remembers the duration of the last run. DVC keeps no durations itself, so this is stored in <code>.dvc/tmp/dvcat-history.json</code>, inside DVC's own Git-ignored tmp directory.</p>
+<h3>Experiments</h3>
+<p>The table shows every experiment with its params and metrics. A param that differs from the baseline is highlighted, and <kbd>m</kbd> turns the metric cells into signed differences such as <code>▲ +0.1867</code>. The arrows show direction only, because the tool cannot know if higher or lower is better. From the table you can:</p>
 <ul>
-<li><kbd>j</kbd>/<kbd>k</kbd> move, <kbd>Enter</kbd> steps into a stage's files, <kbd>o</kbd> opens a file in the editor.</li>
-<li><kbd>r</kbd> runs the selected stage only, <kbd>R</kbd> runs it with its stale upstream stages, <kbd>x</kbd> cancels.</li>
-<li><kbd>g</kbd> shows the stage graph, <kbd>e</kbd> the experiments table with <kbd>m</kbd> for differences from the baseline, <kbd>n</kbd> for a new experiment.</li>
+<li><kbd>n</kbd> start a new experiment. A form lists every param, pre-filled from the row under the cursor, and only the values you changed become <code>-S</code> overrides. The command that will run is shown at the bottom, and it runs as <code>dvc exp run --temp</code> in an isolated copy, so your workspace stays untouched.</li>
+<li><kbd>a</kbd> apply, <kbd>d</kbd> remove, <kbd>b</kbd> save the experiment as a Git branch. Each asks a yes/no question first, and the branch is created without checking it out.</li>
+<li><kbd>s</kbd> sort, <kbd>t</kbd> transpose the table, <kbd>v</kbd> choose which params are shown (grouped by file, so <code>train.*</code> can be hidden at once) and <kbd>p</kbd> chart one metric against a param.</li>
+</ul>
+<h3>Templated stages</h3>
+<p><code>foreach</code>, <code>matrix</code> and <code>vars</code> in <code>dvc.yaml</code> are expanded the way DVC does it, so a stage like <code>each@us</code> or <code>grid@lin-1</code> is listed, checked and runnable like any other. A stage that uses something dvcat does not understand is shown with a warning and the reason instead of being silently wrong.</p>
+<h3>Keys</h3>
+<ul>
+<li><kbd>j</kbd>/<kbd>k</kbd> move, <kbd>Tab</kbd> switches between the stages and the files pane, <kbd>Enter</kbd> steps into a stage's files or previews a file, <kbd>o</kbd> opens it in <code>$EDITOR</code>.</li>
+<li><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> switch between the pipeline, graph, experiments and plots.</li>
+<li><kbd>q</kbd> quits, and a running stage keeps running.</li>
 </ul>
 <h2>Tips from my setup</h2>
 <ul>
-<li><strong>Staleness with a reason.</strong> The stage detail says whether the parameters, the dependencies, the command or the outputs changed, and which parameter exactly. That is the view I missed most.</li>
-<li><strong>A run survives the UI.</strong> Quitting leaves a running stage running, and dvcat picks it up again when I open it in the project, which fits long runs on the computer at home. See the post about working from anywhere.</li>
-<li><strong>It finds DVC through the project.</strong> dvcat looks for the DVC of the project's virtual environment first, then for one on the path, so it works with the uv setup.</li>
-<li><strong>Built with agents and OpenSpec.</strong> The plan for each feature is an OpenSpec change in the repository, and a coding agent implemented it. See the posts about OpenSpec and my Claude setup.</li>
-<li><strong>A demo.</strong> <code>just demo</code> builds a small project with three experiments, so you can try everything without your own pipeline.</li>
+<li><strong>Staleness with a reason.</strong> That is the view I missed most. I no longer run <code>dvc repro</code> to find out what would run: I look at the list, read why, and decide.</li>
+<li><strong>A run survives the UI.</strong> Runs started from dvcat are detached. Quitting with <kbd>q</kbd> leaves the stage running, and the next <code>dvcat</code> in the project shows the output so far and keeps streaming, with the time counted from the real start. A run that finished while the interface was closed is shown once, with its log, outcome and duration. This fits long runs on the computer at home that I check from my phone. See the post about working from anywhere.</li>
+<li><strong>It notices runs it did not start.</strong> Every couple of seconds dvcat reads <code>.dvc/tmp/rwlock</code>. If another terminal or another tool is running <code>dvc</code>, the header names the command and its age, and the stages it works on get a marker. Pressing <kbd>r</kbd> on a stage that would clash with it is refused with the reason, for example which folder the other run is writing. <kbd>X</kbd> stops the outside process after a yes, with SIGTERM first and SIGKILL after five seconds.</li>
+<li><strong>It finds DVC through the project.</strong> dvcat looks for <code>$DVCAT_DVC</code>, then <code>.venv/bin/dvc</code> in the project, then the path, so it works with the uv setup and no global install.</li>
+<li><strong>It checks itself against DVC.</strong> One of the tests compares dvcat's stale detection with the real <code>dvc status --json</code>, so a difference between the two is a bug that fails the build.</li>
+<li><strong>Built with agents and OpenSpec.</strong> The plan for each feature is an OpenSpec change in the repository (<code>add-dvc-tui</code>, then <code>add-dvc-tui-insights</code>), and a coding agent implemented it. See the posts about OpenSpec and my Claude setup.</li>
+<li><strong>Try it without your own pipeline.</strong> <code>just demo</code> builds a small Git project with three finished experiments (<code>lr-001</code>, <code>lr-005</code>, <code>lr-010</code>) and opens it, so you can try the table, the chart and the graph straight away.</li>
+<li><strong>What it does not do yet.</strong> It cannot show image plots, and it does not compare revisions (<code>dvc plots diff</code>).</li>
 </ul>
     </article>
       </div>

@@ -2,27 +2,6 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
-    "id": "terminal-in-your-pocket",
-    "title": "A terminal in my pocket: Blink, Tailscale and a computer that never sleeps",
-    "date": "2026-11-08",
-    "tags": [],
-    "image": "featured.svg"
-  },
-  {
-    "id": "neovim-tips",
-    "title": "Neovim tips from my setup: flash, smart splits and sending code to a REPL",
-    "date": "2026-11-08",
-    "tags": [],
-    "image": "featured.svg"
-  },
-  {
-    "id": "just-recipes",
-    "title": "just: one command for every task in a project",
-    "date": "2026-11-08",
-    "tags": [],
-    "image": "featured.svg"
-  },
-  {
     "id": "television-fuzzy-finder",
     "title": "tv: a fuzzy finder with channels for everything",
     "date": "2026-11-08",
@@ -31,7 +10,7 @@ export const POSTS = [
   },
   {
     "id": "tuis-lazygit-yazi-visidata",
-    "title": "Three terminal apps I would not work without: lazygit, yazi and VisiData",
+    "title": "TUIs you can open anywhere: lazygit, yazi and VisiData",
     "date": "2026-11-08",
     "tags": [],
     "image": "featured.svg"
@@ -44,6 +23,13 @@ export const POSTS = [
       "publication"
     ],
     "image": "featured.jpg"
+  },
+  {
+    "id": "terminal-in-your-pocket",
+    "title": "Data science from anywhere",
+    "date": "2025-12-15",
+    "tags": [],
+    "image": "featured.svg"
   },
   {
     "id": "central-bank-tone",
@@ -65,6 +51,20 @@ export const POSTS = [
       "AI"
     ],
     "image": "logo.png"
+  },
+  {
+    "id": "neovim-tips",
+    "title": "Neovim tips from my setup: flash, smart splits and sending code to a REPL",
+    "date": "2024-05-15",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "just-recipes",
+    "title": "just: one command for every task in a project",
+    "date": "2024-05-15",
+    "tags": [],
+    "image": "featured.svg"
   },
   {
     "id": "bigdata-course-2023",

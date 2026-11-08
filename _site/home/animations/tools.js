@@ -245,6 +245,7 @@ function tuis(c, t) {
     const x = 40 + i * 106; c.fillStyle = i === k ? INK : 'transparent'; rr(c, x, 396, 98, 26, 13); c.fill(); c.strokeStyle = LINE; c.stroke();
     c.fillStyle = i === k ? '#fff' : MUTED; c.font = `600 12px ${SANS}`; c.textAlign = 'center'; c.fillText(nme, x + 49, 413); c.textAlign = 'left';
   });
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.textAlign = 'right'; c.fillText('same apps on laptop · iPad · phone', 600, 413); c.textAlign = 'left';
 }
 
 const SCENES = { remote, neovim, just, tv, tuis };

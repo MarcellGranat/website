@@ -300,7 +300,7 @@ function openspec(c, t) {
 function herdr(c, t) {
   t %= 12;
   win(c, 30, 40, 580, 340, 'herdr');
-  const names = ['website', 'compass', 'housing', 'cv'], st = ['working', 'waiting', 'done', 'idle'];
+  const names = ['website', 'compass', 'housing', 'tokyo'], st = ['working', 'waiting', 'done', 'idle'];
   const state = (i) => st[(Math.floor(t / 3) + i) % 4];
   c.fillStyle = '#1b2227'; c.fillRect(30, 70, 190, 280);
   names.forEach((n, i) => {
@@ -343,7 +343,7 @@ function pomodoro(c, t) {
   // sidebar: only the focus workspace while focusing
   c.fillStyle = '#14181c'; rr(c, 360, 70, 250, 280, 14); c.fill();
   c.fillStyle = '#8d98a0'; c.font = `600 11px ${MONO}`; c.fillText(focus ? 'agents · focus workspace only' : 'agents · all workspaces', 376, 98);
-  ['website', 'compass', 'housing', 'cv'].forEach((n, i) => {
+  ['website', 'compass', 'housing', 'tokyo'].forEach((n, i) => {
     const show = !focus || i === 0, y = 132 + i * 52, a = show ? 1 : 0.1; c.globalAlpha = a;
     c.fillStyle = 'rgba(255,255,255,.05)'; rr(c, 374, y - 22, 222, 42, 8); c.fill();
     c.fillStyle = i === 0 ? '#7ee0d6' : '#f5b83d'; c.beginPath(); c.arc(394, y - 1, 5, 0, 7); c.fill();

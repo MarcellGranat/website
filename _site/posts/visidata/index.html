@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Why VisiData is my first stop for any data file, and how I extended it with my own commands, from association heatmaps to regression trees." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>VisiData: far better than Excel, and it speaks Python | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="visidata" role="img" aria-label="Animation: VisiData shows an association heatmap, then a regression tree built from the sheet"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://www.visidata.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>VisiData</span></a><a class="dl" href="https://www.visidata.org/docs/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>VisiData documentation</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2025-01-18">January 18, 2025</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>Terminal maximalist</span></dd></div>
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">VisiData: far better than Excel, and it speaks Python</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>The first look at a data file should not need a script or a spreadsheet. Excel is slow on big files, has row limits, mangles dates and types, cannot be scripted and cannot open a JSONL file or a database. And most of the time I only want to know what is in the file.</p>
+<h2>The general idea</h2>
+<p><a href="https://www.visidata.org">VisiData</a> is a spreadsheet for the terminal. It opens CSV, Excel, Parquet, JSON, JSONL, SQLite and many database formats as the same kind of sheet, handles millions of rows, and is driven by the keyboard. You can sort, filter, group, pivot and join, and it is written in Python, so you can extend it with your own commands. That is why it is far better than Excel for my work.</p>
+<h2>Examples</h2>
+<pre><code>vd prices.parquet
+vd events.jsonl
+vd database.sqlite</code></pre>
+<ul>
+<li><kbd>Shift-F</kbd> turns the current column into a frequency table.</li>
+<li><kbd>Shift-I</kbd> describes the whole sheet with summary statistics.</li>
+<li>Selecting rows and pressing <kbd>"</kbd> opens them as a new sheet.</li>
+</ul>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Extensions written in Python.</strong> A <code>visidatarc</code> loads my own modules, each a small file that adds commands:
+<pre><code>gA   association heatmap across all columns
+zA   the strongest pairs
+gO   OLS regression on the sheet
+gD   a regression tree you can open node by node
+B    bin a numeric column
+gT   infer the column types automatically
+zH   a histogram in the terminal (plotext)
+     dedupe-rows, select-duplicate-rows</code></pre></li>
+<li><strong>The association heatmap</strong> shows Pearson r for numeric pairs, Cramér's V for categorical ones and the variance explained (η²) for mixed pairs, which gives me a feel for a dataset before I model it.</li>
+<li><strong>A custom layout.</strong> A dark Catppuccin-style theme, the sidebar and the menu bar hidden by default, and a key (Ctrl-H) that shows the menu when I need it.</li>
+<li><strong>It goes where I go.</strong> Because it is a terminal app, I open the same sheets over SSH on the computer at home from the laptop, the iPad or the phone. See the posts about data science from anywhere and about TUIs.</li>
+<li><strong>Pair it with DuckDB.</strong> DuckDB answers the question with SQL and VisiData is how I look at the result.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

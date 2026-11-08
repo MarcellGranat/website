@@ -378,7 +378,95 @@ function uv(c, t) {
   c.globalAlpha = 1; c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('one tool for Python versions, environments and dependencies', 30, 412);
 }
 
-const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv };
+/* ---------- 11. marimo: reactive cells, remote URL (T = 14) ---------- */
+function marimo(c, t) {
+  t %= 14;
+  c.fillStyle = '#fff'; rr(c, 30, 40, 580, 340, 14); c.fill(); c.strokeStyle = LINE; c.stroke();
+  c.fillStyle = '#f1f0ea'; rr(c, 30, 40, 580, 36, [14, 14, 0, 0]); c.fill();
+  c.fillStyle = '#fff'; rr(c, 120, 49, 360, 18, 9); c.fill(); c.fillStyle = MUTED; c.font = `500 11px ${MONO}`; c.textAlign = 'center'; c.fillText('home-pc:6061', 300, 62); c.textAlign = 'left';
+  const k = (t < 7 ? ease(seg(t, 1.2, 3)) : 1 - ease(seg(t, 8, 10.4))) , n = Math.round(1 + k * 8);
+  const hot = (a, b) => (t > a && t < b);
+  // cell 1: slider
+  c.strokeStyle = hot(1.2, 3.4) || hot(8, 10.6) ? AMBER : LINE; c.lineWidth = hot(1.2, 3.4) || hot(8, 10.6) ? 2.5 : 1; rr(c, 50, 92, 540, 62, 10); c.stroke(); c.lineWidth = 1;
+  c.fillStyle = MUTED; c.font = `500 12px ${MONO}`; c.fillText('rooms = mo.ui.slider(1, 10)', 66, 118);
+  c.fillStyle = 'rgba(20,24,28,.12)'; rr(c, 330, 108, 200, 6, 3); c.fill(); c.fillStyle = TEAL; rr(c, 330, 108, 200 * (n - 1) / 9, 6, 3); c.fill();
+  c.fillStyle = '#fff'; c.strokeStyle = TEAL; c.lineWidth = 2; c.beginPath(); c.arc(330 + 200 * (n - 1) / 9, 111, 9, 0, 7); c.fill(); c.stroke(); c.lineWidth = 1;
+  c.fillStyle = INK; c.font = `700 13px ${MONO}`; c.fillText(String(n), 548, 116);
+  // cell 2: SQL
+  const upd = hot(1.6, 3.8) || hot(8.4, 10.8);
+  c.strokeStyle = upd ? AMBER : LINE; c.lineWidth = upd ? 2.5 : 1; rr(c, 50, 166, 540, 78, 10); c.stroke(); c.lineWidth = 1;
+  c.fillStyle = '#6d4fc2'; c.font = `700 11px ${MONO}`; c.fillText('SQL', 66, 190);
+  c.fillStyle = MUTED; c.font = `500 12px ${MONO}`; c.fillText('SELECT city, count(*) FROM prices', 100, 190); c.fillText(`WHERE rooms >= ${n} GROUP BY city`, 100, 210);
+  c.fillStyle = INK; c.font = `600 12px ${MONO}`; c.fillText(`${Math.round(9400 / (n * 0.9 + 1))} rows`, 66, 232);
+  // cell 3: chart
+  c.strokeStyle = upd ? AMBER : LINE; c.lineWidth = upd ? 2.5 : 1; rr(c, 50, 256, 540, 108, 10); c.stroke(); c.lineWidth = 1;
+  [1, 0.72, 0.5, 0.36, 0.25].forEach((v, i) => { const h = 70 * v * (1 - (n - 1) * 0.07) + 6; c.fillStyle = i === 0 ? TEAL : 'rgba(15,143,134,.45)'; rr(c, 90 + i * 70, 352 - h, 44, h, 4); c.fill(); });
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('change one value, every dependent cell re-runs', 30, 412);
+}
+
+/* ---------- 12. quarto: one source, many outputs (T = 14) ---------- */
+function quarto(c, t) {
+  t %= 14;
+  c.fillStyle = '#fff'; rr(c, 30, 50, 230, 320, 14); c.fill(); c.strokeStyle = LINE; c.stroke();
+  c.fillStyle = TEAL; c.font = `700 13px ${MONO}`; c.fillText('report.qmd', 48, 80);
+  const src = ['---', 'title: "Results"', 'format: html', '---', '', '## Method', 'We estimate...', '', '```{python}', 'plot(df)', '```'];
+  src.forEach((ln, i) => { const a = 0.4 + i * 0.28; if (t > a) { c.fillStyle = ln.startsWith('#') ? INK : (ln.startsWith('`') || ln.startsWith('plot') ? '#6d4fc2' : MUTED); c.font = `500 12px ${MONO}`; c.fillText(typed(ln, seg(t, a, a + 0.3)), 48, 108 + i * 22); } });
+  const go = t > 4.2; c.fillStyle = go ? AMBER : '#c9d1d6'; c.font = `700 44px ${SANS}`; c.fillText('›', 282, 226); c.font = `700 11px ${MONO}`; c.fillText('quarto render', 330, 56);
+  [['HTML', '#0f8f86', 330, 70], ['PDF', '#e5484d', 470, 70], ['Word', '#2f6fb0', 330, 200], ['Slides', '#d98a00', 470, 200]].forEach(([nm, col, x, y], i) => {
+    const a = ease(seg(t, 4.6 + i * 0.5, 5.4 + i * 0.5)); c.globalAlpha = a;
+    const dy = (1 - a) * 18; c.fillStyle = '#fff'; rr(c, x, y + dy, 120, 110, 10); c.fill(); c.strokeStyle = LINE; c.stroke();
+    c.fillStyle = col; c.fillRect(x, y + dy, 120, 22); c.fillStyle = '#fff'; c.font = `700 12px ${SANS}`; c.fillText(nm, x + 12, y + dy + 16);
+    for (let l = 0; l < 4; l++) { c.fillStyle = 'rgba(20,24,28,.12)'; c.fillRect(x + 12, y + dy + 38 + l * 14, l === 3 ? 50 : 96, 6); }
+    c.fillStyle = TEAL; c.fillRect(x + 12, y + dy + 90, 36, 12); c.globalAlpha = 1;
+  });
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('write once in Markdown with code, publish as anything', 30, 412);
+}
+
+/* ---------- 13. duckdb: SQL straight on files (T = 14) ---------- */
+function duckdb(c, t) {
+  t %= 14;
+  win(c, 30, 50, 580, 320, 'duckdb');
+  const files = [['prices.parquet', 0], ['rents.csv', 1], ['events.jsonl', 2]];
+  files.forEach(([f, i]) => { const on = t > 3.2 && t < 8; c.fillStyle = on ? 'rgba(245,184,61,.2)' : 'rgba(255,255,255,.05)'; rr(c, 46, 92 + i * 34, 150, 26, 6); c.fill(); c.fillStyle = on ? '#f5b83d' : '#8d98a0'; c.font = `500 12px ${MONO}`; c.fillText(f, 58, 110 + i * 34); });
+  c.fillStyle = '#7ee0d6'; c.font = `500 13px ${MONO}`;
+  const q = ['SELECT city, avg(price)', "FROM 'prices.parquet'", 'GROUP BY city', 'ORDER BY 2 DESC;'];
+  q.forEach((ln, i) => { c.fillStyle = i === 1 ? '#f5b83d' : '#7ee0d6'; c.fillText(typed((i === 0 ? 'D ' : '  ') + ln, seg(t, 0.4 + i * 0.7, 1.1 + i * 0.7)), 220, 100 + i * 24); });
+  if (t > 3.6) {
+    const a = ease(seg(t, 3.6, 4.2)); c.globalAlpha = a; c.fillStyle = '#1b2227'; rr(c, 220, 214, 372, 136, 8); c.fill();
+    c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`; c.fillText('city          avg(price)', 236, 238);
+    [['Budapest', 612, 1], ['Debrecen', 318, 0.52], ['Szeged', 297, 0.48], ['Pécs', 281, 0.46]].forEach(([nm, v, w], i) => {
+      c.fillStyle = '#e6e8ea'; c.fillText(nm, 236, 258 + i * 20); c.fillText(String(v), 326, 258 + i * 20);
+      c.fillStyle = TEAL; c.fillRect(372, 249 + i * 20, 190 * w * a, 9);
+    });
+    c.fillStyle = '#3ccf6e'; c.fillText('4 rows · 0.04 s', 236, 340); c.globalAlpha = 1;
+  }
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('no import step: query the files where they are', 30, 412);
+}
+
+/* ---------- 14. visidata: heatmap and regression tree (T = 16) ---------- */
+function visidata(c, t) {
+  t %= 16;
+  const tree = t >= 8;
+  win(c, 30, 40, 580, 340, tree ? 'vd · decision-tree' : 'vd · events.jsonl');
+  c.font = `500 12px ${MONO}`;
+  if (!tree) {
+    const cols = ['price', 'size', 'rooms', 'age'], r = [[1, .82, .64, -.3], [.82, 1, .71, -.2], [.64, .71, 1, -.1], [-.3, -.2, -.1, 1]];
+    c.fillStyle = '#8d98a0'; c.fillText(t > 2 ? 'gA  association-heatmap' : 'vd events.jsonl', 52, 80);
+    if (t < 2) { ['price  size  rooms  age', '612    74    3      12', '540    58    2      31', '801    98    4      7'].forEach((ln, i) => { c.fillStyle = i ? '#cfd6db' : '#7ee0d6'; c.fillText(ln, 52, 112 + i * 26); }); }
+    else cols.forEach((cn, i) => { c.fillStyle = '#7ee0d6'; c.fillText(cn, 150 + i * 92, 110); c.fillStyle = '#7ee0d6'; c.fillText(cn, 52, 148 + i * 52);
+      cols.forEach((_, j) => { const v = r[i][j], a = ease(seg(t, 2.2 + (i + j) * 0.3, 3 + (i + j) * 0.3)); c.fillStyle = v >= 0 ? `rgba(15,143,134,${.15 + .7 * Math.abs(v) * a})` : `rgba(229,72,77,${.15 + .7 * Math.abs(v) * a})`; c.fillRect(140 + j * 92, 124 + i * 52, 84, 44); c.fillStyle = '#fff'; c.globalAlpha = a; c.fillText(v.toFixed(2), 160 + j * 92, 152 + i * 52); c.globalAlpha = 1; }); });
+    c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`; c.fillText('Pearson r · Cramér\'s V · eta²', 52, 360);
+  } else {
+    const nodes = [[310, 90, 'size < 65?', 0], [190, 190, 'age < 20?', 1.2], [430, 190, 'rooms < 4?', 1.2], [120, 300, '£ 310', 2.4], [260, 300, '£ 470', 2.4], [360, 300, '£ 590', 2.4], [500, 300, '£ 810', 2.4]];
+    const edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6]];
+    edges.forEach(([a, b]) => { const A = nodes[a], B = nodes[b], k = ease(seg(t - 8, B[3], B[3] + 0.8)); c.strokeStyle = `rgba(255,255,255,${.3 * k})`; c.beginPath(); c.moveTo(A[0], A[1] + 16); c.lineTo(A[0] + (B[0] - A[0]) * k, A[1] + 16 + (B[1] - A[1] - 32) * k); c.stroke(); });
+    nodes.forEach(([x, y, lab, at]) => { const k = ease(seg(t - 8, at, at + 0.8)); c.globalAlpha = k; const leaf = lab.startsWith('£'); c.fillStyle = leaf ? 'rgba(245,184,61,.2)' : 'rgba(126,224,214,.16)'; rr(c, x - 52, y - 16, 104, 32, 8); c.fill(); c.fillStyle = leaf ? '#f5b83d' : '#7ee0d6'; c.textAlign = 'center'; c.fillText(lab, x, y + 4); c.textAlign = 'left'; c.globalAlpha = 1; });
+    c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`; c.fillText('gD  decision-tree: a regression tree on the sheet', 52, 360);
+  }
+  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('a terminal spreadsheet that I extend with Python', 30, 412);
+}
+
+const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata };
 export function mount(cv, { reduced = false } = {}) {
   const c = cv.getContext('2d'), scene = SCENES[cv.dataset.tool];
   const frozen = cv.dataset.time !== undefined ? +cv.dataset.time : null;

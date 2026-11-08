@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Why DuckDB is my favourite data tool, with examples from how I use it in one of my projects." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>DuckDB: my favourite tool for data work | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="duckdb" role="img" aria-label="Animation: a DuckDB query runs straight on a Parquet file and returns an aggregated table"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://duckdb.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DuckDB</span></a><a class="dl" href="https://duckdb.org/docs/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DuckDB documentation</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2024-07-10">July 10, 2024</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">DuckDB: my favourite tool for data work</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Data comes as files: CSV, Parquet, JSONL. Too big for Excel, too small to justify a database server. Loading everything into pandas eats memory and time, and setting up Postgres just to answer a question is overkill. Meanwhile SQL is the best language for most questions about data.</p>
+<h2>The general idea</h2>
+<p><a href="https://duckdb.org">DuckDB</a> is an analytical SQL database that runs inside your process. There is no server: it is a single binary or a Python library, it queries files where they are, it is columnar and very fast, and a whole database is a single file. It is my favourite tool, because it is the shortest path from a file to an answer.</p>
+<h2>Examples</h2>
+<p>Query files directly, with no import step:</p>
+<pre><code>SELECT city, avg(price)
+FROM 'prices.parquet'
+GROUP BY city
+ORDER BY 2 DESC;
+
+SELECT count(*) FROM read_json_auto('events.jsonl');
+COPY (SELECT * FROM 'rents.csv') TO 'rents.parquet';</code></pre>
+<p>And from Python, with the result as a dataframe:</p>
+<pre><code>import duckdb
+
+df = duckdb.sql("SELECT * FROM 'prices.parquet' WHERE rooms >= 3").df()</code></pre>
+<h2>Tips from my setup</h2>
+<p>Here is how it looks in one of my projects, a data pipeline with a model on top:</p>
+<ul>
+<li><strong>One database file, organised in schemas.</strong> The project keeps a single <code>bwf.duckdb</code> with raw, features and models layers, and the SQL that builds each layer lives in versioned <code>.sql</code> files in the repository.</li>
+<li><strong>Recipes for the pipeline.</strong> <code>just refresh</code> pulls and loads the new data, <code>just rebuild-db</code> builds the database again from scratch, and <code>just export-features</code> hands the feature tables to the models. <code>just load-jsonl source table</code> loads any JSONL file into a table.</li>
+<li><strong>A read-only monitoring session.</strong> <code>just db</code> opens DuckDB with an init script that attaches the database as READ_ONLY and prints a freshness overview of the tables. Because it only reads, it never blocks the running app, and DuckDB's single-writer rule is respected.</li>
+<li><strong>DuckDB everywhere else.</strong> yazi opens a <code>.duckdb</code> file in the shell on Enter, Neovim sends SQL to a DuckDB REPL, and marimo has SQL cells on top of the same file. See those posts.</li>
+<li><strong>Rules for my agents.</strong> My Claude instructions say to read data files with DuckDB, to open <code>.duckdb</code> files read-only and never to modify the source data.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

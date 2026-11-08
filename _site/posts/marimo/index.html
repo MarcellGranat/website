@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Why marimo is my most productive tool for exploring data: reactive cells, plain Python files, SQL cells and a notebook server I can open from any device." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>marimo: notebooks that stay in sync, in any browser | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="marimo" role="img" aria-label="Animation: a marimo notebook in a browser; moving a slider re-runs the SQL and chart cells that depend on it"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://marimo.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>marimo</span></a><a class="dl" href="https://docs.marimo.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>marimo documentation</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2025-08-12">August 12, 2025</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">marimo: notebooks that stay in sync, in any browser</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Classic notebooks lie. Cells can be run in any order, so a stale cell happily shows numbers from a variable you have since changed. The file is a blob of JSON that makes a mess of git diffs, it cannot be imported or run as a script, and SQL, the language I would rather use for most data questions, sits awkwardly in a Python cell. And a notebook server that I can reach from a second computer usually takes an afternoon to set up.</p>
+<h2>The general idea</h2>
+<p><a href="https://marimo.io">marimo</a> is a reactive notebook. Cells form a dependency graph: change a value and every cell that reads it re-runs automatically, so what you see is always consistent with the code. A notebook is a plain Python file, which is friendly to git, can be run as a script and imported as a module. SQL cells are built in and are executed with DuckDB, and UI elements such as sliders and dropdowns turn an analysis into a small app. For exploring data, it is the most productive tool I have found.</p>
+<h2>Examples</h2>
+<pre><code>import marimo as mo
+
+rooms = mo.ui.slider(1, 10, value=3)   # one cell
+
+df = mo.sql(f"""                         # another cell, in SQL
+    SELECT city, count(*) AS n
+    FROM prices
+    WHERE rooms >= {rooms.value}
+    GROUP BY city
+""")</code></pre>
+<p>Move the slider and the SQL cell, and everything below it, updates. From the command line:</p>
+<pre><code>marimo edit analysis.py     # open or create a notebook in the browser
+marimo run analysis.py      # serve it as a read-only app</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>Open it remotely.</strong> A <code>just marimo</code> recipe starts the server on the computer at home that is always on: <code>uv run marimo edit . --host 0.0.0.0 --port 6061 --watch --no-token</code>. Over Tailscale I open it from the laptop, the iPad or the phone, and the heavy queries run at home. That token-free setup is only sensible because the machine is on my private network, nothing is exposed to the internet. See the post about data science from anywhere.</li>
+<li><strong>Edit in Neovim, see it in the browser.</strong> The <code>--watch</code> flag reloads the notebook when the file changes on disk, so I can edit the Python file in my editor while the browser shows the result.</li>
+<li><strong>SQL cells on my DuckDB files.</strong> A SQL cell queries the project database directly, and the next Python cell continues with the result as a dataframe. See the post about DuckDB.</li>
+<li><strong>Settings:</strong> vim keybindings, autosave after one second, a compact layout and basedpyright for type checking.</li>
+<li><strong>Notebooks are code.</strong> They live in a <code>notebooks/</code> folder of the project as plain Python files, with marimo as one of the project's dependencies, so <code>uv run marimo</code> works on any machine.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

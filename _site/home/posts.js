@@ -77,6 +77,13 @@ export const POSTS = [
     "image": "featured.svg"
   },
   {
+    "id": "marimo",
+    "title": "marimo: notebooks that stay in sync, in any browser",
+    "date": "2025-08-12",
+    "tags": [],
+    "image": "featured.svg"
+  },
+  {
     "id": "eabh2025",
     "title": "A Compass to Understanding the Hungarian Economy of the 19th–20th Centuries",
     "date": "2025-06-12",
@@ -93,6 +100,22 @@ export const POSTS = [
     "tags": [
       "AI"
     ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "visidata",
+    "title": "VisiData: far better than Excel, and it speaks Python",
+    "date": "2025-01-18",
+    "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
+  },
+  {
+    "id": "duckdb",
+    "title": "DuckDB: my favourite tool for data work",
+    "date": "2024-07-10",
+    "tags": [],
     "image": "featured.svg"
   },
   {
@@ -130,6 +153,13 @@ export const POSTS = [
       "R"
     ],
     "image": "featured.png"
+  },
+  {
+    "id": "quarto",
+    "title": "Quarto: one source for reports, papers and slides",
+    "date": "2023-11-20",
+    "tags": [],
+    "image": "featured.svg"
   },
   {
     "id": "cb-textmining",

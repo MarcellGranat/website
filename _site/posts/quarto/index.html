@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="Why Quarto is my tool for writing and reporting results, at work and in academia, from a single plain-text source." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>Quarto: one source for reports, papers and slides | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="quarto" role="img" aria-label="Animation: a report.qmd source file is rendered into HTML, PDF, Word and slides"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://quarto.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Quarto</span></a><a class="dl" href="https://quarto.org/docs/guide/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Quarto guide</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2023-11-20">November 20, 2023</time></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">Quarto: one source for reports, papers and slides</h1>
+        <article class="prose">
+<h2>The problem it solves</h2>
+<p>Results get scattered. The analysis is in one place, the text in a Word file, the slides in PowerPoint, and the numbers in between were copied by hand, so they are out of date the moment the data changes. Academic writing adds citations, cross-references and equations on top, and at work I just need a clean report by tomorrow.</p>
+<h2>The general idea</h2>
+<p><a href="https://quarto.org">Quarto</a> is an open-source publishing system from Posit. You write Markdown with code chunks (Python, R or Julia), and one source renders to HTML, PDF, Word, ePub, slides, websites and books. It is built on Pandoc and runs the code with Jupyter or knitr, so tables and figures in the document come straight from the analysis and are rebuilt every time. It is where R Markdown went, in one consistent system. It is the best tool I know for writing and reporting results.</p>
+<h2>Examples</h2>
+<pre><code>---
+title: "Results"
+format: html
+---
+
+## Method
+
+We estimate the effect of rooms on price.
+
+```{python}
+plot(df)
+```</code></pre>
+<pre><code>quarto render report.qmd                 # HTML
+quarto render report.qmd --to docx       # Word
+quarto preview report.qmd                # live preview while writing</code></pre>
+<h2>Tips from my setup</h2>
+<ul>
+<li><strong>The same tool at work and in academia.</strong> A quick report for colleagues, a paper draft with citations and cross-references, and a conference deck all start from a <code>.qmd</code> file.</li>
+<li><strong>Slides as code.</strong> My conference slides are Quarto revealjs decks, and a coding-agent skill knows how to build and tidy them. Plain text means the slides diff, version and rebuild like any other code.</li>
+<li><strong>Websites and courses.</strong> This website, and the site of my Big Data course, were Quarto projects, built from the same plain-text posts.</li>
+<li><strong>In the editor.</strong> quarto-nvim runs the code chunks and gives language support inside them, so I write documents in Neovim like any other code.</li>
+<li><strong>Keep the analysis outside.</strong> The heavy work lives in scripts and DuckDB. The document loads the results and shows them, so rendering is fast.</li>
+</ul>
+    </article>
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ const TOOLS = [
   ['uv', '#6d4fc2'], ['Quarto', '#2a8a5b'], ['git', '#14181c'], ['Claude Code', '#c46a2d'],
   ['pytest', '#0f8f86'], ['Parquet', '#2f6fb0'],
 ];
-const H = 230, G = 186, SPEED = 95, WAGON = 124, PUFF_EVERY = 0.2, PUFF_LIFE = 3.2;
+const H = 420, G = 382, SPEED = 115, WAGON = 124, TRAIN = 170 + TOOLS.length * WAGON, GAP = 260, PUFF_EVERY = 0.2, PUFF_LIFE = 3.2;
 const INK = '#14181c', MONO = "'JetBrains Mono', ui-monospace, monospace";
 
 function rr(c, x, y, w, h, r) { c.beginPath(); c.roundRect(x, y, w, h, r); }
@@ -70,29 +70,35 @@ function wagon(c, x, i, t, dist) {
   c.restore();
 }
 
-function draw(c, W, t) {
-  const dist = t * SPEED;
+const smooth = (x) => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
+
+function draw(c, W, t, fixedL) {
+  const dist = t * SPEED, P = W + TRAIN + GAP;
+  const posAt = (tt) => ((tt * SPEED) % P) - 170;
+  const L = fixedL ?? posAt(t);
   c.clearRect(0, 0, W, H);
-  // landscape (slow parallax)
-  hill(c, W, dist, 34, G - 52, 1.3, 'rgba(15,143,134,.10)', 0.12);
-  hill(c, W, dist, 22, G - 22, 4.1, 'rgba(217,138,0,.10)', 0.28);
-  // ground, gravel, sleepers, rails
-  c.fillStyle = 'rgba(20,24,28,.06)'; c.fillRect(0, G, W, H - G);
+  // landscape (static; the train is what moves)
+  hill(c, W, 0, 38, G - 60, 1.3, 'rgba(15,143,134,.10)', 0);
+  hill(c, W, 0, 24, G - 24, 4.1, 'rgba(217,138,0,.10)', 0);
+  // sleepers and rails (no ground slab)
   c.fillStyle = 'rgba(20,24,28,.22)';
-  for (let x = -((dist) % 26); x < W; x += 26) c.fillRect(x, G + 6, 14, 6);
+  for (let x = 0; x < W; x += 26) c.fillRect(x, G + 6, 14, 6);
   c.fillStyle = INK; c.fillRect(0, G - 1, W, 4);
-  // steam
-  const born = Math.floor(t / PUFF_EVERY);
-  const L = Math.min(W - 190, Math.max(WAGON, W * 0.72));
-  for (let k = born; k > born - PUFF_LIFE / PUFF_EVERY; k--) {
-    const age = t - k * PUFF_EVERY; if (age < 0) continue;
-    const u = age / PUFF_LIFE;
-    const x = L + 125 - age * 62 - u * 30, y = G - 116 - age * 26 - u * 16;
-    c.fillStyle = `rgba(222,221,214,${0.9 * (1 - u)})`; c.strokeStyle = `rgba(20,24,28,${0.08 * (1 - u)})`;
-    c.beginPath(); c.arc(x, y, 6 + u * 24, 0, 7); c.fill(); c.stroke();
+  // steam: puffs stay where they were released, grow, rise and fade out well before the edges
+  if (fixedL === undefined) {
+    const born = Math.floor(t / PUFF_EVERY);
+    for (let k = born; k > born - PUFF_LIFE / PUFF_EVERY; k--) {
+      const age = t - k * PUFF_EVERY; if (age < 0) continue;
+      const u = age / PUFF_LIFE;
+      const x = posAt(k * PUFF_EVERY) + 125 - age * 14, y = G - 116 - age * 30 - u * 18;
+      const edge = smooth(x / (W * 0.16)) * smooth((W - x) / (W * 0.16));
+      const a = 0.9 * (1 - u) * edge; if (a <= 0.01) continue;
+      c.fillStyle = `rgba(222,221,214,${a})`; c.strokeStyle = `rgba(20,24,28,${0.07 * (1 - u) * edge})`;
+      c.beginPath(); c.arc(x, y, 6 + u * 26, 0, 7); c.fill(); c.stroke();
+    }
   }
   loco(c, L, t, dist);
-  for (let i = 0, x = L - WAGON; x > -WAGON; i++, x -= WAGON) wagon(c, x, i, t, dist);
+  for (let i = 0, x = L - WAGON; x > -WAGON && i < TOOLS.length; i++, x -= WAGON) if (x < W) wagon(c, x, i, t, dist);
 }
 
 export function mount(cv, { reduced = false } = {}) {
@@ -107,7 +113,7 @@ export function mount(cv, { reduced = false } = {}) {
     c.setTransform(cv.width / W, 0, 0, cv.height / H, 0, 0);
     paint(performance.now());
   }
-  const paint = (now) => draw(c, W, frozen ?? (reduced ? 2.5 : (now - t0) / 1000));
+  const paint = (now) => reduced && frozen === null ? draw(c, W, 0, W * 0.82) : draw(c, W, frozen ?? (now - t0) / 1000);
   function loop(now) { if (!vis) return; paint(now); raf = requestAnimationFrame(loop); }
   new ResizeObserver(size).observe(cv);
   new IntersectionObserver(([e]) => {

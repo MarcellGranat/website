@@ -44,7 +44,7 @@ export const POSTS = [
   {
     "id": "git",
     "title": "git: the minimal setup that keeps me safe",
-    "date": "2026-03-04",
+    "date": "2021-11-12",
     "tags": [
       "dev"
     ],

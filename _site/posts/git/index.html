@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f5f1" />
-  <meta name="description" content="How I use git for data science: a few habits, a global gitignore, lazygit, just recipes and a small course I built on the terminal." />
+  <meta name="description" content="How I use git for data science: a few habits, a global gitignore, lazygit, branches, worktrees, notes, DVC and why an agent should commit after every change." />
   <link rel="icon" href="../../logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../home/styles.css" />
@@ -33,7 +33,7 @@
         </figure>
         <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://git-scm.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>git</span></a><a class="dl" href="https://cli.github.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>GitHub CLI</span></a><a class="dl" href="https://git-scm.com/book" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>Pro Git book</span></a></div>
         <dl class="facts">
-          <div><dt>Published</dt><dd><time datetime="2026-03-04">March 4, 2026</time></dd></div>
+          <div><dt>Published</dt><dd><time datetime="2021-11-12">November 12, 2021</time></dd></div>
           <div><dt>Topics</dt><dd class="tags"><span>dev</span></dd></div>
           
         </dl>
@@ -62,8 +62,32 @@ gh repo create my-project --private --source . --remote origin --push</code></pr
 <li><strong>A global gitignore.</strong> One file keeps the things that never belong in git out of every repository: <code>data/</code>, <code>*.env</code>, logs, zip files, caches and the folders of my coding agents. Data goes to DVC instead.</li>
 <li><strong>Recipes for the boring parts.</strong> <code>just create</code> makes a private GitHub repository from the current folder, sets the remote and pushes, and <code>just clone</code> clones one of mine. See the post about just.</li>
 <li><strong>lazygit for everything interactive.</strong> Staging single hunks, amending and resolving conflicts are faster in lazygit than in the command line. See the post about TUIs.</li>
-<li><strong>A small course.</strong> I built <a href="https://github.com/MarcellGranat/modern_git">modern_git</a>, a repository that teaches git from the terminal with a just recipe for every step: create the repository with the GitHub CLI, clone it, and walk through a small Shiny app from a flat history to a branch with a merge conflict.</li>
 <li><strong>Imperative commit messages</strong>, one change per commit, and a commit at the end of every finished task.</li>
+</ul>
+<h2>Expert things</h2>
+<h3>Branches</h3>
+<p>A branch is a cheap label on a commit. I use one for every idea that might fail: a new model, a refactor, an experiment with a different data source. If it works I merge it, if it does not I delete the branch and <code>main</code> never knew. With agents the rule is stricter: the agent works on a branch, I review the diff, and only then does it reach <code>main</code>.</p>
+<pre><code>git switch -c try-new-model
+git log --oneline --graph --all
+git branch -d try-new-model     # the idea did not work</code></pre>
+<h3>Worktrees</h3>
+<p>A worktree checks out another branch into a second folder that shares the same repository. You can run a long job on one branch while you edit on another, or give each agent its own folder so that two of them never overwrite each other's files. No stashing, no half-finished changes in the way.</p>
+<pre><code>git worktree add ../project-feature feature
+git worktree list
+git worktree remove ../project-feature</code></pre>
+<h3>Notes</h3>
+<p>A commit message cannot be edited without rewriting history, but a note can. <code>git notes</code> attaches extra text to a commit without changing it. I use it for things I learn later: which run of the pipeline used this commit, what the result was, why a change was reverted.</p>
+<pre><code>git notes add -m "AUC 0.81 on the 2021 sample" HEAD
+git log --show-notes</code></pre>
+<h3>DVC for the data</h3>
+<p>git is bad at big files and data does not belong in it. <a href="../dvc/index.html">DVC</a> keeps a small pointer file in git and the data itself in a remote, so one commit describes the code and the exact data it ran on. Going back to an old commit means going back to the old data as well.</p>
+<h3>Why the agent should commit after every modification</h3>
+<ul>
+<li><strong>Every step is a restore point.</strong> If the next edit breaks something, one <code>git restore</code> or <code>git revert</code> undoes exactly that step instead of an hour of mixed changes.</li>
+<li><strong>The diff stays reviewable.</strong> Ten small commits are easy to read. One huge change at the end is not, and that is where mistakes slip through.</li>
+<li><strong>Agents drift.</strong> A long session loses track of what it changed. The history is the record of what actually happened, not what the agent remembers.</li>
+<li><strong>Bisecting works.</strong> When a bug appears later, <code>git bisect</code> finds the commit that caused it, but only if the commits are small.</li>
+<li><strong>Parallel agents need it.</strong> With worktrees and several agents, small commits make merging painless.</li>
 </ul>
     </article>
       </div>

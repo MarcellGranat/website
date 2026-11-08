@@ -11,27 +11,9 @@ export const POSTS = [
     "image": "featured.svg"
   },
   {
-    "id": "television-fuzzy-finder",
-    "title": "tv: a fuzzy finder with channels for everything",
-    "date": "2026-11-08",
-    "tags": [
-      "Terminal maximalist"
-    ],
-    "image": "featured.svg"
-  },
-  {
-    "id": "tuis-lazygit-yazi-visidata",
-    "title": "TUIs you can open anywhere: lazygit, yazi and VisiData",
-    "date": "2026-11-08",
-    "tags": [
-      "Terminal maximalist"
-    ],
-    "image": "featured.svg"
-  },
-  {
     "id": "dvcat",
     "title": "dvcat: a terminal UI for DVC",
-    "date": "2026-11-06",
+    "date": "2026-11-08",
     "tags": [
       "Terminal maximalist"
     ],
@@ -75,6 +57,15 @@ export const POSTS = [
     "title": "jj: I tried it so you do not have to",
     "date": "2026-01-27",
     "tags": [],
+    "image": "featured.svg"
+  },
+  {
+    "id": "tuis-lazygit-yazi-visidata",
+    "title": "TUIs you can open anywhere: lazygit, yazi and VisiData",
+    "date": "2026-01-20",
+    "tags": [
+      "Terminal maximalist"
+    ],
     "image": "featured.svg"
   },
   {
@@ -129,6 +120,15 @@ export const POSTS = [
       "AI"
     ],
     "image": "logo.png"
+  },
+  {
+    "id": "television-fuzzy-finder",
+    "title": "tv: a fuzzy finder with channels for everything",
+    "date": "2025-05-22",
+    "tags": [
+      "Terminal maximalist"
+    ],
+    "image": "featured.svg"
   },
   {
     "id": "claude-code-setup",

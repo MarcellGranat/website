@@ -11,7 +11,7 @@ $('#year').textContent = new Date().getFullYear();
 // Attach posts to a stop: put post ids in the stop's data-posts attribute ("id1 id2").
 for (const box of $$('.stop-posts')) {
   const ids = box.dataset.posts.split(/\s+/).filter(Boolean);
-  const posts = ids.map((id) => POSTS.find((p) => p.id === id)).filter(Boolean);
+  const posts = ids.map((id) => POSTS.find((p) => p.id === id)).filter(Boolean).sort((a, b) => b.date.localeCompare(a.date)); // newest first
   box.innerHTML = posts.length
     ? posts.map((p) => `
       <a class="post" href="../posts/${p.id}/index.html">

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="A map of my modern data-science stack: setting the computer up, writing code with agents, analysing data and bringing it to production." />
+  <link rel="icon" href="../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../home/styles.css" />
+  <link rel="stylesheet" href="../home/post.css" />
+  <link rel="stylesheet" href="../home/stack.css" />
+  <title>The modern data-science stack | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../index.html"><img src="../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#blog">Blog</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="stack-page">
+    <section class="stack-hero">
+      <div>
+        <a class="back" href="../index.html#research">← Back to the homepage</a>
+        <p class="kicker">Guide</p>
+        <h1>The modern data-science stack.</h1>
+        <p class="lead">A map of how I work, from a fresh laptop to a running pipeline. Each stop has a short overview of my current setup, and the posts that go deeper will be attached to it.</p>
+      </div>
+      <div class="metro-wrap" id="metro-hero"></div>
+    </section>
+
+    <div class="route" id="route">
+      <section class="stop reveal" id="s1">
+        <span class="stop-n">1</span>
+        <p class="kicker">Stop 1</p>
+        <h2>Set your computer up.</h2>
+        <p>A fast, boring and reproducible base. Homebrew installs almost everything, git (with jj and lazygit on top) keeps the history, and uv manages Python so a project is one command away from running. Rust and R sit next to it for the jobs they do best, and the terminal, with Neovim, fzf, ripgrep and fd, is where most of the day happens. The dotfiles live in a repository, so a new machine is one clone away from feeling like home.</p>
+        <ul class="tools"><li>Homebrew</li><li>git · jj · lazygit</li><li>uv</li><li>rustup</li><li>R</li><li>Neovim</li><li>fzf · ripgrep · fd</li><li>just</li></ul>
+        <p class="stop-posts-title">Posts for this stop</p>
+        <div class="stop-posts" data-posts=""></div>
+      </section>
+
+      <section class="stop reveal" id="s2">
+        <span class="stop-n">2</span>
+        <p class="kicker">Stop 2</p>
+        <h2>How to write code, with agents.</h2>
+        <p>Coding agents (Claude Code and Codex, plus local models through Ollama) do the typing, and I keep the decisions. A global CLAUDE.md carries my conventions to every project: uv for Python, strict type hints, dataclasses and pydantic over dicts, minimal git. Skills package the repeatable jobs, OpenSpec turns an idea into a plan before any code is written, and worktrees let several agents work in parallel without stepping on each other. Ruff, pyright in strict mode and pytest are the guardrails that keep agent-written code honest.</p>
+        <ul class="tools"><li>Claude Code</li><li>Codex</li><li>Ollama</li><li>CLAUDE.md</li><li>Skills</li><li>OpenSpec</li><li>ruff</li><li>pyright</li><li>pytest</li></ul>
+        <p class="stop-posts-title">Posts for this stop</p>
+        <div class="stop-posts" data-posts=""></div>
+      </section>
+
+      <section class="stop reveal" id="s3">
+        <span class="stop-n">3</span>
+        <p class="kicker">Stop 3</p>
+        <h2>How to analyse data.</h2>
+        <p>DuckDB is the engine: SQL straight on CSV, Parquet and JSON files, no server and no waiting. Typed objects (dataclasses, pydantic) keep the pipeline readable, and results are saved as JSON or Parquet. For exploration I use reactive marimo notebooks, R when its statistics and graphics are the best tool, and Quarto for reports and slides. DVC versions the data next to the code, and OpenAlex helps with the literature side of research.</p>
+        <ul class="tools"><li>DuckDB</li><li>Parquet</li><li>marimo</li><li>R</li><li>Quarto</li><li>DVC</li><li>pydantic</li><li>OpenAlex</li></ul>
+        <p class="stop-posts-title">Posts for this stop</p>
+        <div class="stop-posts" data-posts=""></div>
+      </section>
+
+      <section class="stop reveal" id="s4">
+        <span class="stop-n">4</span>
+        <p class="kicker">Stop 4</p>
+        <h2>How to bring this to production.</h2>
+        <p>A pipeline is plain scripts with a locked environment: uv pins the dependencies, just recipes give every task one memorable command, and pytest runs before anything ships. Code and results are versioned with git and DVC and hosted on GitHub, scheduled jobs run on cron, files move through rclone and cloud storage, and hot paths can be rewritten in Rust. Static outputs, like this very website, go live on Netlify.</p>
+        <ul class="tools"><li>uv lockfile</li><li>just</li><li>pytest</li><li>GitHub</li><li>DVC pipelines</li><li>cron</li><li>rclone</li><li>Rust</li><li>Netlify</li></ul>
+        <p class="stop-posts-title">Posts for this stop</p>
+        <div class="stop-posts" data-posts=""></div>
+      </section>
+
+      <p class="more-stops reveal">More stops coming</p>
+    </div>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../index.html">Home</a></footer>
+  <script type="module" src="../home/stack.js"></script>
+</body>
+</html>

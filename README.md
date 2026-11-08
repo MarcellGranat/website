@@ -9,3 +9,7 @@ Plain static website - no build step, no Quarto. **`_site/` is the site** (this 
 - `archive-quarto/` : the old Quarto sources (qmd files, freeze cache, theme). Kept for reference only.
 
 Preview locally: `cd _site && python3 -m http.server 8000` then open http://localhost:8000/
+
+## Modern DS stack map (`_site/stack/`)
+
+`_site/stack/index.html` is the route-map page (four stops). Attach posts to a stop by putting post ids into that stop's `data-posts="id1 id2"` attribute (ids from `_site/home/posts.js`). The map itself is `home/animations/metro.js` (shared by the homepage band and the page); styles are in `home/stack.css`.

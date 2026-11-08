@@ -44,12 +44,13 @@
 <p>DVC does its job, and its command line output is not friendly. Which stages are stale, and why? Did the parameters change, a dependency, the command or an output? What does the experiment table look like across five runs? The answers are there, but you have to piece them together from <code>dvc status</code>, <code>dvc params diff</code>, <code>dvc exp show</code> and a look into <code>dvc.lock</code>.</p>
 <p>It gets worse with long pipelines. A run takes an hour on the computer at home, you close the terminal, and an hour later you do not know if it is still going, if it failed, or if someone else started a second <code>dvc repro</code> that is fighting for the same lock. I wanted one screen that answers all of this and stays out of the way.</p>
 <h2>The general idea</h2>
-<p><a href="https://github.com/MarcellGranat/dvcat">dvcat</a> (DVC and cat) is a minimal terminal UI for DVC. I built it in Rust with <a href="https://ratatui.rs">ratatui</a>, in <a href="https://catppuccin.com">Catppuccin</a> Mocha colours (it needs a true-colour terminal). It does not replace DVC and it does not store anything about your pipeline. It reads <code>dvc.yaml</code>, <code>dvc.lock</code> and <code>params.yaml</code>, calls the real <code>dvc</code> for everything that changes something, and shows you the result. The views:</p>
+<p>The goal: <strong>use DVC in a friendly way without VS Code.</strong> The editor extensions give you a pipeline view, an experiments table and plots, but they tie you to a graphical editor, and I work in the terminal, often over SSH. <a href="https://github.com/MarcellGranat/dvcat">dvcat</a> (DVC and cat) brings the same things to any terminal.</p>
+<p><strong>dvcat is written in Rust</strong> with <a href="https://ratatui.rs">ratatui</a>: one fast binary with no runtime to install. It is a minimal terminal UI for DVC, in <a href="https://catppuccin.com">Catppuccin</a> Mocha colours (it needs a true-colour terminal). It does not replace DVC and it does not store anything about your pipeline. It reads <code>dvc.yaml</code>, <code>dvc.lock</code> and <code>params.yaml</code>, calls the real <code>dvc</code> for everything that changes something, and shows you the result. The views:</p>
 <ul>
 <li><strong>Pipeline.</strong> A list of stages with a status glyph, a detail pane and a files pane. <code>✓</code> is up to date, <code>●</code> stale, <code>○</code> never run, <code>?</code> unverified and <code>…</code> still checking.</li>
 <li><strong>Graph.</strong> The stages as boxes in dependency layers, left to right, with an arrow for each dependency. The cursor is shared with the pipeline view.</li>
 <li><strong>Experiments.</strong> A table of all experiments with their params and metrics, sortable, with differences from the baseline, a chart and actions.</li>
-<li><strong>Plots.</strong> The <code>plots:</code> section of <code>dvc.yaml</code> drawn in the terminal from your CSV, TSV, JSON or YAML files.</li>
+<li><strong>Plots.</strong> The <code>plots:</code> section of <code>dvc.yaml</code> drawn in the terminal from your CSV, TSV, JSON or YAML files, with a form to add new plots.</li>
 </ul>
 <h2>Examples</h2>
 <pre><code>cargo install --git https://github.com/MarcellGranat/dvcat --locked
@@ -65,8 +66,25 @@ dvcat                    # or: dvcat path/to/project</code></pre>
 <ul>
 <li><kbd>n</kbd> start a new experiment. A form lists every param, pre-filled from the row under the cursor, and only the values you changed become <code>-S</code> overrides. The command that will run is shown at the bottom, and it runs as <code>dvc exp run --temp</code> in an isolated copy, so your workspace stays untouched.</li>
 <li><kbd>a</kbd> apply, <kbd>d</kbd> remove, <kbd>b</kbd> save the experiment as a Git branch. Each asks a yes/no question first, and the branch is created without checking it out.</li>
+<li><kbd>c</kbd> write or edit the message of an experiment, the text of <code>dvc exp run -m</code>. It is shown under the table, so a row named <code>lr-005</code> can also say <em>"smaller learning rate, after fixing the join"</em>.</li>
 <li><kbd>s</kbd> sort, <kbd>t</kbd> transpose the table, <kbd>v</kbd> choose which params are shown (grouped by file, so <code>train.*</code> can be hidden at once) and <kbd>p</kbd> chart one metric against a param.</li>
 </ul>
+<h3>Messages: notes on every experiment</h3>
+<p>Experiment names such as <code>exp-3f9a1</code> tell you nothing a week later. DVC can store a message with every experiment (<code>dvc exp run -m "..."</code>), and almost nobody looks at it because <code>dvc exp show</code> hides it. dvcat shows the message of the experiment under the cursor below the table, and <kbd>c</kbd> edits it. It becomes a habit to write one line about why you tried the run, and the table turns into a lab notebook.</p>
+<h3>Plots</h3>
+<p>Press <kbd>4</kbd> or <kbd>p</kbd> for the plots view. It draws everything in the <code>plots:</code> section of <code>dvc.yaml</code> as a chart in the terminal, reading the data from the workspace. dvcat saves nothing of its own: the definitions stay in <code>dvc.yaml</code> and the data in your tracked files, exactly as in DVC.</p>
+<ul>
+<li><kbd>j</kbd>/<kbd>k</kbd> pick a plot, <kbd>F5</kbd> re-reads the files after a run, and <kbd>d</kbd> shows the plot's definition from <code>dvc.yaml</code> under the chart.</li>
+<li><kbd>n</kbd> opens a form for a new plot: the data file, x, y, the template and a title. The form lists the columns of the file, and <kbd>Ctrl+F</kbd> picks the file with fzf. The plot is added to the <code>plots:</code> section and the rest of the file is left untouched.</li>
+<li>Supported: <code>x</code>, <code>y</code> (a field, a list, or <code>file: fields</code>), titles, axis labels and the templates <code>linear</code>, <code>simple</code>, <code>scatter</code>, <code>smooth</code>, <code>bar_horizontal</code>, <code>bar_horizontal_sorted</code>, <code>confusion</code> and <code>confusion_normalized</code>.</li>
+</ul>
+<pre><code>plots:
+  - metrics/loss.csv:
+      x: epoch
+      y: loss
+      title: Training loss</code></pre>
+<h3>Adding a stage</h3>
+<p>In the pipeline and graph views <kbd>n</kbd> opens a form for a new stage: name, command, dependencies, params, outputs and metrics, with toggles for <code>cache</code>, <code>persist</code>, <code>always_changed</code> and <code>frozen</code>. <kbd>Ctrl+F</kbd> on a list field picks files, or param keys, with fzf. The stage is written to <code>dvc.yaml</code> and nothing else in the file changes.</p>
 <h3>Templated stages</h3>
 <p><code>foreach</code>, <code>matrix</code> and <code>vars</code> in <code>dvc.yaml</code> are expanded the way DVC does it, so a stage like <code>each@us</code> or <code>grid@lin-1</code> is listed, checked and runnable like any other. A stage that uses something dvcat does not understand is shown with a warning and the reason instead of being silently wrong.</p>
 <h3>Keys</h3>
@@ -82,9 +100,9 @@ dvcat                    # or: dvcat path/to/project</code></pre>
 <li><strong>It notices runs it did not start.</strong> Every couple of seconds dvcat reads <code>.dvc/tmp/rwlock</code>. If another terminal or another tool is running <code>dvc</code>, the header names the command and its age, and the stages it works on get a marker. Pressing <kbd>r</kbd> on a stage that would clash with it is refused with the reason, for example which folder the other run is writing. <kbd>X</kbd> stops the outside process after a yes, with SIGTERM first and SIGKILL after five seconds.</li>
 <li><strong>It finds DVC through the project.</strong> dvcat looks for <code>$DVCAT_DVC</code>, then <code>.venv/bin/dvc</code> in the project, then the path, so it works with the uv setup and no global install.</li>
 <li><strong>It checks itself against DVC.</strong> One of the tests compares dvcat's stale detection with the real <code>dvc status --json</code>, so a difference between the two is a bug that fails the build.</li>
-<li><strong>Built with agents and OpenSpec.</strong> The plan for each feature is an OpenSpec change in the repository (<code>add-dvc-tui</code>, then <code>add-dvc-tui-insights</code>), and a coding agent implemented it. See the posts about OpenSpec and my Claude setup.</li>
 <li><strong>Try it without your own pipeline.</strong> <code>just demo</code> builds a small Git project with three finished experiments (<code>lr-001</code>, <code>lr-005</code>, <code>lr-010</code>) and opens it, so you can try the table, the chart and the graph straight away.</li>
 <li><strong>What it does not do yet.</strong> It cannot show image plots, and it does not compare revisions (<code>dvc plots diff</code>).</li>
+<li><strong>It edits <code>dvc.yaml</code> carefully.</strong> The stage and plot forms only add their own block, so nothing else in the file changes and the Git diff stays small.</li>
 </ul>
     </article>
       </div>

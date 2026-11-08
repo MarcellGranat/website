@@ -265,7 +265,7 @@ export const POSTS = [
     "tags": [
       "ML"
     ],
-    "image": "logo.png"
+    "image": "cover.jpg"
   },
   {
     "id": "morgan",

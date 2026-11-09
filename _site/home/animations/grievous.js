@@ -1,6 +1,6 @@
 // General Grievous: scuttles along the underside of the top bar like a spider on four limbs and
 // asks the kind of questions every data person has heard. Uses the shared Jedi walk/bubble code.
-const TOOLS = ['DuckDB', 'Neovim', 'marimo', 'Quarto', 'uv', 'DVC', 'Herdr', 'lazygit', 'VisiData', 'yazi', 'just', 'Snakemake', 'television'];
+const TOOLS = ['DuckDB', 'Neovim', 'marimo', 'Quarto', 'uv', 'DVC', 'Herdr', 'lazygit', 'VisiData', 'yazi', 'Snakemake', 'television'];
 
 const QUESTIONS = [
   'Do you have that chart in Excel?',

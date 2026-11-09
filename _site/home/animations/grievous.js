@@ -13,8 +13,8 @@ const QUESTIONS = [
   'Is Python the one with the macros?',
   '*cough* Can you make the logo bigger?',
   'Did you try turning the dataset off and on again?',
-  'Can you train the model on the test set? Just to be sure.',
-  'What is the difference between the mean and the average?',
+  '*cough* You performed better on the training set, Jedi!',
+  'Just replace it with the mean, Jedi. It should be fine. *cough*',
   'Can the dashboard fit on one printed page?',
 ];
 

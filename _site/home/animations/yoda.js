@@ -167,7 +167,7 @@ export function mount({ reduced = false, watch = null } = {}) {
     new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
   }
 
-  // Yoda, Grievous, the little one, Darth Vader and Obi-Wan take turns.
+  // Yoda, Grievous, the little one, Darth Vader and Obi-Wan all visit.
   const cast = [
     createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
     createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top', headShift: 0.2 }),
@@ -175,11 +175,19 @@ export function mount({ reduced = false, watch = null } = {}) {
     createVader(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),
   ];
-  let turn = 0;
+  // random order: a shuffled bag, so everyone appears once per round and nobody twice in a row
+  let bag = [], last = null;
+  const nextActor = () => {
+    if (!bag.length) {
+      bag = [...cast].sort(() => Math.random() - 0.5);
+      if (bag.at(-1) === last) bag.unshift(bag.pop());
+    }
+    return (last = bag.pop());
+  };
   const loop = async (delay) => {
     await wait(delay);
     while (document.hidden || !visible) await wait(1500);
-    await cast[turn++ % cast.length].visit();
+    await nextActor().visit();
     loop(rand(...GAP));
   };
   loop(rand(...FIRST_DELAY));

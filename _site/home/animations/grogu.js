@@ -2,15 +2,12 @@
 // ground, crouches and jumps with an open mouth to catch it, like the frog scene.
 const LOGOS = [
   {
-    say: 'Crunchy!',
     svg: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="none" stroke="#14181c" stroke-width="6" stroke-dasharray="5.6 4.4"/><circle cx="24" cy="24" r="16" fill="#14181c"/><text x="24" y="31" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="21" fill="#fff">R</text></svg>`,
   },
   {
-    say: 'Tastes like snake!',
     svg: `<svg viewBox="0 0 48 48"><rect x="4" y="3" width="27" height="25" rx="10" fill="#3776ab"/><rect x="17" y="20" width="27" height="25" rx="10" fill="#ffd43b" stroke="#f6f5f1" stroke-width="2.5"/><circle cx="13" cy="11" r="2.4" fill="#fff"/><circle cx="35" cy="37" r="2.4" fill="#14181c"/></svg>`,
   },
   {
-    say: 'Mmm, so helpful!',
     svg: `<svg viewBox="0 0 48 48" fill="none" stroke="#d97757" stroke-width="3.6" stroke-linecap="round">${Array.from({ length: 12 }, (_, i) => `<line x1="24" y1="${i % 2 ? 11 : 6}" x2="24" y2="22" transform="rotate(${i * 30} 24 24)"/>`).join('')}</svg>`,
   },
 ];
@@ -73,12 +70,11 @@ export function createGrogu() {
   const root = document.createElement('div');
   root.className = 'grogu';
   root.setAttribute('aria-hidden', 'true');
-  root.innerHTML = `<div class="yoda-bubble"></div><span class="g-alert">!</span><div class="g-jump"><div class="g-flip">${SVG}</div></div>`;
+  root.innerHTML = `<span class="g-alert">!</span><div class="g-jump"><div class="g-flip">${SVG}</div></div>`;
   const logoEl = document.createElement('div');
   logoEl.className = 'g-logo';
   logoEl.setAttribute('aria-hidden', 'true');
   document.body.append(root, logoEl);
-  const bubble = root.querySelector('.yoda-bubble');
   const jump = root.querySelector('.g-jump');
   const flip = root.querySelector('.g-flip');
 
@@ -101,17 +97,6 @@ export function createGrogu() {
     root.classList.add('walking');
     await move(from, to, { duration: (Math.abs(to - from) / SPEED) * 1000, easing: 'ease-in-out' });
     root.classList.remove('walking');
-  };
-
-  const say = (text, at, gw, w) => {
-    bubble.textContent = text;
-    bubble.style.maxWidth = `${Math.min(240, w - 12)}px`;
-    bubble.classList.add('show');
-    const bw = bubble.offsetWidth;
-    const centre = at + gw / 2;
-    const left = clamp(centre - bw / 2, 4, w - bw - 4);
-    bubble.style.left = `${left - at}px`;
-    bubble.style.setProperty('--tail', `${centre - left}px`);
   };
 
   const visit = async () => {
@@ -161,9 +146,7 @@ export function createGrogu() {
     root.classList.add('chew');
     await jump.animate([{ transform: 'translateY(0) scale(1.16, .84)' }, { transform: 'none' }], { duration: 260, easing: 'ease-out', fill: 'forwards' }).finished;
     jump.getAnimations().forEach((a) => a.cancel());
-    say(logo.say, target, gw, w);
-    await wait(1700);
-    bubble.classList.remove('show');
+    await wait(1700); // chews in silence
     root.classList.remove('chew');
     await wait(350);
     await walk(target, start);

@@ -2,7 +2,7 @@
 // his eyes closed while little stones circle him, says something wise and sinks back down.
 // He and the walking Yoda split the old quotes between them.
 export const ZEN_QUOTES = [
-  'Do or do not. There is no try. Only try/except.',
+  'Do or do not... or Try/Except.',
   'Reproducible, your pipeline must be.',
   'Stale, your stage is. dvc repro, you must.',
   'Hidden state in notebooks, the dark side it is.',

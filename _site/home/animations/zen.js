@@ -2,14 +2,14 @@
 // his eyes closed while little stones circle him, says something wise and sinks back down.
 // He and the walking Yoda split the old quotes between them.
 export const ZEN_QUOTES = [
-  'Do or do not. There is no try.',
+  'Do or do not. There is no try. Only try/except.',
   'Reproducible, your pipeline must be.',
   'Stale, your stage is. dvc repro, you must.',
   'Hidden state in notebooks, the dark side it is.',
   'Fear of the terminal leads to the dark side.',
   'Strong with the CLI, this one is.',
   'Much to learn, you still have.',
-  'Breathe, you must. Let the data flow through you.',
+  'Let the data flow through you, you must. But clean it first.',
   'Clear your mind, you must. Clear your cache, too.',
 ];
 

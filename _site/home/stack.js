@@ -1,5 +1,6 @@
 import { POSTS } from './posts.js';
 import { mount } from './animations/metro.js';
+import { mount as mountYoda } from './animations/yoda.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);
@@ -22,6 +23,7 @@ for (const box of $$('.stop-posts')) {
 }
 
 mount($('#metro-hero'), { reduced, base: '#' });
+mountYoda($('#metro-hero'), { reduced });
 
 // reveal, route progress line, progress bar
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });

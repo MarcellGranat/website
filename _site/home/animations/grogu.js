@@ -18,23 +18,45 @@ const LOGOS = [
 const SVG = `
 <svg viewBox="0 0 100 120" class="g-svg" aria-hidden="true">
   <ellipse cx="50" cy="116" rx="26" ry="3.5" fill="rgba(20,24,28,.12)"/>
-  <ellipse class="g-foot-a" cx="40" cy="112" rx="7.5" ry="4" fill="#a9c58f"/>
-  <ellipse class="g-foot-b" cx="60" cy="112" rx="7.5" ry="4" fill="#a9c58f"/>
-  <path d="M29 112 Q26 82 40 72 Q50 67 60 72 Q74 82 71 112 Z" fill="#cdb08a"/>
-  <path d="M40 72 Q50 82 60 72 L58 84 Q50 89 42 84 Z" fill="#b08f66"/>
-  <g class="g-arm-l"><path d="M35 80 Q26 90 30 100" stroke="#cdb08a" stroke-width="8" stroke-linecap="round" fill="none"/><circle cx="30" cy="102" r="4" fill="#b7d29c"/></g>
-  <g class="g-head">
-    <g class="g-ear-l"><path d="M28 47 Q6 34 -8 54 Q8 64 28 60 Z" fill="#b7d29c"/><path d="M25 49 Q8 42 0 54 Q10 60 25 57 Z" fill="#e1bd9f"/></g>
-    <g class="g-ear-r"><path d="M72 47 Q94 34 108 54 Q92 64 72 60 Z" fill="#b7d29c"/><path d="M75 49 Q92 42 100 54 Q90 60 75 57 Z" fill="#e1bd9f"/></g>
-    <ellipse cx="50" cy="50" rx="24" ry="22" fill="#b7d29c"/>
-    <ellipse class="g-cheek" cx="32" cy="60" rx="5" ry="4.5" fill="#a5c58a"/><ellipse class="g-cheek" cx="68" cy="60" rx="5" ry="4.5" fill="#a5c58a"/>
-    <path d="M46 29 Q48 23 50 29 M51 29 Q54 24 56 29" stroke="#e6ecd9" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <g class="g-eyes"><circle cx="40" cy="51" r="7" fill="#1c2118"/><circle cx="60" cy="51" r="7" fill="#1c2118"/><circle cx="42.5" cy="48.5" r="2.2" fill="#fff"/><circle cx="62.5" cy="48.5" r="2.2" fill="#fff"/></g>
-    <path d="M49 58 L50 59.5 L51 58" stroke="#8db073" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <path class="g-mouth" d="M45 64 Q50 67 55 64" stroke="#5d7a48" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-    <ellipse class="g-mouth-open" cx="50" cy="65" rx="6.5" ry="5" fill="#6b2b2b"/>
+  <ellipse class="g-foot-a" cx="40" cy="112" rx="7.5" ry="4" fill="#aebf8d"/>
+  <ellipse class="g-foot-b" cx="60" cy="112" rx="7.5" ry="4" fill="#aebf8d"/>
+  <path d="M27 113 Q22 84 37 74 Q50 69 63 74 Q78 84 73 113 Z" fill="#cdb592"/>
+  <path d="M44 92 Q42 102 44 111 M56 92 Q58 102 56 111 M35 88 Q33 98 35 108 M65 88 Q67 98 65 108" stroke="#b79c78" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  <path d="M28 99 Q50 106 72 99" stroke="#8c7452" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M35 74 Q50 88 65 74 L63 83 Q50 94 37 83 Z" fill="#a98d68"/>
+  <g class="g-arm-l">
+    <path d="M36 80 Q23 90 28 101" stroke="#cdb592" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <circle cx="28" cy="104" r="4.2" fill="#aebf8d"/><path d="M25 107 L24 110 M28 108 L28 111 M31 107 L32 110" stroke="#aebf8d" stroke-width="2" stroke-linecap="round"/>
   </g>
-  <g class="g-arm-r"><path d="M65 80 Q74 90 70 100" stroke="#cdb08a" stroke-width="8" stroke-linecap="round" fill="none"/><circle cx="70" cy="102" r="4" fill="#b7d29c"/></g>
+  <g class="g-head">
+    <g class="g-ear-l">
+      <path d="M31 45 Q8 36 -19 56 Q10 69 31 61 Z" fill="#aebf8d"/>
+      <path d="M28 48 Q10 43 -9 56 Q10 64 28 58 Z" fill="#d9b79a"/>
+      <path d="M26 53 Q10 52 -2 56 M26 56 Q12 58 2 59" stroke="#c49c80" stroke-width="1" fill="none" stroke-linecap="round"/>
+    </g>
+    <g class="g-ear-r">
+      <path d="M69 45 Q92 36 119 56 Q90 69 69 61 Z" fill="#aebf8d"/>
+      <path d="M72 48 Q90 43 109 56 Q90 64 72 58 Z" fill="#d9b79a"/>
+      <path d="M74 53 Q90 52 102 56 M74 56 Q88 58 98 59" stroke="#c49c80" stroke-width="1" fill="none" stroke-linecap="round"/>
+    </g>
+    <path d="M25 50 Q25 26 50 26 Q75 26 75 50 Q75 68 62 73 Q50 77 38 73 Q25 68 25 50 Z" fill="#aebf8d"/>
+    <ellipse class="g-cheek" cx="31" cy="63" rx="5" ry="4.5" fill="#9db37e"/><ellipse class="g-cheek" cx="69" cy="63" rx="5" ry="4.5" fill="#9db37e"/>
+    <path d="M44 25 Q42 19 45 15 M49 25 Q49 17 52 13 M54 25 Q57 19 61 18" stroke="#d3dbbb" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <path d="M40 33 Q50 30 60 33 M42 37 Q50 35 58 37" stroke="#93a875" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <path d="M30 44 Q39 39 46 44 M54 44 Q61 39 70 44" stroke="#93a875" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <g class="g-eyes">
+      <circle cx="39" cy="53" r="8.6" fill="#231c16"/><circle cx="61" cy="53" r="8.6" fill="#231c16"/>
+      <circle cx="42" cy="49.5" r="3.2" fill="#fff"/><circle cx="64" cy="49.5" r="3.2" fill="#fff"/>
+      <circle cx="36" cy="57" r="1.3" fill="#fff" opacity=".8"/><circle cx="58" cy="57" r="1.3" fill="#fff" opacity=".8"/>
+    </g>
+    <circle cx="49" cy="62" r=".8" fill="#7f9663"/><circle cx="51" cy="62" r=".8" fill="#7f9663"/>
+    <path class="g-mouth" d="M45.5 67 Q50 69.5 54.5 67" stroke="#667f4f" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <g class="g-mouth-open"><ellipse cx="50" cy="68" rx="6.5" ry="5" fill="#5a2a26"/><ellipse cx="50" cy="70.5" rx="3.6" ry="2" fill="#c76b6b"/></g>
+  </g>
+  <g class="g-arm-r">
+    <path d="M64 80 Q77 90 72 101" stroke="#cdb592" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <circle cx="72" cy="104" r="4.2" fill="#aebf8d"/><path d="M69 107 L68 110 M72 108 L72 111 M75 107 L76 110" stroke="#aebf8d" stroke-width="2" stroke-linecap="round"/>
+  </g>
 </svg>`;
 
 const SPEED = 110; // px per second while waddling

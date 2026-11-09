@@ -110,10 +110,10 @@
 .g-jump { transform-origin: 50% 100%; }
 .g-flip { transform-origin: 50% 100%; }
 .g-svg { display: block; width: 100%; height: auto; overflow: visible; }
-.g-svg .g-arm-l { transform-origin: 35px 80px; transition: transform .3s var(--ease); }
-.g-svg .g-arm-r { transform-origin: 65px 80px; transition: transform .3s var(--ease); }
-.g-svg .g-ear-l { transform-origin: 28px 53px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
-.g-svg .g-ear-r { transform-origin: 72px 53px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.g-svg .g-arm-l { transform-origin: 36px 80px; transition: transform .3s var(--ease); }
+.g-svg .g-arm-r { transform-origin: 64px 80px; transition: transform .3s var(--ease); }
+.g-svg .g-ear-l { transform-origin: 30px 53px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.g-svg .g-ear-r { transform-origin: 70px 53px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
 .g-svg .g-head { transform-origin: 50px 72px; }
 .g-svg .g-eyes { transform-box: fill-box; transform-origin: center; animation: yoda-blink 4.2s infinite; transition: transform .25s; }
 .g-svg .g-mouth-open, .g-svg .g-cheek { opacity: 0; }

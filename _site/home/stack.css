@@ -180,4 +180,26 @@
 @keyframes v-march { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-3px) rotate(1.5deg); } }
 @keyframes v-lights { 50% { opacity: .35; } }
 @keyframes v-pop { 0% { transform: translateX(-50%) rotate(-4deg) scale(1.5); } 100% { transform: translateX(-50%) rotate(-4deg) scale(1); } }
+
+
+/* General Grievous: hangs from the underside of the top bar and scuttles like a spider */
+.yoda.grievous { width: clamp(170px, 17vw, 230px); bottom: auto; top: 0; z-index: 45; }
+.yoda.grievous .yoda-flip { transform-origin: 50% 0; }
+.yoda-svg .gr-a { transform-origin: 52px 36px; }
+.yoda-svg .gr-b { transform-origin: 58px 32px; }
+.yoda-svg .gr-c { transform-origin: 76px 32px; }
+.yoda-svg .gr-d { transform-origin: 82px 38px; }
+.yoda-svg .gr-head { transform-origin: 98px 48px; transition: transform .4s var(--ease); }
+.yoda.grievous.walking .yoda-flip { animation: gr-bob .3s ease-in-out infinite; }
+.yoda.grievous.walking .gr-a, .yoda.grievous.walking .gr-c { animation: gr-step .3s ease-in-out infinite alternate; }
+.yoda.grievous.walking .gr-b, .yoda.grievous.walking .gr-d { animation: gr-step .3s ease-in-out infinite alternate-reverse; }
+.yoda.ask .gr-head { animation: gr-tilt 1s ease-in-out infinite alternate; }
+.yoda.ask .gr-c, .yoda.ask .gr-d { animation: gr-step .35s ease-in-out infinite alternate; }
+.yoda-bubble.below { bottom: auto; top: calc(100% + 6px); transform-origin: var(--tail, 50%) 0; transform: translateY(-6px) scale(.92); }
+.yoda-bubble.below.show { transform: none; }
+.yoda-bubble.below::after { top: auto; bottom: 100%; margin: 0 0 -6px -6px; border-width: 1.5px 0 0 1.5px; }
+
+@keyframes gr-bob { 50% { transform: translateY(3px); } }
+@keyframes gr-step { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+@keyframes gr-tilt { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
 @media (prefers-reduced-motion: reduce) { .yoda, .grogu, .g-logo, .vader { display: none; } }

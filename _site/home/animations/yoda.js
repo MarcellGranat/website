@@ -1,6 +1,7 @@
 import { createGrogu } from './grogu.js';
 import { createVader } from './vader.js';
 import { OBI_SVG, OBI_QUOTES } from './obiwan.js';
+import { GRIEVOUS_SVG, GRIEVOUS_QUOTES } from './grievous.js';
 
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
@@ -78,7 +79,7 @@ const SVG = `
 
 // One Jedi character: walks in from a random side, stops near the edge, says a line and does a
 // Force trick. `svg` is the figure, `actions` are CSS classes (force, mind).
-export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEED, cls = '' }) {
+export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEED, cls = '', edge = 'bottom' }) {
   const host = document.documentElement;
 
   const yoda = document.createElement('div');
@@ -88,6 +89,8 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
   document.body.appendChild(yoda);
   const bubble = yoda.querySelector('.yoda-bubble');
   const flip = yoda.querySelector('.yoda-flip');
+  const top = edge === 'top'; // hangs from the underside of the top bar instead of standing on the bottom
+  if (top) bubble.classList.add('below');
 
   let bag = [];
   const nextQuote = () => {
@@ -112,6 +115,7 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
     const action = actions[Math.floor(Math.random() * actions.length)];
     const quote = nextQuote();
     const w = host.clientWidth; // viewport width without the scrollbar
+    if (top) yoda.style.top = `${document.querySelector('.nav')?.getBoundingClientRect().bottom ?? 0}px`;
     const yw = yoda.offsetWidth;
     const offLeft = -yw - 12;
     const offRight = w + 12;
@@ -145,7 +149,7 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
 
   return {
     async visit() {
-      try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind'); }
+      try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind', 'ask'); }
     },
   };
 }
@@ -163,9 +167,10 @@ export function mount({ reduced = false, watch = null } = {}) {
     new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
   }
 
-  // Yoda, the little one, Darth Vader and Obi-Wan take turns.
+  // Yoda, Grievous, the little one, Darth Vader and Obi-Wan take turns.
   const cast = [
     createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
+    createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top' }),
     createGrogu(),
     createVader(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),

@@ -206,3 +206,22 @@
 @keyframes gr-step { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
 @keyframes gr-tilt { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
 @media (prefers-reduced-motion: reduce) { .yoda, .grogu, .g-logo, .vader { display: none; } }
+
+/* Meditating Yoda: floats up from the bottom middle, sits in the air, then sinks back */
+.zen { --zw: clamp(130px, 14vw, 180px); position: fixed; left: 50%; bottom: 0; width: var(--zw); margin-left: calc(var(--zw) / -2); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
+.zen.on { visibility: visible; }
+.zen-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.zen-svg .zen-body { animation: zen-float 3.4s ease-in-out infinite; }
+.zen-svg .zen-head { transform-origin: 70px 56px; animation: zen-nod 5s ease-in-out infinite; }
+.zen-svg .zen-aura { transform-box: fill-box; transform-origin: center; opacity: 0; transition: opacity .8s; }
+.zen.glow .zen-aura { opacity: .55; animation: zen-pulse 2.4s ease-in-out infinite; }
+.zen.glow .zen-aura-2 { opacity: .8; animation-delay: -1.2s; }
+.zen-svg .zen-orbit { transform-origin: 70px 66px; animation: zen-orbit 7s linear infinite; }
+.zen-svg .zen-shadow { display: none; }
+.zen .yoda-bubble { bottom: calc(100% + 16px); }
+
+@keyframes zen-float { 50% { transform: translateY(-7px); } }
+@keyframes zen-nod { 50% { transform: rotate(1.6deg); } }
+@keyframes zen-pulse { 50% { transform: scale(1.1); } }
+@keyframes zen-orbit { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .zen { display: none; } }

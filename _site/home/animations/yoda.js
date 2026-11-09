@@ -2,26 +2,21 @@ import { createGrogu } from './grogu.js';
 import { createVader } from './vader.js';
 import { OBI_SVG, OBI_QUOTES } from './obiwan.js';
 import { GRIEVOUS_SVG, GRIEVOUS_QUOTES } from './grievous.js';
+import { createZen } from './zen.js';
 
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
 const NS = 'http://www.w3.org/2000/svg';
 
+// The walking Yoda's lines (the wise ones belong to the meditating Yoda, see zen.js).
 export const QUOTES = [
   'You want to try out Herdr!',
   'Neovim is super quick. Vim-vim!',
   'Without data, you are just an opinion!',
   'Nice... Now show me your data!',
-  'Do or do not. There is no try.',
   'Commit early, commit often, you must.',
-  'Reproducible, your pipeline must be.',
   'Query this file with DuckDB, you should.',
-  'Stale, your stage is. dvc repro, you must.',
-  'Hidden state in notebooks, the dark side it is.',
-  'Fear of the terminal leads to the dark side.',
   'uv sync, run you must.',
-  'Strong with the CLI, this one is.',
-  'Much to learn, you still have.',
 ];
 
 const ACTIONS = ['force', 'mind']; // Force push, or the Jedi mind trick (hand wave)
@@ -167,12 +162,13 @@ export function mount({ reduced = false, watch = null } = {}) {
     new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
   }
 
-  // Yoda, Grievous, the little one, Darth Vader and Obi-Wan all visit.
+  // Yoda, the meditating Yoda, Grievous, the little one, Darth Vader and Obi-Wan all visit.
   const cast = [
     createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
     createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top', headShift: 0.2 }),
     createGrogu(),
     createVader(),
+    createZen(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),
   ];
   // random order: a shuffled bag, so everyone appears once per round and nobody twice in a row

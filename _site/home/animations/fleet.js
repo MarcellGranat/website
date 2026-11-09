@@ -19,6 +19,8 @@ const SCALE = 0.85; // ship size
 const TILT = -0.22; // radians: the nose points to the top right corner
 const SPAN = 720; // formation width in canvas units; it is squeezed on narrow screens
 const H = 420, G = 382, BOLT_EVERY = 1.1, BOLT_LIFE = 1.6, BOLT_SPEED = 420;
+// Every PERIOD seconds the whole fleet jumps to hyperspace (streaks off to the top right) and drops back in.
+const PERIOD = 18, T_OUT = 13.2, OUT_D = 0.6, T_IN = 14.6, IN_D = 1.1, STAGGER = 0.05, JUMP_DIST = 1100;
 const INK = '#14181c', MONO = "'JetBrains Mono', ui-monospace, monospace";
 const HULL = '#e9ecee', HULL_EDGE = '#8c939a', METAL = '#8f969c', GLASS = '#3a4a5c';
 
@@ -89,12 +91,33 @@ const KIND = {
 
 function trails(c, k, t, i) {
   for (const y of k.engines) {
+    const pulse = 0.85 + 0.15 * Math.sin(t * 9 + i * 2 + y);
+    // soft bloom around the nozzle
+    const b = c.createRadialGradient(k.tail + 2, y, 0, k.tail + 2, y, 17);
+    b.addColorStop(0, `rgba(${k.rgb},${0.45 * pulse})`); b.addColorStop(1, `rgba(${k.rgb},0)`);
+    c.fillStyle = b; c.beginPath(); c.arc(k.tail + 2, y, 17, 0, 7); c.fill();
+    // flame
     const len = k.len * (0.88 + 0.12 * Math.sin(t * 31 + i * 2 + y));
     const g = c.createLinearGradient(k.tail, 0, k.tail - len, 0);
     g.addColorStop(0, `rgba(${k.rgb},.85)`); g.addColorStop(1, `rgba(${k.rgb},0)`);
     c.fillStyle = g; c.beginPath(); c.moveTo(k.tail, y - 3.4); c.lineTo(k.tail - len, y); c.lineTo(k.tail, y + 3.4); c.closePath(); c.fill();
     c.fillStyle = 'rgba(255,255,255,.85)'; c.beginPath(); c.arc(k.tail + 1, y, 2.4, 0, 7); c.fill();
+    // sparks drifting back
+    for (let j = 0; j < 5; j++) {
+      const u = (t * 1.6 + j * 0.2 + i * 0.137 + y * 0.01) % 1, cyc = Math.floor(t * 1.6 + j * 0.2 + i * 0.137 + y * 0.01);
+      const sy = y + Math.sin(j * 12.99 + i * 78.2 + cyc * 43.7) * 5 * u;
+      c.fillStyle = `rgba(${k.rgb},${0.8 * (1 - u)})`; c.beginPath(); c.arc(k.tail - 8 - u * 58, sy, 0.5 + 1.5 * (1 - u), 0, 7); c.fill();
+    }
   }
+}
+
+// Hyperspace: stretch out and shoot off to the top right, then drop back in from the bottom left.
+function jump(t, i) {
+  const p = (((t - i * STAGGER) % PERIOD) + PERIOD) % PERIOD;
+  if (p >= T_OUT && p < T_OUT + OUT_D) { const q = (p - T_OUT) / OUT_D; return { off: q ** 3 * JUMP_DIST, stretch: 1 + q * 5, alpha: 1 - Math.max(0, q - 0.6) / 0.4 }; }
+  if (p >= T_OUT + OUT_D && p < T_IN) return { off: 0, stretch: 1, alpha: 0 };
+  if (p >= T_IN && p < T_IN + IN_D) { const q = (p - T_IN) / IN_D, r = 1 - q; return { off: -(r ** 3) * JUMP_DIST, stretch: 1 + r * 5, alpha: Math.min(1, q / 0.3) }; }
+  return { off: 0, stretch: 1, alpha: 1 };
 }
 
 function tag(c, x, y, i) {
@@ -127,20 +150,30 @@ function draw(c, W, t, still) {
 
   // ground shadows: the higher a ship hovers, the fainter and smaller its shadow
   SHIPS.forEach((s, i) => {
-    const [x, y] = pos(s, i), lift = (G - y) / G;
-    c.fillStyle = `rgba(20,24,28,${0.14 - lift * 0.08})`; c.beginPath(); c.ellipse(x, G + 9, 30 * sc * (1.1 - lift * 0.5), 5, 0, 0, 7); c.fill();
+    const [x, y] = pos(s, i), lift = (G - y) / G, a = still ? 1 : jump(t, i).alpha;
+    if (a <= 0) return;
+    c.fillStyle = `rgba(20,24,28,${(0.14 - lift * 0.08) * a})`; c.beginPath(); c.ellipse(x, G + 9, 30 * sc * (1.1 - lift * 0.5), 5, 0, 0, 7); c.fill();
   });
+  const dirx = Math.cos(TILT), diry = Math.sin(TILT);
   SHIPS.forEach((s, i) => {
-    const k = KIND[s.type], [x, y] = pos(s, i);
-    c.save(); c.translate(x, y); c.rotate(TILT + Math.sin(t * 1.4 + i) * 0.025); c.scale(sc, sc);
+    const k = KIND[s.type], [x, y] = pos(s, i), j = still ? { off: 0, stretch: 1, alpha: 1 } : jump(t, i);
+    if (j.alpha <= 0) return;
+    const bank = Math.cos(t * 1.8 + i * 1.3) * 9 * 0.004; // banks into its own up and down motion
+    c.save(); c.globalAlpha = j.alpha;
+    c.translate(x + dirx * j.off, y + diry * j.off); c.rotate(TILT + bank + Math.sin(t * 1.4 + i) * 0.02);
+    c.scale(sc * j.stretch, sc * (1 - 0.1 * Math.abs(Math.sin(t * 0.8 + i * 2.1)))); // a slow roll
+    if (j.stretch > 1.3) { c.strokeStyle = 'rgba(200,225,255,.85)'; c.lineWidth = 2; c.beginPath(); c.moveTo(-60, 0); c.lineTo(-14 * j.stretch, 0); c.stroke(); }
     trails(c, k, t, i); k.draw(c);
     c.restore();
   });
   // tool tags go on top so no ship covers them
-  SHIPS.forEach((s, i) => { const [x, y] = pos(s, i); tag(c, x - 4, y + 26, i); });
+  SHIPS.forEach((s, i) => {
+    const [x, y] = pos(s, i), j = still ? { off: 0, alpha: 1 } : jump(t, i), a = Math.max(0, (j.alpha - 0.5) * 2);
+    if (a <= 0) return;
+    c.globalAlpha = a; tag(c, x - 4 + dirx * j.off, y + 26 + diry * j.off, i); c.globalAlpha = 1;
+  });
 
   if (!still) { // laser bolts fly out along the tilt
-    const dirx = Math.cos(TILT), diry = Math.sin(TILT);
     const born = Math.floor(t / BOLT_EVERY);
     for (let n = born; n > born - BOLT_LIFE / BOLT_EVERY; n--) {
       const age = t - n * BOLT_EVERY; if (n < 0 || age < 0) continue;
@@ -167,7 +200,7 @@ export function mount(cv, { reduced = false } = {}) {
     c.setTransform(cv.width / W, 0, 0, cv.height / H, 0, 0);
     paint(performance.now());
   }
-  const paint = (now) => (reduced && frozen === null ? draw(c, W, 0, true) : draw(c, W, frozen ?? (now - t0) / 1000, frozen !== null));
+  const paint = (now) => (reduced && frozen === null ? draw(c, W, 0, true) : draw(c, W, frozen ?? (now - t0) / 1000, false));
   function loop(now) { if (!vis) return; paint(now); raf = requestAnimationFrame(loop); }
   new ResizeObserver(size).observe(cv);
   new IntersectionObserver(([e]) => {

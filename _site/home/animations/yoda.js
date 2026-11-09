@@ -1,4 +1,5 @@
 import { createGrogu } from './grogu.js';
+import { createVader } from './vader.js';
 
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
@@ -150,16 +151,20 @@ export function mount({ reduced = false, watch = null } = {}) {
     yoda.classList.remove('on');
   };
 
-  // Yoda and the little one take turns.
+  // Yoda, the little one and Darth Vader take turns.
   const grogu = createGrogu();
+  const vader = createVader();
   let turn = 0;
   const loop = async (delay) => {
     await wait(delay);
     while (document.hidden || !visible) await wait(1500);
-    if (turn++ % 2 === 0) {
+    const who = turn++ % 3;
+    if (who === 0) {
       try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind'); }
-    } else {
+    } else if (who === 1) {
       await grogu.visit();
+    } else {
+      await vader.visit();
     }
     loop(rand(...GAP));
   };

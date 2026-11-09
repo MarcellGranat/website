@@ -20,9 +20,9 @@ export const QUOTES = [
 ];
 
 const ACTIONS = ['force', 'mind']; // Force push, or the Jedi mind trick (hand wave)
-const SPEED = 70; // px per second while walking
+const SPEED = 150; // px per second while walking
 const FIRST_DELAY = [1200, 1800];
-const GAP = [9000, 18000];
+const GAP = [25000, 45000];
 const EDGE = [0.03, 0.22]; // he stays near the side he came from (share of the viewport width)
 
 const rand = (a, b) => a + Math.random() * (b - a);
@@ -55,10 +55,10 @@ const SVG = `
     <path d="M53 63 Q60 67 67 63" stroke="#5d7a48" stroke-width="1.7" fill="none" stroke-linecap="round"/>
   </g></g>
   <g class="y-force">
-    <circle cx="108" cy="77" r="8"/><circle cx="108" cy="77" r="8"/><circle cx="108" cy="77" r="8"/>
+    <circle cx="109" cy="91" r="8"/><circle cx="109" cy="91" r="8"/><circle cx="109" cy="91" r="8"/>
   </g>
   <g class="y-swirl">
-    <path d="M86 52 Q96 46 104 54"/><path d="M84 64 Q98 56 110 66"/><path d="M86 76 Q100 68 112 78"/>
+    <path d="M98 80 Q108 74 118 82"/><path d="M100 92 Q112 84 124 94"/><path d="M100 104 Q112 98 122 106"/>
   </g>
   <g class="y-arm">
     <path d="M76 92 Q90 102 88 120" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>

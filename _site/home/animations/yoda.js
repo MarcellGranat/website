@@ -25,7 +25,7 @@ const ACTIONS = ['force', 'mind']; // Force push, or the Jedi mind trick (hand w
 const SPEED = 150;
 const FROM_RIGHT = 0.7; // chance that he comes in from the right // px per second while walking
 const FIRST_DELAY = [1200, 1800];
-const GAP = [25000, 45000];
+const GAP = [7000, 10000];
 const EDGE = [0.03, 0.22]; // he stays near the side he came from (share of the viewport width)
 
 const rand = (a, b) => a + Math.random() * (b - a);

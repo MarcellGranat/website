@@ -1,3 +1,5 @@
+import { createGrogu } from './grogu.js';
+
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
 const NS = 'http://www.w3.org/2000/svg';
@@ -124,7 +126,7 @@ export function mount({ reduced = false, watch = null } = {}) {
     const gap = rand(...EDGE) * w;
     const stop = Math.min(Math.max(dir === 1 ? gap : w - gap - yw, 6), w - yw - 6);
 
-    flip.style.transform = `scaleX(${dir})`;
+    flip.style.scale = `${dir} 1`; // `scale` composes with the walking animation, unlike an inline transform
     yoda.style.transform = `translateX(${start}px)`;
     yoda.classList.add('on');
     await walk(start, stop);
@@ -148,10 +150,17 @@ export function mount({ reduced = false, watch = null } = {}) {
     yoda.classList.remove('on');
   };
 
+  // Yoda and the little one take turns.
+  const grogu = createGrogu();
+  let turn = 0;
   const loop = async (delay) => {
     await wait(delay);
     while (document.hidden || !visible) await wait(1500);
-    try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind'); }
+    if (turn++ % 2 === 0) {
+      try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind'); }
+    } else {
+      await grogu.visit();
+    }
     loop(rand(...GAP));
   };
   loop(rand(...FIRST_DELAY));

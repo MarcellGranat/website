@@ -102,4 +102,51 @@
 @keyframes yoda-ring { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(3.2); opacity: 0; } }
 @keyframes yoda-wave { from { transform: rotate(-48deg); } to { transform: rotate(-78deg); } }
 @keyframes yoda-swirl { from { opacity: 0; } 50% { opacity: .9; } to { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .yoda { display: none; } }
+
+
+/* Grogu: waddles in, sees a logo on the ground and jumps to catch it */
+.grogu { position: fixed; left: 0; bottom: 0; width: clamp(84px, 9vw, 116px); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
+.grogu.on { visibility: visible; }
+.g-jump { transform-origin: 50% 100%; }
+.g-flip { transform-origin: 50% 100%; }
+.g-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.g-svg .g-arm-l { transform-origin: 35px 80px; transition: transform .3s var(--ease); }
+.g-svg .g-arm-r { transform-origin: 65px 80px; transition: transform .3s var(--ease); }
+.g-svg .g-ear-l { transform-origin: 28px 53px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.g-svg .g-ear-r { transform-origin: 72px 53px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.g-svg .g-head { transform-origin: 50px 72px; }
+.g-svg .g-eyes { transform-box: fill-box; transform-origin: center; animation: yoda-blink 4.2s infinite; transition: transform .25s; }
+.g-svg .g-mouth-open, .g-svg .g-cheek { opacity: 0; }
+.grogu.walking .g-flip { animation: g-waddle .44s ease-in-out infinite; }
+.grogu.walking .g-foot-a { animation: yoda-step .44s ease-in-out infinite; }
+.grogu.walking .g-foot-b { animation: yoda-step .44s ease-in-out infinite .22s; }
+.grogu.walking .g-ear-l { animation: g-flap-l .44s ease-in-out infinite alternate; }
+.grogu.walking .g-ear-r { animation: g-flap-r .44s ease-in-out infinite alternate; }
+.grogu.alert .g-ear-l { transform: rotate(18deg); }
+.grogu.alert .g-ear-r { transform: rotate(-18deg); }
+.grogu.alert .g-eyes { animation: none; transform: scale(1.18); }
+.grogu.alert .g-head { transform: rotate(-5deg); transition: transform .3s var(--ease); }
+.grogu.jumping .g-arm-l { transform: rotate(135deg); }
+.grogu.jumping .g-arm-r { transform: rotate(-135deg); }
+.grogu.jumping .g-ear-l { transform: rotate(-22deg); }
+.grogu.jumping .g-ear-r { transform: rotate(22deg); }
+.grogu.jumping .g-mouth { opacity: 0; }
+.grogu.jumping .g-mouth-open { opacity: 1; }
+.grogu.chew .g-cheek { opacity: 1; }
+.grogu.chew .g-head { animation: g-chew .28s ease-in-out infinite alternate; }
+.grogu.chew .g-eyes { animation: none; transform: scaleY(.55); }
+.g-alert { position: absolute; left: 50%; top: -4px; width: 26px; height: 26px; margin-left: -13px; border-radius: 50%; background: var(--amber); color: #fff; font: 800 1rem/26px 'Inter', sans-serif; text-align: center; transform: scale(0); transition: transform .3s cubic-bezier(.3, 1.8, .5, 1); }
+.grogu.alert .g-alert { transform: scale(1); }
+
+.g-logo { position: fixed; bottom: 8px; width: 44px; height: 44px; z-index: 29; pointer-events: none; transform: scale(0); opacity: 0; transition: transform .4s cubic-bezier(.3, 1.6, .5, 1), opacity .2s; filter: drop-shadow(0 3px 3px rgba(20, 24, 28, .2)); }
+.g-logo svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.g-logo.show { transform: scale(1); opacity: 1; }
+.g-logo.hop svg { animation: g-hop .8s ease-in-out infinite; }
+.g-logo.gone { transform: scale(0); opacity: 0; transition-duration: .15s; }
+
+@keyframes g-waddle { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-3px) rotate(5deg); } }
+@keyframes g-flap-l { from { transform: rotate(0); } to { transform: rotate(10deg); } }
+@keyframes g-flap-r { from { transform: rotate(0); } to { transform: rotate(-10deg); } }
+@keyframes g-chew { from { transform: scale(1, 1); } to { transform: scale(1.04, .95); } }
+@keyframes g-hop { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-12px) rotate(-6deg); } 60% { transform: translateY(-12px) rotate(6deg); } }
+@media (prefers-reduced-motion: reduce) { .yoda, .grogu, .g-logo { display: none; } }

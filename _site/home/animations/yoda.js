@@ -1,5 +1,6 @@
 import { createGrogu } from './grogu.js';
 import { createVader } from './vader.js';
+import { OBI_SVG, OBI_QUOTES } from './obiwan.js';
 
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
@@ -75,31 +76,22 @@ const SVG = `
   </g>
 </svg>`;
 
-// Walks along the bottom of the viewport. With `watch` (a selector) he only shows up while that
-// element is on screen, otherwise he roams the whole page.
-export function mount({ reduced = false, watch = null } = {}) {
-  if (reduced) return;
+// One Jedi character: walks in from a random side, stops near the edge, says a line and does a
+// Force trick. `svg` is the figure, `actions` are CSS classes (force, mind).
+export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEED, cls = '' }) {
   const host = document.documentElement;
-  const target = watch ? document.querySelector(watch) : null;
-  if (watch && !target) return;
 
   const yoda = document.createElement('div');
-  yoda.className = 'yoda';
+  yoda.className = `yoda ${cls}`.trim();
   yoda.setAttribute('aria-hidden', 'true');
-  yoda.innerHTML = `<div class="yoda-bubble"></div><div class="yoda-flip">${SVG}</div>`;
+  yoda.innerHTML = `<div class="yoda-bubble"></div><div class="yoda-flip">${svg}</div>`;
   document.body.appendChild(yoda);
   const bubble = yoda.querySelector('.yoda-bubble');
   const flip = yoda.querySelector('.yoda-flip');
 
-  let visible = true;
-  if (target) {
-    visible = false;
-    new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
-  }
-
   let bag = [];
   const nextQuote = () => {
-    if (!bag.length) bag = [...QUOTES].sort(() => Math.random() - 0.5);
+    if (!bag.length) bag = [...quotes].sort(() => Math.random() - 0.5);
     return bag.pop();
   };
 
@@ -107,7 +99,7 @@ export function mount({ reduced = false, watch = null } = {}) {
     yoda.classList.add('walking');
     const anim = yoda.animate(
       [{ transform: `translateX(${from}px)` }, { transform: `translateX(${to}px)` }],
-      { duration: (Math.abs(to - from) / SPEED) * 1000, easing: 'ease-in-out', fill: 'forwards' },
+      { duration: (Math.abs(to - from) / speed) * 1000, easing: 'ease-in-out', fill: 'forwards' },
     );
     await anim.finished;
     yoda.style.transform = `translateX(${to}px)`;
@@ -116,8 +108,8 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
 
   const visit = async () => {
-    const dir = Math.random() < FROM_RIGHT ? -1 : 1; // 1 = enters from the left
-    const action = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
+    const dir = Math.random() < fromRight ? -1 : 1; // 1 = enters from the left
+    const action = actions[Math.floor(Math.random() * actions.length)];
     const quote = nextQuote();
     const w = host.clientWidth; // viewport width without the scrollbar
     const yw = yoda.offsetWidth;
@@ -151,21 +143,38 @@ export function mount({ reduced = false, watch = null } = {}) {
     yoda.classList.remove('on');
   };
 
-  // Yoda, the little one and Darth Vader take turns.
-  const grogu = createGrogu();
-  const vader = createVader();
+  return {
+    async visit() {
+      try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind'); }
+    },
+  };
+}
+
+// Walks along the bottom of the viewport. With `watch` (a selector) he only shows up while that
+// element is on screen, otherwise he roams the whole page.
+export function mount({ reduced = false, watch = null } = {}) {
+  if (reduced) return;
+  const target = watch ? document.querySelector(watch) : null;
+  if (watch && !target) return;
+
+  let visible = true;
+  if (target) {
+    visible = false;
+    new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
+  }
+
+  // Yoda, the little one, Darth Vader and Obi-Wan take turns.
+  const cast = [
+    createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
+    createGrogu(),
+    createVader(),
+    createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),
+  ];
   let turn = 0;
   const loop = async (delay) => {
     await wait(delay);
     while (document.hidden || !visible) await wait(1500);
-    const who = turn++ % 3;
-    if (who === 0) {
-      try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind'); }
-    } else if (who === 1) {
-      await grogu.visit();
-    } else {
-      await vader.visit();
-    }
+    await cast[turn++ % cast.length].visit();
     loop(rand(...GAP));
   };
   loop(rand(...FIRST_DELAY));

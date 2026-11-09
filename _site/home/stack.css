@@ -185,20 +185,23 @@
 /* General Grievous: hangs from the underside of the top bar and scuttles like a spider */
 .yoda.grievous { width: clamp(170px, 17vw, 230px); bottom: auto; top: 0; z-index: 45; }
 .yoda.grievous .yoda-flip { transform-origin: 50% 0; }
-.yoda-svg .gr-a { transform-origin: 52px 36px; }
-.yoda-svg .gr-b { transform-origin: 58px 32px; }
-.yoda-svg .gr-c { transform-origin: 76px 32px; }
-.yoda-svg .gr-d { transform-origin: 82px 38px; }
-.yoda-svg .gr-head { transform-origin: 98px 48px; transition: transform .4s var(--ease); }
+.yoda-svg .gr-a { transform-origin: 54px 38px; }
+.yoda-svg .gr-b { transform-origin: 60px 34px; }
+.yoda-svg .gr-c { transform-origin: 74px 34px; }
+.yoda-svg .gr-d { transform-origin: 80px 40px; }
+.yoda-svg .gr-head { transform-origin: 98px 40px; transition: transform .4s var(--ease); }
 .yoda.grievous.walking .yoda-flip { animation: gr-bob .3s ease-in-out infinite; }
 .yoda.grievous.walking .gr-a, .yoda.grievous.walking .gr-c { animation: gr-step .3s ease-in-out infinite alternate; }
 .yoda.grievous.walking .gr-b, .yoda.grievous.walking .gr-d { animation: gr-step .3s ease-in-out infinite alternate-reverse; }
+.yoda-svg .gr-mouth { transform-box: fill-box; transform-origin: top; }
+.yoda.ask .gr-mouth { animation: gr-talk .18s ease-in-out infinite alternate; }
 .yoda.ask .gr-head { animation: gr-tilt 1s ease-in-out infinite alternate; }
 .yoda.ask .gr-c, .yoda.ask .gr-d { animation: gr-step .35s ease-in-out infinite alternate; }
-.yoda-bubble.below { bottom: auto; top: calc(100% + 6px); transform-origin: var(--tail, 50%) 0; transform: translateY(-6px) scale(.92); }
+.yoda-bubble.below { bottom: auto; top: calc(78% + 6px); transform-origin: var(--tail, 50%) 0; transform: translateY(-6px) scale(.92); }
 .yoda-bubble.below.show { transform: none; }
 .yoda-bubble.below::after { top: auto; bottom: 100%; margin: 0 0 -6px -6px; border-width: 1.5px 0 0 1.5px; }
 
+@keyframes gr-talk { from { transform: scaleY(1); } to { transform: scaleY(1.7); } }
 @keyframes gr-bob { 50% { transform: translateY(3px); } }
 @keyframes gr-step { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
 @keyframes gr-tilt { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }

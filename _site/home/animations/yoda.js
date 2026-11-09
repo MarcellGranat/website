@@ -79,7 +79,7 @@ const SVG = `
 
 // One Jedi character: walks in from a random side, stops near the edge, says a line and does a
 // Force trick. `svg` is the figure, `actions` are CSS classes (force, mind).
-export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEED, cls = '', edge = 'bottom' }) {
+export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEED, cls = '', edge = 'bottom', headShift = 0 }) {
   const host = document.documentElement;
 
   const yoda = document.createElement('div');
@@ -133,7 +133,7 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
     bubble.style.maxWidth = `${Math.min(240, w - 12)}px`;
     bubble.classList.add('show');
     const bw = bubble.offsetWidth;
-    const centre = stop + yw / 2;
+    const centre = stop + yw / 2 + dir * headShift * yw; // the bubble's tail points at the head
     const left = Math.min(Math.max(centre - bw / 2, 4), w - bw - 4);
     bubble.style.left = `${left - stop}px`;
     bubble.style.setProperty('--tail', `${centre - left}px`);
@@ -149,7 +149,7 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
 
   return {
     async visit() {
-      try { await visit(); } catch { yoda.classList.remove('on', 'walking', 'force', 'mind', 'ask'); }
+      try { await visit(); } catch (e) { console.error('jedi visit failed', e); yoda.classList.remove('on', 'walking', 'force', 'mind', 'ask'); }
     },
   };
 }
@@ -170,7 +170,7 @@ export function mount({ reduced = false, watch = null } = {}) {
   // Yoda, Grievous, the little one, Darth Vader and Obi-Wan take turns.
   const cast = [
     createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
-    createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top' }),
+    createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top', headShift: 0.2 }),
     createGrogu(),
     createVader(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),

@@ -23,25 +23,44 @@ export const GRIEVOUS_QUOTES = [
   ...TOOLS.map((t) => `Ah, this ${t} was missing from my collection.`),
 ];
 
-const limb = (cls, [sx, sy], [ex, ey], [hx, hy]) => `<g class="${cls}"><path d="M${sx} ${sy} L${ex} ${ey} L${hx} ${hy}" stroke="#d4d0c0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="${ex}" cy="${ey}" r="3.6" fill="#8b877a"/><circle cx="${hx}" cy="${hy}" r="4" fill="#3a3d44"/></g>`;
+const PLATE = '#d2ccb9';
+const PLATE_DARK = '#bdb6a3';
+const JOINT = '#3a3228';
+
+// A plated limb: upper arm, forearm, a dark joint and a claw hooking onto the top bar.
+const limb = (cls, [sx, sy], [ex, ey], [hx, hy]) => `<g class="${cls}">
+    <path d="M${sx} ${sy} L${ex} ${ey}" stroke="${PLATE}" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M${ex} ${ey} L${hx} ${hy}" stroke="${PLATE_DARK}" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+    <circle cx="${ex}" cy="${ey}" r="4.2" fill="${JOINT}"/>
+    <path d="M${hx - 4.5} ${hy + 3} Q${hx} ${hy - 3} ${hx + 4.5} ${hy + 3}" stroke="${JOINT}" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  </g>`;
+
+// His collection: lightsaber hilts hanging from the belt.
+const HILTS = [['#3b82f6', 54, 8], ['#22c55e', 60, 3], ['#a855f7', 66, -2], ['#eab308', 72, -7]]
+  .map(([c, x, r]) => `<g transform="translate(${x} 57) rotate(${r})"><rect x="-1.9" y="0" width="3.8" height="10" rx="1" fill="#5d6269"/><rect x="-1.9" y="8" width="3.8" height="3.2" rx="1" fill="${c}"/></g>`).join('');
 
 export const GRIEVOUS_SVG = `
-<svg viewBox="0 0 140 110" class="yoda-svg" aria-hidden="true">
-  <path d="M46 40 Q40 70 48 92 L54 82 L60 96 L66 82 L74 96 L78 80 L84 90 Q90 66 86 40 Z" fill="#1c1e24"/>
-  ${limb('gr-a', [52, 36], [32, 24], [22, 4])}
-  ${limb('gr-b', [58, 32], [48, 16], [42, 4])}
-  <ellipse cx="66" cy="42" rx="22" ry="15" fill="#2b2e35"/>
-  <path d="M52 38 Q66 45 80 38 M53 43 Q66 50 79 43 M56 48 Q66 53 76 48" stroke="#cfcabb" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  ${limb('gr-c', [76, 32], [88, 16], [94, 4])}
-  ${limb('gr-d', [82, 38], [102, 26], [114, 4])}
-  <path d="M80 46 Q91 50 95 56" stroke="#8b877a" stroke-width="6" stroke-linecap="round" fill="none"/>
-  <g class="gr-head"><g transform="translate(98 48) scale(1.35) translate(-98 -48)">
-    <path d="M85 62 Q85 46 98 46 Q111 46 111 62 Q111 74 104 84 Q98 88 92 84 Q85 74 85 62 Z" fill="#e6e1d0"/>
-    <path d="M85 56 Q98 46 111 56 L105 62 Q98 58 91 62 Z" fill="#4a4d55"/>
-    <circle cx="92.5" cy="64" r="4.2" fill="#e8b923"/><circle cx="103.5" cy="64" r="4.2" fill="#e8b923"/>
-    <ellipse cx="92.5" cy="64" rx="1.2" ry="3.6" fill="#1a1a1a"/><ellipse cx="103.5" cy="64" rx="1.2" ry="3.6" fill="#1a1a1a"/>
-    <path d="M98 66 L96.5 74 L99.5 74 Z" fill="#b9b4a2"/>
-    <path d="M93 77 V84 M98 78 V86 M103 77 V84" stroke="#6b675a" stroke-width="1.4" stroke-linecap="round"/>
-    <path d="M88 70 Q89 76 92 80 M108 70 Q107 76 104 80" stroke="#bdb8a6" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-  </g></g>
+<svg viewBox="0 0 140 120" class="yoda-svg" aria-hidden="true">
+  <path d="M46 40 Q38 72 46 100 L53 88 L59 104 L66 90 L73 104 L79 88 L86 98 Q94 70 86 40 Z" fill="#2a2018"/>
+  ${limb('gr-a', [54, 38], [32, 26], [22, 5])}
+  ${limb('gr-b', [60, 34], [48, 18], [42, 5])}
+  <ellipse cx="66" cy="44" rx="22" ry="16" fill="${PLATE}"/>
+  <path d="M52 40 Q66 47 80 40 M53 46 Q66 53 79 46 M57 51 Q66 56 75 51 M66 30 V58" stroke="#7a725f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="66" cy="44" rx="5" ry="7.5" fill="${JOINT}"/>
+  <rect x="48" y="55" width="36" height="4" rx="2" fill="${JOINT}"/>
+  ${HILTS}
+  ${limb('gr-c', [74, 34], [88, 18], [95, 5])}
+  ${limb('gr-d', [80, 40], [102, 28], [116, 5])}
+  <path d="M80 46 Q89 50 94 58" stroke="${JOINT}" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <g class="gr-head">
+    <path d="M85 42 L98 35 L111 42 L113 64 Q111 80 98 93 Q85 80 83 64 Z" fill="#e0dac8"/>
+    <path d="M98 35 V56" stroke="${PLATE_DARK}" stroke-width="1.8"/>
+    <path d="M85 42 L98 35 L111 42 L110 50 L98 44 L86 50 Z" fill="${PLATE_DARK}"/>
+    <path d="M84 53 L97 61 L98 65 L85 58 Z M112 53 L99 61 L98 65 L111 58 Z" fill="${JOINT}"/>
+    <ellipse cx="91.5" cy="67" rx="4.6" ry="4" fill="#e8b923"/><ellipse cx="104.5" cy="67" rx="4.6" ry="4" fill="#e8b923"/>
+    <ellipse cx="91.5" cy="67" rx="1.2" ry="3.7" fill="#1a1a1a"/><ellipse cx="104.5" cy="67" rx="1.2" ry="3.7" fill="#1a1a1a"/>
+    <path d="M98 68 V76" stroke="#8b8578" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M85 68 Q88 82 98 91 M111 68 Q108 82 98 91" stroke="#8b8578" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <g class="gr-mouth"><path d="M93.5 79 V86 M98 80 V89 M102.5 79 V86" stroke="#5a5446" stroke-width="1.7" stroke-linecap="round"/></g>
+  </g>
 </svg>`;

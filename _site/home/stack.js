@@ -23,7 +23,7 @@ for (const box of $$('.stop-posts')) {
 }
 
 mount($('#metro-hero'), { reduced, base: '#' });
-mountYoda($('#metro-hero'), { reduced });
+mountYoda({ reduced });
 
 // reveal, route progress line, progress bar
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });

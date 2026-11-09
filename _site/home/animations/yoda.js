@@ -20,7 +20,8 @@ export const QUOTES = [
 ];
 
 const ACTIONS = ['force', 'mind']; // Force push, or the Jedi mind trick (hand wave)
-const SPEED = 150; // px per second while walking
+const SPEED = 150;
+const FROM_RIGHT = 0.7; // chance that he comes in from the right // px per second while walking
 const FIRST_DELAY = [1200, 1800];
 const GAP = [25000, 45000];
 const EDGE = [0.03, 0.22]; // he stays near the side he came from (share of the viewport width)
@@ -38,8 +39,10 @@ const SVG = `
   <path d="M38 141 Q33 100 46 84 Q60 78 74 84 Q87 100 82 141 Z" fill="#d8b47c"/>
   <path d="M46 84 Q60 96 74 84 L72 102 Q60 109 48 102 Z" fill="#b98e55"/>
   <path d="M39 114 Q60 121 81 114 L82 121 Q60 128 38 121 Z" fill="#5a4630"/>
-  <path d="M42 94 Q31 106 35 120" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
-  <circle cx="35" cy="123" r="4.5" fill="#9cc07f"/>
+  <g class="y-arm-l">
+    <path d="M42 94 Q31 106 35 120" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <circle cx="35" cy="123" r="4.5" fill="#9cc07f"/>
+  </g>
   <g class="y-head"><g transform="translate(0 16)">
     <path d="M40 55 Q22 42 4 64 Q22 70 40 68 Z" fill="#9cc07f"/>
     <path d="M37 57 Q22 49 11 63 Q24 66 37 65 Z" fill="#d4b08a"/>
@@ -48,8 +51,8 @@ const SVG = `
     <path d="M38 48 Q38 26 60 26 Q82 26 82 48 Q82 62 71 69 Q60 74 49 69 Q38 62 38 48 Z" fill="#9cc07f"/>
     <path d="M46 36 Q60 31 74 36 M48 41 Q60 37 72 41" stroke="#7fa064" stroke-width="1.6" fill="none" stroke-linecap="round"/>
     <path d="M57 26 Q60 19 63 26" stroke="#c9d6b5" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-    <circle cx="50" cy="49" r="5.2" fill="#fff"/><circle cx="70" cy="49" r="5.2" fill="#fff"/>
-    <circle class="y-pupil" cx="51" cy="50" r="2.7" fill="#14181c"/><circle class="y-pupil" cx="71" cy="50" r="2.7" fill="#14181c"/>
+    <g class="y-eyes"><circle cx="50" cy="49" r="5.2" fill="#fff"/><circle cx="70" cy="49" r="5.2" fill="#fff"/>
+    <circle class="y-pupil" cx="51" cy="50" r="2.7" fill="#14181c"/><circle class="y-pupil" cx="71" cy="50" r="2.7" fill="#14181c"/></g>
     <path d="M43 44 Q50 40 57 45 M77 44 Q70 40 63 45" stroke="#6f9156" stroke-width="2.4" fill="none" stroke-linecap="round"/>
     <path d="M58 57 L60 59 L62 57" stroke="#7fa064" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M53 63 Q60 67 67 63" stroke="#5d7a48" stroke-width="1.7" fill="none" stroke-linecap="round"/>
@@ -101,7 +104,7 @@ export function mount({ reduced = false, watch = null } = {}) {
     yoda.classList.add('walking');
     const anim = yoda.animate(
       [{ transform: `translateX(${from}px)` }, { transform: `translateX(${to}px)` }],
-      { duration: (Math.abs(to - from) / SPEED) * 1000, easing: 'linear', fill: 'forwards' },
+      { duration: (Math.abs(to - from) / SPEED) * 1000, easing: 'ease-in-out', fill: 'forwards' },
     );
     await anim.finished;
     yoda.style.transform = `translateX(${to}px)`;
@@ -110,7 +113,7 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
 
   const visit = async () => {
-    const dir = Math.random() < 0.5 ? 1 : -1; // 1 = enters from the left
+    const dir = Math.random() < FROM_RIGHT ? -1 : 1; // 1 = enters from the left
     const action = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
     const quote = nextQuote();
     const w = host.clientWidth; // viewport width without the scrollbar

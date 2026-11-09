@@ -62,7 +62,7 @@
 }
 
 /* Yoda: walks along the bottom of the viewport, does a Jedi thing and quotes something */
-.yoda { position: fixed; left: 0; bottom: 0; width: clamp(84px, 9vw, 120px); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
+.yoda { position: fixed; left: 0; bottom: 0; width: clamp(112px, 12vw, 160px); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
 .yoda.on { visibility: visible; }
 .yoda-flip { transform-origin: 50% 100%; }
 .yoda-svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -70,12 +70,17 @@
 .yoda-svg .y-hand { transform-box: fill-box; transform-origin: center; transition: transform .4s var(--ease); }
 .yoda-svg .y-force circle { fill: none; stroke: var(--teal); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
 .yoda-svg .y-swirl path { fill: none; stroke: var(--teal); stroke-width: 2.5; stroke-linecap: round; opacity: 0; }
-.yoda-svg .y-head { transform-origin: 60px 90px; }
+.yoda-svg .y-head { transform-origin: 60px 90px; transition: transform .45s var(--ease); }
+.yoda-svg .y-arm-l { transform-origin: 44px 94px; }
+.yoda-svg .y-eyes { transform-box: fill-box; transform-origin: center; animation: yoda-blink 4.6s infinite; }
+.yoda.force .y-head, .yoda.mind .y-head { transform: rotate(-4deg); }
 .yoda.walking .yoda-flip { animation: yoda-bob .5s ease-in-out infinite; }
+.yoda.walking .y-arm { animation: yoda-arm .5s ease-in-out infinite alternate; }
+.yoda.walking .y-arm-l { animation: yoda-arm .5s ease-in-out infinite alternate-reverse; }
 .yoda.walking .y-foot-a { animation: yoda-step .5s ease-in-out infinite; }
 .yoda.walking .y-foot-b { animation: yoda-step .5s ease-in-out infinite .25s; }
 .yoda.walking .y-head { animation: yoda-nod 1s ease-in-out infinite; }
-.yoda.force .y-arm { transform: rotate(-70deg); }
+.yoda.force .y-arm { transform: rotate(-70deg); transition-timing-function: cubic-bezier(.3, 1.6, .5, 1); }
 .yoda.force .y-force circle { animation: yoda-ring 1.1s ease-out infinite; }
 .yoda.force .y-force circle:nth-child(2) { animation-delay: .35s; }
 .yoda.force .y-force circle:nth-child(3) { animation-delay: .7s; }
@@ -89,8 +94,10 @@
 .yoda-bubble::after { content: ''; position: absolute; top: 100%; left: var(--tail, 50%); width: 10px; height: 10px; margin: -6px 0 0 -6px; background: var(--surface); border: solid var(--ink); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
 .yoda-bubble.show { opacity: 1; transform: none; }
 
-@keyframes yoda-bob { 50% { transform: translateY(-3px); } }
-@keyframes yoda-step { 50% { transform: translateY(-3px); } }
+@keyframes yoda-bob { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-4px) rotate(-1deg); } }
+@keyframes yoda-arm { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+@keyframes yoda-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.08); } }
+@keyframes yoda-step { 0%, 100% { transform: translate(-3px, 0); } 50% { transform: translate(4px, -4px); } }
 @keyframes yoda-nod { 50% { transform: rotate(2.5deg); } }
 @keyframes yoda-ring { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(3.2); opacity: 0; } }
 @keyframes yoda-wave { from { transform: rotate(-48deg); } to { transform: rotate(-78deg); } }

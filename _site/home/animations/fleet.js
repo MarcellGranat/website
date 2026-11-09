@@ -1,21 +1,24 @@
-// A Star Wars fleet flies across the band: the Millennium Falcon leads at the top, with X-wings,
-// Y-wings, A-wings and Jedi starfighters in formation below, each carrying a tool tag.
-// Everything is a pure function of time t (seconds), so a frame can be frozen with data-time.
+// A Star Wars fleet hovers over the dunes, nose tilted up towards the top right corner: the Millennium
+// Falcon on top, with X-wings, Y-wings, A-wings and Jedi starfighters stepping down behind it, each
+// carrying a tool tag. Everything is a pure function of time t (seconds), so a frame can be frozen
+// with data-time.
 const TOOLS = [
   ['Python', '#0f8f86'], ['DuckDB', '#d98a00'], ['Rust', '#b4492b'], ['R', '#2f6fb0'],
   ['uv', '#6d4fc2'], ['Quarto', '#2a8a5b'], ['git', '#14181c'], ['Claude Code', '#c46a2d'],
   ['pytest', '#0f8f86'], ['Parquet', '#2f6fb0'],
 ];
-// Formation: dx behind the Falcon, y = flight height (canvas units). The Falcon flies highest.
+// Formation: a diagonal climbing to the top right. dx behind the Falcon, y = hover height (canvas units).
 const SHIPS = [
-  { type: 'falcon', dx: 0, y: 188 },
-  { type: 'xwing', dx: -150, y: 258 }, { type: 'xwing', dx: -150, y: 332 },
-  { type: 'jedi', dx: -300, y: 228 }, { type: 'ywing', dx: -300, y: 296 },
-  { type: 'awing', dx: -450, y: 262 }, { type: 'awing', dx: -450, y: 334 },
-  { type: 'jedi', dx: -600, y: 216 }, { type: 'ywing', dx: -600, y: 278 }, { type: 'xwing', dx: -600, y: 342 },
+  { type: 'falcon', dx: 0, y: 172 },
+  { type: 'xwing', dx: -115, y: 205 }, { type: 'xwing', dx: -115, y: 272 },
+  { type: 'jedi', dx: -230, y: 240 }, { type: 'ywing', dx: -230, y: 310 },
+  { type: 'awing', dx: -345, y: 276 }, { type: 'awing', dx: -345, y: 344 },
+  { type: 'jedi', dx: -460, y: 298 }, { type: 'ywing', dx: -460, y: 358 }, { type: 'xwing', dx: -575, y: 332 },
 ];
 const SCALE = 0.85; // ship size
-const H = 420, G = 382, SPEED = 130, FLEET = 820, GAP = 200, BOLT_EVERY = 0.7, BOLT_LIFE = 1.3, BOLT_SPEED = 560;
+const TILT = -0.22; // radians: the nose points to the top right corner
+const SPAN = 720; // formation width in canvas units; it is squeezed on narrow screens
+const H = 420, G = 382, BOLT_EVERY = 1.1, BOLT_LIFE = 1.6, BOLT_SPEED = 420;
 const INK = '#14181c', MONO = "'JetBrains Mono', ui-monospace, monospace";
 const HULL = '#e9ecee', HULL_EDGE = '#8c939a', METAL = '#8f969c', GLASS = '#3a4a5c';
 
@@ -111,10 +114,10 @@ function sky(c, W) {
   c.fillStyle = 'rgba(20,24,28,.09)'; c.beginPath(); c.arc(W * 0.76 + 16, 90, 10, 0, 7); c.fill();
 }
 
-function draw(c, W, t, fixedL) {
-  const P = W + FLEET + GAP;
-  const posAt = (tt) => ((tt * SPEED) % P) - 170;
-  const L = fixedL ?? posAt(t);
+function draw(c, W, t, still) {
+  const fx = Math.min(1, Math.max(0.5, (W - 60) / SPAN)); // squeeze the formation on narrow screens
+  const L = W - 90 * fx - 30, sc = SCALE * Math.max(0.72, fx);
+  const pos = (s, i) => [L + s.dx * fx + Math.sin(t * 0.9 + i * 1.7) * 2, s.y + Math.sin(t * 1.8 + i * 1.3) * 5];
   c.clearRect(0, 0, W, H);
   sky(c, W);
   // Tatooine dunes
@@ -122,31 +125,31 @@ function draw(c, W, t, fixedL) {
   hill(c, W, 24, G - 24, 4.1, 'rgba(217,138,0,.16)');
   c.fillStyle = 'rgba(217,138,0,.18)'; c.fillRect(0, G, W, H - G);
 
+  // ground shadows: the higher a ship hovers, the fainter and smaller its shadow
   SHIPS.forEach((s, i) => {
-    const x = L + s.dx, k = KIND[s.type];
-    if (x < -130 || x > W + 100) return;
-    const y = s.y + Math.sin(t * 1.8 + i * 1.3) * 3.5;
-    c.save(); c.translate(x, y); c.rotate(Math.sin(t * 1.4 + i) * 0.03); c.scale(SCALE, SCALE);
+    const [x, y] = pos(s, i), lift = (G - y) / G;
+    c.fillStyle = `rgba(20,24,28,${0.14 - lift * 0.08})`; c.beginPath(); c.ellipse(x, G + 9, 30 * sc * (1.1 - lift * 0.5), 5, 0, 0, 7); c.fill();
+  });
+  SHIPS.forEach((s, i) => {
+    const k = KIND[s.type], [x, y] = pos(s, i);
+    c.save(); c.translate(x, y); c.rotate(TILT + Math.sin(t * 1.4 + i) * 0.025); c.scale(sc, sc);
     trails(c, k, t, i); k.draw(c);
     c.restore();
   });
   // tool tags go on top so no ship covers them
-  SHIPS.forEach((s, i) => {
-    const x = L + s.dx;
-    if (x < -130 || x > W + 100) return;
-    tag(c, x - 4, s.y + Math.sin(t * 1.8 + i * 1.3) * 3.5 + 25, i);
-  });
+  SHIPS.forEach((s, i) => { const [x, y] = pos(s, i); tag(c, x - 4, y + 26, i); });
 
-  if (fixedL === undefined) { // laser bolts
+  if (!still) { // laser bolts fly out along the tilt
+    const dirx = Math.cos(TILT), diry = Math.sin(TILT);
     const born = Math.floor(t / BOLT_EVERY);
     for (let n = born; n > born - BOLT_LIFE / BOLT_EVERY; n--) {
       const age = t - n * BOLT_EVERY; if (n < 0 || age < 0) continue;
-      const s = SHIPS[(n * 3 + 1) % SHIPS.length], k = KIND[s.type];
-      const bx = posAt(n * BOLT_EVERY) + s.dx + k.nose * SCALE + age * BOLT_SPEED, a = 1 - age / BOLT_LIFE;
-      if (bx < -20 || bx > W + 20) continue;
-      c.lineCap = 'round';
-      c.strokeStyle = k.bolt; c.globalAlpha = 0.28 * a; c.lineWidth = 7; c.beginPath(); c.moveTo(bx - 16, s.y); c.lineTo(bx, s.y); c.stroke();
-      c.globalAlpha = a; c.lineWidth = 3; c.beginPath(); c.moveTo(bx - 16, s.y); c.lineTo(bx, s.y); c.stroke();
+      const i = (n * 3 + 1) % SHIPS.length, s = SHIPS[i], k = KIND[s.type], a = 1 - age / BOLT_LIFE;
+      const [sx, sy] = pos(s, i);
+      const d = k.nose * sc + age * BOLT_SPEED, bx = sx + dirx * d, by = sy + diry * d;
+      c.lineCap = 'round'; c.strokeStyle = k.bolt;
+      c.globalAlpha = 0.28 * a; c.lineWidth = 7; c.beginPath(); c.moveTo(bx - dirx * 16, by - diry * 16); c.lineTo(bx, by); c.stroke();
+      c.globalAlpha = a; c.lineWidth = 3; c.beginPath(); c.moveTo(bx - dirx * 16, by - diry * 16); c.lineTo(bx, by); c.stroke();
       c.globalAlpha = 1;
     }
   }
@@ -164,7 +167,7 @@ export function mount(cv, { reduced = false } = {}) {
     c.setTransform(cv.width / W, 0, 0, cv.height / H, 0, 0);
     paint(performance.now());
   }
-  const paint = (now) => reduced && frozen === null ? draw(c, W, 0, W * 0.82) : draw(c, W, frozen ?? (now - t0) / 1000);
+  const paint = (now) => (reduced && frozen === null ? draw(c, W, 0, true) : draw(c, W, frozen ?? (now - t0) / 1000, frozen !== null));
   function loop(now) { if (!vis) return; paint(now); raf = requestAnimationFrame(loop); }
   new ResizeObserver(size).observe(cv);
   new IntersectionObserver(([e]) => {

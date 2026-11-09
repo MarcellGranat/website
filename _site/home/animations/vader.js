@@ -15,7 +15,6 @@ export const LABELS = [
   'p < 0.05 (somehow)',
   'Untitled17.ipynb',
   "it's not a bug, it's a feature",
-  'NaN',
   'df_final_USE_THIS_ONE',
   'I find your lack of tests disturbing',
   'results_new_new_OLD.csv',

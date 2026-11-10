@@ -50,12 +50,17 @@ const SVG = `
   </g>
     <g class="v-arm">
     <path d="M76 92 Q90 102 88 120" stroke="#1a1c21" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <g class="v-saber" transform="translate(88 123) rotate(-125)">
+    <circle cx="88" cy="123" r="5.2" fill="#0e0f12"/><path d="M85 121 H91 M85 124 H91" stroke="#3a3d45" stroke-width="1" stroke-linecap="round"/>
+  </g>
+  <g class="v-arm-bent">
+    <path d="M76 92 Q89 96 92 110 Q97 100 104 85" stroke="#1a1c21" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="92" cy="110" r="4.6" fill="#1a1c21"/>
+    <g class="v-saber" transform="translate(104 84) rotate(180)">
       <g class="v-blade"><rect class="v-b1" x="-1.8" y="8" width="3.6" height="0" rx="1.8" fill="#ff3b3b"/><rect class="v-b2" x="-.6" y="8" width="1.2" height="0" rx=".6" fill="#ffe6e6"/></g>
       <rect x="-2.5" y="-14" width="5" height="23" rx="1.2" fill="#9aa0aa"/><path d="M-2.5 -11.5 H2.5 M-2.5 -8.5 H2.5 M-2.5 -5.5 H2.5 M-2.5 5 H2.5" stroke="#5a5f69" stroke-width=".8"/>
       <rect x="-3.4" y="-15" width="6.8" height="2.4" rx="1" fill="#4a4e57"/><rect x="-3.4" y="7.5" width="6.8" height="2" rx=".8" fill="#4a4e57"/>
     </g>
-    <circle cx="88" cy="123" r="5.2" fill="#0e0f12"/><path d="M85 121 H91 M85 124 H91" stroke="#3a3d45" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="104" cy="84" r="5.2" fill="#0e0f12"/><path d="M101 82 H107 M101 85 H107" stroke="#3a3d45" stroke-width="1" stroke-linecap="round"/>
   </g>
 </svg>`;
 

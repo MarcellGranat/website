@@ -60,9 +60,9 @@ export const OBI_SVG = `
     <path d="M78 91 Q87 96 89 114" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
     <g transform="translate(89 114)">
       <g class="y-fore">
-        <path d="M0 0 Q2 -12 8 -23" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
-        <circle cx="9" cy="-26" r="4.8" fill="#e8bf9a"/>
-        <path d="M6 -30 L5 -35 M9 -31 L9 -36 M12 -30 L13 -35 M14 -26 L17 -28" stroke="#e8bf9a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M0 0 Q3 -16 10 -30" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
+        <circle cx="11" cy="-34" r="4.8" fill="#e8bf9a"/>
+        <path d="M8 -38 L7 -43 M11 -39 L11 -44 M14 -38 L15 -43 M16 -34 L19 -36" stroke="#e8bf9a" stroke-width="2" stroke-linecap="round"/>
       </g>
       <circle cx="0" cy="0" r="4.5" fill="#7a5632"/>
     </g>

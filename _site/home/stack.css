@@ -377,3 +377,6 @@
 @keyframes sc-pass { from { transform: translate(320px, 24px) scaleX(-1); } to { transform: translate(-70px, 14px) scaleX(-1); } }
 
 @media (prefers-reduced-motion: reduce) { .scene svg *, .scene svg { animation: none !important; } .scene-4 .sc-panel { opacity: 1; } .scene-4 .sc-bar { transform: none; } .scene-2 .sc-ai { opacity: 1; } .scene-4 .sc-sd { transform: translate(200px, 20px) scaleX(-1); } }
+
+/* the tool Grievous names is highlighted in his bubble */
+.q-tool { color: var(--teal); font-weight: 800; }

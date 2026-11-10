@@ -28,6 +28,16 @@ const FIRST_DELAY = [1200, 1800];
 const GAP = [7000, 10000];
 const EDGE = [0.03, 0.22]; // he stays near the side he came from (share of the viewport width)
 
+// **word** in a quote is shown highlighted (Grievous names the tool, which is not always obvious)
+function setQuote(el, quote) {
+  el.textContent = '';
+  quote.split('**').forEach((part, i) => {
+    if (!part) return;
+    if (i % 2) { const b = document.createElement('span'); b.className = 'q-tool'; b.textContent = part; el.append(b); }
+    else el.append(part);
+  });
+}
+
 const rand = (a, b) => a + Math.random() * (b - a);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -138,7 +148,7 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
     await walk(start, stop);
 
     // say it and do the Jedi thing
-    bubble.textContent = quote;
+    setQuote(bubble, quote);
     bubble.style.maxWidth = `${Math.min(240, w - 12)}px`;
     bubble.classList.add('show');
     const bw = bubble.offsetWidth;
@@ -147,7 +157,7 @@ export function createJedi({ svg, quotes, actions, fromRight = 0.5, speed = SPEE
     bubble.style.left = `${left - stop}px`;
     bubble.style.setProperty('--tail', `${centre - left}px`);
     yoda.classList.add(action);
-    await wait(2200 + quote.length * 45);
+    await wait(2200 + quote.replace(/\*\*/g, '').length * 45);
 
     bubble.classList.remove('show');
     yoda.classList.remove(action);

@@ -20,7 +20,7 @@ const QUESTIONS = [
 
 export const GRIEVOUS_QUOTES = [
   ...QUESTIONS,
-  ...TOOLS.map((t) => `Ah, this ${t} was missing from my collection.`),
+  ...TOOLS.map((t) => `Ah, this **${t}** was missing from my collection.`),
 ];
 
 const PLATE = '#d2ccb9';

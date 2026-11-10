@@ -238,10 +238,12 @@
 .p-svg .p-arm { transform-origin: 71px 86px; transition: transform .7s cubic-bezier(.45, .05, .25, 1) .15s; }
 .p-svg .p-arm-l { transform-origin: 49px 86px; transition: transform .7s cubic-bezier(.45, .05, .25, 1) .1s; }
 .p-svg .p-head { transform-origin: 60px 72px; transition: transform .7s cubic-bezier(.45, .05, .25, 1) .1s; }
-.padme.bend .p-upper { transform: rotate(34deg); }
-.padme.bend .p-arm { transform: rotate(-98deg); }
-.padme.bend .p-arm-l { transform: rotate(-34deg); }
-.padme.bend .p-head { transform: rotate(-6deg); }
+.p-svg .p-skirt { transform-origin: 60px 144px; transition: transform .8s cubic-bezier(.45, .05, .25, 1); }
+.padme.bend .p-skirt { transform: scaleY(.86); }
+.padme.bend .p-upper { transform: translate(7px, 15px) rotate(20deg); }
+.padme.bend .p-arm { transform: rotate(-74deg); }
+.padme.bend .p-arm-l { transform: rotate(-22deg); }
+.padme.bend .p-head { transform: rotate(8deg); }
 .padme.walking .p-bob { animation: p-run .36s ease-in-out infinite; }
 .padme.walking .p-foot-a { animation: yoda-step .36s ease-in-out infinite; }
 .padme.walking .p-foot-b { animation: yoda-step .36s ease-in-out infinite .18s; }

@@ -13,30 +13,28 @@ const PADME_SVG = `
   <ellipse cx="60" cy="146" rx="30" ry="4" fill="rgba(20,24,28,.13)"/>
   <ellipse class="p-foot-a" cx="48" cy="144" rx="7" ry="3.5" fill="#4a3322"/>
   <ellipse class="p-foot-b" cx="72" cy="144" rx="7" ry="3.5" fill="#4a3322"/>
-  <path d="M35 144 Q38 114 43 104 L77 104 Q82 114 85 144 Z" fill="#f4f1ea"/>
-  <path d="M50 108 Q46 126 44 143 M60 108 L60 144 M70 108 Q74 126 76 143" stroke="#cfc8bb" stroke-width="1.4" fill="none"/>
-  <path d="M43 105 Q60 111 77 105" stroke="#d9b44a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <path d="M60 108 Q58 118 61 126" stroke="#d9b44a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <g class="p-skirt">
+    <path d="M35 144 Q38 114 43 104 L77 104 Q82 114 85 144 Z" fill="#fbf9f4"/>
+    <path d="M50 110 Q46 126 44 143 M60 110 L60 144 M70 110 Q74 126 76 143" stroke="#e2ddd2" stroke-width="1.4" fill="none"/>
+  </g>
   <g class="p-upper">
     <g class="p-arm-l">
       <path d="M49 86 Q39 97 43 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>
-      <path d="M40 108 Q43 113 47 108" stroke="#7a4fa0" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M39.5 108 Q43 113 47.5 108" stroke="#e2ddd2" stroke-width="2.4" fill="none" stroke-linecap="round"/>
       <circle cx="43" cy="114" r="3.6" fill="#efc9a3"/>
     </g>
-    <path d="M47 80 Q60 75 73 80 Q79 92 81 114 L39 114 Q41 92 47 80 Z" fill="#f4f1ea"/>
-    <path d="M60 86 V112" stroke="#cfc8bb" stroke-width="1.2"/><circle cx="60" cy="92" r="1" fill="#b9b2a4"/><circle cx="60" cy="99" r="1" fill="#b9b2a4"/><circle cx="60" cy="106" r="1" fill="#b9b2a4"/>
+    <path d="M47 80 Q60 75 73 80 Q79 92 81 114 L39 114 Q41 92 47 80 Z" fill="#fbf9f4"/>
     <rect x="56" y="70" width="8" height="12" fill="#efc9a3"/>
-    <path d="M40 80 Q60 66 80 80 L84 92 Q60 82 36 92 Z" fill="#fbf9f4" stroke="#cfc8bb" stroke-width="1"/>
-    <path d="M51 79 L58 83 L57 114 L50 114 Z M69 79 L62 83 L63 114 L70 114 Z" fill="#7a4fa0" stroke="#d9b44a" stroke-width="1"/>
-    <path d="M52 100 H56 M64 100 H68" stroke="#d9b44a" stroke-width="1.4"/>
-    <path d="M55 72 H65 L62 78 H58 Z" fill="#2b2f36"/><rect x="58.6" y="73" width="2.8" height="4" fill="#fff"/>
+    <path d="M38 80 Q60 66 82 80 Q88 90 82 94 Q60 84 38 94 Q32 90 38 80 Z" fill="#fbf9f4" stroke="#d9d3c6" stroke-width="1.2"/>
+    <path d="M52 80 Q60 88 68 80" stroke="#d9d3c6" stroke-width="1.2" fill="none"/>
+    <path d="M56 84 V98 M64 84 V98" stroke="#cfc8bb" stroke-width="1.5" stroke-linecap="round"/><circle cx="56" cy="99" r="1.4" fill="#cfc8bb"/><circle cx="64" cy="99" r="1.4" fill="#cfc8bb"/>
+    <path d="M46 103 L74 103 L78 114 L42 114 Z" fill="#f1ede4" stroke="#dcd6c9" stroke-width="1"/>
     <g class="p-head">
       <ellipse cx="60" cy="54" rx="15" ry="16" fill="#3b2418"/>
       <circle cx="43" cy="54" r="7" fill="#3b2418"/><circle cx="77" cy="54" r="7" fill="#3b2418"/>
       <path d="M40 54 Q43 49 46 54 M74 54 Q77 49 80 54" stroke="#2a1a10" stroke-width="1.2" fill="none"/>
       <ellipse cx="60" cy="58" rx="11" ry="13" fill="#efc9a3"/>
       <path d="M48 55 Q50 42 60 42 Q70 42 72 55 Q66 48 60 48 Q54 48 48 55 Z" fill="#3b2418"/>
-      <circle cx="60" cy="47" r="1.8" fill="#d9b44a"/>
       <circle cx="55" cy="58" r="1.4" fill="#2a1a12"/><circle cx="65" cy="58" r="1.4" fill="#2a1a12"/>
       <path d="M52 54.5 Q55 53 58 54.5 M62 54.5 Q65 53 68 54.5" stroke="#3b2418" stroke-width="1" fill="none" stroke-linecap="round"/>
       <path d="M56 65 Q60 68 64 65" stroke="#b8434f" stroke-width="1.9" fill="none" stroke-linecap="round"/>
@@ -44,7 +42,7 @@ const PADME_SVG = `
     </g>
     <g class="p-arm">
       <path d="M71 86 Q81 97 80 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>
-      <path d="M77 108 Q80 113 84 108" stroke="#7a4fa0" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M76.5 108 Q80 113 84.5 108" stroke="#e2ddd2" stroke-width="2.4" fill="none" stroke-linecap="round"/>
       <circle cx="80" cy="114" r="3.8" fill="#efc9a3"/>
     </g>
   </g>

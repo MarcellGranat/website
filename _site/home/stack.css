@@ -268,7 +268,7 @@
 .y-arm-bent .y-fore { transition: transform .5s var(--ease); }
 .yoda.force .y-arm, .yoda.mind .y-arm { opacity: 0; animation: none; transform: none; }
 .yoda.force .y-arm-bent, .yoda.mind .y-arm-bent { opacity: 1; }
-.yoda.mind .y-fore { animation: obi-wave .5s ease-in-out .35s infinite alternate; }
+.yoda.mind .y-fore { animation: obi-wave .6s ease-in-out .6s 1 both; } /* one single wipe, from upright to outwards */
 @keyframes obi-wave { from { transform: rotate(0deg); } to { transform: rotate(26deg); } }
 
 /* Vader raises his hand, switches a red lightsaber on and off */

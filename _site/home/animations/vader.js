@@ -52,7 +52,7 @@ const SVG = `
     <path d="M76 92 Q90 102 88 120" stroke="#1a1c21" stroke-width="9" stroke-linecap="round" fill="none"/>
     <g class="v-saber">
       <g class="v-blade"><rect x="86.2" y="131" width="3.6" height="62" rx="1.8" fill="#ff3b3b"/><rect x="87.4" y="131" width="1.2" height="62" rx=".6" fill="#ffe6e6"/></g>
-      <rect x="85.5" y="117" width="5" height="15" rx="1.2" fill="#9aa0aa"/><path d="M85.5 120 H90.5 M85.5 123 H90.5 M85.5 126 H90.5" stroke="#5a5f69" stroke-width=".8"/><rect x="84.8" y="130.5" width="6.4" height="2" rx=".8" fill="#4a4e57"/>
+      <rect x="85.5" y="109" width="5" height="23" rx="1.2" fill="#9aa0aa"/><path d="M85.5 111.5 H90.5 M85.5 114.5 H90.5 M85.5 117.5 H90.5 M85.5 128 H90.5" stroke="#5a5f69" stroke-width=".8"/><rect x="84.6" y="108" width="6.8" height="2.4" rx="1" fill="#4a4e57"/><rect x="84.8" y="130.5" width="6.4" height="2" rx=".8" fill="#4a4e57"/>
     </g>
     <circle cx="88" cy="123" r="5.2" fill="#0e0f12"/><path d="M85 121 H91 M85 124 H91" stroke="#3a3d45" stroke-width="1" stroke-linecap="round"/>
   </g>

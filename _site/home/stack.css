@@ -264,7 +264,7 @@
 
 /* Yoda's and Obi-Wan's Force trick: bent arm, elbow pointing down (push forward, or a waving mind trick) */
 .y-arm-bent { opacity: 0; transition: opacity .35s; }
-.y-arm-bent .y-fore { transform-origin: 91px 114px; }
+.y-arm-bent .y-fore { transform-origin: 0 0; } /* the group is translated to the elbow, so 0 0 is the elbow */
 .y-arm-bent .y-fore { transition: transform .5s var(--ease); }
 .yoda.force .y-arm, .yoda.mind .y-arm { opacity: 0; animation: none; transform: none; }
 .yoda.force .y-arm-bent, .yoda.mind .y-arm-bent { opacity: 1; }

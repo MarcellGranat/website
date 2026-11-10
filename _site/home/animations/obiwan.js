@@ -57,12 +57,14 @@ export const OBI_SVG = `
     </g>
   </g>
   <g class="y-arm-bent">
-    <path d="M78 91 Q89 96 91 114" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <g class="y-fore">
-      <path d="M91 114 Q93 102 99 91" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
-      <circle cx="100" cy="88" r="4.8" fill="#e8bf9a"/>
-      <path d="M97 84 L96 79 M100 83 L100 78 M103 84 L104 79 M105 88 L108 86" stroke="#e8bf9a" stroke-width="2" stroke-linecap="round"/>
+    <path d="M78 91 Q87 96 89 114" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <g transform="translate(89 114)">
+      <g class="y-fore">
+        <path d="M0 0 Q2 -12 8 -23" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
+        <circle cx="9" cy="-26" r="4.8" fill="#e8bf9a"/>
+        <path d="M6 -30 L5 -35 M9 -31 L9 -36 M12 -30 L13 -35 M14 -26 L17 -28" stroke="#e8bf9a" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <circle cx="0" cy="0" r="4.5" fill="#7a5632"/>
     </g>
-    <circle cx="91" cy="114" r="4.5" fill="#7a5632"/>
   </g>
 </svg>`;

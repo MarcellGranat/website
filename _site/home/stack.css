@@ -192,7 +192,7 @@
 .yoda.ask .gr-mouth { animation: gr-talk .18s ease-in-out infinite alternate; }
 .yoda.ask .gr-head { animation: gr-tilt 1s ease-in-out infinite alternate; }
 .yoda.ask .gr-c, .yoda.ask .gr-d { animation: gr-step .35s ease-in-out infinite alternate; }
-.yoda-bubble.below { bottom: auto; top: calc(78% + 6px); transform-origin: var(--tail, 50%) 0; transform: translateY(-6px) scale(.92); }
+.yoda-bubble.below { bottom: auto; top: calc(92% + 6px); transform-origin: var(--tail, 50%) 0; transform: translateY(-6px) scale(.92); }
 .yoda-bubble.below.show { transform: none; }
 .yoda-bubble.below::after { top: auto; bottom: 100%; margin: 0 0 -6px -6px; border-width: 1.5px 0 0 1.5px; }
 

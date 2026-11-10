@@ -53,14 +53,17 @@ export const GRIEVOUS_SVG = `
   ${limb('gr-d', [80, 40], [102, 28], [116, 5])}
   <path d="M80 46 Q89 50 94 58" stroke="${JOINT}" stroke-width="6" stroke-linecap="round" fill="none"/>
   <g class="gr-head">
-    <path d="M85 42 L98 35 L111 42 L113 64 Q111 80 98 93 Q85 80 83 64 Z" fill="#e0dac8"/>
-    <path d="M98 35 V56" stroke="${PLATE_DARK}" stroke-width="1.8"/>
-    <path d="M85 42 L98 35 L111 42 L110 50 L98 44 L86 50 Z" fill="${PLATE_DARK}"/>
-    <path d="M84 53 L97 61 L98 65 L85 58 Z M112 53 L99 61 L98 65 L111 58 Z" fill="${JOINT}"/>
-    <ellipse cx="91.5" cy="67" rx="4.6" ry="4" fill="#e8b923"/><ellipse cx="104.5" cy="67" rx="4.6" ry="4" fill="#e8b923"/>
-    <ellipse cx="91.5" cy="67" rx="1.2" ry="3.7" fill="#1a1a1a"/><ellipse cx="104.5" cy="67" rx="1.2" ry="3.7" fill="#1a1a1a"/>
-    <path d="M98 68 V76" stroke="#8b8578" stroke-width="1.6" stroke-linecap="round"/>
-    <path d="M85 68 Q88 82 98 91 M111 68 Q108 82 98 91" stroke="#8b8578" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <g class="gr-mouth"><path d="M93.5 79 V86 M98 80 V89 M102.5 79 V86" stroke="#5a5446" stroke-width="1.7" stroke-linecap="round"/></g>
+    <path d="M91 94 Q84 106 90 119 M105 94 Q112 106 106 119" stroke="#3a3228" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M79 25 Q68 44 70 58 Q73 76 90 95 Q84 72 85 56 Q86 40 79 25 Z" fill="#e8e2d0" stroke="#bdb6a3" stroke-width="1"/>
+    <path d="M117 25 Q128 44 126 58 Q123 76 106 95 Q112 72 111 56 Q110 40 117 25 Z" fill="#e8e2d0" stroke="#bdb6a3" stroke-width="1"/>
+    <path d="M86.5 38 Q88 23 98 22 Q108 23 109.5 38 L113.5 50 Q113.5 61 106 71 L103 98 Q98 108 93 98 L90 71 Q82.5 61 82.5 50 Z" fill="#e0dac8"/>
+    <path d="M84 52 Q90 49 97 53 L96 60.5 Q90 63.5 85 59 Z M112 52 Q106 49 99 53 L100 60.5 Q106 63.5 111 59 Z" fill="#6b2a26"/>
+    <ellipse cx="91" cy="56" rx="3.7" ry="2.5" fill="#e8b923"/><ellipse cx="105" cy="56" rx="3.7" ry="2.5" fill="#e8b923"/>
+    <ellipse cx="91" cy="56" rx="1" ry="2.3" fill="#1a1a1a"/><ellipse cx="105" cy="56" rx="1" ry="2.3" fill="#1a1a1a"/>
+    <path d="M93.5 28 V47 M102.5 28 V47" stroke="#1d1a17" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M85 49 Q91 46 97 50 M111 49 Q105 46 99 50" stroke="#a69f8d" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M98 64 V78" stroke="#a69f8d" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M89.5 70 Q92 88 94 98 M106.5 70 Q104 88 102 98" stroke="#b5ae9b" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <g class="gr-mouth"><rect x="93" y="79" width="10" height="14" rx="1.6" fill="#d3ccb8" stroke="#8b8578" stroke-width=".8"/><path d="M94.9 81 V91 M97.3 81 V91 M99.7 81 V91 M102.1 81 V91" stroke="#5a5446" stroke-width="1.1" stroke-linecap="round"/></g>
   </g>
 </svg>`;

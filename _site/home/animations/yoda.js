@@ -73,12 +73,12 @@ const SVG = `
     </g>
   </g>
   <g class="y-arm-bent">
-    <path d="M78 91 Q87 96 89 114" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <g transform="translate(89 114)">
+    <path d="M78 91 Q85 94 88 106" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <g transform="translate(88 106)">
       <g class="y-fore">
-        <path d="M0 0 Q2 -6 7 -14" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
-        <circle cx="8" cy="-17" r="4.8" fill="#9cc07f"/>
-        <path d="M5 -21 L4 -26 M8 -22 L8 -27 M11 -21 L12 -26 M13 -17 L16 -19" stroke="#9cc07f" stroke-width="2" stroke-linecap="round"/>
+        <path d="M0 0 Q0 -7 1 -13" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+        <circle cx="1" cy="-16" r="4.8" fill="#9cc07f"/>
+        <path d="M-2 -20 L-3 -25 M1 -21 L1 -26 M4 -20 L5 -25 M6 -16 L9 -18" stroke="#9cc07f" stroke-width="2" stroke-linecap="round"/>
       </g>
       <circle cx="0" cy="0" r="4.5" fill="#d8b47c"/>
     </g>
@@ -203,6 +203,7 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
   loop(rand(...FIRST_DELAY));
 }
+
 
 
 

@@ -269,7 +269,7 @@
 .yoda.force .y-arm, .yoda.mind .y-arm { opacity: 0; animation: none; transform: none; }
 .yoda.force .y-arm-bent, .yoda.mind .y-arm-bent { opacity: 1; }
 .yoda.mind .y-fore { animation: obi-wave .5s ease-in-out .35s infinite alternate; }
-@keyframes obi-wave { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
+@keyframes obi-wave { from { transform: rotate(0deg); } to { transform: rotate(26deg); } }
 
 /* Vader raises his hand, switches a red lightsaber on and off */
 .v-svg .v-blade { filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }

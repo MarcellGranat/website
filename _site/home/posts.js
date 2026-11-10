@@ -2,6 +2,15 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
+    "id": "duckrev",
+    "title": "duckrev: rerun only the stages whose DuckDB tables really changed",
+    "date": "2026-11-11",
+    "tags": [
+      "dev"
+    ],
+    "image": "featured.svg"
+  },
+  {
     "id": "herdr-pomodoro",
     "title": "herdr-pomodoro: a focus timer that knows what I am working on",
     "date": "2026-11-08",

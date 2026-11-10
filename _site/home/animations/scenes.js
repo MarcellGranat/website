@@ -43,10 +43,11 @@ const FALCON = `
       <ellipse cx="78" cy="104" rx="21" ry="13" fill="#96704c"/>
       <path d="M58 52 Q55 66 59 80 M68 48 Q65 66 70 84 M79 47 Q81 66 78 86 M90 48 Q94 64 91 82 M101 52 Q104 64 99 78" stroke="#3b2818" stroke-width="5" stroke-linecap="round" fill="none"/>
       <path d="M64 50 Q62 64 65 76 M85 48 Q86 62 84 74 M96 50 Q99 60 96 70" stroke="#2a1a0e" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <path d="M52 78 Q62 70 72 78 M84 78 Q94 70 104 78" stroke="#2a1a0e" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M56 85 Q63 80 71 85 M85 85 Q93 80 100 85" stroke="#140a04" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M50 84 L73 71 M106 84 L83 71" stroke="#2a1a0e" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="63" cy="87" rx="5.6" ry="6.4" fill="#0e0a07"/><ellipse cx="93" cy="87" rx="5.6" ry="6.4" fill="#0e0a07"/>
+      <circle cx="65" cy="84.6" r="1.7" fill="#fff"/><circle cx="95" cy="84.6" r="1.7" fill="#fff"/>
       <ellipse cx="78" cy="96" rx="9.5" ry="7" fill="#55514e"/><ellipse cx="75" cy="93" rx="3.4" ry="1.9" fill="#8a8680"/><path d="M72 99 Q74 101 76 99 M80 99 Q82 101 84 99" stroke="#2c2a29" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-      <path class="sc-smile" d="M66 108 Q78 115 90 108" stroke="#5a2d2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path class="sc-smile" d="M67 113 Q78 107 89 113" stroke="#5a2d2a" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M112 64 Q116 72 112 76 Q108 72 112 64 Z" fill="#9fd4ee" stroke="#6aa6c6" stroke-width=".8"/>
       <g class="sc-roar"><path d="M64 106 Q78 103 92 106 Q90 122 78 124 Q66 122 64 106 Z" fill="#3a1d12"/><path d="M66 106 Q78 104 90 106 L88 111 Q78 108 68 111 Z" fill="#f4efe6"/><path d="M71 120 Q78 114 85 120 Q78 125 71 120 Z" fill="#d9626a"/></g>
       <path d="M52 112 L48 140 L60 122 L64 150 L74 126 L80 154 L88 126 L96 150 L100 122 L112 140 L106 112 Z" fill="#8a6446"/>
       <path d="M58 118 L56 134 M70 124 L70 144 M84 126 L84 146 M98 124 L100 140" stroke="#5a3d26" stroke-width="2.2" stroke-linecap="round"/>
@@ -57,6 +58,7 @@ const FALCON = `
     <path d="M166 200 Q168 134 225 126 Q282 134 284 200 Z" fill="#e8dfc8"/>
     <path d="M178 150 Q186 160 192 176 M272 150 Q264 160 258 176" stroke="#cfc5aa" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <path d="M168 200 Q170 140 196 130 L208 200 Z M282 200 Q280 140 254 130 L242 200 Z" fill="#24242a"/>
+    <g class="sc-han-arm"><path d="M196 60 V44" stroke="#8c939a" stroke-width="3" stroke-linecap="round"/><path d="M174 160 L170 124 L192 82" stroke="#cfc5aa" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M174 160 L170 124 L192 82" stroke="#e8dfc8" stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M168 118 L176 114" stroke="#cfc5aa" stroke-width="1.3" stroke-linecap="round"/><circle cx="194" cy="76" r="6" fill="#dca682"/><circle cx="196" cy="64" r="3.4" fill="#d9473b"/></g>
     <path d="M208 126 L225 170 L242 126 Z" fill="#d6a07a"/>
     <path d="M198 122 L212 106 L224 142 Z M252 122 L238 106 L226 142 Z" fill="#f1e8d2" stroke="#cfc5aa" stroke-width="1"/>
     <rect x="213" y="104" width="24" height="24" fill="#d9a07c"/>
@@ -71,7 +73,6 @@ const FALCON = `
     <path d="M226 84 Q222 94 227 96" stroke="#c48c6a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <path class="sc-grin" d="M211 101 Q225 114 241 99 Q226 106 211 101 Z" fill="#fff" stroke="#8a4a3a" stroke-width="1.5" stroke-linejoin="round"/>
     <path d="M208 98 Q207 106 213 110 M244 98 Q245 106 239 110" stroke="#cf9a78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-    <g class="sc-han-arm"><path d="M196 62 V44" stroke="#8c939a" stroke-width="3" stroke-linecap="round"/><path d="M204 150 L190 122 L196 78" stroke="#e8dfc8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M193 104 L201 106" stroke="#cfc5aa" stroke-width="1.3" stroke-linecap="round"/><circle cx="196" cy="72" r="6" fill="#dca682"/><circle cx="196" cy="62" r="3.4" fill="#d9473b"/></g>
   </g>
   </g>
   <!-- console with two chrome knobs -->
@@ -121,12 +122,13 @@ const OPERA = `
     <path d="M168 160 Q186 142 196 128 M268 160 Q246 142 238 128" stroke="#5e472c" stroke-width="2" fill="none"/>
     <rect x="203" y="108" width="24" height="26" fill="#d9a07c"/>
     <path d="M204 72 Q192 70 190 76 L184 82 L190 86 L188 93 Q190 99 196 101 L206 110 Q218 110 224 98 L228 74 Z" fill="#e8b896"/>
-    <ellipse cx="226" cy="94" rx="5" ry="8" fill="#dca682"/>
-    <path d="M200 52 Q232 30 258 58 Q268 84 258 112 Q252 126 240 130 Q236 118 226 112 Q214 96 210 76 Z" fill="#6b4528"/>
-    ${[[212, 46], [228, 40], [244, 44], [256, 56], [262, 72], [262, 90], [258, 108], [252, 122], [244, 130], [236, 124]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8" fill="#6b4528"/>`).join('')}
-    <path d="M190 68 Q186 46 212 40 Q196 52 198 70 Q194 72 190 68 Z" fill="#6b4528"/>
+    <ellipse cx="222" cy="90" rx="5" ry="8" fill="#dca682"/>
+    <path d="M198 66 Q200 40 228 38 Q252 40 254 66 Q256 84 250 100 L256 116 L246 108 L246 122 L236 108 Q222 98 218 88 Q214 78 208 74 L212 68 L202 68 L206 60 L196 62 Z" fill="#5b3a22"/>
+    <path d="M214 48 Q228 42 244 50 M226 66 Q240 62 250 70 M234 86 Q244 84 250 92" stroke="#7a5030" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M200 60 L214 60 L214 74 L206 72 Z" fill="#5b3a22"/>
+    <path d="M190 70 Q188 48 214 42 L206 52 L212 56 L200 62 L204 70 Z" fill="#5b3a22"/>
     <path d="M214 50 Q228 42 244 50 M224 70 Q240 62 254 72 M232 94 Q246 88 256 98 M240 116 Q246 112 250 120" stroke="#8a6038" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path d="M196 62 Q200 70 208 70" stroke="#6b4528" stroke-width="5" stroke-linecap="round" fill="none"/>
+    
     <path d="M192 74 Q198 70 204 73" stroke="#4a2e1a" stroke-width="2" fill="none" stroke-linecap="round"/>
     <path d="M193 79 Q198 76 203 79 Q198 83 193 79 Z" fill="#fff"/><circle cx="196" cy="79" r="1.9" fill="#4a7ab0"/><circle cx="195.6" cy="79" r=".9" fill="#14181c"/>
     <path d="M187 90 Q190 92 194 91" stroke="#8a4a3a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
@@ -140,26 +142,31 @@ const OPERA = `
 // ---------------------------------------------------------------------------------------------------
 // 3. Anakin and Obi-Wan, each in their own Jedi starfighter (headset after the film still): "This is where the fun begins"
 const brass = '#c9a85a';
-const ship = (hull, hullLight, pilot) => `
-    <path d="M12 164 L94 148 L178 164 L164 174 L94 168 L26 174 Z" fill="${hull}" stroke="${EDGE}" stroke-width="1.2" stroke-linejoin="round"/>
-    <path d="M52 154 Q56 130 94 128 Q132 130 136 154 Z" fill="${hullLight}" stroke="${EDGE}" stroke-width="1.2"/>
-    <path d="M56 154 Q58 138 94 136" stroke="#fff" stroke-width="1.6" fill="none" opacity=".6"/>
+const m = (x) => 188 - x; // mirror about the ship's centre line
+const wing = (x) => `M${x(68)} 140 L${x(26)} 134 L${x(14)} 158 L${x(70)} 166 Z`;
+const ship = (orange, grey, pilot, droid) => `
+    <path d="${wing((x) => x)}" fill="${grey}" stroke="${EDGE}" stroke-width="1.2" stroke-linejoin="round"/><path d="${wing(m)}" fill="${grey}" stroke="${EDGE}" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M60 146 L30 142 L24 154 L62 160 Z M128 146 L158 142 L164 154 L126 160 Z" fill="${orange}" stroke="#a8742a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M14 150 L42 164 L38 174 L9 160 Z M174 150 L146 164 L150 174 L179 160 Z" fill="#4d545a" stroke="${EDGE}" stroke-width="1"/>
+    <path d="M17 154 L40 166 M13 158 L36 170 M171 154 L148 166 M175 158 L152 170" stroke="#7b848b" stroke-width="1"/>
+    <path d="M24 66 L34 62 L44 136 L26 142 Z M164 66 L154 62 L144 136 L162 142 Z" fill="${orange}" stroke="#a8742a" stroke-width="1" stroke-linejoin="round"/>
+    <rect x="77" y="160" width="4.5" height="16" rx="1.5" fill="#4d545a"/><rect x="106.5" y="160" width="4.5" height="16" rx="1.5" fill="#4d545a"/>
+    <ellipse cx="94" cy="150" rx="28" ry="20" fill="#858c92" stroke="${EDGE}" stroke-width="1.2"/>
+    <path d="M84 142 H104 L112 150 L104 158 H84 L76 150 Z" fill="#6b7279" stroke="#4d545a" stroke-width="1"/><path d="M94 142 V158 M76 150 H112 M84 142 L104 158 M104 142 L84 158" stroke="#4d545a" stroke-width="1"/>
+    ${droid ? '<g><path d="M126 130 Q126 116 136 116 Q146 116 146 130 Z" fill="#f4f6f7" stroke="#8c939a" stroke-width="1"/><path d="M130 124 H142" stroke="#3b82f6" stroke-width="3"/><circle cx="136" cy="119" r="2" fill="#3b82f6"/></g>' : ''}
     ${pilot}
-    <path d="M52 138 Q52 76 94 72 Q136 76 136 138 Z" fill="#cfe0ee" opacity=".16"/>
-    <path d="M52 138 Q52 76 94 72 Q136 76 136 138" fill="none" stroke="#f4f6f7" stroke-width="5"/>
-    <path d="M52 138 Q52 76 94 72 Q136 76 136 138" fill="none" stroke="${EDGE}" stroke-width="1.2"/>
-    <rect x="44" y="136" width="100" height="14" rx="5" fill="${hullLight}" stroke="${EDGE}" stroke-width="1.2"/>
-    <circle cx="14" cy="164" r="3" fill="#d9473b"/><circle cx="178" cy="164" r="3" fill="#d9473b"/>`;
+    <path d="M52 140 Q52 76 94 72 Q136 76 136 140 Z" fill="#46505a" opacity=".22"/>
+    <path d="M52 140 Q52 76 94 72 Q136 76 136 140" fill="none" stroke="#6b7279" stroke-width="5"/>
+    <path d="M52 140 Q52 76 94 72 Q136 76 136 140" fill="none" stroke="#a3aab0" stroke-width="1.2"/>
+    <path d="M60 132 Q60 88 80 80" stroke="#fff" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"/>`;
 const ANAKIN_PILOT = `
     <path d="M62 140 Q64 118 94 116 Q124 118 126 140 Z" fill="#7d5f3d"/>
     <path d="M80 118 L94 134 L108 118 Z" fill="#dcc79c"/>
     <rect x="87" y="104" width="14" height="14" fill="#d9a07c"/>
-    <path d="M70 100 Q64 78 92 76 Q118 78 116 100 L122 122 Q112 112 112 106 L76 106 Q76 112 68 122 Z" fill="#7a4a2a"/>
+    <path d="M72 108 Q66 76 92 72 Q120 72 118 102 L122 118 L114 112 L112 104 L74 104 L70 116 Z" fill="#5b3a22"/>
     <path d="M76 102 Q76 120 92 122 Q110 120 110 100 Q112 82 92 80 Q74 82 76 102 Z" fill="${SKIN}"/>
-    <path d="M74 90 Q74 72 94 72 Q114 74 112 92 Q106 80 98 82 Q86 80 76 92 Z" fill="#7a4a2a"/>
-    <path d="M80 82 Q86 76 92 80 Q86 78 82 86 M96 80 Q104 74 110 84 M108 96 Q116 100 112 112 M74 98 Q70 108 76 114" stroke="#9a6236" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-    ${[[80, 76], [90, 71], [100, 71], [110, 76], [69, 90], [67, 102], [70, 114], [117, 90], [121, 102], [118, 114]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6.5" fill="#7a4a2a"/>`).join('')}
-    <path d="M80 82 Q86 76 92 80 Q86 78 82 86 M96 80 Q104 74 110 84" stroke="#9a6236" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+    <path d="M73 96 Q72 74 94 72 Q114 74 113 94 L110 94 Q108 82 98 80 L100 90 L92 82 L90 92 L84 84 L80 94 Z" fill="#5b3a22"/>
+    <path d="M80 80 Q90 74 104 78 M76 92 Q76 84 80 80" stroke="#7a5030" stroke-width="1.8" fill="none" stroke-linecap="round"/>
     <path d="M72 88 H112 a3 3 0 0 1 0 5 H72 Z" fill="${brass}" stroke="#8a7236" stroke-width="1"/><path d="M80 90.5 H104 M98 88 V93" stroke="#8a7236" stroke-width="1" stroke-linecap="round"/>
     <path d="M72 88 V108" stroke="${brass}" stroke-width="3" stroke-linecap="round"/><path d="M72 106 Q70 120 86 124" stroke="${brass}" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="87" cy="124" r="2.6" fill="${brass}" stroke="#8a7236" stroke-width=".8"/>
     ${eyes(93, 100, 8.5, '#6a8aa0', 1.9)}
@@ -193,8 +200,8 @@ const FIGHTER = `
     <path d="M232 52 L268 64 M240 74 L274 84" stroke="#7de08a" stroke-width="2.4" stroke-linecap="round"/>
     <circle class="sc-boom a" cx="150" cy="52" r="10" fill="#ff9f3a"/><circle class="sc-boom b" cx="270" cy="110" r="8" fill="#ffd05a"/><circle class="sc-boom c" cx="22" cy="96" r="7" fill="#ff7a3a"/>
   </g>
-  <g transform="translate(140 -4) scale(.8)"><g class="sc-shipB">${ship('#8fb0dc', '#b3cbe8', OBI_PILOT)}</g></g>
-  <g transform="translate(0 12)"><g class="sc-shipA">${ship('#e9c75a', '#f1d97e', ANAKIN_PILOT)}</g></g>
+  <g transform="translate(140 -4) scale(.8)"><g class="sc-shipB">${ship('#7ba3d6', '#a9b3bc', OBI_PILOT, false)}</g></g>
+  <g transform="translate(0 12)"><g class="sc-shipA">${ship('#e8a93a', '#a9b3bc', ANAKIN_PILOT, true)}</g></g>
 </svg>`;
 
 // ---------------------------------------------------------------------------------------------------
@@ -241,7 +248,7 @@ const DEATH_STAR = `
 </svg>`;
 
 export const SCENES = [
-  { svg: FALCON, lines: ['Chewy, start the hyper engine!'], hl: '#f3dca0' },
+  { svg: FALCON, lines: ['Punch it, Chewie!'], hl: '#f3dca0' },
   { svg: OPERA, lines: ['The dark side of the Force is a pathway', 'to many abilities some consider', 'to be unnatural.'], hl: '#dccfe8' },
   { svg: FIGHTER, lines: ['This is where the fun begins.'], hl: '#bcd6ec' },
   { svg: DEATH_STAR, lines: ['Deploying to production…'], hl: '#bfe3dc' },

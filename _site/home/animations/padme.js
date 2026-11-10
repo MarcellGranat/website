@@ -13,32 +13,39 @@ const PADME_SVG = `
   <ellipse cx="60" cy="146" rx="30" ry="4" fill="rgba(20,24,28,.13)"/>
   <ellipse class="p-foot-a" cx="48" cy="144" rx="7" ry="3.5" fill="#4a3322"/>
   <ellipse class="p-foot-b" cx="72" cy="144" rx="7" ry="3.5" fill="#4a3322"/>
-  <path d="M33 144 Q36 112 47 102 L73 102 Q84 112 87 144 Z" fill="#f4f1ea"/>
-  <path d="M48 106 Q44 126 42 143 M60 106 L60 144 M72 106 Q76 126 78 143" stroke="#cfc8bb" stroke-width="1.4" fill="none"/>
-  <rect x="46" y="100" width="28" height="5" rx="2" fill="#b9c4d0"/>
+  <path d="M35 144 Q38 114 43 104 L77 104 Q82 114 85 144 Z" fill="#f4f1ea"/>
+  <path d="M50 108 Q46 126 44 143 M60 108 L60 144 M70 108 Q74 126 76 143" stroke="#cfc8bb" stroke-width="1.4" fill="none"/>
+  <path d="M43 105 Q60 111 77 105" stroke="#d9b44a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M60 108 Q58 118 61 126" stroke="#d9b44a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
   <g class="p-upper">
     <g class="p-arm-l">
-      <path d="M49 86 Q40 96 44 108" stroke="#fbf9f4" stroke-width="8" stroke-linecap="round" fill="none"/>
-      <circle cx="44" cy="111" r="3.6" fill="#efc9a3"/>
+      <path d="M49 86 Q39 97 43 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M40 108 Q43 113 47 108" stroke="#7a4fa0" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="43" cy="114" r="3.6" fill="#efc9a3"/>
     </g>
-    <path d="M45 104 Q43 90 49 82 Q60 76 71 82 Q77 90 75 104 Z" fill="#fbf9f4"/>
+    <path d="M47 80 Q60 75 73 80 Q79 92 81 114 L39 114 Q41 92 47 80 Z" fill="#f4f1ea"/>
+    <path d="M60 86 V112" stroke="#cfc8bb" stroke-width="1.2"/><circle cx="60" cy="92" r="1" fill="#b9b2a4"/><circle cx="60" cy="99" r="1" fill="#b9b2a4"/><circle cx="60" cy="106" r="1" fill="#b9b2a4"/>
     <rect x="56" y="70" width="8" height="12" fill="#efc9a3"/>
-    <path d="M52 80 Q60 90 68 80 L66 78 Q60 84 54 78 Z" fill="#e4ded2"/>
-    <path d="M57 83 V93 M63 83 V93" stroke="#b9c4d0" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M40 80 Q60 66 80 80 L84 92 Q60 82 36 92 Z" fill="#fbf9f4" stroke="#cfc8bb" stroke-width="1"/>
+    <path d="M51 79 L58 83 L57 114 L50 114 Z M69 79 L62 83 L63 114 L70 114 Z" fill="#7a4fa0" stroke="#d9b44a" stroke-width="1"/>
+    <path d="M52 100 H56 M64 100 H68" stroke="#d9b44a" stroke-width="1.4"/>
+    <path d="M55 72 H65 L62 78 H58 Z" fill="#2b2f36"/><rect x="58.6" y="73" width="2.8" height="4" fill="#fff"/>
     <g class="p-head">
-      <path d="M60 33 Q82 33 82 58 Q82 72 74 78 L46 78 Q38 72 38 58 Q38 33 60 33 Z" fill="#fbf9f4" stroke="#cfc8bb" stroke-width="1.2"/>
-      <path d="M42 62 Q40 72 47 77 M78 62 Q80 72 73 77" stroke="#e4ded2" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="60" cy="54" rx="15" ry="16" fill="#3b2418"/>
+      <circle cx="43" cy="54" r="7" fill="#3b2418"/><circle cx="77" cy="54" r="7" fill="#3b2418"/>
+      <path d="M40 54 Q43 49 46 54 M74 54 Q77 49 80 54" stroke="#2a1a10" stroke-width="1.2" fill="none"/>
       <ellipse cx="60" cy="58" rx="11" ry="13" fill="#efc9a3"/>
       <path d="M48 55 Q50 42 60 42 Q70 42 72 55 Q66 48 60 48 Q54 48 48 55 Z" fill="#3b2418"/>
-      <circle cx="60" cy="47" r="1.8" fill="#b9c4d0"/>
+      <circle cx="60" cy="47" r="1.8" fill="#d9b44a"/>
       <circle cx="55" cy="58" r="1.4" fill="#2a1a12"/><circle cx="65" cy="58" r="1.4" fill="#2a1a12"/>
       <path d="M52 54.5 Q55 53 58 54.5 M62 54.5 Q65 53 68 54.5" stroke="#3b2418" stroke-width="1" fill="none" stroke-linecap="round"/>
       <path d="M56 65 Q60 68 64 65" stroke="#b8434f" stroke-width="1.9" fill="none" stroke-linecap="round"/>
       <circle cx="52" cy="62" r="2.2" fill="#e9a58f" opacity=".5"/><circle cx="68" cy="62" r="2.2" fill="#e9a58f" opacity=".5"/>
     </g>
     <g class="p-arm">
-      <path d="M71 86 Q80 96 80 108" stroke="#fbf9f4" stroke-width="8" stroke-linecap="round" fill="none"/>
-      <circle cx="80" cy="111" r="3.8" fill="#efc9a3"/>
+      <path d="M71 86 Q81 97 80 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M77 108 Q80 113 84 108" stroke="#7a4fa0" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="80" cy="114" r="3.8" fill="#efc9a3"/>
     </g>
   </g>
 </svg>`;

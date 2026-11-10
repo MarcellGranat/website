@@ -1,4 +1,4 @@
-// Darth Vader marches in from a random side wearing a paper label, stops, and does a Force choke
+// Darth Vader marches in from a random side wearing a paper label, stops, and ignites his red lightsaber and swings it
 // with glowing red eyes. The label is different every visit.
 export const LABELS = [
   'final_final_v13.xlsx',
@@ -48,9 +48,12 @@ const SVG = `
     <path d="M54 70 V76 M58 70 V76 M62 70 V76 M66 70 V76" stroke="#3a3d45" stroke-width="1"/>
     <path d="M37 62 Q39 72 46 77 M83 62 Q81 72 74 77" stroke="#0f1013" stroke-width="2" fill="none" stroke-linecap="round"/>
   </g>
-  <g class="v-force"><circle cx="109" cy="91" r="8"/><circle cx="109" cy="91" r="8"/><circle cx="109" cy="91" r="8"/></g>
-  <g class="v-arm">
+    <g class="v-arm">
     <path d="M76 92 Q90 102 88 120" stroke="#1a1c21" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <g class="v-saber">
+      <g class="v-blade"><rect x="86.2" y="131" width="3.6" height="62" rx="1.8" fill="#ff3b3b"/><rect x="87.4" y="131" width="1.2" height="62" rx=".6" fill="#ffe6e6"/></g>
+      <rect x="85.5" y="117" width="5" height="15" rx="1.2" fill="#9aa0aa"/><path d="M85.5 120 H90.5 M85.5 123 H90.5 M85.5 126 H90.5" stroke="#5a5f69" stroke-width=".8"/><rect x="84.8" y="130.5" width="6.4" height="2" rx=".8" fill="#4a4e57"/>
+    </g>
     <circle cx="88" cy="123" r="5.2" fill="#0e0f12"/><path d="M85 121 H91 M85 124 H91" stroke="#3a3d45" stroke-width="1" stroke-linecap="round"/>
   </g>
 </svg>`;
@@ -104,10 +107,10 @@ export function createVader() {
     root.classList.add('on');
     await walk(start, stop);
 
-    root.classList.add('choke');
+    root.classList.add('saber');
     label.classList.add('pop');
-    await wait(3000);
-    root.classList.remove('choke');
+    await wait(3600);
+    root.classList.remove('saber');
     await wait(500);
     label.classList.remove('pop');
     await walk(stop, start);
@@ -117,7 +120,7 @@ export function createVader() {
   return {
     async visit() {
       try { await visit(); } catch {
-        root.classList.remove('on', 'walking', 'choke');
+        root.classList.remove('on', 'walking', 'saber');
         label.classList.remove('pop');
       }
     },

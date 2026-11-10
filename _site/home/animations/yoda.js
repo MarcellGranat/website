@@ -22,8 +22,8 @@ export const QUOTES = [
 const ACTIONS = ['mind']; // the Jedi mind trick: a hand wave in front of the face
 const SPEED = 150;
 const FROM_RIGHT = 0.7; // chance that he comes in from the right // px per second while walking
-const FIRST_DELAY = [1200, 1800];
-const GAP = [7000, 10000];
+const FIRST_DELAY = [10000, 15000]; // ms before the first visitor
+const GAP = [10000, 15000]; // ms between visitors
 const EDGE = [0.03, 0.22]; // he stays near the side he came from (share of the viewport width)
 
 // **word** in a quote is shown highlighted (Grievous names the tool, which is not always obvious)
@@ -195,11 +195,9 @@ export function mount({ reduced = false, watch = null } = {}) {
     createMaul(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),
   ];
-  // random order: a shuffled bag, so everyone appears once per round and nobody twice in a row
+  // random order: a shuffled bag, so everyone appears once per round (a cycle) and nobody twice in a row
   let bag = [], last = null;
-  let testFirst = cast[7]; // TEST: Maul goes first (remove this line and the check below)
   const nextActor = () => {
-    if (testFirst) { const a = testFirst; testFirst = null; return (last = a); } // TEST
     if (!bag.length) {
       bag = [...cast].sort(() => Math.random() - 0.5);
       if (bag.at(-1) === last) bag.unshift(bag.pop());

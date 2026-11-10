@@ -28,17 +28,18 @@ const PADME_SVG = `
     <path d="M38 80 Q60 66 82 80 Q88 90 82 94 Q60 84 38 94 Q32 90 38 80 Z" fill="#fbf9f4" stroke="#d9d3c6" stroke-width="1.2"/>
     <path d="M52 80 Q60 88 68 80" stroke="#d9d3c6" stroke-width="1.2" fill="none"/>
     <path d="M56 84 V98 M64 84 V98" stroke="#cfc8bb" stroke-width="1.5" stroke-linecap="round"/><circle cx="56" cy="99" r="1.4" fill="#cfc8bb"/><circle cx="64" cy="99" r="1.4" fill="#cfc8bb"/>
-    <path d="M46 103 L74 103 L78 114 L42 114 Z" fill="#f1ede4" stroke="#dcd6c9" stroke-width="1"/>
+    <path d="M49 99 L71 99 L73 109 L47 109 Z" fill="#f1ede4" stroke="#dcd6c9" stroke-width="1"/>
     <g class="p-head">
       <ellipse cx="60" cy="54" rx="15" ry="16" fill="#3b2418"/>
       <circle cx="43" cy="54" r="7" fill="#3b2418"/><circle cx="77" cy="54" r="7" fill="#3b2418"/>
       <path d="M40 54 Q43 49 46 54 M74 54 Q77 49 80 54" stroke="#2a1a10" stroke-width="1.2" fill="none"/>
       <ellipse cx="60" cy="58" rx="11" ry="13" fill="#efc9a3"/>
       <path d="M48 55 Q50 42 60 42 Q70 42 72 55 Q66 48 60 48 Q54 48 48 55 Z" fill="#3b2418"/>
-      <circle cx="55" cy="58" r="1.4" fill="#2a1a12"/><circle cx="65" cy="58" r="1.4" fill="#2a1a12"/>
-      <path d="M52 54.5 Q55 53 58 54.5 M62 54.5 Q65 53 68 54.5" stroke="#3b2418" stroke-width="1" fill="none" stroke-linecap="round"/>
-      <path d="M56 65 Q60 68 64 65" stroke="#b8434f" stroke-width="1.9" fill="none" stroke-linecap="round"/>
-      <circle cx="52" cy="62" r="2.2" fill="#e9a58f" opacity=".5"/><circle cx="68" cy="62" r="2.2" fill="#e9a58f" opacity=".5"/>
+      <ellipse cx="55" cy="58" rx="3.3" ry="3.8" fill="#fff" stroke="#3b2418" stroke-width=".8"/><ellipse cx="65" cy="58" rx="3.3" ry="3.8" fill="#fff" stroke="#3b2418" stroke-width=".8"/>
+      <circle cx="55" cy="59" r="1.1" fill="#2a1a12"/><circle cx="65" cy="59" r="1.1" fill="#2a1a12"/>
+      <path d="M50.5 53.5 L58 50 M69.5 53.5 L62 50" stroke="#3b2418" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="60" cy="67" rx="2.4" ry="3" fill="#7a2f3a"/>
+      <path d="M73 47 Q77 53 73.5 56 Q70 53 73 47 Z" fill="#8ecbff" stroke="#5aa6e0" stroke-width=".6"/>
     </g>
     <g class="p-arm">
       <path d="M71 86 Q81 97 80 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>

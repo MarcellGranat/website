@@ -1,6 +1,7 @@
 import { POSTS } from './posts.js';
 import { mount } from './animations/metro.js';
 import { mount as mountYoda } from './animations/yoda.js';
+import { mountScenes } from './animations/scenes.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);
@@ -22,6 +23,7 @@ for (const box of $$('.stop-posts')) {
     : '<div class="stop-empty">Posts for this stop are coming. They will show up here once written.</div>';
 }
 
+mountScenes();
 mount($('#metro-hero'), { reduced, base: '#' });
 mountYoda({ reduced });
 

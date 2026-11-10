@@ -55,13 +55,15 @@ const FALCON = `
   </g>
   <!-- Han: tousled brown hair, big grin, cream shirt open over a black vest -->
   <g class="sc-han">
+    <g style="transform-box: view-box" transform="translate(225 0) scale(.8 1) translate(-225 0)">
     <path d="M166 200 Q168 134 225 126 Q282 134 284 200 Z" fill="#e8dfc8"/>
     <path d="M178 150 Q186 160 192 176 M272 150 Q264 160 258 176" stroke="#cfc5aa" stroke-width="1.4" fill="none" stroke-linecap="round"/>
 
     <path d="M168 200 Q168 138 194 128 L214 132 L217 200 Z M282 200 Q282 138 256 128 L236 132 L233 200 Z" fill="#24242a"/>
     <path d="M225 140 V200" stroke="#cfc5aa" stroke-width="1.3"/><circle cx="225" cy="152" r="1.4" fill="#cfc5aa"/><circle cx="225" cy="166" r="1.4" fill="#cfc5aa"/><circle cx="225" cy="180" r="1.4" fill="#cfc5aa"/>
+    </g>
     <g class="sc-han-arm"><path d="M196 60 V44" stroke="#8c939a" stroke-width="3" stroke-linecap="round"/>
-      <path d="M186 146 L177 114" stroke="#24242a" stroke-width="17.5" stroke-linecap="round"/><path d="M177 114 L193 84" stroke="#24242a" stroke-width="11" stroke-linecap="round"/><circle cx="177" cy="114" r="8.6" fill="#24242a"/>
+      <path d="M198 146 L187 116" stroke="#24242a" stroke-width="17.5" stroke-linecap="round"/><path d="M187 116 L194 86" stroke="#24242a" stroke-width="11" stroke-linecap="round"/><circle cx="187" cy="116" r="8" fill="#24242a"/>
       <path d="M187 88 L199 84" stroke="#e8dfc8" stroke-width="8" stroke-linecap="round"/>
       <circle cx="194" cy="76" r="6" fill="#dca682"/><circle cx="196" cy="64" r="3.4" fill="#d9473b"/></g>
     <path d="M216 108 L216 126 Q225 132 234 126 L234 108 Z" fill="#d9a07c"/>

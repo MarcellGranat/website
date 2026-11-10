@@ -266,3 +266,8 @@
 .r2.scan .r2-pupil { fill: #6fc2ff; filter: drop-shadow(0 0 3px #3a9dff); }
 @keyframes r2-sweep { from { transform: translateY(0); } to { transform: translateY(46px); } }
 .r2.walking .r2-scan { opacity: 0 !important; animation: none; }
+
+/* Obi-Wan's mind-trick wave: a lower, calmer arm than Yoda's */
+.yoda.obi.mind .y-arm { animation: obi-wave .9s ease-in-out .3s infinite alternate; transform: rotate(-24deg); }
+.yoda.obi.mind .y-hand { transform: none; }
+@keyframes obi-wave { from { transform: rotate(-22deg); } to { transform: rotate(-42deg); } }

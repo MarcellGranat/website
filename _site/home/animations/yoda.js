@@ -3,6 +3,7 @@ import { createVader } from './vader.js';
 import { OBI_SVG, OBI_QUOTES } from './obiwan.js';
 import { GRIEVOUS_SVG, GRIEVOUS_QUOTES } from './grievous.js';
 import { createZen } from './zen.js';
+import { createPadme } from './padme.js';
 
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
@@ -162,13 +163,14 @@ export function mount({ reduced = false, watch = null } = {}) {
     new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
   }
 
-  // Yoda, the meditating Yoda, Grievous, the little one, Darth Vader and Obi-Wan all visit.
+  // Yoda, the meditating Yoda, Grievous, the little one, Darth Vader, Obi-Wan and Padmé with R2 all visit.
   const cast = [
     createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
     createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top', headShift: 0.2 }),
     createGrogu(),
     createVader(),
     createZen(),
+    createPadme(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),
   ];
   // random order: a shuffled bag, so everyone appears once per round and nobody twice in a row

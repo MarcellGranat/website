@@ -39,10 +39,13 @@ const SVG = `
     <g class="m-blade"><rect class="m-bl1" x="34" y="91.7" width="0" height="3.6" rx="1.8" fill="#ff3b3b"/><rect class="m-bl2" x="34" y="92.9" width="0" height="1.2" rx=".6" fill="#ffe6e6"/></g>
     <g class="m-blade"><rect class="m-br1" x="86" y="91.7" width="0" height="3.6" rx="1.8" fill="#ff3b3b"/><rect class="m-br2" x="86" y="92.9" width="0" height="1.2" rx=".6" fill="#ffe6e6"/></g>
   </g>
+  <g class="m-hilt">
   <rect x="34" y="90.5" width="52" height="6" rx="2" fill="#8d939d"/>
   <rect x="34" y="89.8" width="4" height="7.4" rx="1.2" fill="#3a3d45"/><rect x="82" y="89.8" width="4" height="7.4" rx="1.2" fill="#3a3d45"/>
   <path d="M42 90.5 V96.5 M46 90.5 V96.5 M74 90.5 V96.5 M78 90.5 V96.5" stroke="#5a5f69" stroke-width="1"/>
   <circle cx="53" cy="93.5" r="4.8" fill="#0c0d10"/><circle cx="71" cy="93.5" r="4.8" fill="#0c0d10"/>
+  
+  </g>
   </g>
 </svg>`;
 
@@ -69,6 +72,8 @@ export function createMaul() {
     upper: [root.querySelector('.m-upper'), '62px 112px'],
   };
   for (const [el, origin] of Object.values(limbs)) el.style.transformOrigin = origin;
+  const hilt = root.querySelector('.m-hilt');
+  hilt.style.transformOrigin = '60px 93.5px';
   const pose = (name, frames, duration) => limbs[name][0].animate(frames, { duration, easing: 'ease-in-out' }).finished;
   const q = (c) => root.querySelector(c);
   const sides = {
@@ -136,6 +141,8 @@ export function createMaul() {
     bob.style.transform = '';
     await wait(300);
 
+    // he twirls the hilt in his hands first, then the first blade comes on
+    await hilt.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(720deg)' }], { duration: 950, easing: 'ease-in-out' }).finished;
     root.classList.add('lit');
     labelL.classList.add('show');
     await grow('l', 1);

@@ -73,13 +73,13 @@ const SVG = `
     </g>
   </g>
   <g class="y-arm-bent">
-    <path d="M76 92 Q91 98 92 112" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M76 92 Q90 98 92 116" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
     <g class="y-fore">
-      <path d="M92 112 Q82 96 67 77" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
-      <circle cx="66" cy="72" r="4.8" fill="#a9cb8c" stroke="#5d7a48" stroke-width="1.2"/>
-      <path d="M63 68 L62 63 M66 67 L66 62 M69 68 L70 63 M71 72 L74 70" stroke="#5d7a48" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M92 116 Q84 106 73 99" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <circle cx="71" cy="96" r="4.8" fill="#9cc07f"/>
+      <path d="M68 92 L67 87 M71 91 L71 86 M74 92 L75 87 M76 96 L79 94" stroke="#9cc07f" stroke-width="2" stroke-linecap="round"/>
     </g>
-    <circle cx="92" cy="112" r="4.6" fill="#d8b47c"/>
+    <circle cx="92" cy="116" r="4.5" fill="#d8b47c"/>
   </g>
 </svg>`;
 
@@ -201,5 +201,6 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
   loop(rand(...FIRST_DELAY));
 }
+
 
 

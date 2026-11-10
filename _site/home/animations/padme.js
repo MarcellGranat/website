@@ -1,17 +1,10 @@
 // Padmé and R2-D2 run in from opposite sides and meet in the middle. R2 beeps, Padmé bends down to him
 // and records the message, like the one that was sent to a certain Jedi master.
 const TOOLS = [
-  'Obi-Wan Gaussian',
   'Bayes’ Theorem',
   'Central Limit Theorem',
-  'Monte Carlo',
-  'Bootstrap',
-  'Lasso',
   'Random Forest',
   'Kalman Filter',
-  'Maximum Likelihood',
-  'Cross-Validation',
-  'Markov Chain',
   'Law of Large Numbers',
 ];
 
@@ -140,7 +133,7 @@ export function createPadme() {
     padme.classList.add('rec');
 
     bubble.style.maxWidth = `${Math.min(260, w - 12)}px`;
-    for (const line of [`${tool}, you’re my only hope!`, `${tool}, please... help us`]) {
+    for (const line of [`Help me, ${tool}. You’re my only hope.`, `${tool}, please... help us`]) {
       bubble.textContent = line;
       bubble.classList.add('show');
       const bw = bubble.offsetWidth;

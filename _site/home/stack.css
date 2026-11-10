@@ -203,7 +203,7 @@
 @keyframes gr-bob { 50% { transform: translateY(3px); } }
 @keyframes gr-step { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
 @keyframes gr-tilt { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
-@media (prefers-reduced-motion: reduce) { .yoda, .grogu, .g-logo, .vader, .padme, .r2 { display: none; } }
+@media (prefers-reduced-motion: reduce) { .yoda, .grogu, .g-logo, .vader, .padme, .r2, .maul { display: none; } }
 
 /* Meditating Yoda: floats up from the bottom middle, sits in the air, then sinks back */
 .zen { --zw: clamp(130px, 14vw, 180px); position: fixed; left: 50%; bottom: 0; width: var(--zw); margin-left: calc(var(--zw) / -2); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
@@ -272,3 +272,16 @@
 
 /* Vader raises his hand, switches a red lightsaber on and off */
 .v-svg .v-blade { filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }
+
+/* Darth Maul: double-bladed saber held across the body, blades switch on one after another */
+.maul { position: fixed; left: 0; bottom: 0; width: clamp(112px, 12vw, 150px); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
+.maul.on { visibility: visible; }
+.m-bob { position: relative; transform-origin: 50% 100%; }
+.m-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.m-svg .m-blade { filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }
+.m-svg .m-eyes { transition: filter .3s; }
+.maul.lit .m-eyes { filter: drop-shadow(0 0 3px #ffd21e); }
+.maul.walking .m-bob { animation: m-prowl .7s ease-in-out infinite; }
+.maul.walking .m-foot-a { animation: yoda-step .7s ease-in-out infinite; }
+.maul.walking .m-foot-b { animation: yoda-step .7s ease-in-out infinite .35s; }
+@keyframes m-prowl { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-3px) rotate(1deg); } }

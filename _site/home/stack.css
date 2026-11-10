@@ -312,14 +312,12 @@
 .stop.in .scene-1 .sc-lights circle { animation: sc-blink 1.1s steps(2) infinite; }
 .scene-1 .sc-lights circle:nth-child(2n) { animation-delay: .35s !important; }
 @keyframes sc-blink { 50% { opacity: .25; } }
-.scene-1 .sc-roar { opacity: 0; }
-.stop.in .scene-1 .sc-roar { animation: sc-roar 4.5s steps(1) infinite; }
-.stop.in .scene-1 .sc-smile { animation: sc-smile 4.5s steps(1) infinite; }
-@keyframes sc-roar { 0%, 30% { opacity: 0; } 32%, 58% { opacity: 1; } 60%, 100% { opacity: 0; } }
-@keyframes sc-smile { 0%, 30% { opacity: 1; } 32%, 58% { opacity: 0; } 60%, 100% { opacity: 1; } }
+.scene-1 .sc-roar { transform-origin: 50% 0; }
+.stop.in .scene-1 .sc-roar { animation: sc-roar 4.5s ease-in-out infinite; }
+@keyframes sc-roar { 0%, 28%, 62%, 100% { transform: none; } 40%, 52% { transform: scaleY(1.12); } }
 .scene-1 .sc-chew-head { transform-origin: 50% 100%; }
 .stop.in .scene-1 .sc-chew-head { animation: sc-nodc 4.5s ease-in-out infinite; }
-@keyframes sc-nodc { 0%, 28%, 62%, 100% { transform: none; } 40%, 52% { transform: rotate(-3deg) translateY(-2px); } }
+@keyframes sc-nodc { 0%, 28%, 62%, 100% { transform: none; } 40%, 52% { transform: rotate(-1.2deg) translateY(-1px); } }
 .stop.in .scene-1 .sc-sw:nth-child(3n) { animation: sc-blink 1.6s steps(2) infinite; }
 .stop.in .scene-1 .sc-grin { animation: sc-gr 4.5s ease-in-out infinite; transform-origin: 50% 0; }
 @keyframes sc-gr { 0%, 28%, 100% { transform: none; } 40%, 55% { transform: scale(1.08, 1.4); } }

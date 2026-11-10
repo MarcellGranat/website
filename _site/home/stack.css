@@ -265,10 +265,13 @@
 @keyframes r2-sweep { from { transform: translateY(0); } to { transform: translateY(46px); } }
 .r2.walking .r2-scan { opacity: 0 !important; animation: none; }
 
-/* Obi-Wan's mind-trick wave: a lower, calmer arm than Yoda's */
-.yoda.obi.mind .y-arm { animation: obi-wave .9s ease-in-out .3s infinite alternate; transform: rotate(-24deg); }
-.yoda.obi.mind .y-hand { transform: none; }
-@keyframes obi-wave { from { transform: rotate(-22deg); } to { transform: rotate(-42deg); } }
+/* Obi-Wan's mind-trick wave: bent arm, elbow pointing down, forearm waving */
+.y-arm-bent { opacity: 0; transition: opacity .35s; }
+.y-arm-bent .y-fore { transform-origin: 93px 111px; }
+.yoda.obi.mind .y-arm { opacity: 0; animation: none; transform: none; }
+.yoda.obi.mind .y-arm-bent { opacity: 1; }
+.yoda.obi.mind .y-fore { animation: obi-wave .9s ease-in-out .3s infinite alternate; }
+@keyframes obi-wave { from { transform: rotate(-8deg); } to { transform: rotate(14deg); } }
 
 /* Vader raises his hand, switches a red lightsaber on and off */
 .v-svg .v-blade { filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }

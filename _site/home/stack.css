@@ -241,7 +241,7 @@
 .p-svg .p-skirt { transform-origin: 60px 144px; transition: transform .8s cubic-bezier(.45, .05, .25, 1); }
 .padme.bend .p-skirt { transform: scaleY(.93); }
 .padme.bend .p-upper { transform: translate(5px, 9px) rotate(16deg) scaleY(.8); }
-.padme.bend .p-arm { transform: rotate(-66deg); }
+.padme.bend .p-arm { transform: rotate(-42deg); }
 .padme.bend .p-arm-l { transform: rotate(-16deg); }
 .padme.bend .p-head { transform: rotate(6deg) scaleY(1.25); }
 .padme.walking .p-bob { animation: p-run .36s ease-in-out infinite; }

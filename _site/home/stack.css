@@ -265,12 +265,14 @@
 @keyframes r2-sweep { from { transform: translateY(0); } to { transform: translateY(46px); } }
 .r2.walking .r2-scan { opacity: 0 !important; animation: none; }
 
-/* Obi-Wan's mind-trick wave: bent arm, elbow pointing down, forearm waving */
+/* Yoda's and Obi-Wan's Force trick: bent arm, elbow pointing down (push forward, or a waving mind trick) */
 .y-arm-bent { opacity: 0; transition: opacity .35s; }
 .y-arm-bent .y-fore { transform-origin: 93px 111px; }
-.yoda.obi.mind .y-arm { opacity: 0; animation: none; transform: none; }
-.yoda.obi.mind .y-arm-bent { opacity: 1; }
-.yoda.obi.mind .y-fore { animation: obi-wave .9s ease-in-out .3s infinite alternate; }
+.y-arm-bent .y-fore { transition: transform .5s var(--ease); }
+.yoda.force .y-arm, .yoda.mind .y-arm { opacity: 0; animation: none; transform: none; }
+.yoda.force .y-arm-bent, .yoda.mind .y-arm-bent { opacity: 1; }
+.yoda.force .y-fore { transform: rotate(25deg); }
+.yoda.mind .y-fore { animation: obi-wave .9s ease-in-out .3s infinite alternate; }
 @keyframes obi-wave { from { transform: rotate(-8deg); } to { transform: rotate(14deg); } }
 
 /* Vader raises his hand, switches a red lightsaber on and off */

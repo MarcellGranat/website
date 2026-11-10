@@ -4,6 +4,7 @@ import { OBI_SVG, OBI_QUOTES } from './obiwan.js';
 import { GRIEVOUS_SVG, GRIEVOUS_QUOTES } from './grievous.js';
 import { createZen } from './zen.js';
 import { createPadme } from './padme.js';
+import { createMaul } from './maul.js';
 
 // A small flat-style Yoda who wanders across the route map from a random side,
 // stops, does a Jedi thing (Force push or lightsaber swing) and says something nerdy.
@@ -70,6 +71,15 @@ const SVG = `
       <circle cx="88" cy="123" r="4.8" fill="#9cc07f"/>
       <path d="M85 126 L84 130 M88 127 L88 131 M91 126 L92 130 M93 123 L96 125" stroke="#9cc07f" stroke-width="2" stroke-linecap="round"/>
     </g>
+  </g>
+  <g class="y-arm-bent">
+    <path d="M76 92 Q89 96 93 111" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <g class="y-fore">
+      <path d="M93 111 Q98 100 104 88" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <circle cx="104" cy="84" r="4.8" fill="#9cc07f"/>
+      <path d="M101.5 80.5 L100.5 76 M104 79.5 L104 75 M106.5 80.5 L107.5 76 M108.5 84 L111.5 82" stroke="#9cc07f" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <circle cx="93" cy="111" r="4.6" fill="#d8b47c"/>
   </g>
 </svg>`;
 
@@ -163,7 +173,7 @@ export function mount({ reduced = false, watch = null } = {}) {
     new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; }, { threshold: 0.25 }).observe(target);
   }
 
-  // Yoda, the meditating Yoda, Grievous, the little one, Darth Vader, Obi-Wan and Padmé with R2 all visit.
+  // Yoda, the meditating Yoda, Grievous, the little one, Darth Vader, Padmé with R2, Darth Maul and Obi-Wan all visit.
   const cast = [
     createJedi({ svg: SVG, quotes: QUOTES, actions: ACTIONS, fromRight: FROM_RIGHT }),
     createJedi({ svg: GRIEVOUS_SVG, quotes: GRIEVOUS_QUOTES, actions: ['ask'], fromRight: 0.5, speed: 220, cls: 'grievous', edge: 'top', headShift: 0.2 }),
@@ -171,6 +181,7 @@ export function mount({ reduced = false, watch = null } = {}) {
     createVader(),
     createZen(),
     createPadme(),
+    createMaul(),
     createJedi({ svg: OBI_SVG, quotes: OBI_QUOTES, actions: ['mind'], fromRight: 0.5, cls: 'obi' }),
   ];
   // random order: a shuffled bag, so everyone appears once per round and nobody twice in a row
@@ -190,3 +201,4 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
   loop(rand(...FIRST_DELAY));
 }
+

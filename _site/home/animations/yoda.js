@@ -21,7 +21,7 @@ export const QUOTES = [
   'uv sync, run you must.',
 ];
 
-const ACTIONS = ['force', 'mind']; // Force push, or the Jedi mind trick (hand wave)
+const ACTIONS = ['mind']; // the Jedi mind trick: a hand wave in front of the face
 const SPEED = 150;
 const FROM_RIGHT = 0.7; // chance that he comes in from the right // px per second while walking
 const FIRST_DELAY = [1200, 1800];
@@ -73,13 +73,13 @@ const SVG = `
     </g>
   </g>
   <g class="y-arm-bent">
-    <path d="M76 92 Q89 96 93 111" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M76 92 Q91 98 92 112" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
     <g class="y-fore">
-      <path d="M93 111 Q98 100 104 88" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
-      <circle cx="104" cy="84" r="4.8" fill="#9cc07f"/>
-      <path d="M101.5 80.5 L100.5 76 M104 79.5 L104 75 M106.5 80.5 L107.5 76 M108.5 84 L111.5 82" stroke="#9cc07f" stroke-width="2" stroke-linecap="round"/>
+      <path d="M92 112 Q82 96 67 77" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <circle cx="66" cy="72" r="4.8" fill="#a9cb8c" stroke="#5d7a48" stroke-width="1.2"/>
+      <path d="M63 68 L62 63 M66 67 L66 62 M69 68 L70 63 M71 72 L74 70" stroke="#5d7a48" stroke-width="2.4" stroke-linecap="round"/>
     </g>
-    <circle cx="93" cy="111" r="4.6" fill="#d8b47c"/>
+    <circle cx="92" cy="112" r="4.6" fill="#d8b47c"/>
   </g>
 </svg>`;
 
@@ -201,4 +201,5 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
   loop(rand(...FIRST_DELAY));
 }
+
 

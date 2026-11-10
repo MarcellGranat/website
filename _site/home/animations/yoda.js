@@ -79,7 +79,7 @@ const SVG = `
         <path d="M0 0 Q0 -7 1 -13" stroke="#d8b47c" stroke-width="9" stroke-linecap="round" fill="none"/>
         <circle cx="1" cy="-16" r="4.8" fill="#9cc07f"/>
         <path d="M-0.6 -18 V-26.5 M2.6 -18 V-27.5" stroke="#9cc07f" stroke-width="3" stroke-linecap="round"/>
-        <path d="M5.6 -15 L8 -17" stroke="#9cc07f" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M-3.6 -15 L-6 -17" stroke="#9cc07f" stroke-width="2.4" stroke-linecap="round"/>
       </g>
       <circle cx="0" cy="0" r="4.5" fill="#d8b47c"/>
     </g>
@@ -204,6 +204,7 @@ export function mount({ reduced = false, watch = null } = {}) {
   };
   loop(rand(...FIRST_DELAY));
 }
+
 
 
 

@@ -1,21 +1,18 @@
 // Obi-Wan: drawn to reuse the `.yoda` styles and animations (same hooks, different figure and lines),
 // so he walks in, says something wise and does the Jedi mind-trick wave.
 export const OBI_QUOTES = [
-  'You want to try out Herdr, my young padawan.',
+  'You want to try out Herdr.',
   'Neovim: an elegant weapon, for a more civilized age.',
   'Without data, you are just an opinion, my young padawan.',
   'Now show me your data, young padawan.',
-  'You now go to the Dagoba... I mean, the database system, my young padawan.',
   'You will go to the Gradient Descent system. There you will find the global minimum. Maybe.',
   'May the Force be with you. And may your tests pass.',
-  'May the data be with you, always.',
   'These are not the bugs you are looking for.',
   'Hello there! Have you tried uv?',
   'Only a Sith deals in hardcoded paths.',
   'Commit often, my young padawan.',
   'Use the Force, young padawan. And a lockfile.',
   'Excel... so uncivilized.',
-  'I have the high ground, and the git history.',
   'There is no such thing as luck. Only reproducibility.',
 ];
 

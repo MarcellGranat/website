@@ -1,21 +1,12 @@
 // General Grievous: scuttles along the underside of the top bar like a spider on four limbs and
 // asks the kind of questions every data person has heard. Uses the shared Jedi walk/bubble code.
-const TOOLS = ['DuckDB', 'Neovim', 'marimo', 'Quarto', 'uv', 'DVC', 'Herdr', 'lazygit', 'VisiData', 'yazi', 'Snakemake', 'television'];
+const TOOLS = ['DuckDB', 'marimo', 'Quarto', 'DVC', 'Herdr', 'lazygit', 'VisiData'];
 
 const QUESTIONS = [
   'Do you have that chart in Excel?',
-  '*cough* Can you send me the model as a screenshot?',
   'Can you just add AI to it?',
-  'Why does the CSV not open in Word?',
-  'Could you make the chart pop a bit more?',
-  'Is the model 100% accurate? I need it 100% accurate.',
-  'Can we get the whole dataset by tomorrow?',
-  'Is Python the one with the macros?',
-  '*cough* Can you make the logo bigger?',
-  'Did you try turning the dataset off and on again?',
-  '*cough* You performed better on the training set, Jedi!',
+  'You performed better on the training set, Jedi!',
   'Just replace it with the mean, Jedi. It should be fine. *cough*',
-  'Can the dashboard fit on one printed page?',
 ];
 
 export const GRIEVOUS_QUOTES = [

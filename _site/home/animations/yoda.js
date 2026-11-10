@@ -13,12 +13,10 @@ const NS = 'http://www.w3.org/2000/svg';
 // The walking Yoda's lines (the wise ones belong to the meditating Yoda, see zen.js).
 export const QUOTES = [
   'You want to try out Herdr!',
-  'Neovim is super quick. Vim-vim!',
   'Without data, you are just an opinion!',
   'Nice... Now show me your data!',
   'Commit early, commit often, you must.',
   'Query this file with DuckDB, you should.',
-  'uv sync, run you must.',
 ];
 
 const ACTIONS = ['mind']; // the Jedi mind trick: a hand wave in front of the face
@@ -199,7 +197,9 @@ export function mount({ reduced = false, watch = null } = {}) {
   ];
   // random order: a shuffled bag, so everyone appears once per round and nobody twice in a row
   let bag = [], last = null;
+  let testFirst = cast[7]; // TEST: Maul goes first (remove this line and the check below)
   const nextActor = () => {
+    if (testFirst) { const a = testFirst; testFirst = null; return (last = a); } // TEST
     if (!bag.length) {
       bag = [...cast].sort(() => Math.random() - 0.5);
       if (bag.at(-1) === last) bag.unshift(bag.pop());

@@ -3,7 +3,6 @@
 const TOOLS = [
   'Bayes’ Theorem',
   'Central Limit Theorem',
-  'Random Forest',
   'Kalman Filter',
   'Law of Large Numbers',
 ];

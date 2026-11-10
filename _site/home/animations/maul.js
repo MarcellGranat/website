@@ -2,7 +2,6 @@
 // switches the blades on one after another, each with a line (the second one is the crazy one).
 export const MAUL_LINES = [
   ['Agentic coding', 'Make no mistake'],
-  ['Vibe coding', 'Ship it on Friday'],
   ['Think step by step', 'Then rewrite everything in Rust'],
   ['Context window: 1M tokens', 'Still forgot the first line'],
   ['Fix the failing test', 'By deleting the test'],

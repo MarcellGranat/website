@@ -7,8 +7,6 @@ export const LABELS = [
   'TODO_fix_later',
   'model_v2_new_FINAL(2).pkl',
   'git push --force',
-  'no_tests.py',
-  'main is your father',
   'dataset_v9_dont_touch',
   'SELECT * FROM everything',
   'merge_conflict_unresolved',
@@ -19,7 +17,6 @@ export const LABELS = [
   'I find your lack of tests disturbing',
   'results_new_new_OLD.csv',
   'requirements.txt (lost)',
-  'cron job: nobody knows',
 ];
 
 const SVG = `

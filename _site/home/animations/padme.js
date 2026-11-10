@@ -42,9 +42,10 @@ const PADME_SVG = `
       <path d="M73 49 Q76 54 73.4 56.5 Q70.6 54 73 49 Z" fill="#8ecbff" stroke="#5aa6e0" stroke-width=".6"/>
     </g>
     <g class="p-arm">
-      <path d="M71 86 Q81 97 80 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M66 89 Q80 94 80 109" stroke="#fbf9f4" stroke-width="10" stroke-linecap="round" fill="none"/>
       <path d="M76.5 108 Q80 113 84.5 108" stroke="#e2ddd2" stroke-width="2.4" fill="none" stroke-linecap="round"/>
       <circle cx="80" cy="114" r="3.8" fill="#efc9a3"/>
+      <circle cx="66" cy="89" r="7" fill="#fbf9f4"/>
     </g>
   </g>
 </svg>`;

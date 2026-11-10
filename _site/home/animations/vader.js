@@ -50,9 +50,10 @@ const SVG = `
   </g>
     <g class="v-arm">
     <path d="M76 92 Q90 102 88 120" stroke="#1a1c21" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <g class="v-saber">
-      <g class="v-blade"><rect x="86.2" y="131" width="3.6" height="62" rx="1.8" fill="#ff3b3b"/><rect x="87.4" y="131" width="1.2" height="62" rx=".6" fill="#ffe6e6"/></g>
-      <rect x="85.5" y="109" width="5" height="23" rx="1.2" fill="#9aa0aa"/><path d="M85.5 111.5 H90.5 M85.5 114.5 H90.5 M85.5 117.5 H90.5 M85.5 128 H90.5" stroke="#5a5f69" stroke-width=".8"/><rect x="84.6" y="108" width="6.8" height="2.4" rx="1" fill="#4a4e57"/><rect x="84.8" y="130.5" width="6.4" height="2" rx=".8" fill="#4a4e57"/>
+    <g class="v-saber" transform="translate(88 123) rotate(-125)">
+      <g class="v-blade"><rect class="v-b1" x="-1.8" y="8" width="3.6" height="0" rx="1.8" fill="#ff3b3b"/><rect class="v-b2" x="-.6" y="8" width="1.2" height="0" rx=".6" fill="#ffe6e6"/></g>
+      <rect x="-2.5" y="-14" width="5" height="23" rx="1.2" fill="#9aa0aa"/><path d="M-2.5 -11.5 H2.5 M-2.5 -8.5 H2.5 M-2.5 -5.5 H2.5 M-2.5 5 H2.5" stroke="#5a5f69" stroke-width=".8"/>
+      <rect x="-3.4" y="-15" width="6.8" height="2.4" rx="1" fill="#4a4e57"/><rect x="-3.4" y="7.5" width="6.8" height="2" rx=".8" fill="#4a4e57"/>
     </g>
     <circle cx="88" cy="123" r="5.2" fill="#0e0f12"/><path d="M85 121 H91 M85 124 H91" stroke="#3a3d45" stroke-width="1" stroke-linecap="round"/>
   </g>
@@ -73,6 +74,20 @@ export function createVader() {
   document.body.appendChild(root);
   const flip = root.querySelector('.v-flip');
   const label = root.querySelector('.v-label');
+  const blades = [...root.querySelectorAll('.v-blade rect')];
+  const BLADE = 62; // blade length in svg units
+  let lit = 0;
+  const setBlade = (f) => { lit = f; blades.forEach((r) => r.setAttribute('height', String(BLADE * f))); };
+  // the blade grows and shrinks from the hilt (plain attribute animation, no CSS transform origins)
+  const blade = (to) => new Promise((done) => {
+    const from = lit, t0 = performance.now();
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / 300);
+      setBlade(from + (to - from) * k);
+      if (k < 1) requestAnimationFrame(step); else done();
+    };
+    requestAnimationFrame(step);
+  });
 
   let bag = [];
   const nextLabel = () => {
@@ -110,9 +125,9 @@ export function createVader() {
     root.classList.add('saber'); // raises his hand with the hilt
     label.classList.add('pop');
     await wait(700);
-    root.classList.add('lit'); // switches the blade on
+    await blade(1); // switches the blade on
     await wait(2200);
-    root.classList.remove('lit'); // and off again
+    await blade(0); // and off again
     await wait(450);
     root.classList.remove('saber');
     await wait(500);
@@ -124,7 +139,8 @@ export function createVader() {
   return {
     async visit() {
       try { await visit(); } catch {
-        root.classList.remove('on', 'walking', 'saber', 'lit');
+        root.classList.remove('on', 'walking', 'saber');
+        setBlade(0);
         label.classList.remove('pop');
       }
     },

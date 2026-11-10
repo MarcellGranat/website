@@ -57,7 +57,12 @@ const FALCON = `
   <g class="sc-han">
     <path d="M166 200 Q168 134 225 126 Q282 134 284 200 Z" fill="#e8dfc8"/>
     <path d="M178 150 Q186 160 192 176 M272 150 Q264 160 258 176" stroke="#cfc5aa" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-    <g class="sc-han-arm"><path d="M196 60 V44" stroke="#8c939a" stroke-width="3" stroke-linecap="round"/><path d="M184 140 L178 114 L193 82" stroke="#cfc5aa" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M184 140 L178 114 L193 82" stroke="#e8dfc8" stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M175 112 L182 110" stroke="#cfc5aa" stroke-width="1.3" stroke-linecap="round"/><circle cx="194" cy="76" r="6" fill="#dca682"/><circle cx="196" cy="64" r="3.4" fill="#d9473b"/></g>
+    <g class="sc-han-arm"><path d="M196 60 V44" stroke="#8c939a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M186 142 L177 114" stroke="#cfc5aa" stroke-width="20" stroke-linecap="round"/><path d="M177 114 L193 82" stroke="#cfc5aa" stroke-width="13.5" stroke-linecap="round"/>
+      <path d="M186 142 L177 114" stroke="#e8dfc8" stroke-width="17.5" stroke-linecap="round"/><path d="M177 114 L193 82" stroke="#e8dfc8" stroke-width="11" stroke-linecap="round"/><circle cx="177" cy="114" r="8.6" fill="#e8dfc8"/>
+      <path d="M170 126 Q168 116 174 108" stroke="#cfc5aa" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M181 112 L187 108" stroke="#cfc5aa" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="194" cy="76" r="6" fill="#dca682"/><circle cx="196" cy="64" r="3.4" fill="#d9473b"/></g>
+
     <path d="M168 200 Q170 140 196 130 L208 200 Z M282 200 Q280 140 254 130 L242 200 Z" fill="#24242a"/>
     <path d="M208 126 L225 170 L242 126 Z" fill="#d6a07a"/>
     <path d="M198 122 L212 106 L224 142 Z M252 122 L238 106 L226 142 Z" fill="#f1e8d2" stroke="#cfc5aa" stroke-width="1"/>
@@ -67,11 +72,13 @@ const FALCON = `
     <path d="M198 84 Q190 50 224 48 Q258 48 252 82 Q250 66 240 62 Q232 70 218 64 Q204 68 198 84 Z" fill="#7a5232"/>
     <path d="M240 60 Q254 66 252 84 Q250 70 240 66 Z" fill="#7a5232"/>
     <path d="M212 54 L206 44 L220 52 M226 52 L228 41 L236 52 M240 56 L250 47 L248 60" stroke="#7a5232" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    ${eyes(225, 82, 10, '#7f9570', 2)}
-    <path d="M205 77 Q212 73 220 76 M231 75 Q239 71 246 76" stroke="#5a3b22" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <ellipse cx="215" cy="82" rx="3.8" ry="3" fill="#fff"/><ellipse cx="235" cy="82" rx="3.8" ry="3" fill="#fff"/>
+    <circle cx="213.4" cy="82" r="2.2" fill="#7f9570"/><circle cx="233.4" cy="82" r="2.2" fill="#7f9570"/><circle cx="213.2" cy="82" r="1.1" fill="#14181c"/><circle cx="233.2" cy="82" r="1.1" fill="#14181c"/>
+    <path d="M206 75 L221 79 M244 75 L229 79" stroke="#5a3b22" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M222 70 L226 72 M228 71 L232 69" stroke="#cf9a78" stroke-width="1.1" stroke-linecap="round"/>
     <path d="M214 87 Q212 90 208 89 M236 87 Q238 90 242 89" stroke="#c48c6a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
     <path d="M226 84 Q222 94 227 96" stroke="#c48c6a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-    <path class="sc-grin" d="M216 102 Q225 110 234 101 Q225 105 216 102 Z" fill="#fff" stroke="#8a4a3a" stroke-width="1.5" stroke-linejoin="round"/>
+    <g class="sc-grin"><path d="M218 102 Q225 100 232 102 Q231 109 225 109.5 Q219 109 218 102 Z" fill="#5a2220" stroke="#8a4a3a" stroke-width="1.2" stroke-linejoin="round"/><path d="M219.4 102.4 Q225 100.8 230.6 102.4 L230 105 Q225 103.6 220 105 Z" fill="#fff"/></g>
     <path d="M211 98 Q210 105 215 108 M241 98 Q242 105 236 108" stroke="#cf9a78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
   </g>
   </g>
@@ -101,7 +108,7 @@ const OPERA = `
     <path d="M56 130 L62 98 L88 124 L108 104 L124 130 L92 152 Z" fill="#2c2630" stroke="#120f16" stroke-width="1"/>
     <path d="M84 128 L96 146 L108 128" stroke="#7a2630" stroke-width="2.2" fill="none"/>
     <path d="M80 104 L80 126 Q94 134 108 126 L108 102 Z" fill="#c5b0a0"/>
-    <path d="M66 74 Q64 44 96 40 Q126 42 128 66 Q130 76 126 82 Q134 84 137 90 Q133 95 126 95 Q128 102 120 108 Q112 116 98 116 Q78 114 71 98 Q66 86 66 74 Z" fill="#d8c4b0"/>
+    <path d="M66 74 Q64 44 96 40 Q126 42 128 66 Q130 74 129 80 Q134 85 137 92 Q137 96 131 96.5 Q128 97 128 99.5 Q130 102 127 104 Q128 107 124 109 Q122 113 116 114 Q108 118 98 116 Q78 114 71 98 Q66 86 66 74 Z" fill="#d8c4b0"/>
     <path d="M66 72 Q62 42 96 34 Q128 36 130 62 Q120 50 104 49 Q86 48 74 60 Q70 66 66 72 Z" fill="#cfcbc6"/>
     <path d="M66 66 Q60 82 68 96 Q70 80 76 68 Z" fill="#c4c0ba"/>
     <ellipse cx="73" cy="82" rx="4" ry="7" fill="#cdb7a2"/>
@@ -113,11 +120,11 @@ const OPERA = `
     <path d="M84 75.4 Q92 71 100 76 M106 75 Q113 71 120 75.6" stroke="#2a2128" stroke-width="2.6" fill="none" stroke-linecap="round"/>
     <path d="M80 67 Q90 69 100 73 M123 66 Q113 67 106 72" stroke="#4a4048" stroke-width="2.6" fill="none" stroke-linecap="round"/>
     <path d="M85 83 Q92 87 99 83 M107 82 Q113 85 119 82" stroke="#a9917e" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-    <path d="M104 78 Q103 88 100 92 Q108 96 114 92" stroke="#b59b86" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M121 90 Q125 93 129 92" stroke="#b59b86" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M127 95 Q130 97 133 95" stroke="#8a7464" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <path d="M74 90 Q74 102 86 109 M123 98 Q119 104 112 109" stroke="#b59b86" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <path d="M80 86 Q84 96 92 100 M118 92 Q114 98 108 102" stroke="#b9a290" stroke-width="1.1" fill="none" stroke-linecap="round"/>
-    <path class="sc-palp-mouth" d="M94 102 Q108 103 123 95 L125 93" stroke="#5a2f34" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M100 104 Q108 108 116 103" stroke="#a9917e" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+    <path class="sc-palp-mouth" d="M100 105 Q113 108 126 103" stroke="#5a2f34" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M104 110 Q112 113 120 109" stroke="#a9917e" stroke-width="1.1" fill="none" stroke-linecap="round"/>
   </g>
   <!-- Anakin: seen from behind, turned towards Palpatine, thick wavy hair -->
   <g class="sc-ani">
@@ -127,8 +134,7 @@ const OPERA = `
     <path d="M207 104 L207 124 Q217 130 228 124 L228 104 Z" fill="#d9a07c"/>
     <path d="M194 72 Q194 42 222 40 Q252 42 252 72 Q256 90 250 106 L246 116 L240 104 L236 118 L230 98 Z" fill="#5b3a22"/>
     <ellipse cx="236" cy="90" rx="5" ry="8" fill="#dca682"/>
-    <path d="M200 80 Q199 60 216 58 Q234 58 235 78 Q236 96 227 108 Q216 118 206 109 Q199 100 200 80 Z" fill="${SKIN}"/>
-    <path d="M201 84 L193 94 Q194 98 201 97 Z" fill="${SKIN}" stroke="#d09a78" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M200 80 Q199 60 216 58 Q234 58 235 78 Q236 96 227 108 Q216 118 207 111 Q203 111 202 108 Q200 106 201 104 Q198 103 199 100 Q200 98 200.5 97 Q195 97 193 94 Q195 90 198.5 85 Q200 83 200 80 Z" fill="${SKIN}" stroke="#d09a78" stroke-width=".8" stroke-linejoin="round"/>
     <path d="M194 84 Q192 54 216 50 Q244 52 242 78 Q236 66 230 70 L226 62 L220 72 L214 62 L209 72 L204 64 L200 76 Z" fill="#5b3a22"/>
     <path d="M230 66 Q244 66 246 84 Q244 96 240 100 Q240 84 232 74 Z" fill="#5b3a22"/>
     <path d="M204 54 Q218 48 232 54 M236 62 Q246 70 244 84 M240 84 Q244 94 240 102" stroke="#7a5030" stroke-width="1.6" fill="none" stroke-linecap="round"/>
@@ -136,8 +142,8 @@ const OPERA = `
     <path d="M202 85 Q207 79 213 83 Q208 90 202 85 Z M220 83 Q226 79 231 84 Q226 89 220 83 Z" fill="#fff"/>
     <circle cx="206" cy="85" r="1.9" fill="#4a7ab0"/><circle cx="224" cy="84" r="1.7" fill="#4a7ab0"/><circle cx="205.6" cy="85" r=".9" fill="#14181c"/><circle cx="223.6" cy="84" r=".8" fill="#14181c"/>
     <path d="M203 69 L206 78 M205 90 L205 98" stroke="#c9826a" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-    <path d="M200 95 Q199 99 203 99 M221 91 Q219 96 222 98" stroke="#c48c6a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-    <path d="M207 105 Q212 103 219 105 Q214 110 207 105 Z" fill="#6a2a2a" stroke="#8a4a3a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M221 91 Q219 96 222 98" stroke="#c48c6a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M203 104 Q208 102 213 104 Q208 109 203 104 Z" fill="#5a2220" stroke="#8a4a3a" stroke-width=".9" stroke-linejoin="round"/><path d="M195 95.6 Q197 96.6 199 96" stroke="#9a6a50" stroke-width="1.1" fill="none" stroke-linecap="round"/>
     <path d="M196 62 Q192 68 196 74 Q200 68 196 62 Z" fill="#9fd4ee" stroke="#6aa6c6" stroke-width=".8"/>
   </g>
   <g class="sc-ai"><path d="M146 114 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3 Z" fill="#7ee0ff" stroke="#3aa7cf" stroke-width="1"/><circle cx="164" cy="110" r="2.4" fill="#7ee0ff"/><circle cx="130" cy="134" r="2" fill="#7ee0ff"/></g>

@@ -3,13 +3,9 @@
 export const MAUL_LINES = [
   ['Agentic coding', 'Make no mistake'],
   ['Vibe coding', 'Ship it on Friday'],
-  ['You are a senior data scientist', 'Make no mistakes'],
-  ['Write the unit tests', 'Do not hallucinate. Not even once.'],
   ['Think step by step', 'Then rewrite everything in Rust'],
   ['Context window: 1M tokens', 'Still forgot the first line'],
-  ['Prompt engineering', 'Please. Pretty please. Make no mistakes.'],
   ['Fix the failing test', 'By deleting the test'],
-  ['Auto-accept all edits', 'What could go wrong?'],
   ['Add one small feature', '+4,000 lines, 0 tests'],
 ];
 

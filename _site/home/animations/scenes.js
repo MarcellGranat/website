@@ -58,21 +58,22 @@ const FALCON = `
     <path d="M166 200 Q168 134 225 126 Q282 134 284 200 Z" fill="#e8dfc8"/>
     <path d="M178 150 Q186 160 192 176 M272 150 Q264 160 258 176" stroke="#cfc5aa" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <g class="sc-han-arm"><path d="M196 60 V44" stroke="#8c939a" stroke-width="3" stroke-linecap="round"/>
-      <path d="M186 142 L177 114" stroke="#cfc5aa" stroke-width="20" stroke-linecap="round"/><path d="M177 114 L193 82" stroke="#cfc5aa" stroke-width="13.5" stroke-linecap="round"/>
-      <path d="M186 142 L177 114" stroke="#e8dfc8" stroke-width="17.5" stroke-linecap="round"/><path d="M190 140 L181 114" stroke="#d3c8aa" stroke-width="6" stroke-linecap="round"/><path d="M181 112 L196 82" stroke="#d3c8aa" stroke-width="4" stroke-linecap="round"/><path d="M177 114 L193 82" stroke="#e8dfc8" stroke-width="11" stroke-linecap="round"/><circle cx="177" cy="114" r="8.6" fill="#e8dfc8"/>
-      <path d="M170 126 Q168 116 174 108" stroke="#cfc5aa" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M181 112 L187 108" stroke="#cfc5aa" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M186 142 L177 114" stroke="#101014" stroke-width="20" stroke-linecap="round"/><path d="M177 114 L193 84" stroke="#101014" stroke-width="13.5" stroke-linecap="round"/>
+      <path d="M186 142 L177 114" stroke="#24242a" stroke-width="17.5" stroke-linecap="round"/><path d="M177 114 L193 84" stroke="#24242a" stroke-width="11" stroke-linecap="round"/><circle cx="177" cy="114" r="8.6" fill="#24242a"/>
+      <path d="M170 126 Q168 116 174 108" stroke="#3a3a42" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M187 88 L199 84" stroke="#e8dfc8" stroke-width="8" stroke-linecap="round"/>
       <circle cx="194" cy="76" r="6" fill="#dca682"/><circle cx="196" cy="64" r="3.4" fill="#d9473b"/></g>
 
     <path d="M168 200 Q168 138 194 128 L214 132 L217 200 Z M282 200 Q282 138 256 128 L236 132 L233 200 Z" fill="#24242a"/>
-    <path d="M217 140 Q222 168 217 200 L233 200 Q228 168 233 140 Z" fill="#d8cdb0"/>
     <path d="M225 140 V200" stroke="#cfc5aa" stroke-width="1.3"/><circle cx="225" cy="152" r="1.4" fill="#cfc5aa"/><circle cx="225" cy="166" r="1.4" fill="#cfc5aa"/><circle cx="225" cy="180" r="1.4" fill="#cfc5aa"/>
     <path d="M216 108 L216 126 Q225 132 234 126 L234 108 Z" fill="#d9a07c"/>
     <path d="M206 116 L212 98 L224 124 L221 134 Z M244 116 L238 98 L226 124 L229 134 Z" fill="#efe6cc" stroke="#cfc5aa" stroke-width="1" stroke-linejoin="round"/>
     <path d="M222 126 L225 136 L228 126 Z" fill="#d9a07c"/>
+    <ellipse cx="200" cy="88" rx="4" ry="6.5" fill="#dca682"/><ellipse cx="250" cy="88" rx="4" ry="6.5" fill="#dca682"/>
     <path d="M201 84 Q199 62 225 60 Q251 62 249 84 Q251 104 239 113 Q225 122 211 113 Q199 104 201 84 Z" fill="#e9b690"/>
-    <path d="M197 96 Q190 54 224 49 Q258 52 254 94 L249 104 Q250 84 244 76 Q234 62 214 66 Q204 72 203 88 L202 104 Z" fill="#7a5232"/>
-    <path d="M205 70 Q222 54 247 70 Q232 62 216 70 Q207 74 205 86 Z" fill="#7a5232"/>
-    <path d="M207 63 Q224 54 244 64 M204 80 Q205 72 210 68" stroke="#92683f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M198 84 Q190 50 224 48 Q258 48 252 82 Q250 66 240 62 Q232 70 218 64 Q204 68 198 84 Z" fill="#7a5232"/>
+    <path d="M240 60 Q254 66 252 84 Q250 70 240 66 Z" fill="#7a5232"/>
+    <path d="M212 54 L206 44 L220 52 M226 52 L228 41 L236 52 M240 56 L250 47 L248 60" stroke="#7a5232" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     <ellipse cx="215" cy="82" rx="3.8" ry="3" fill="#fff"/><ellipse cx="235" cy="82" rx="3.8" ry="3" fill="#fff"/>
     <circle cx="213.4" cy="82" r="2.2" fill="#7f9570"/><circle cx="233.4" cy="82" r="2.2" fill="#7f9570"/><circle cx="213.2" cy="82" r="1.1" fill="#14181c"/><circle cx="233.2" cy="82" r="1.1" fill="#14181c"/>
     <path d="M206 75 L221 79 M244 75 L229 79" stroke="#5a3b22" stroke-width="2.8" fill="none" stroke-linecap="round"/>

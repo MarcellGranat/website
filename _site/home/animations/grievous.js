@@ -53,7 +53,6 @@ export const GRIEVOUS_SVG = `
   ${limb('gr-d', [80, 40], [102, 28], [116, 5])}
   <path d="M80 46 Q89 50 94 58" stroke="${JOINT}" stroke-width="6" stroke-linecap="round" fill="none"/>
   <g class="gr-head">
-    <path d="M91 94 Q84 106 90 119 M105 94 Q112 106 106 119" stroke="#3a3228" stroke-width="4" stroke-linecap="round" fill="none"/>
     <path d="M79 25 Q68 44 70 58 Q73 76 90 95 Q84 72 85 56 Q86 40 79 25 Z" fill="#e8e2d0" stroke="#bdb6a3" stroke-width="1"/>
     <path d="M117 25 Q128 44 126 58 Q123 76 106 95 Q112 72 111 56 Q110 40 117 25 Z" fill="#e8e2d0" stroke="#bdb6a3" stroke-width="1"/>
     <path d="M86.5 38 Q88 23 98 22 Q108 23 109.5 38 L113.5 50 Q113.5 61 106 71 L103 98 Q98 108 93 98 L90 71 Q82.5 61 82.5 50 Z" fill="#e0dac8"/>

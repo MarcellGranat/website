@@ -286,3 +286,5 @@
 .m-label.show { opacity: 1; transform: translate(-50%, calc(-100% - 6px)); }
 .m-label-l { left: -21%; }
 .m-label-r { left: 121%; }
+.maul.mirrored .m-label-l { left: 121%; }
+.maul.mirrored .m-label-r { left: -21%; }

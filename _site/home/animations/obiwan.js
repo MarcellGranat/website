@@ -62,7 +62,8 @@ export const OBI_SVG = `
       <g class="y-fore">
         <path d="M0 0 Q0 -10 1 -18" stroke="#7a5632" stroke-width="9" stroke-linecap="round" fill="none"/>
         <circle cx="1" cy="-21" r="4.8" fill="#e8bf9a"/>
-        <path d="M-2 -25 L-3 -30 M1 -26 L1 -31 M4 -25 L5 -30 M6 -21 L9 -23" stroke="#e8bf9a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M-0.6 -23 V-31.5 M2.6 -23 V-32.5" stroke="#e8bf9a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M5.6 -20 L8 -22" stroke="#e8bf9a" stroke-width="2.4" stroke-linecap="round"/>
       </g>
       <circle cx="0" cy="0" r="4.5" fill="#7a5632"/>
     </g>

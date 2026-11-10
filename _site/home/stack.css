@@ -233,6 +233,7 @@
 .padme.on, .r2.on { visibility: visible; }
 .p-bob, .p-flip, .r2-bob, .r2-flip { position: relative; transform-origin: 50% 100%; }
 .p-svg, .r2-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.padme .p-svg { filter: drop-shadow(0 0 1px rgba(20, 24, 28, .55)) drop-shadow(0 1px 1px rgba(20, 24, 28, .18)); }
 .p-svg .p-upper { transform-origin: 60px 104px; transition: transform .6s var(--ease); }
 .p-svg .p-arm { transform-origin: 71px 86px; transition: transform .6s var(--ease); }
 .p-svg .p-arm-l { transform-origin: 49px 86px; }
@@ -240,10 +241,6 @@
 .padme.bend .p-upper { transform: rotate(40deg); }
 .padme.bend .p-arm { transform: rotate(-108deg); }
 .padme.bend .p-head { transform: rotate(-14deg); }
-.p-svg .p-rec { opacity: 0; }
-.p-svg .p-cone { fill: #0f8f86; opacity: 0; transition: opacity .4s; }
-.padme.rec .p-rec { animation: p-rec .9s steps(2) infinite; }
-.padme.rec .p-cone { opacity: .2; animation: v-lights 1.2s ease-in-out infinite; }
 .padme.walking .p-bob { animation: p-run .36s ease-in-out infinite; }
 .padme.walking .p-foot-a { animation: yoda-step .36s ease-in-out infinite; }
 .padme.walking .p-foot-b { animation: yoda-step .36s ease-in-out infinite .18s; }
@@ -258,6 +255,10 @@
 .r2.beep .r2-pupil { fill: #ff6a6a; filter: drop-shadow(0 0 2px #ff2a2a); }
 
 @keyframes p-run { 0%, 100% { transform: translateY(0) rotate(3deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
-@keyframes p-rec { 50% { opacity: 1; } }
 @keyframes r2-roll { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-1.5px) rotate(3deg); } }
 @keyframes r2-look { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-9px); } 60% { transform: translateX(7px); } 80% { transform: translateX(0); } }
+.r2-svg .r2-scan { opacity: 0; transition: opacity .35s; }
+.r2.scan .r2-scan { opacity: 1; animation: v-lights 1.4s ease-in-out infinite; }
+.r2.scan .r2-sweep { animation: r2-sweep 1.2s ease-in-out infinite alternate; }
+.r2.scan .r2-pupil { fill: #6fc2ff; filter: drop-shadow(0 0 3px #3a9dff); }
+@keyframes r2-sweep { from { transform: translateY(0); } to { transform: translateY(46px); } }

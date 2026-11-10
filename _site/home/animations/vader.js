@@ -1,4 +1,4 @@
-// Darth Vader marches in from a random side wearing a paper label, stops, and ignites his red lightsaber and swings it
+// Darth Vader marches in from a random side wearing a paper label, stops, and switches on his red lightsaber
 // with glowing red eyes. The label is different every visit.
 export const LABELS = [
   'final_final_v13.xlsx',
@@ -107,9 +107,13 @@ export function createVader() {
     root.classList.add('on');
     await walk(start, stop);
 
-    root.classList.add('saber');
+    root.classList.add('saber'); // raises his hand with the hilt
     label.classList.add('pop');
-    await wait(3600);
+    await wait(700);
+    root.classList.add('lit'); // switches the blade on
+    await wait(2200);
+    root.classList.remove('lit'); // and off again
+    await wait(450);
     root.classList.remove('saber');
     await wait(500);
     label.classList.remove('pop');
@@ -120,7 +124,7 @@ export function createVader() {
   return {
     async visit() {
       try { await visit(); } catch {
-        root.classList.remove('on', 'walking', 'saber');
+        root.classList.remove('on', 'walking', 'saber', 'lit');
         label.classList.remove('pop');
       }
     },

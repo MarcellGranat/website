@@ -151,7 +151,7 @@
 @keyframes g-hop { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-12px) rotate(-6deg); } 60% { transform: translateY(-12px) rotate(6deg); } }
 
 
-/* Darth Vader: marches in wearing a paper label, then ignites a red lightsaber */
+/* Darth Vader: marches in wearing a paper label, then switches on a red lightsaber */
 .vader { position: fixed; left: 0; bottom: 0; width: clamp(112px, 12vw, 150px); z-index: 30; pointer-events: none; visibility: hidden; will-change: transform; }
 .vader.on { visibility: visible; }
 .v-bob, .v-flip { transform-origin: 50% 100%; position: relative; }
@@ -268,9 +268,8 @@
 .yoda.obi.mind .y-hand { transform: none; }
 @keyframes obi-wave { from { transform: rotate(-22deg); } to { transform: rotate(-42deg); } }
 
-/* Vader draws and swings a red lightsaber */
+/* Vader raises his hand, switches a red lightsaber on and off */
 .v-svg .v-saber { transform-origin: 88px 123px; transform: rotate(-125deg); opacity: 0; transition: opacity .2s; }
-.v-svg .v-blade { transform-origin: 88px 131px; transform: scaleY(0); transition: transform .35s ease-out .45s; filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }
-.vader.saber .v-saber { opacity: 1; animation: v-swing 1s ease-in-out 1s infinite alternate; }
-.vader.saber .v-blade { transform: scaleY(1); }
-@keyframes v-swing { from { transform: rotate(-142deg); } to { transform: rotate(-104deg); } }
+.v-svg .v-blade { transform-origin: 88px 131px; transform: scaleY(0); transition: transform .3s ease-out; filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }
+.vader.saber .v-saber { opacity: 1; }
+.vader.lit .v-blade { transform: scaleY(1); }

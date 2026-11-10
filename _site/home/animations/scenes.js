@@ -146,7 +146,6 @@ const OPERA = `
     <path d="M203 69 L205 77 M204 88 L205 96" stroke="#c9826a" stroke-width="1.6" stroke-linecap="round" fill="none"/>
     <path d="M214 87 Q213 92 212.4 94.6 M217 88 Q218 92 217.6 95" stroke="#c48c6a" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M210.4 96 Q214.6 98.6 219 96" stroke="#a9745a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <path d="M207 105 Q213 102.5 219 105 Q213 111 207 105 Z" fill="#5a2220" stroke="#8a4a3a" stroke-width=".9" stroke-linejoin="round"/>
-    <path d="M196 62 Q192 68 196 74 Q200 68 196 62 Z" fill="#9fd4ee" stroke="#6aa6c6" stroke-width=".8"/>
   </g>
   <g class="sc-ai"><path d="M146 114 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3 Z" fill="#7ee0ff" stroke="#3aa7cf" stroke-width="1"/><circle cx="164" cy="110" r="2.4" fill="#7ee0ff"/><circle cx="130" cy="134" r="2" fill="#7ee0ff"/></g>
   <rect x="22" y="162" width="256" height="9" rx="4" fill="#e8a283" stroke="#b9573a" stroke-width="1.2"/>

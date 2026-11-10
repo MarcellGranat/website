@@ -312,7 +312,7 @@ export function mountScenes(root = document) {
     const fig = document.createElement('figure');
     fig.className = `scene scene-${i + 1}`;
     fig.innerHTML = `${s.svg}<figcaption class="sr-only">${s.lines.join(' ')}</figcaption>`;
-    stop.insertBefore(fig, stop.querySelector('.kicker').nextSibling);
+    stop.insertBefore(fig, stop.querySelector('h2').nextSibling); // below the title on phones, beside the text on wide screens
     letter(fig.querySelector('svg'), s.lines, s.hl);
   });
 }

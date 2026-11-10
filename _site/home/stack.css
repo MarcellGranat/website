@@ -281,7 +281,8 @@
 .m-svg .m-blade { filter: drop-shadow(0 0 3px #ff2a2a) drop-shadow(0 0 8px rgba(255, 40, 40, .6)); }
 .m-svg .m-eyes { transition: filter .3s; }
 .maul.lit .m-eyes { filter: drop-shadow(0 0 3px #ffd21e); }
-.maul.walking .m-bob { animation: m-prowl .7s ease-in-out infinite; }
-.maul.walking .m-foot-a { animation: yoda-step .7s ease-in-out infinite; }
-.maul.walking .m-foot-b { animation: yoda-step .7s ease-in-out infinite .35s; }
-@keyframes m-prowl { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-3px) rotate(1deg); } }
+.m-label { position: absolute; top: 61%; width: max-content; padding: 6px 11px; border-radius: 12px; background: var(--surface); border: 1.5px solid var(--ink); font: 600 .8rem/1.3 'Inter', sans-serif; text-align: center; color: var(--ink); opacity: 0; transform: translate(-50%, calc(-100% - 6px)) scale(.9); transition: opacity .25s, transform .3s var(--ease); }
+.m-label::after { content: ''; position: absolute; top: 100%; left: 50%; width: 9px; height: 9px; margin: -5px 0 0 -5px; background: var(--surface); border: solid var(--ink); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+.m-label.show { opacity: 1; transform: translate(-50%, calc(-100% - 6px)); }
+.m-label-l { left: -21%; }
+.m-label-r { left: 121%; }

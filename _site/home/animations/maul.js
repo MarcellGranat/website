@@ -1,4 +1,4 @@
-// Darth Maul in his iconic stance: he strides in holding the double-bladed saber across his body, then
+// Darth Maul in his iconic stance: he jumps up from below the bottom edge holding the double-bladed saber across his body, then
 // switches the blades on one after another, each with a line (the second one is the crazy one).
 export const MAUL_LINES = [
   ['Agentic coding', 'Make no mistake'],
@@ -30,9 +30,9 @@ const SVG = `
     <g class="m-eyes"><ellipse cx="52" cy="41.5" rx="3" ry="2" fill="#ffd21e"/><ellipse cx="68" cy="41.5" rx="3" ry="2" fill="#ffd21e"/>
     <path d="M52 40 V43 M68 40 V43" stroke="#14100f" stroke-width="1" stroke-linecap="round"/></g>
     <path d="M44 36 L58 41 M76 36 L62 41" stroke="#14100f" stroke-width="2.4" stroke-linecap="round"/>
-    <path d="M48 52 Q52 58 58 60 M72 52 Q68 58 62 60 M60 48 V54" stroke="#14100f" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M52 57 Q60 61 68 57" stroke="#3a0d0d" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M54 58 L55.5 60 L57 58.6 M63 58.6 L64.5 60 L66 58" stroke="#f2eadf" stroke-width="1" fill="none"/>
+    <path d="M47 49 L52 57 M73 49 L68 57 M60 48 V54 M60 61 V64.5" stroke="#14100f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M52 59.5 Q60 55.5 68 59.5 Q60 62 52 59.5 Z" fill="#2a0a0a"/>
+    <path d="M54 58.4 Q60 56.6 66 58.4 L66 59.6 Q60 58 54 59.6 Z" fill="#f2eadf"/><path d="M57 57.4 V59.2 M60 57 V59 M63 57.4 V59.2" stroke="#2a0a0a" stroke-width=".6"/>
   </g>
   <path d="M47 84 Q35 96 50 94" stroke="#1d1f25" stroke-width="9" stroke-linecap="round" fill="none"/>
   <path d="M73 84 Q85 96 70 94" stroke="#1d1f25" stroke-width="9" stroke-linecap="round" fill="none"/>
@@ -46,21 +46,20 @@ const SVG = `
   <circle cx="53" cy="93.5" r="4.8" fill="#0c0d10"/><circle cx="68" cy="93.5" r="4.8" fill="#0c0d10"/>
 </svg>`;
 
-const SPEED = 120;
 const LEN = 72; // blade length in svg units
-const EDGE = [0.12, 0.3];
 
 const rand = (a, b) => a + Math.random() * (b - a);
-const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export function createMaul() {
   const root = document.createElement('div');
   root.className = 'maul';
   root.setAttribute('aria-hidden', 'true');
-  root.innerHTML = `<div class="yoda-bubble"></div><div class="m-bob">${SVG}</div>`;
+  root.innerHTML = `<div class="m-label m-label-l"></div><div class="m-label m-label-r"></div><div class="m-bob">${SVG}</div>`;
   document.body.appendChild(root);
-  const bubble = root.querySelector('.yoda-bubble');
+  const labelL = root.querySelector('.m-label-l');
+  const labelR = root.querySelector('.m-label-r');
+  const bob = root.querySelector('.m-bob');
   const q = (c) => root.querySelector(c);
   const sides = {
     l: { rects: [q('.m-bl1'), q('.m-bl2')], f: 0 },
@@ -92,58 +91,52 @@ export function createMaul() {
     return bag.pop();
   };
 
-  const walk = async (from, to) => {
-    root.classList.add('walking');
-    const anim = root.animate(
-      [{ transform: `translateX(${from}px)` }, { transform: `translateX(${to}px)` }],
-      { duration: (Math.abs(to - from) / SPEED) * 1000, easing: 'ease-in-out', fill: 'forwards' },
-    );
-    await anim.finished;
-    root.style.transform = `translateX(${to}px)`;
-    anim.cancel();
-    root.classList.remove('walking');
-  };
-
   const visit = async () => {
-    const dir = Math.random() < 0.5 ? 1 : -1;
     const [first, second] = nextPair();
     const w = document.documentElement.clientWidth;
     const mw = root.offsetWidth;
-    const reach = (38 / 120) * mw + 6; // how far the blades stick out past the figure
-    const start = dir === 1 ? -mw - reach - 12 : w + reach + 12;
-    const stop = clamp(dir === 1 ? rand(...EDGE) * w + reach : w - rand(...EDGE) * w - mw - reach, reach + 6, w - mw - reach - 6);
+    const margin = (38 / 120) * mw + 70; // room for the blades and the labels on them
+    const x = w - mw - 2 * margin > 0 ? rand(margin, w - mw - margin) : (w - mw) / 2;
+    labelL.textContent = first;
+    labelR.textContent = second;
+    for (const l of [labelL, labelR]) l.style.maxWidth = `${Math.min(120, w / 2 - 10)}px`;
 
-    root.style.transform = `translateX(${start}px)`;
+    // he jumps up from below the bottom edge and lands in his stance
+    root.style.transform = `translateX(${x}px)`;
+    const away = 'translateY(125%)';
+    bob.style.transform = away;
     root.classList.add('on');
-    await walk(start, stop);
-    await wait(400);
-
-    const say = (line) => {
-      bubble.textContent = line;
-      bubble.style.maxWidth = `${Math.min(250, w - 12)}px`;
-      bubble.classList.add('show');
-      const bw = bubble.offsetWidth;
-      const centre = stop + mw / 2;
-      const left = clamp(centre - bw / 2, 4, w - bw - 4);
-      bubble.style.left = `${left - stop}px`;
-      bubble.style.setProperty('--tail', `${centre - left}px`);
-    };
+    await bob.animate([
+      { transform: away, easing: 'cubic-bezier(.2, .7, .3, 1)' },
+      { offset: 0.6, transform: 'translateY(-70px) scale(.96, 1.06)', easing: 'cubic-bezier(.5, 0, .8, .4)' },
+      { offset: 0.86, transform: 'translateY(0) scale(1.1, .88)', easing: 'ease-out' },
+      { transform: 'none' },
+    ], { duration: 1100, fill: 'forwards' }).finished;
+    bob.getAnimations().forEach((a) => a.cancel());
+    bob.style.transform = '';
+    await wait(300);
 
     root.classList.add('lit');
-    say(first);
+    labelL.classList.add('show');
     await grow('l', 1);
-    await wait(1300 + first.length * 45);
-    bubble.classList.remove('show');
-    await wait(300);
-    say(second);
+    await wait(1400 + first.length * 45);
+    labelR.classList.add('show');
     await grow('r', 1);
-    await wait(2000 + second.length * 55);
-    bubble.classList.remove('show');
+    await wait(2200 + second.length * 55);
+    labelL.classList.remove('show');
+    labelR.classList.remove('show');
     await grow('r', 0);
     await grow('l', 0);
     root.classList.remove('lit');
-    await wait(400);
-    await walk(stop, start);
+    await wait(350);
+
+    // a little hop, then he drops back out of sight
+    await bob.animate([
+      { transform: 'none', easing: 'ease-out' },
+      { offset: 0.3, transform: 'translateY(-34px)', easing: 'ease-in' },
+      { transform: away },
+    ], { duration: 800, fill: 'forwards' }).finished;
+    bob.getAnimations().forEach((a) => a.cancel());
     root.classList.remove('on');
   };
 
@@ -151,8 +144,10 @@ export function createMaul() {
     async visit() {
       try { await visit(); } catch (e) {
         console.error('maul visit failed', e);
-        root.classList.remove('on', 'walking', 'lit');
-        bubble.classList.remove('show');
+        root.classList.remove('on', 'lit');
+        labelL.classList.remove('show');
+        labelR.classList.remove('show');
+        bob.getAnimations().forEach((a) => a.cancel());
         setBlade('l', 0); setBlade('r', 0);
       }
     },

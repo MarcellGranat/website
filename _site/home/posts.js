@@ -3,7 +3,7 @@
 export const POSTS = [
   {
     "id": "duckdb-reruns",
-    "title": "DuckDB is the most awesome tool for large data: rerun only what really changed",
+    "title": "DuckDB is the most awesome tool for large data, and DVC reruns only what really changed",
     "date": "2026-11-11",
     "tags": [
       "dev"

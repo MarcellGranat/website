@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../home/styles.css" />
   <link rel="stylesheet" href="../../home/post.css" />
   <link rel="stylesheet" href="../../home/syntax.css" />
-  <title>DuckDB and DVC: the analyst's top pick for a reproducible pipeline on large data | Marcell Granát</title>
+  <title>DuckDB and DVC: combine the top picks for a reproducible pipeline on large data | Marcell Granát</title>
 </head>
 <body>
   <div class="progress" id="progress"></div>
@@ -39,7 +39,7 @@
         </dl>
       </aside>
       <div class="post-main">
-        <h1 class="post-title">DuckDB and DVC: the analyst's top pick for a reproducible pipeline on large data</h1>
+        <h1 class="post-title">DuckDB and DVC: combine the top picks for a reproducible pipeline on large data</h1>
         <article class="prose">
 <p class="lead"><strong>DuckDB is the most awesome tool for large data.</strong> One file, no server, SQL straight on CSV and Parquet, and a columnar engine that hashes 100 million rows in well under a second on a laptop. It is the reason I can keep a whole project in a single database file and still iterate fast. The other half of the story is <strong>DVC</strong>, the tool I recommend most to analysts, researchers and ML engineers: it versions the data and the pipeline, and it knows which stages are stale. This post is about the one thing a single DuckDB file makes awkward for DVC, and a small helper that fixes it: in a pipeline where every stage reads the same database, which is modified during the run, <strong>rerun only the stages that really need it</strong>.</p>
 <ul>

@@ -552,10 +552,10 @@ function dvcat(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('see what is stale, and why, then run it', 30, 412);
 }
 
-/* ---------- duckrev: revs of tables and views decide what reruns (T = 14) ---------- */
-function duckrev(c, t) {
+/* ---------- table hashes: revs of tables and views decide what reruns (T = 14) ---------- */
+function reruns(c, t) {
   t %= 14;
-  win(c, 30, 40, 580, 340, 'dvc repro · duckrev');
+  win(c, 30, 40, 580, 340, 'dvc repro · table hashes');
   const B0 = 7.4, inB = t >= B0;
   const nodes = {
     build: { x: 48, y: 170, w: 120 }, daily: { x: 262, y: 100, w: 100 }, summary: { x: 456, y: 100, w: 120 }, export: { x: 262, y: 240, w: 100 },
@@ -621,7 +621,7 @@ function gcloud(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('release once, then it runs every night without my laptop', 30, 412);
 }
 
-const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata, snakemake, targets, dvc, git, jj, dvcat, duckrev, gcloud };
+const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata, snakemake, targets, dvc, git, jj, dvcat, reruns, gcloud };
 export function mount(cv, { reduced = false } = {}) {
   const c = cv.getContext('2d'), scene = SCENES[cv.dataset.tool];
   const frozen = cv.dataset.time !== undefined ? +cv.dataset.time : null;

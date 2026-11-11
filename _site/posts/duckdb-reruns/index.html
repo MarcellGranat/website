@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <meta name="description" content="DuckDB is the most awesome tool for large data. A small hash helper lets a DVC pipeline on one DuckDB file rerun only the stages whose tables and views really changed." />
+  <link rel="icon" href="../../logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../home/styles.css" />
+  <link rel="stylesheet" href="../../home/post.css" />
+  <link rel="stylesheet" href="../../home/syntax.css" />
+  <title>DuckDB is the most awesome tool for large data: rerun only what really changed | Marcell Granát</title>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="../../index.html"><img src="../../logo.png" alt="" width="28" height="28" /> Marcell Granát</a>
+    <nav>
+      <a href="../../index.html#research">Research</a>
+      <a href="../../index.html#blog">Blog</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <main class="post-page">
+    <div class="post-layout">
+      <aside class="post-aside">
+        <a class="back" href="../../index.html#blog">← All posts</a>
+        <figure class="visual cover" data-visual>
+          <canvas class="tool-canvas" data-tool="reruns" role="img" aria-label="Animation: a pipeline reads one DuckDB file, the raw data changes, and only the stages that read the changed table run again"></canvas>
+        </figure>
+        <div class="downloads"><p class="dl-title">Links</p><a class="dl" href="https://duckdb.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DuckDB</span></a><a class="dl" href="https://dvc.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3M21 3h-7M21 3v7M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg><span>DVC</span></a></div>
+        <dl class="facts">
+          <div><dt>Published</dt><dd><time datetime="2026-11-11">November 11, 2026</time></dd></div>
+          <div><dt>Topics</dt><dd class="tags"><span>dev</span></dd></div>
+          
+        </dl>
+      </aside>
+      <div class="post-main">
+        <h1 class="post-title">DuckDB is the most awesome tool for large data: rerun only what really changed</h1>
+        <article class="prose">
+<p class="lead"><strong>DuckDB is the most awesome tool for large data.</strong> One file, no server, SQL straight on CSV and Parquet, and a columnar engine that hashes 100 million rows in well under a second on a laptop. It is the reason I can keep a whole project in a single database file and still iterate fast. This post is about the one thing a single file makes awkward, and a small helper that fixes it: in a pipeline where every stage reads the same DuckDB database, which is modified during the run, <strong>rerun only the stages that really need it</strong>.</p>
+<ul>
+<li><strong>A small helper:</strong> about 150 lines of Python, DuckDB and PyYAML, nothing else.</li>
+<li><strong>Only the needed stages rerun:</strong> a change travels only as far as it is visible.</li>
+<li><strong>A change in the raw data is recorded:</strong> in a few bytes of text per table, in git.</li>
+<li><strong>No new files are generated:</strong> great if your ML pipeline involves large data and you do not want to cache each step of each version, only the most recent one.</li>
+</ul>
+<h2>Why DuckDB is my tool for large data</h2>
+<p><a href="https://duckdb.org">DuckDB</a> is an in-process analytical database. There is nothing to install or run besides a library, and the whole database is one file. Three things make it the best fit for data that is too large for a spreadsheet and too small to justify a cluster:</p>
+<ul>
+<li><strong>It reads your files where they are.</strong> <code>SELECT ... FROM 'orders.csv'</code> or <code>read_parquet('data/*.parquet')</code> works without an import step, and the same engine writes Parquet back with <code>COPY</code>.</li>
+<li><strong>It is built for scans.</strong> Columnar storage, vectorised execution and all cores in parallel. Aggregating, joining and hashing hundreds of millions of rows is an interactive operation, and data larger than memory spills to disk instead of failing.</li>
+<li><strong>It is plain SQL.</strong> The transformations of a pipeline are a <code>.sql</code> file that anyone can read, and tables and views carry the logic, so the database is the single place where the current state of the data lives.</li>
+</ul>
+<p>That last point is the interesting one. Keeping the state in one database file is convenient for the analysis, but it is a problem for the pipeline tool around it.</p>
+<h2>The problem: one database, modified during the run</h2>
+<p>A pipeline tool such as <a href="https://dvc.org">DVC</a> decides what to rerun by hashing files: the dependencies and the outputs of every stage. A <code>.duckdb</code> file does not fit this model, because every stage reads it and some stage writes it. My pipeline looks like this:</p>
+<pre><code>raw/orders.csv -> clean -> build -> daily -> summary
+                                \-> export</code></pre>
+<p><code>build</code> turns the raw file into a <code>sales</code> table and a view <code>v_sales_by_day</code>. <code>daily</code> reads the view and writes a CSV, <code>summary</code> totals that CSV, and <code>export</code> extracts the table to Parquet. The three obvious ways to wire this up all fail:</p>
+<ol>
+<li><strong>Declare the database file as a dependency of every stage.</strong> The file changes whenever anything changes, so every change reruns everything. A relabelled column that no downstream stage reads still triggers a full run, which is the cost of the very thing I wanted to avoid.</li>
+<li><strong>Declare nothing.</strong> Then the stages are never told that their input moved. New raw data would leave <code>daily</code> and <code>export</code> stale and nobody would notice.</li>
+<li><strong>Materialise every table as a file between stages</strong> and let DVC track those files. This works, but it copies the data at every step, and DVC keeps a copy of each step of each version in its cache. With large data that is the thing I do not want: I need only the most recent state, not a history of every intermediate table.</li>
+</ol>
+<p>What I want is a fingerprint of <em>each table and view</em>, small enough to store in git and cheap enough to compute on large data.</p>
+<h2>The idea: a rev for every table and view</h2>
+<p>A <strong>rev</strong> is a tiny JSON file that describes one object in the database. DVC tracks the rev files, not the database. A downstream stage depends on the rev of exactly what it reads, so a change reaches only the stages that can see it. A rev has three levels, and each one is more expensive and more precise than the previous one:</p>
+<ul>
+<li><strong><code>catalog</code>:</strong> a hash of the <code>CREATE</code> statement, plus the estimated size for a table. It reads no data.</li>
+<li><strong><code>rows</code>:</strong> the exact row count. It needs a scan.</li>
+<li><strong><code>row_hash</code>:</strong> the sum of the hash of every row, so the row order does not matter. It needs a scan.</li>
+</ul>
+<p>A rev file is as small as this:</p>
+<pre><code>{"kind": "table", "catalog": "1450e0478e8812a9", "size": 1000,
+ "rows": 1000, "row_hash": "9018511025794672586643"}</code></pre>
+<p>The catalog level is free because DuckDB exposes its own metadata as table functions: <code>duckdb_tables()</code> and <code>duckdb_views()</code> return the SQL and the estimated size of every object without touching the data:</p>
+<pre><code>def catalog_rev(con, obj):
+    schema, name = split(obj)
+    view = con.execute(
+        "SELECT sql FROM duckdb_views() WHERE schema_name = ? AND view_name = ?",
+        [schema, name],
+    ).fetchone()
+    if view:
+        return {"kind": "view", "catalog": digest(view[0])}
+    table = con.execute(
+        "SELECT sql, estimated_size FROM duckdb_tables() "
+        "WHERE schema_name = ? AND table_name = ?",
+        [schema, name],
+    ).fetchone()
+    if table:
+        return {"kind": "table", "catalog": digest(f"{table[0]} {table[1]}"),
+                "size": table[1]}
+    return None</code></pre>
+<p>The row level is where DuckDB shows what it is. <code>hash(t)</code> hashes a whole row, and summing the hashes gives an order independent fingerprint of the table in one scan:</p>
+<pre><code>def scan_table(con, obj):
+    schema, name = split(obj)
+    count, total = con.execute(
+        f'SELECT count(*), coalesce(sum(hash(t)::HUGEINT), 0) '
+        f'FROM "{schema}"."{name}" t'
+    ).fetchone()
+    return count, str(total)</code></pre>
+<p>I measured it on a table of 100 million rows (an integer id, an integer key, a random double and an MD5 string, 2.6 GB on disk) on an M2 Max laptop:</p>
+<ul>
+<li><strong>catalog rev:</strong> 6 milliseconds</li>
+<li><strong>row count and row hash:</strong> 0.4 seconds</li>
+</ul>
+<p>Hashing every row of a table that size in less than a second is why a full row check is a realistic default, and the catalog level is there for the cases where even that is too much.</p>
+<h2>How the check works: build, then clean</h2>
+<p>The helper has two commands, and the pipeline runs them in this order.</p>
+<p><strong><code>build</code></strong> runs the SQL script, and then writes one rev file per tracked object. It also stamps the catalog hash into the object's own <code>COMMENT</code> inside the database, which is how a later run can tell that someone redefined the object behind the pipeline's back:</p>
+<pre><code>def build(db, script, objects, scan_rows):
+    con = duckdb.connect(db)
+    con.execute(Path(script).read_text())
+    for obj in objects:
+        rev = live_rev(con, obj, scan_rows)
+        con.execute(f"COMMENT ON {rev['kind'].upper()} {obj} IS 'rev:{rev['catalog']}'")
+        rev_file(db, obj).write_text(json.dumps(rev))</code></pre>
+<p><strong><code>clean</code></strong> runs <em>first</em>, every time. It compares each rev file on disk with what the database looks like right now, and <strong>deletes the rev files that no longer match</strong>. For DVC a missing output means that the stage which writes it is out of date, so <code>build</code> runs again. If everything matches, nothing is deleted and <code>build</code> is skipped:</p>
+<pre><code>def is_stale(con, obj, saved, live):
+    if live is None:                       # the table or view is gone
+        return True
+    if saved["catalog"] != live["catalog"] or saved["catalog"] != stored_hash(con, obj):
+        return True                        # definition changed, or redefined by hand
+    if "row_hash" in saved and "row_hash" in live:
+        return (saved["rows"], saved["row_hash"]) != (live["rows"], live["row_hash"])
+    return False</code></pre>
+<p>The clean step opens the database read only, so checking never changes it. This is the whole trick: DVC cannot look inside the database, so the helper turns the state of the database into files that DVC understands, and uses file deletion as the signal.</p>
+<h2>The pipeline</h2>
+<p>The pipeline is an ordinary DVC pipeline. The interesting parts are what each stage depends on. Every downstream stage lists the rev of the object it reads, and nothing else about the database:</p>
+<pre><code>stages:
+  clean:
+    cmd: uv run python -m utils.revs clean -d wh.duckdb -r main.sales main.v_sales_by_day
+    always_changed: true
+    params:
+      - ../params.yaml: [scan_rows]
+    outs:
+      - revs/.cleaned: {cache: false}
+
+  build:
+    cmd: uv run python -m utils.revs -d wh.duckdb -c sql/build.sql -r main.sales main.v_sales_by_day
+    deps: [sql/build.sql, raw/orders.csv, revs/.cleaned]
+    params:
+      - ../params.yaml: [scan_rows]
+    outs:
+      - revs/wh__main__sales.rev: {cache: false}
+      - revs/wh__main__v_sales_by_day.rev: {cache: false}
+
+  daily:
+    cmd: uv run python -m utils.downstream daily
+    deps: [revs/wh__main__v_sales_by_day.rev]
+    outs: [out/daily.csv]
+
+  export:
+    cmd: uv run python -m utils.downstream export
+    deps: [revs/wh__main__sales.rev]
+    outs: [out/sales.parquet]
+
+  summary:
+    cmd: uv run python -m utils.downstream summary
+    deps: [out/daily.csv]
+    outs: [out/summary.txt]</code></pre>
+<p>A few details are doing real work here. <code>clean</code> is <code>always_changed</code>, so it runs on every <code>dvc repro</code>. It writes a constant file <code>revs/.cleaned</code> that <code>build</code> depends on, which only orders <code>build</code> after <code>clean</code> and never triggers a rerun on its own. <code>build</code> depends on the raw file and on the SQL script, so a change in either also reruns it. And <code>summary</code> depends on a file that <code>daily</code> wrote, not on a rev: the dependency chain continues the normal DVC way.</p>
+<p>The SQL that <code>build</code> runs is two statements. Note that the view reads only <code>day</code> and <code>amount</code>, and never <code>channel</code>:</p>
+<pre><code>CREATE OR REPLACE TABLE sales AS
+    SELECT order_id, day, channel, amount FROM read_csv('raw/orders.csv');
+
+CREATE OR REPLACE VIEW v_sales_by_day AS
+    SELECT day, sum(amount) AS total FROM sales GROUP BY day;</code></pre>
+<h2>What reruns when: six scenarios</h2>
+<p>I ran each of these on a fresh copy of the project with 1000 fake orders (seeded, so the runs are reproducible). Only the lines about the stages are shown.</p>
+<h3>1. Upstream relabels a column the view never reads</h3>
+<pre><code>sed -i '' 's/,web,/,online,/' raw/orders.csv
+dvc repro
+# Running stage 'clean'
+# Running stage 'build'
+# Stage 'daily' didn't change, skipping
+# Running stage 'export'
+# Stage 'summary' didn't change, skipping</code></pre>
+<p>The <code>sales</code> table changed, so its rev changed, and <code>export</code> reruns. The view <code>v_sales_by_day</code> returns exactly the same rows, so it gets exactly the same rev, and <code>daily</code> and <code>summary</code> are skipped. This is the case that a file-level hash of the database would never get right.</p>
+<h3>2. New raw data arrives</h3>
+<pre><code>python -m utils.fake_data -n 2000
+dvc repro
+# Running stage 'clean'
+# Running stage 'build'
+# Running stage 'daily'
+# Running stage 'export'
+# Running stage 'summary'</code></pre>
+<p>More rows change the table and, through the totals, the view. Everything downstream reruns, and the change is recorded: the new rev files differ in the git diff, and <code>rows</code> goes from 1000 to 2000.</p>
+<h3>3. The view logic changes</h3>
+<pre><code>sed -i '' 's/sum(amount)/max(amount)/' sql/build.sql
+dvc repro
+# Running stage 'clean'
+# Running stage 'build'
+# Running stage 'daily'
+# Stage 'export' didn't change, skipping
+# Running stage 'summary'</code></pre>
+<p>The table is untouched, so its rev is the same and <code>export</code> is skipped. The view has a new definition, so <code>daily</code> reruns, and <code>summary</code> follows because the CSV that <code>daily</code> wrote has changed.</p>
+<h3>4. Someone edits the database by hand</h3>
+<pre><code>duckdb wh.duckdb -c "UPDATE sales SET amount = 0"
+dvc repro
+# Running stage 'clean'
+# Running stage 'build'
+# Stage 'daily' didn't change, skipping
+# Stage 'export' didn't change, skipping
+# Stage 'summary' didn't change, skipping</code></pre>
+<p><code>clean</code> sees that the rows no longer match the stored row hash and deletes the rev. <code>build</code> reruns and restores the table from the raw file. The new revs are identical to the old ones, so nothing downstream reruns. A manual edit of the data is repaired and does not cost a full pipeline run.</p>
+<h3>5. Nothing changed</h3>
+<pre><code>dvc repro
+# Running stage 'clean'
+# Stage 'build' didn't change, skipping
+# Stage 'daily' didn't change, skipping
+# Stage 'export' didn't change, skipping
+# Stage 'summary' didn't change, skipping</code></pre>
+<p>Only <code>clean</code> runs, and its job is the 0.4 second row check, not a rebuild.</p>
+<h3>6. The raw data goes back to an earlier version</h3>
+<p>I restored the 1000 order file from scenario 1. <code>build</code>, <code>daily</code> and <code>summary</code> ran, and the database holds the older data again. <code>export</code> did not run: its input is the same rev as in the first run, so DVC restored the Parquet file from its run cache. This case is the reason for the next section.</p>
+<h2>Why the revs use <code>cache: false</code></h2>
+<p>DVC has a run cache: if a stage has run before with exactly the same dependencies, DVC can restore the old outputs instead of running it. That is great for ordinary stages, and wrong for <code>build</code>, because <code>build</code> has a side effect that DVC cannot see: it changes the database. Two things would go wrong if the rev files were cached:</p>
+<ul>
+<li><strong>A hand edit.</strong> <code>clean</code> deletes the stale revs, DVC sees "same inputs as an earlier run" and restores the old revs, and does not run <code>build</code>. The edit stays in the database, while the revs claim that everything is clean. It would repeat on every run.</li>
+<li><strong>Raw data going back to an earlier version.</strong> The old revs come back from the cache, and the database keeps the newer data.</li>
+</ul>
+<p>With <code>cache: false</code> there is nothing to restore, so a missing rev always means that <code>build</code> runs. Both cases are covered in the scenarios above. DVC has no default for this option, and forgetting it on one output would silently bring the bug back, so the helper counts the <code>.rev</code> outputs in <code>dvc.yaml</code> and stops the pipeline if any of them lacks <code>cache: false</code>. The side effect is that DVC does not gitignore the revs, so I commit them: they are a few hundred bytes each, and their history in git is the record of how the data moved.</p>
+<h2>Limits and trade-offs</h2>
+<ul>
+<li><strong>Two stages must not change the same table.</strong> A rev belongs to one stage, and DVC does not allow two stages to share an output. If two stages wrote the same table, neither could tell its own change from the other's. Give each table one owner, and let the other stages only read it.</li>
+<li><strong><code>scan_rows</code> is a switch.</strong> It lives in <code>params.yaml</code>, the same file DVC reads. On, the check hashes every row and notices any change in the data. Off, it reads the catalog only, which is free on any size, but a change in the rows that keeps the definition and the estimated size is invisible to it. For most tables the 0.4 seconds per 100 million rows is worth paying.</li>
+<li><strong>The hash is a fingerprint, not a proof.</strong> The revs are truncated hashes and the row hash is a sum, so a collision is possible in principle. For deciding whether to rerun a stage it is more than enough. I would not use it as a security measure.</li>
+<li><strong>The helper tracks what you list.</strong> An object that is not named after <code>-r</code> has no rev, so no stage can depend on it.</li>
+<li><strong>Downstream outputs are ordinary DVC outputs.</strong> The database is never copied, but the files that stages like <code>export</code> write are cached by DVC as usual. If you want the cache to keep only the latest versions, <code>dvc gc</code> does that.</li>
+</ul>
+<h2>Why this fits large data</h2>
+<ul>
+<li><strong>No new files.</strong> The only artifacts are a few hundred bytes of revs per table and the outputs of the stages. The database stays one file, edited in place, so a large dataset is stored once.</li>
+<li><strong>The check scales with the engine.</strong> DuckDB hashes 100 million rows in 0.4 seconds, so the pipeline pays almost nothing for knowing the truth about its data.</li>
+<li><strong>The expensive stages are the ones that get skipped.</strong> In an ML pipeline the stages that follow the data are the training and the evaluation. A changed column that the model never reads no longer triggers an hour of fitting.</li>
+<li><strong>Everything stays plain.</strong> SQL for the transformations, a YAML file for the pipeline, JSON for the revs, git for the history.</li>
+</ul>
+<h2>Takeaway</h2>
+<p>DuckDB makes one file the home of the whole project, and a few lines of hashing make that file understandable to a pipeline tool. The result is the behaviour I wanted from the start: the pipeline reruns the smallest set of stages that can be affected by a change, the change itself is recorded in git, and no copy of the data is made along the way. For large data that is the difference between a pipeline I run without thinking and one that I avoid running.</p>
+    </article>
+
+      </div>
+    </div>
+    <section class="related" id="related-section" hidden>
+      <div class="related-inner">
+        <p class="kicker" id="related-kicker">Similar posts</p>
+        <div class="post-grid" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>© <span id="year"></span> Marcell Granát</span><a href="../../index.html#blog">All posts</a></footer>
+  <script type="module" src="../../home/post.js"></script>
+</body>
+</html>

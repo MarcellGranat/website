@@ -2,8 +2,8 @@
 // (title, date YYYY-MM-DD, tags, and the image file inside _site/posts/<id>/).
 export const POSTS = [
   {
-    "id": "duckrev",
-    "title": "duckrev: rerun only the stages whose DuckDB tables really changed",
+    "id": "duckdb-reruns",
+    "title": "DuckDB is the most awesome tool for large data: rerun only what really changed",
     "date": "2026-11-11",
     "tags": [
       "dev"

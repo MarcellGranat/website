@@ -552,53 +552,6 @@ function dvcat(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('see what is stale, and why, then run it', 30, 412);
 }
 
-/* ---------- table hashes: revs of tables and views decide what reruns (T = 14) ---------- */
-function reruns(c, t) {
-  t %= 14;
-  win(c, 30, 40, 580, 340, 'dvc repro · table hashes');
-  const B0 = 7.4, inB = t >= B0;
-  const nodes = {
-    build: { x: 48, y: 170, w: 120 }, daily: { x: 262, y: 100, w: 100 }, summary: { x: 456, y: 100, w: 120 }, export: { x: 262, y: 240, w: 100 },
-  };
-  // phase A: everything runs. phase B: channel is relabelled, only build and export rerun
-  const at = { build: [0.8, 1.8, 7.8, 8.8], daily: [2.4, 3.4], export: [2.4, 3.4, 9.6, 10.6], summary: [4.2, 5.2] };
-  const stateOf = (k) => {
-    const [a0, a1, b0, b1] = at[k];
-    if (!inB) return t >= a1 ? 'done' : t >= a0 ? 'run' : 'idle';
-    if (b0 === undefined) return 'skip';
-    return t >= b1 ? 'done' : t >= b0 ? 'run' : 'stale';
-  };
-  c.fillStyle = '#8d98a0'; c.font = `500 12px ${MONO}`;
-  c.fillText(!inB ? '$ ' + typed('dvc repro', seg(t, 0.2, 0.8)) : '# raw data: web → online (channel only), dvc repro', 52, 76);
-  // edges with the rev that travels on them
-  const salesRev = t >= 8.8 ? 'c7d2e91a' : 'a41f03bb', viewRev = '90938a2e';
-  const edge = (a, b, label, col) => {
-    c.strokeStyle = 'rgba(255,255,255,.28)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(a.x + a.w, a.y + 28); c.lineTo(b.x, b.y + 28); c.stroke(); c.lineWidth = 1;
-    const mx = (a.x + a.w + b.x) / 2, my = (a.y + b.y) / 2 + 28;
-    c.textAlign = 'center'; c.fillStyle = '#8d98a0'; c.font = `500 9px ${MONO}`; c.fillText(label[0], mx, my - 12); c.fillStyle = col; c.font = `700 10px ${MONO}`; c.fillText(label[1], mx, my + 1); c.textAlign = 'left';
-  };
-  edge(nodes.build, nodes.daily, ['v_sales_by_day', viewRev], '#7ee0d6');
-  edge(nodes.build, nodes.export, ['sales', salesRev], t >= 8.8 ? '#f5b83d' : '#7ee0d6');
-  edge(nodes.daily, nodes.summary, ['daily.csv', ''], '#7ee0d6');
-  // stage boxes
-  Object.entries(nodes).forEach(([k, n]) => {
-    const st = stateOf(k);
-    const col = { idle: '#4a5560', run: '#7ee0d6', done: '#3ccf6e', skip: '#6b757c', stale: '#f5b83d' }[st];
-    c.fillStyle = 'rgba(255,255,255,.05)'; rr(c, n.x, n.y, n.w, 56, 10); c.fill();
-    c.strokeStyle = col; c.lineWidth = st === 'run' ? 3 : 1.5; rr(c, n.x, n.y, n.w, 56, 10); c.stroke(); c.lineWidth = 1;
-    c.textAlign = 'center'; c.fillStyle = '#e6e8ea'; c.font = `600 12px ${MONO}`; c.fillText(k, n.x + n.w / 2, n.y + 24);
-    c.fillStyle = col; c.font = `500 10px ${MONO}`;
-    c.fillText(st === 'skip' ? 'rev unchanged: skipped' : st === 'stale' ? 'rev changed' : st === 'run' ? 'running…' : st === 'done' ? 'done' : '', n.x + n.w / 2, n.y + 43); c.textAlign = 'left';
-  });
-  // the database that build modifies, shown as a small cylinder
-  c.fillStyle = '#232a30'; rr(c, 48, 262, 120, 54, 10); c.fill();
-  c.fillStyle = '#ffc400'; c.font = `700 11px ${MONO}`; c.fillText('wh.duckdb', 62, 284);
-  c.fillStyle = '#8d98a0'; c.font = `500 10px ${MONO}`; c.fillText('one file, edited in place', 62, 302);
-  c.fillStyle = '#8d98a0'; c.font = `500 11px ${MONO}`;
-  c.fillText(!inB ? 'revs written: sales, v_sales_by_day' : 'clean: sales rev stale, view rev still matches', 52, 352);
-  c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('a rev per table and view: only what really changed reruns', 30, 412);
-}
-
 /* ---------- Google Cloud: a daily job (T = 14) ---------- */
 function gcloud(c, t) {
   t %= 14;
@@ -621,7 +574,7 @@ function gcloud(c, t) {
   c.fillStyle = MUTED; c.font = `500 12px ${SANS}`; c.fillText('release once, then it runs every night without my laptop', 30, 412);
 }
 
-const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata, snakemake, targets, dvc, git, jj, dvcat, reruns, gcloud };
+const SCENES = { remote, neovim, just, tv, tuis, claude, openspec, herdr, pomodoro, uv, marimo, quarto, duckdb, visidata, snakemake, targets, dvc, git, jj, dvcat, gcloud };
 export function mount(cv, { reduced = false } = {}) {
   const c = cv.getContext('2d'), scene = SCENES[cv.dataset.tool];
   const frozen = cv.dataset.time !== undefined ? +cv.dataset.time : null;

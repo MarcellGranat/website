@@ -113,3 +113,8 @@
 .visual canvas.book-canvas { aspect-ratio: 640 / 440; }
 .visual canvas.signal-canvas { aspect-ratio: 640 / 440; }
 .visual canvas.tool-canvas { aspect-ratio: 640 / 440; }
+
+/* Inline figures (SVG charts and diagrams) inside articles */
+.prose .viz { margin: 2em 0; padding: 16px 14px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; text-align: left; }
+.prose .viz svg { display: block; width: 100%; height: auto; }
+.prose .viz figcaption { margin-top: 10px; font-size: .85rem; line-height: 1.5; color: var(--muted); }

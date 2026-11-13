@@ -120,6 +120,6 @@
 .prose .viz figcaption { margin-top: 10px; font-size: .85rem; line-height: 1.5; color: var(--muted); }
 
 /* Small photo floated beside the opening paragraph (above it on phones) */
-.prose .inline-photo { float: right; width: 150px; margin: 6px 0 10px 22px; }
+.prose .inline-photo { float: right; width: 200px; margin: 6px 0 10px 22px; }
 .prose .inline-photo img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
-@media (max-width: 640px) { .prose .inline-photo { float: none; width: 150px; margin: 0 0 16px; } }
+@media (max-width: 640px) { .prose .inline-photo { float: none; width: 90%; margin: 0 0 16px; } }

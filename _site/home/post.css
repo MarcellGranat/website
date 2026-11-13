@@ -124,4 +124,4 @@
 .prose .inline-photo img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
 .prose .intro-row { display: flow-root; }
 .prose .intro-row > p { margin-top: 0; }
-@media (max-width: 640px) { .prose .intro-row { display: flex; flex-direction: column; } .prose .inline-photo { float: none; order: 2; width: 90%; margin: 0 0 16px; } }
+@media (max-width: 640px) { .prose .intro-row { display: flex; flex-direction: column; } .prose .inline-photo { float: none; order: 2; width: 90%; margin: 0 auto 16px; } }
